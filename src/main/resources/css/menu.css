@@ -1,0 +1,21 @@
+.root {
+    -fx-background-color: #e9967a;
+    -fx-background-image: url("menu.png");
+}
+
+.label{
+    -fx-font-size: 40;
+    -fx-font-family: "Courier New";
+    -fx-text-fill: "black";
+    -fx-alignment: center;
+}
+
+#startGame{
+    -fx-font-size: 20;
+    -fx-border-width: 5;
+    -fx-border-radius: 2;
+    -fx-border-color:#87cefa;
+    -fx-background-color: lightcyan;
+    -fx-font-family: "Courier New" ;
+
+}

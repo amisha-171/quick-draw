@@ -1,0 +1,17 @@
+#canvasPane {
+    -fx-border-width: 5;
+    -fx-border-radius: 2;
+    -fx-border-color:#87cefa;
+    -fx-border-style: dashed;
+}
+
+#predLabel {
+    -fx-border-width: 5;
+    -fx-border-radius: 2;
+    -fx-border-color: salmon;
+    -fx-font-family: "Courier New";
+}
+
+#wordLabel {
+    -fx-font-family: "Copperplate Gothic Bold";
+}
