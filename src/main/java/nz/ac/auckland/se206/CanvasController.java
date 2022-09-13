@@ -2,6 +2,13 @@ package nz.ac.auckland.se206;
 
 import ai.djl.ModelException;
 import com.opencsv.exceptions.CsvException;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.util.Timer;
+import java.util.TimerTask;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.embed.swing.SwingFXUtils;
@@ -15,17 +22,9 @@ import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javax.imageio.ImageIO;
 import nz.ac.auckland.se206.ml.DoodlePrediction;
 import nz.ac.auckland.se206.speech.TextToSpeech;
-
-import javax.imageio.ImageIO;
-import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.net.URISyntaxException;
-import java.util.Timer;
-import java.util.TimerTask;
 
 /**
  * This is the controller of the canvas. You are free to modify this class and the corresponding
@@ -82,35 +81,36 @@ public class CanvasController {
       graphic = canvas.getGraphicsContext2D();
 
       canvas.setOnMousePressed(
-              e -> {
-                currentX = e.getX();
-                currentY = e.getY();
-                isContent = true;
-              });
+          e -> {
+            currentX = e.getX();
+            currentY = e.getY();
+            isContent = true;
+          });
 
       canvas.setOnMouseDragged(
-              e -> {
-                // Brush size (you can change this, it should not be too small or too large).
-                final double size = 6;
+          e -> {
+            // Brush size (you can change this, it should not be too small or too large).
+            final double size = 6;
 
-                final double x = e.getX() - size / 2;
-                final double y = e.getY() - size / 2;
+            final double x = e.getX() - size / 2;
+            final double y = e.getY() - size / 2;
 
-                // This is the colour of the brush.
-                graphic.setStroke(color);
-                graphic.setLineWidth(size);
+            // This is the colour of the brush.
+            graphic.setStroke(color);
+            graphic.setLineWidth(size);
 
-                // Create a line that goes from the point (currentX, currentY) and (x,y)
-                graphic.strokeLine(currentX, currentY, x, y);
+            // Create a line that goes from the point (currentX, currentY) and (x,y)
+            graphic.strokeLine(currentX, currentY, x, y);
 
-                // update the coordinates
-                currentX = x;
-                currentY = y;
-              });
+            // update the coordinates
+            currentX = x;
+            currentY = y;
+          });
     }
 
     model = new DoodlePrediction();
   }
+
   protected void disablestartButtons(boolean btn) {
     // This method when called well disable or enable the required buttons on input
     onInk.setDisable(btn);

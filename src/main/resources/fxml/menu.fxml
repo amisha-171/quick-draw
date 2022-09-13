@@ -27,5 +27,6 @@
       <Label layoutX="32.0" layoutY="174.0" text="Stats for:" />
       <Label fx:id="userId" layoutX="300.0" layoutY="174.0" text="Label" />
       <Label fx:id="userStats" alignment="TOP_LEFT" layoutX="32.0" layoutY="220.0" prefHeight="160.0" prefWidth="365.0" />
+      <Button layoutX="20.0" layoutY="640.0" mnemonicParsing="false" onAction="#switchProfile" text="Switch Profile" />
    </children>
 </Pane>

@@ -1,4 +1,5 @@
 package nz.ac.auckland.se206;
+
 import com.opencsv.exceptions.CsvException;
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -20,15 +21,12 @@ public class MenuController {
   private @FXML Button startGame;
   private Scene scene;
   private Stage stage;
-  @FXML
-  private Label userLabel;
+  @FXML private Label userLabel;
 
   private String userName;
 
-  @FXML
-  private Label userStats;
-  @FXML
-  private Label userId;
+  @FXML private Label userStats;
+  @FXML private Label userId;
 
   protected void getName(String userId) {
     this.userName = userId;
@@ -39,7 +37,14 @@ public class MenuController {
     String currString = new String(Files.readAllBytes(Paths.get("users/" + userName + ".json")));
     JSONArray jsonObject = new JSONArray(currString);
     StringBuilder sb = new StringBuilder();
-    sb.append("Won: ").append(jsonObject.getJSONObject(0).get("wins")).append(System.getProperty("line.separator")).append("Lost: ").append(jsonObject.getJSONObject(0).get("losses")).append(System.getProperty("line.separator")).append("Fastest Time: ").append(jsonObject.getJSONObject(0).get("fastest-time"));
+    sb.append("Won: ")
+        .append(jsonObject.getJSONObject(0).get("wins"))
+        .append(System.getProperty("line.separator"))
+        .append("Lost: ")
+        .append(jsonObject.getJSONObject(0).get("losses"))
+        .append(System.getProperty("line.separator"))
+        .append("Fastest Time: ")
+        .append(jsonObject.getJSONObject(0).get("fastest-time"));
     userStats.setText(sb.toString());
     userId.setText(userName);
   }
@@ -62,6 +67,16 @@ public class MenuController {
     canvasController.disablestartButtons(true);
 
     // Set the stage and show it
+    stage.setScene(scene);
+    stage.show();
+  }
+
+  @FXML
+  private void switchProfile(ActionEvent event) throws IOException {
+    FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/profile.fxml"));
+    Parent root = loader.load();
+    Scene scene = new Scene(root);
+    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
     stage.setScene(scene);
     stage.show();
   }
