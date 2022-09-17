@@ -63,6 +63,7 @@ public class MenuController {
     String randomWord = categorySelector.getRandomDiffWord(CategorySelector.Difficulty.E);
     CanvasController canvasController = loader.getController();
     canvasController.setWord(randomWord);
+    canvasController.setUserName(this.userName);
     // Disable the buttons in the GUI as fit
     canvasController.disablestartButtons(true);
 

@@ -58,25 +58,26 @@
                <children>
                 <HBox alignment="TOP_CENTER" prefHeight="72.0" prefWidth="963.0">
                   <children>
-                        <Button fx:id="speakWord" mnemonicParsing="false" onAction="#onSpeakWord" prefHeight="42.0" prefWidth="288.0" text="Speak Word ">
+                        <Button fx:id="speakWord" mnemonicParsing="false" onAction="#onSpeakWord" prefHeight="42.0" prefWidth="207.0" text="Speak Word ">
                            <font>
                               <Font name="Courier New Bold" size="21.0" />
                            </font>
                         </Button>
-                        <Button fx:id="eraseBtn" mnemonicParsing="false" onAction="#onErase" prefHeight="42.0" prefWidth="277.0" text="Eraser ">
+                        <Button fx:id="eraseBtn" mnemonicParsing="false" onAction="#onErase" prefHeight="42.0" prefWidth="180.0" text="Eraser ">
                            <font>
                               <Font name="Courier New" size="22.0" />
                            </font>
                         </Button>
-                        <Button fx:id="onInk" mnemonicParsing="false" onAction="#onPen" prefHeight="42.0" prefWidth="227.0" text="Pen">
+                        <Button fx:id="onInk" mnemonicParsing="false" onAction="#onPen" prefHeight="46.0" prefWidth="134.0" text="Pen">
                            <font>
                               <Font name="Simplex" size="22.0" />
                            </font>
                         </Button>
-                        <Button fx:id="saveImage" mnemonicParsing="false" onAction="#saveCurrentSnapshotOnFile" prefHeight="42.0" prefWidth="145.0" text="Save Image " />
+                        <Button fx:id="saveImage" mnemonicParsing="false" onAction="#saveCurrentSnapshotOnFile" prefHeight="42.0" prefWidth="103.0" text="Save Image " />
+                        <Button fx:id="newGameBtn" mnemonicParsing="false" onAction="#onNewGame" prefHeight="42.0" prefWidth="148.0" text="New Game" />
+                        <Button fx:id="mainMenuBtn" mnemonicParsing="false" onAction="#onMainMenuSwitch" prefHeight="41.0" prefWidth="149.0" text="Main Menu" />
                   </children>
                 </HBox>
-                  <Button fx:id="newGameBtn" mnemonicParsing="false" onAction="#onNewGame" prefHeight="42.0" prefWidth="148.0" text="New Game" />
                </children>
             </HBox>
       
