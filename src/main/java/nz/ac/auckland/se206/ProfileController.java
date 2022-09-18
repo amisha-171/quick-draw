@@ -3,7 +3,6 @@ package nz.ac.auckland.se206;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,7 +14,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import org.json.JSONArray;
+import nz.ac.auckland.se206.Userutil.Database;
+import nz.ac.auckland.se206.Userutil.User;
 
 public class ProfileController {
   private @FXML Button loginButton;
@@ -25,6 +25,7 @@ public class ProfileController {
 
   @FXML
   private void createProfile(ActionEvent event) throws IOException {
+    // Show the create profile scene if the user wishes to make a new profile
     FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/createprofile.fxml"));
     Parent root = loader.load();
     Scene scene = new Scene(root);
@@ -34,6 +35,7 @@ public class ProfileController {
   }
 
   private void showAlert() {
+    // If the user enters invalid login details we prompt the user
     Alert alert = new Alert(Alert.AlertType.ERROR);
     alert.setTitle("Invalid");
     alert.setHeaderText("Invalid username or password");
@@ -42,19 +44,18 @@ public class ProfileController {
 
   @FXML
   private void loginButton(ActionEvent event) throws IOException {
-    JSONArray currUser = null;
+    // Create our database instance
+    Database db = new Database();
     try {
-      Files.exists(Path.of("users/" + username.getText() + ".json"));
-      String currString =
-          new String(Files.readAllBytes(Paths.get("users/" + username.getText() + ".json")));
-      currUser = new JSONArray(currString);
+      db.read(username.getText()); // Check if such user actually exists and prompt user if not
     } catch (Exception e) {
       showAlert();
     }
-
     if (Files.exists(Path.of("users/" + username.getText() + ".json"))) {
-      assert currUser != null;
-      if (currUser.getJSONObject(0).get("password").equals(password.getText())) {
+      User currentUser = db.read(username.getText());
+      // Check if the password associated user in our file is the same as what the user entered and
+      // load the main menu
+      if (currentUser.getPassword().equals(password.getText())) {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/menu.fxml"));
         Parent root = loader.load();
         Scene scene = new Scene(root);
@@ -64,7 +65,7 @@ public class ProfileController {
         menucontroller.setStats();
         stage.setScene(scene);
         stage.show();
-      } else {
+      } else { // If there is a mismatch we inform the user the login details are invalid
         showAlert();
       }
     }

@@ -3,8 +3,6 @@ package nz.ac.auckland.se206;
 import com.opencsv.exceptions.CsvException;
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,7 +13,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import nz.ac.auckland.se206.FileReader.CategorySelector;
-import org.json.JSONArray;
+import nz.ac.auckland.se206.Userutil.Database;
+import nz.ac.auckland.se206.Userutil.User;
 
 public class MenuController {
   private @FXML Button startGame;
@@ -30,21 +29,23 @@ public class MenuController {
 
   protected void getName(String userId) {
     this.userName = userId;
-    userLabel.setText(this.userName);
+    if (userLabel != null) {
+      userLabel.setText(this.userName);
+    }
   }
 
   protected void setStats() throws IOException {
-    String currString = new String(Files.readAllBytes(Paths.get("users/" + userName + ".json")));
-    JSONArray jsonObject = new JSONArray(currString);
+    Database db = new Database();
+    User currentUser = db.read(userName);
     StringBuilder sb = new StringBuilder();
     sb.append("Won: ")
-        .append(jsonObject.getJSONObject(0).get("wins"))
+        .append(currentUser.getWins())
         .append(System.getProperty("line.separator"))
         .append("Lost: ")
-        .append(jsonObject.getJSONObject(0).get("losses"))
+        .append(currentUser.getLosses())
         .append(System.getProperty("line.separator"))
         .append("Fastest Time: ")
-        .append(jsonObject.getJSONObject(0).get("fastest-time"));
+        .append(currentUser.getFastestTime());
     userStats.setText(sb.toString());
     userId.setText(userName);
   }
@@ -66,7 +67,6 @@ public class MenuController {
     canvasController.setUserName(this.userName);
     // Disable the buttons in the GUI as fit
     canvasController.disablestartButtons(true);
-
     // Set the stage and show it
     stage.setScene(scene);
     stage.show();

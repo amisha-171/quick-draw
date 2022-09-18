@@ -7,6 +7,8 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 import javafx.application.Platform;
@@ -27,6 +29,8 @@ import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javax.imageio.ImageIO;
+import nz.ac.auckland.se206.Userutil.Database;
+import nz.ac.auckland.se206.Userutil.User;
 import nz.ac.auckland.se206.ml.DoodlePrediction;
 import nz.ac.auckland.se206.speech.TextToSpeech;
 
@@ -65,6 +69,10 @@ public class CanvasController {
   @FXML private Button newGameBtn;
   @FXML private Button saveImage;
   @FXML private Button mainMenuBtn;
+  private final Database db = new Database();
+  private User user;
+  private int wins;
+  private List<String> words;
 
   // mouse coordinates
   private double currentX;
@@ -118,8 +126,11 @@ public class CanvasController {
     model = new DoodlePrediction();
   }
 
-  public void setUserName(String userId) {
+  public void setUserName(String userId) throws IOException {
     this.userName = userId;
+    this.user = db.read(userName);
+    this.wins = user.getWins();
+    this.words = user.getWordList();
   }
 
   protected void disablestartButtons(boolean btn) {
@@ -218,6 +229,15 @@ public class CanvasController {
             if (gameWon) {
               timer.cancel();
               enableEndButtons();
+              wins++;
+              user.setWins(wins);
+              words.add(wordChosen);
+              user.setWordList((ArrayList<String>) words);
+              try {
+                db.write(user);
+              } catch (IOException e) {
+                throw new RuntimeException(e);
+              }
             }
             if (counter == 0) {
               timer.cancel();
@@ -370,6 +390,7 @@ public class CanvasController {
       // with a new word to draw
       throws IOException, URISyntaxException, CsvException {
     MenuController newGameMenu = new MenuController();
+    newGameMenu.getName(userName);
     newGameMenu.onNewGame(event);
   }
 
@@ -379,11 +400,11 @@ public class CanvasController {
     Parent root = loader.load();
     Scene scene = new Scene(root);
     Stage stage = (Stage) ((Node) btnEvent.getSource()).getScene().getWindow();
-    //set the username in the menu controller, so that the menu shows the stats
+    // set the username in the menu controller, so that the menu shows the stats
     MenuController menuController = loader.getController();
     menuController.getName(this.userName);
     menuController.setStats();
-    //show the scene in the GUI
+    // show the scene in the GUI
     stage.setScene(scene);
     stage.show();
   }

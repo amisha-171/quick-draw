@@ -1,6 +1,5 @@
 package nz.ac.auckland.se206;
 
-import java.io.FileWriter;
 import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -11,8 +10,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import org.json.JSONArray;
-import org.json.JSONObject;
+import nz.ac.auckland.se206.Userutil.Database;
+import nz.ac.auckland.se206.Userutil.User;
 
 public class CreateProfileController {
   @FXML private TextField usernameField;
@@ -26,24 +25,10 @@ public class CreateProfileController {
       alert.setHeaderText("Empty field");
       alert.showAndWait();
     } else {
-      JSONObject userDetails = new JSONObject();
-      userDetails.put("username", usernameField.getText());
-      userDetails.put("password", passwordField.getText());
-      userDetails.put("wins", 0);
-      userDetails.put("losses", 0);
-      userDetails.put("fastest-time", 0);
+      Database db = new Database();
+      User newUser = new User(usernameField.getText(), passwordField.getText());
+      db.write(newUser);
 
-      JSONArray wordsDrawn = new JSONArray();
-      userDetails.put("words", wordsDrawn);
-      JSONArray userObject = new JSONArray();
-      userObject.put(userDetails);
-      try {
-        FileWriter file = new FileWriter("users/" + usernameField.getText() + ".json");
-        file.write(String.valueOf(userObject.toString()));
-        file.flush();
-      } catch (IOException e) {
-        e.printStackTrace();
-      }
       FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/menu.fxml"));
       Parent root = loader.load();
       Scene scene = new Scene(root);
