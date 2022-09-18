@@ -1,21 +1,36 @@
-.root {
-    -fx-background-color: #e9967a;
-    -fx-background-image: url("menu.png");
+@import url('https://fonts.googleapis.com/css2?family=Gorditas&family=Viga&display=swap');
+
+Button {
+    -fx-text-fill: "white";
 }
 
-.label{
-    -fx-font-size: 40;
-    -fx-font-family: "Courier New";
-    -fx-text-fill: "black";
+
+.root {
+    -fx-background-color: #c7dbb2;
+    -fx-background-image: url(../images/doodles.gif);
+}
+
+Label {
+    -fx-font-size: 140;
     -fx-alignment: center;
+    -fx-font-family: "Gorditas", cursive;
+    -fx-text-fill: #cc960e;
+}
+
+#topTitle{
+    -fx-text-fill: white;
 }
 
 #startGame{
-    -fx-font-size: 20;
-    -fx-border-width: 5;
-    -fx-border-radius: 2;
-    -fx-border-color:#87cefa;
-    -fx-background-color: lightcyan;
-    -fx-font-family: "Courier New" ;
+    -fx-font-size: 30px;
+    -fx-background-radius: 30px;
+    -fx-background-color: #cc960e;
+    -fx-font-family: 'Viga', sans-serif;
+    -fx-cursor: hand;
+}
+
+#startGame:hover{
+    -fx-background-color: #157d20;
+    -fx-background-radius: 30px;
 
 }
