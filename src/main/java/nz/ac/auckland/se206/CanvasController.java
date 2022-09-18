@@ -7,6 +7,7 @@ import javafx.concurrent.Task;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Cursor;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
@@ -74,11 +75,17 @@ public class CanvasController {
     gameWon = false;
     isContent = false;
     color = Color.BLACK;
+
+    canvas.setOnMouseEntered( e-> {
+      canvas.setCursor(Cursor.HAND);
+    });
+
     if (playerReady) {
       // Enable buttons and disable buttons on ready
       clearButton.setDisable(false);
-      disablestartButtons(false);
+      disableStartButtons(false);
       readyButton.setDisable(true);
+
       graphic = canvas.getGraphicsContext2D();
 
       canvas.setOnMousePressed(
@@ -111,7 +118,7 @@ public class CanvasController {
 
     model = new DoodlePrediction();
   }
-  protected void disablestartButtons(boolean btn) {
+  protected void disableStartButtons(boolean btn) {
     // This method when called well disable or enable the required buttons on input
     onInk.setDisable(btn);
     clearButton.setDisable(btn);
@@ -152,6 +159,7 @@ public class CanvasController {
   @FXML
   private void saveCurrentSnapshotOnFile() throws IOException {
     fileChooser = new FileChooser();
+    fileChooser.setTitle("Save Your Image");
     fileChooser
         .getExtensionFilters()
         .addAll(
@@ -159,6 +167,7 @@ public class CanvasController {
             new FileChooser.ExtensionFilter("JPG", "*.jpg"),
             new FileChooser.ExtensionFilter("PNG", "*.png"));
 
+    fileChooser.setInitialFileName("snapshot_of_" + wordChosen + System.currentTimeMillis());
     File file = fileChooser.showSaveDialog(new Stage());
     if (file != null) {
       ImageIO.write(getCurrentSnapshot(), "bmp", file);
@@ -207,12 +216,16 @@ public class CanvasController {
             if (gameWon) {
               timer.cancel();
               enableEndButtons();
+              canvas.setOnMouseDragged(
+                      e-> {
+                        canvas.setCursor(Cursor.DEFAULT);
+                      });
             }
             if (counter == 0) {
               timer.cancel();
               disableButtons();
               enableEndButtons();
-              Platform.runLater(() -> wordLabel.setText("YOU LOST !!! TIMES UP"));
+              Platform.runLater(() -> wordLabel.setText("You lost, better luck next time!"));
             }
             if (counter == 10) {
               Platform.runLater(() -> timerCount.setTextFill(Color.RED));
@@ -262,15 +275,13 @@ public class CanvasController {
             for (int i = 0; i < 10; i++) {
               // Append the required formatting to sbf
               // The prediction number (10) being lowest (1) being the best prediction
-              sbf.append("(")
-                  .append(k)
-                  .append(")")
-                  .append(": ")
+              sbf.append(k)
+                  .append(") ")
                   .append(
                       model
                           .getPredictions(image, 10)
                           .get(i)
-                          .getClassName()); // Append the predictions themselves
+                          .getClassName().replace("_", " ")); // Append the predictions themselves
               k++;
 
               sbf.append(System.getProperty("line.separator"));
@@ -293,7 +304,7 @@ public class CanvasController {
             // have won
             if ((gameWon && counter > 0) || (gameWon && counter == 0)) {
               Platform.runLater(
-                  () -> wordLabel.setText("YOU WON IN " + (60 - counter) + " " + "SECONDS!!!"));
+                  () -> wordLabel.setText("You won in " + (60 - counter) + " seconds!"));
 
               // Call method to disable the buttons as the game is over
               disableButtons();
@@ -320,7 +331,7 @@ public class CanvasController {
   @FXML
   private void onErase(
       ActionEvent event) { // If the user wants to erase something we set the pen color to white
-    this.color = Color.WHITESMOKE;
+    this.color = Color.WHITE;
     eraseBtn.setDisable(true);
     onInk.setDisable(false);
   }

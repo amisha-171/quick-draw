@@ -20,7 +20,6 @@ public class MenuController {
 
   @FXML
   protected void onNewGame(ActionEvent event) throws IOException, URISyntaxException, CsvException {
-
     // Load the fxml file for the scene which we wish to display and assign it to the parent root
     FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/canvas.fxml"));
     Parent root = loader.load();
@@ -34,7 +33,7 @@ public class MenuController {
     CanvasController canvasController = loader.getController();
     canvasController.setWord(randomWord);
     // Disable the buttons in the GUI as fit
-    canvasController.disablestartButtons(true);
+    canvasController.disableStartButtons(true);
 
     // Set the stage and show it
     stage.setScene(scene);

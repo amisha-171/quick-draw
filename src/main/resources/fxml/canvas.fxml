@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.canvas.Canvas?>
@@ -12,71 +13,88 @@
 
 <Pane xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.CanvasController">
   <children>
-    <VBox alignment="CENTER" prefHeight="709.0" prefWidth="1057.0" spacing="20.0" stylesheets="@../css/canvas.css">
+    <VBox alignment="CENTER" prefHeight="709.0" prefWidth="1057.0" spacing="20.0">
       <children>
-        <Label fx:id="readyLabel" alignment="CENTER" layoutX="124.0" layoutY="14.0" prefHeight="69.0" prefWidth="561.0" text=" QuickDraw !" textAlignment="CENTER">
-          <font>
-            <Font name="Eras Demi ITC" size="22.0" />
-          </font>
-        </Label>
-        <Label fx:id="wordLabel" alignment="CENTER" prefHeight="58.0" prefWidth="666.0" text="Press Ready to draw a word" textAlignment="CENTER">
-          <font>
-            <Font size="40.0" />
-          </font>
-        </Label>
+            <HBox alignment="CENTER" prefHeight="75.0" prefWidth="1017.0">
+               <children>
+              <Label fx:id="wordLabel" alignment="CENTER" prefHeight="47.0" prefWidth="516.0" textAlignment="CENTER" wrapText="true">
+                <font>
+                  <Font size="40.0" />
+                </font>
+              </Label>
+          <Button fx:id="speakWord" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onSpeakWord" prefHeight="29.0" prefWidth="47.0">
+            <font>
+              <Font name="Courier New Bold" size="21.0" />
+            </font>
+                     <HBox.margin>
+                        <Insets left="20.0" />
+                     </HBox.margin>
+          </Button>
+               </children>
+            </HBox>
         <Label fx:id="timerCount" alignment="CENTER" contentDisplay="CENTER" prefHeight="32.0" prefWidth="462.0" textAlignment="RIGHT" textFill="#0022ff">
           <font>
-            <Font name="Courier New Bold" size="27.0" />
+            <Font name="Courier New Bold" size="32.0" />
           </font>
         </Label>
-        <VBox prefHeight="351.0" prefWidth="579.0">
-          <children>
-            <HBox prefHeight="335.0" prefWidth="1017.0">
-              <children>
-                <Label fx:id="predLabel" alignment="TOP_LEFT" prefHeight="250.0" prefWidth="300.0" text="Predictions:">
+      <HBox prefHeight="369.0" prefWidth="1017.0" spacing="40.0">
+        <children>
+                  <VBox prefHeight="335.0" prefWidth="232.0">
+                     <children>
+                        <Label fx:id="predTitle" alignment="CENTER" contentDisplay="CENTER" prefHeight="32.0" prefWidth="462.0" text="PREDICTIONS" textAlignment="RIGHT" textFill="#0022ff">
+                           <font>
+                              <Font name="Courier New Bold" size="34.0" />
+                           </font>
+                        </Label>
+                <Label fx:id="predLabel" alignment="TOP_LEFT" contentDisplay="TOP" prefHeight="337.0" prefWidth="237.0" text="Click &quot;Ready&quot; to start drawing the word you see, and view the predictions!" wrapText="true">
                   <font>
-                    <Font name="Candara Light" size="18.0" />
+                    <Font name="Candara Light" size="20.0" />
                   </font>
+                           <padding>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </padding>
                 </Label>
-                <Pane fx:id="canvasPane" prefHeight="332.0" prefWidth="480.0">
-                  <children>
-                    <Canvas fx:id="canvas" height="324.0" layoutX="5.0" layoutY="7.0" width="471.0">
-                      <cursor>
-                        <Cursor fx:constant="HAND" />
-                      </cursor>
-                    </Canvas>
-                  </children>
-                </Pane>
-                <Button fx:id="readyButton" mnemonicParsing="false" onAction="#readyToDraw" prefHeight="60.0" prefWidth="108.0" text="Ready" />
-                <Button fx:id="clearButton" mnemonicParsing="false" onAction="#onClear" prefHeight="60.0" prefWidth="129.0" text="Clear" />
-              </children>
-            </HBox>
-          </children>
-        </VBox>
-        <HBox prefHeight="27.0" prefWidth="1127.0" />
-        <HBox prefHeight="100.0" prefWidth="200.0">
+                     </children>
+                  </VBox>
+          <Pane fx:id="canvasPane" prefHeight="332.0" prefWidth="480.0">
+            <children>
+              <Canvas fx:id="canvas" height="329.0" layoutX="-1.0" layoutY="3.0" width="480.0">
+                <cursor>
+                  <Cursor fx:constant="DEFAULT" />
+                </cursor>
+              </Canvas>
+            </children>
+          </Pane>
+                  <VBox alignment="CENTER" prefHeight="335.0" prefWidth="219.0" spacing="20.0">
+                     <children>
+                    <HBox alignment="CENTER" prefHeight="27.0" prefWidth="1127.0" spacing="15.0">
+                           <children>
+                      <Button fx:id="onInk" mnemonicParsing="false" onAction="#onPen" prefHeight="48.0" prefWidth="48.0">
+                        <font>
+                          <Font name="Simplex" size="22.0" />
+                        </font>
+                      </Button>
+                      <Button fx:id="eraseBtn" mnemonicParsing="false" onAction="#onErase" prefHeight="48.0" prefWidth="48.0">
+                        <font>
+                          <Font name="Courier New" size="22.0" />
+                        </font>
+                      </Button>
+                           </children>
+                        </HBox>
+                <Button fx:id="readyButton" mnemonicParsing="false" onAction="#readyToDraw" prefHeight="42.0" prefWidth="96.0" text="Ready" />
+                <Button fx:id="clearButton" mnemonicParsing="false" onAction="#onClear" prefHeight="42.0" prefWidth="95.0" text="Clear" />
+                     </children>
+                  </VBox>
+        </children>
+      </HBox>
+        <HBox prefHeight="78.0" prefWidth="968.0" spacing="675.0">
           <children>
-            <HBox alignment="TOP_CENTER" prefHeight="72.0" prefWidth="963.0">
-              <children>
-                <Button fx:id="speakWord" mnemonicParsing="false" onAction="#onSpeakWord" prefHeight="42.0" prefWidth="288.0" text="Speak Word ">
-                  <font>
-                    <Font name="Courier New Bold" size="21.0" />
-                  </font>
-                </Button>
-                <Button fx:id="eraseBtn" mnemonicParsing="false" onAction="#onErase" prefHeight="42.0" prefWidth="277.0" text="Eraser ">
-                  <font>
-                    <Font name="Courier New" size="22.0" />
-                  </font>
-                </Button>
-                <Button fx:id="onInk" mnemonicParsing="false" onAction="#onPen" prefHeight="42.0" prefWidth="227.0" text="Pen">
-                  <font>
-                    <Font name="Simplex" size="22.0" />
-                  </font>
-                </Button>
-                <Button fx:id="saveImage" mnemonicParsing="false" onAction="#saveCurrentSnapshotOnFile" prefHeight="42.0" prefWidth="145.0" text="Save Image " />
-              </children>
-            </HBox>
-            <Button fx:id="newGameBtn" mnemonicParsing="false" onAction="#onNewGame" prefHeight="42.0" prefWidth="148.0" text="New Game" />
+          <Button fx:id="saveImage" mnemonicParsing="false" onAction="#saveCurrentSnapshotOnFile" prefHeight="48.0" prefWidth="153.0" text="Save Image ">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </Button>
+            <Button fx:id="newGameBtn" mnemonicParsing="false" onAction="#onNewGame" prefHeight="42.0" prefWidth="151.0" text="New Game" />
           </children>
         </HBox>
 
@@ -86,4 +104,8 @@
       </padding>
     </VBox>
   </children>
+<stylesheets>
+  <URL value="@../css/canvas.css" />
+  <URL value="@../css/app.css" />
+</stylesheets>
 </Pane>
