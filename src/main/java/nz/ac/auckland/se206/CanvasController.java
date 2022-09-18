@@ -214,18 +214,23 @@ public class CanvasController {
             // Conditionals to check if the user has won the game or time has finished etc and if
             // met we update the status label
             if (gameWon) {
-              timer.cancel();
-              enableEndButtons();
               canvas.setOnMouseDragged(
                       e-> {
                         canvas.setCursor(Cursor.DEFAULT);
                       });
+              timer.cancel();
+              enableEndButtons();
+
             }
             if (counter == 0) {
+              canvas.setOnMouseDragged(
+                      e-> {
+                        canvas.setCursor(Cursor.DEFAULT);
+                      });
               timer.cancel();
               disableButtons();
               enableEndButtons();
-              Platform.runLater(() -> wordLabel.setText("You lost, better luck next time!"));
+              Platform.runLater(() -> wordLabel.setText("You lose!"));
             }
             if (counter == 10) {
               Platform.runLater(() -> timerCount.setTextFill(Color.RED));
