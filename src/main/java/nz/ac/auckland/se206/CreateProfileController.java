@@ -16,16 +16,24 @@ import nz.ac.auckland.se206.Userutil.User;
 public class CreateProfileController {
   @FXML private TextField usernameField;
   @FXML private TextField passwordField;
+  private final Database db = new Database();
+
+  private void setAlert(String title, String header) {
+    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+    alert.setTitle(title);
+    alert.setHeaderText(header);
+    alert.showAndWait();
+  }
 
   @FXML
   private void makeNewProfile(ActionEvent event) throws IOException {
-    if (passwordField.getText().equals("") || usernameField.getText().equals("")) {
-      Alert alert = new Alert(Alert.AlertType.INFORMATION);
-      alert.setTitle("Username or Password must not be empty");
-      alert.setHeaderText("Empty field");
-      alert.showAndWait();
+    if (passwordField.getText().isBlank() || usernameField.getText().isBlank()) {
+      setAlert("Username or Password must not be empty", "Empty field");
+    } else if (usernameField.getText().contains(" ")) {
+      setAlert("Username must not contain any spaces", "Invalid username format");
+    } else if (db.userExists(usernameField.getText(), false)) {
+      setAlert("A profile with this username already exists", "User already exists");
     } else {
-      Database db = new Database();
       User newUser = new User(usernameField.getText(), passwordField.getText());
       db.write(newUser);
 

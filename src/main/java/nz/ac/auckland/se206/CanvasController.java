@@ -141,6 +141,7 @@ public class CanvasController {
     eraseBtn.setDisable(btn);
     saveImage.setDisable(true);
     newGameBtn.setDisable(true);
+    mainMenuBtn.setDisable(true);
   }
 
   /** This method is called when the "Clear" button is pressed. */
@@ -257,6 +258,7 @@ public class CanvasController {
   private void enableEndButtons() {
     newGameBtn.setDisable(false);
     saveImage.setDisable(false);
+    mainMenuBtn.setDisable(false);
   }
 
   private void textSpeak() {

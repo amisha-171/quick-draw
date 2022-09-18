@@ -1,8 +1,6 @@
 package nz.ac.auckland.se206;
 
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -46,12 +44,7 @@ public class ProfileController {
   private void loginButton(ActionEvent event) throws IOException {
     // Create our database instance
     Database db = new Database();
-    try {
-      db.read(username.getText()); // Check if such user actually exists and prompt user if not
-    } catch (Exception e) {
-      showAlert();
-    }
-    if (Files.exists(Path.of("users/" + username.getText() + ".json"))) {
+    if (db.userExists(username.getText(), true)) {
       User currentUser = db.read(username.getText());
       // Check if the password associated user in our file is the same as what the user entered and
       // load the main menu
@@ -68,6 +61,8 @@ public class ProfileController {
       } else { // If there is a mismatch we inform the user the login details are invalid
         showAlert();
       }
+    } else {
+      showAlert();
     }
   }
 }
