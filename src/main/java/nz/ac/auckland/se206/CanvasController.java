@@ -104,16 +104,16 @@ public class CanvasController {
             final double x = e.getX() - size / 2;
             final double y = e.getY() - size / 2;
 
-            // This is the colour of the brush.
-            graphic.setStroke(color);
-            graphic.setLineWidth(size);
+            if (!gameWon && !(counter == 0)) {
+              graphic.setStroke(color);
+              graphic.setLineWidth(size);
+              // Create a line that goes from the point (currentX, currentY) and (x,y)
+              graphic.strokeLine(currentX, currentY, x, y);
 
-            // Create a line that goes from the point (currentX, currentY) and (x,y)
-            graphic.strokeLine(currentX, currentY, x, y);
-
-            // update the coordinates
-            currentX = x;
-            currentY = y;
+              // update the coordinates
+              currentX = x;
+              currentY = y;
+            }
           });
     }
 
@@ -232,7 +232,7 @@ public class CanvasController {
               timer.cancel();
               disableButtons();
               enableEndButtons();
-              Platform.runLater(() -> wordLabel.setText("Better luck next time!"));
+              Platform.runLater(() -> wordLabel.setText("You lost, better luck next time!"));
             }
             if (counter == 10) {
               Platform.runLater(() -> timerCount.setTextFill(Color.RED));
