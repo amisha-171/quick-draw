@@ -2,6 +2,13 @@ package nz.ac.auckland.se206;
 
 import ai.djl.ModelException;
 import com.opencsv.exceptions.CsvException;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.util.Timer;
+import java.util.TimerTask;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.embed.swing.SwingFXUtils;
@@ -16,17 +23,9 @@ import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javax.imageio.ImageIO;
 import nz.ac.auckland.se206.ml.DoodlePrediction;
 import nz.ac.auckland.se206.speech.TextToSpeech;
-
-import javax.imageio.ImageIO;
-import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.net.URISyntaxException;
-import java.util.Timer;
-import java.util.TimerTask;
 
 /**
  * This is the controller of the canvas. You are free to modify this class and the corresponding
@@ -77,49 +76,50 @@ public class CanvasController {
     isContent = false;
     color = Color.BLACK;
 
-    canvas.setOnMouseEntered( e-> {
-      canvas.setCursor(Cursor.HAND);
-    });
+    canvas.setOnMouseEntered(
+        e -> {
+          canvas.setCursor(Cursor.HAND);
+        });
 
     if (playerReady) {
       // Enable buttons and disable buttons on ready
       clearButton.setDisable(false);
       disableStartButtons(false);
       readyButton.setDisable(true);
-      speakWord.setVisible(true);
 
       graphic = canvas.getGraphicsContext2D();
 
       canvas.setOnMousePressed(
-              e -> {
-                currentX = e.getX();
-                currentY = e.getY();
-                isContent = true;
-              });
+          e -> {
+            currentX = e.getX();
+            currentY = e.getY();
+            isContent = true;
+          });
 
       canvas.setOnMouseDragged(
-              e -> {
-                // Brush size (you can change this, it should not be too small or too large).
-                final double size = 6;
+          e -> {
+            // Brush size (you can change this, it should not be too small or too large).
+            final double size = 6;
 
-                final double x = e.getX() - size / 2;
-                final double y = e.getY() - size / 2;
+            final double x = e.getX() - size / 2;
+            final double y = e.getY() - size / 2;
 
-                // This is the colour of the brush.
-                graphic.setStroke(color);
-                graphic.setLineWidth(size);
+            // This is the colour of the brush.
+            graphic.setStroke(color);
+            graphic.setLineWidth(size);
 
-                // Create a line that goes from the point (currentX, currentY) and (x,y)
-                graphic.strokeLine(currentX, currentY, x, y);
+            // Create a line that goes from the point (currentX, currentY) and (x,y)
+            graphic.strokeLine(currentX, currentY, x, y);
 
-                // update the coordinates
-                currentX = x;
-                currentY = y;
-              });
+            // update the coordinates
+            currentX = x;
+            currentY = y;
+          });
     }
 
     model = new DoodlePrediction();
   }
+
   protected void disableStartButtons(boolean btn) {
     // This method when called well disable or enable the required buttons on input
     onInk.setDisable(btn);
@@ -128,6 +128,7 @@ public class CanvasController {
     eraseBtn.setDisable(btn);
     saveImage.setDisable(true);
     newGameBtn.setDisable(true);
+    speakWord.setDisable(false);
   }
 
   /** This method is called when the "Clear" button is pressed. */
@@ -217,24 +218,21 @@ public class CanvasController {
             // met we update the status label
             if (gameWon) {
               canvas.setOnMouseDragged(
-                      e-> {
-                        canvas.setCursor(Cursor.DEFAULT);
-                      });
+                  e -> {
+                    canvas.setCursor(Cursor.DEFAULT);
+                  });
               timer.cancel();
               enableEndButtons();
-              speakWord.setVisible(false);
-
             }
             if (counter == 0) {
               canvas.setOnMouseDragged(
-                      e-> {
-                        canvas.setCursor(Cursor.DEFAULT);
-                      });
-              speakWord.setVisible(false);
+                  e -> {
+                    canvas.setCursor(Cursor.DEFAULT);
+                  });
               timer.cancel();
               disableButtons();
               enableEndButtons();
-              Platform.runLater(() -> wordLabel.setText("You lose!"));
+              Platform.runLater(() -> wordLabel.setText("Better luck next time!"));
             }
             if (counter == 10) {
               Platform.runLater(() -> timerCount.setTextFill(Color.RED));
@@ -248,6 +246,7 @@ public class CanvasController {
   private void enableEndButtons() {
     newGameBtn.setDisable(false);
     saveImage.setDisable(false);
+    speakWord.setDisable(true);
   }
 
   private void textSpeak() {
@@ -290,7 +289,8 @@ public class CanvasController {
                       model
                           .getPredictions(image, 10)
                           .get(i)
-                          .getClassName().replace("_", " ")); // Append the predictions themselves
+                          .getClassName()
+                          .replace("_", " ")); // Append the predictions themselves
               k++;
 
               sbf.append(System.getProperty("line.separator"));
@@ -308,7 +308,6 @@ public class CanvasController {
 
             // Set the predictions label in the GUI to the string builder sbf
             Platform.runLater(() -> predLabel.setText(sbf.toString()));
-
 
             // Check if the game is won and set the label in the GUI to display to the user they
             // have won
