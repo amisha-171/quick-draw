@@ -209,13 +209,15 @@ public class CanvasController {
           @Override
           public void run() {
             // Decrement the counter each second the timer task runs
-            counter--;
-            // When possible we set the label to update the counter
-            Platform.runLater(() -> timerCount.setText(counter + " Seconds remaining"));
+            if (!gameWon) {
+              counter--;
+              // When possible we set the label to update the counter
+              Platform.runLater(() -> timerCount.setText(counter + " Seconds remaining"));
+            }
             // Here we call the predictions' method (onDraw()) only if user has actually begun
             // drawing on the canvas
             // Surrounded in try and catch for exception handling
-            if (isContent) {
+            if (isContent && !gameWon) {
               Platform.runLater(
                   () -> {
                     try {
