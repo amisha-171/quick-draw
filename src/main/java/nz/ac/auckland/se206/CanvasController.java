@@ -60,6 +60,7 @@ public class CanvasController {
   private Color color;
   @FXML private Button newGameBtn;
   @FXML private Button saveImage;
+  @FXML private Button speakWord;
 
   // mouse coordinates
   private double currentX;
@@ -85,6 +86,7 @@ public class CanvasController {
       clearButton.setDisable(false);
       disableStartButtons(false);
       readyButton.setDisable(true);
+      speakWord.setVisible(true);
 
       graphic = canvas.getGraphicsContext2D();
 
@@ -220,6 +222,7 @@ public class CanvasController {
                       });
               timer.cancel();
               enableEndButtons();
+              speakWord.setVisible(false);
 
             }
             if (counter == 0) {
@@ -227,6 +230,7 @@ public class CanvasController {
                       e-> {
                         canvas.setCursor(Cursor.DEFAULT);
                       });
+              speakWord.setVisible(false);
               timer.cancel();
               disableButtons();
               enableEndButtons();
@@ -304,6 +308,7 @@ public class CanvasController {
 
             // Set the predictions label in the GUI to the string builder sbf
             Platform.runLater(() -> predLabel.setText(sbf.toString()));
+
 
             // Check if the game is won and set the label in the GUI to display to the user they
             // have won

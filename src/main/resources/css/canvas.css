@@ -35,7 +35,7 @@
 
 #eraseBtn, #speakWord, #onInk{
     -fx-background-repeat: no-repeat;
-    -fx-background-size: 30px;
+    -fx-background-size: 34px;
     -fx-background-position: center;
 }
 
