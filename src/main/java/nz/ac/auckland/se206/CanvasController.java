@@ -7,6 +7,8 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 import javafx.application.Platform;
@@ -14,6 +16,10 @@ import javafx.concurrent.Task;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.Cursor;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -24,6 +30,8 @@ import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javax.imageio.ImageIO;
+import nz.ac.auckland.se206.Userutil.Database;
+import nz.ac.auckland.se206.Userutil.User;
 import nz.ac.auckland.se206.ml.DoodlePrediction;
 import nz.ac.auckland.se206.speech.TextToSpeech;
 
@@ -40,6 +48,8 @@ import nz.ac.auckland.se206.speech.TextToSpeech;
  * the canvas and brush sizes, make sure that the prediction works fine.
  */
 public class CanvasController {
+
+  private String userName;
 
   @FXML private Canvas canvas;
   @FXML private Label wordLabel;
@@ -59,6 +69,11 @@ public class CanvasController {
   private Color color;
   @FXML private Button newGameBtn;
   @FXML private Button saveImage;
+  @FXML private Button mainMenuBtn;
+  private final Database db = new Database();
+  private User user;
+  private int wins;
+  private List<String> words;
   @FXML private Button speakWord;
 
   // mouse coordinates
@@ -120,6 +135,13 @@ public class CanvasController {
     model = new DoodlePrediction();
   }
 
+  public void setUserName(String userId) throws IOException {
+    this.userName = userId;
+    this.user = db.read(userName);
+    this.wins = user.getWins();
+    this.words = user.getWordList();
+  }
+
   protected void disableStartButtons(boolean btn) {
     // This method when called well disable or enable the required buttons on input
     onInk.setDisable(btn);
@@ -128,6 +150,7 @@ public class CanvasController {
     eraseBtn.setDisable(btn);
     saveImage.setDisable(true);
     newGameBtn.setDisable(true);
+    mainMenuBtn.setDisable(true);
     speakWord.setDisable(false);
   }
 
@@ -198,13 +221,15 @@ public class CanvasController {
           @Override
           public void run() {
             // Decrement the counter each second the timer task runs
-            counter--;
-            // When possible we set the label to update the counter
-            Platform.runLater(() -> timerCount.setText(counter + " Seconds remaining"));
+            if (!gameWon) {
+              counter--;
+              // When possible we set the label to update the counter
+              Platform.runLater(() -> timerCount.setText(counter + " Seconds remaining"));
+            }
             // Here we call the predictions' method (onDraw()) only if user has actually begun
             // drawing on the canvas
             // Surrounded in try and catch for exception handling
-            if (isContent) {
+            if (isContent && !gameWon) {
               Platform.runLater(
                   () -> {
                     try {
@@ -223,6 +248,15 @@ public class CanvasController {
                   });
               timer.cancel();
               enableEndButtons();
+              wins++;
+              user.setWins(wins);
+              words.add(wordChosen);
+              user.setWordList((ArrayList<String>) words);
+              try {
+                db.write(user);
+              } catch (IOException e) {
+                throw new RuntimeException(e);
+              }
             }
             if (counter == 0) {
               canvas.setOnMouseDragged(
@@ -246,6 +280,7 @@ public class CanvasController {
   private void enableEndButtons() {
     newGameBtn.setDisable(false);
     saveImage.setDisable(false);
+    mainMenuBtn.setDisable(false);
     speakWord.setDisable(true);
   }
 
@@ -379,6 +414,22 @@ public class CanvasController {
       // with a new word to draw
       throws IOException, URISyntaxException, CsvException {
     MenuController newGameMenu = new MenuController();
+    newGameMenu.getName(userName);
     newGameMenu.onNewGame(event);
+  }
+
+  @FXML
+  private void onMainMenuSwitch(ActionEvent btnEvent) throws IOException {
+    FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/menu.fxml"));
+    Parent root = loader.load();
+    Scene scene = new Scene(root);
+    Stage stage = (Stage) ((Node) btnEvent.getSource()).getScene().getWindow();
+    // set the username in the menu controller, so that the menu shows the stats
+    MenuController menuController = loader.getController();
+    menuController.getName(this.userName);
+    menuController.setStats();
+    // show the scene in the GUI
+    stage.setScene(scene);
+    stage.show();
   }
 }
