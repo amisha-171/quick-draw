@@ -6,6 +6,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.Arrays;
+import java.util.Comparator;
 
 /**
  * This class is used to read and write user data to a file in .json format, and also to read from a
@@ -66,5 +68,24 @@ public class Database {
       }
     }
     return false;
+  }
+
+  /**
+   * This method will return an array containing all current registered users sorted by their wins.
+   * Note that The list is sorted from least wins to most wins.
+   *
+   * @return Array containing object User
+   * @throws IOException
+   */
+  public User[] getAllUsers() throws IOException {
+    User[] users;
+    File[] allUserFiles = new File("users").listFiles();
+    assert allUserFiles != null;
+    users = new User[allUserFiles.length];
+    for (int i = 0; i < users.length; i++) {
+      users[i] = read(allUserFiles[i].getName().replace(".json", ""));
+    }
+    Arrays.sort(users, Comparator.comparing(User::getWins));
+    return users;
   }
 }
