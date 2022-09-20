@@ -1,0 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Gorditas&family=Viga&display=swap');
+
+Button {
+    -fx-text-fill: "white";
+    -fx-font-size: 25px;
+    -fx-background-radius: 35px;
+    -fx-background-color: #cc960e;
+    -fx-border-radius: 35px;
+    -fx-border-width: 3px;
+    -fx-border-color: #ffffff;
+    -fx-font-family: 'Viga', sans-serif;
+    -fx-cursor: hand;
+}
+
+Button:hover{
+    -fx-background-color: #157d20;
+    -fx-background-radius: 40px;
+
+}

@@ -33,7 +33,7 @@ public class MenuController {
     CanvasController canvasController = loader.getController();
     canvasController.setWord(randomWord);
     // Disable the buttons in the GUI as fit
-    canvasController.disablestartButtons(true);
+    canvasController.disableStartButtons(true);
 
     // Set the stage and show it
     stage.setScene(scene);
