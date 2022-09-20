@@ -1,21 +1,23 @@
-.root {
-    -fx-background-color: #e9967a;
-    -fx-background-image: url("menu.png");
-}
+@import url('https://fonts.googleapis.com/css2?family=Gorditas&family=Viga&display=swap');
 
-.label{
-    -fx-font-size: 40;
-    -fx-font-family: "Courier New";
-    -fx-text-fill: "black";
-    -fx-alignment: center;
+.root {
+    -fx-background-color: #c7dbb2;
+    -fx-background-image: url(../images/doodles.gif);
 }
 
 #startGame{
-    -fx-font-size: 20;
-    -fx-border-width: 5;
-    -fx-border-radius: 2;
-    -fx-border-color:#87cefa;
-    -fx-background-color: lightcyan;
-    -fx-font-family: "Courier New" ;
-
+    -fx-font-size: 30px;
 }
+
+Label {
+    -fx-font-size: 140;
+    -fx-alignment: center;
+    -fx-font-family: "Gorditas", cursive;
+    -fx-text-fill: #cc960e;
+}
+
+#topTitle{
+    -fx-text-fill: white;
+}
+
+
