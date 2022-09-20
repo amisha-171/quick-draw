@@ -5,11 +5,16 @@
     -fx-background-image: url(../images/doodles.gif);
 }
 
-#startGame{
+.button{
     -fx-font-size: 30px;
 }
 
-Label {
+.label{
+    -fx-font-size: 27px;
+}
+
+
+#topTitle, #bottomTitle {
     -fx-font-size: 140;
     -fx-alignment: center;
     -fx-font-family: "Gorditas", cursive;
