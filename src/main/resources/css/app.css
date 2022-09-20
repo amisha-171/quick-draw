@@ -12,6 +12,10 @@ Button {
     -fx-cursor: hand;
 }
 
+Label{
+    -fx-font-family: 'Viga', sans-serif;
+}
+
 Button:hover{
     -fx-background-color: #157d20;
     -fx-background-radius: 40px;

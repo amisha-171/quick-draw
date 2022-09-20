@@ -29,9 +29,6 @@ public class MenuController {
 
   protected void getName(String userId) {
     this.userName = userId;
-    if (userLabel != null) {
-      userLabel.setText(this.userName);
-    }
   }
 
   protected void setStats() throws IOException {
@@ -66,7 +63,7 @@ public class MenuController {
     canvasController.setWord(randomWord);
     canvasController.setUserName(this.userName);
     // Disable the buttons in the GUI as fit
-    canvasController.disablestartButtons(true);
+    canvasController.disableStartButtons(true);
     // Set the stage and show it
     stage.setScene(scene);
     stage.show();
