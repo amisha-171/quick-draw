@@ -4,24 +4,37 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.ProfileController">
    <children>
-      <Label layoutX="79.0" layoutY="134.0" text="Enter username:">
+      <Label layoutX="442.0" layoutY="346.0" text="Enter username:">
          <font>
             <Font size="19.0" />
          </font>
       </Label>
-      <TextField fx:id="username" layoutX="262.0" layoutY="135.0" />
+      <TextField fx:id="username" layoutX="260.0" layoutY="220.0" />
       <Button fx:id="createProfile" layoutX="35.0" layoutY="347.0" mnemonicParsing="false" onAction="#createProfile" text="Create Profile" />
-      <Button fx:id="loginButton" layoutX="313.0" layoutY="246.0" mnemonicParsing="false" onAction="#loginButton" text="Login" />
-      <Label layoutX="79.0" layoutY="174.0" text="Enter Password">
+      <Button fx:id="loginButton" layoutX="312.0" layoutY="313.0" mnemonicParsing="false" onAction="#loginButton" text="Login" />
+      <Label layoutX="99.0" layoutY="219.0" text="Enter Password">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <PasswordField fx:id="password" layoutX="261.0" layoutY="175.0" />
+      <PasswordField fx:id="password" layoutX="442.0" layoutY="347.0" />
+      <Label fx:id="userLabel" layoutX="231.0" layoutY="164.0" prefHeight="36.0" prefWidth="208.0" text="Select your profile">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Label>
+      <Button fx:id="nextUser" layoutX="489.0" layoutY="115.0" mnemonicParsing="false" onAction="#nextUser" text="Next" />
+      <Button fx:id="prevUser" layoutX="86.0" layoutY="115.0" mnemonicParsing="false" onAction="#nextUser" text="Back" />
+      <ImageView fx:id="userImage" fitHeight="110.0" fitWidth="171.0" layoutX="252.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/default.png" />
+         </image></ImageView>
    </children>
 </Pane>

@@ -6,8 +6,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.Arrays;
-import java.util.Comparator;
 
 /**
  * This class is used to read and write user data to a file in .json format, and also to read from a
@@ -85,7 +83,6 @@ public class Database {
     for (int i = 0; i < users.length; i++) {
       users[i] = read(allUserFiles[i].getName().replace(".json", ""));
     }
-    Arrays.sort(users, Comparator.comparing(User::getWins));
     return users;
   }
 }

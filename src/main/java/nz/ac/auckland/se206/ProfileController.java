@@ -1,5 +1,6 @@
 package nz.ac.auckland.se206;
 
+import java.io.File;
 import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -9,8 +10,11 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import nz.ac.auckland.se206.Userutil.Database;
 import nz.ac.auckland.se206.Userutil.User;
@@ -20,6 +24,38 @@ public class ProfileController {
   private @FXML TextField username;
   private @FXML Button createProfile;
   private @FXML PasswordField password;
+  private final Database data = new Database();
+  private @FXML Label userLabel;
+  private @FXML Button nextUser;
+  private @FXML Button prevUser;
+  private @FXML ImageView userImage;
+  private int index = -1;
+  private File[] allUserImages = new File("src/main/resources/profilepics").listFiles();
+
+  @FXML
+  private void nextUser(ActionEvent event) throws IOException {
+    Button sourceButton = (Button) event.getSource();
+    User[] users = data.getAllUsers();
+    if (sourceButton.equals(nextUser)) {
+      if (index < users.length - 1) {
+        index++;
+        setUserInfo(index);
+      }
+    }
+    if (sourceButton.equals(prevUser)) {
+      if (index > 0) {
+        index--;
+        setUserInfo(index);
+      }
+    }
+  }
+
+  private void setUserInfo(int currentUserIndex) throws IOException {
+    User[] users = data.getAllUsers();
+    Image img = new Image("/profilepics/" + allUserImages[index].getName());
+    userImage.setImage(img);
+    userLabel.setText(users[index].getUserName());
+  }
 
   @FXML
   private void createProfile(ActionEvent event) throws IOException {
