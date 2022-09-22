@@ -69,8 +69,7 @@ public class Database {
   }
 
   /**
-   * This method will return an array containing all current registered users sorted by their wins.
-   * Note that The list is sorted from least wins to most wins.
+   * This method will return an array containing all current registered users.
    *
    * @return Array containing object User
    * @throws IOException
