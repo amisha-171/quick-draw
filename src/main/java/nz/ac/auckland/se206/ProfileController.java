@@ -12,7 +12,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
@@ -21,7 +20,6 @@ import nz.ac.auckland.se206.Userutil.User;
 
 public class ProfileController {
   private @FXML Button loginButton;
-  private @FXML TextField username;
   private @FXML Button createProfile;
   private @FXML PasswordField password;
   private final Database data = new Database();
@@ -79,9 +77,10 @@ public class ProfileController {
   @FXML
   private void loginButton(ActionEvent event) throws IOException {
     // Create our database instance
+    User[] allUsers = data.getAllUsers();
     Database db = new Database();
-    if (db.userExists(username.getText(), true)) {
-      User currentUser = db.read(username.getText());
+    if (db.userExists(allUsers[index].getUserName(), true)) {
+      User currentUser = allUsers[index];
       // Check if the password associated user in our file is the same as what the user entered and
       // load the main menu
       if (currentUser.getPassword().equals(password.getText())) {
@@ -90,7 +89,7 @@ public class ProfileController {
         Scene scene = new Scene(root);
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         MenuController menucontroller = loader.getController();
-        menucontroller.getName(username.getText());
+        menucontroller.getName(allUsers[index].getUserName());
         menucontroller.setStats();
         stage.setScene(scene);
         stage.show();
