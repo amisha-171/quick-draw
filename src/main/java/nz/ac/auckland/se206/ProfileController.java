@@ -16,8 +16,8 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
-import nz.ac.auckland.se206.Userutil.Database;
-import nz.ac.auckland.se206.Userutil.User;
+import nz.ac.auckland.se206.userutils.Database;
+import nz.ac.auckland.se206.userutils.User;
 
 public class ProfileController {
   private @FXML Button loginButton;
@@ -66,7 +66,7 @@ public class ProfileController {
   }
 
   @FXML
-  private void createProfile(ActionEvent event) throws IOException {
+  private void onCreateProfile(ActionEvent event) throws IOException {
     if (data.getAllUsers().length == 6) {
       Alert maxUsers = new Alert(Alert.AlertType.INFORMATION);
       maxUsers.setHeaderText("Sorry but only 6 user accounts or less are allowed");
@@ -92,7 +92,7 @@ public class ProfileController {
   }
 
   @FXML
-  private void loginButton(ActionEvent event) throws IOException {
+  private void onLogin(ActionEvent event) throws IOException {
     // Create our database instance
     User[] allUsers = data.getAllUsers();
     Database db = new Database();

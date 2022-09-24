@@ -20,7 +20,7 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <Button layoutX="241.0" layoutY="317.0" mnemonicParsing="false" onAction="#makeNewProfile" text="Create Profile">
+      <Button layoutX="241.0" layoutY="317.0" mnemonicParsing="false" onAction="#onCreateProfile" text="Create Profile">
          <font>
             <Font size="16.0" />
          </font>

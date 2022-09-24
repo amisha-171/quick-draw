@@ -53,7 +53,7 @@
                         <Font name="Bell MT Bold" size="16.0" />
                      </font>
                   </Button>
-            <Button mnemonicParsing="false" onAction="#switchProfile" prefHeight="69.0" prefWidth="245.0" text="Switch Profile" />
+            <Button mnemonicParsing="false" onAction="#onSwitchProfile" prefHeight="69.0" prefWidth="245.0" text="Switch Profile" />
                </children>
                <VBox.margin>
                   <Insets />

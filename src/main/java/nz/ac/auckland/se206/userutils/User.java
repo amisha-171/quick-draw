@@ -1,20 +1,22 @@
-package nz.ac.auckland.se206.Userutil;
+package nz.ac.auckland.se206.userutils;
 
 import java.util.ArrayList;
 
 /** This class is for the User object which we can use to update stats etc. */
 public class User {
   // Constructor for User
-  public User(String userName, String password) {
-    this.userName = userName;
-    this.password = password;
-  }
+
   // Create the stats fields and user information fields
   private final String userName;
   private final String password;
   private int wins;
   private int losses;
   private int fastestTime;
+
+  public User(String userName, String password) {
+    this.userName = userName;
+    this.password = password;
+  }
 
   // Getters and setters for the User fields
   public ArrayList<String> getWordList() {

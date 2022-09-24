@@ -12,9 +12,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
-import nz.ac.auckland.se206.FileReader.CategorySelector;
-import nz.ac.auckland.se206.Userutil.Database;
-import nz.ac.auckland.se206.Userutil.User;
+import nz.ac.auckland.se206.filereader.CategorySelector;
+import nz.ac.auckland.se206.userutils.Database;
+import nz.ac.auckland.se206.userutils.User;
 
 public class MenuController {
   private @FXML Button startGame;
@@ -32,17 +32,20 @@ public class MenuController {
   }
 
   protected void setStats() throws IOException {
+    // Create database instance and obtain the current user for which we set stats
     Database db = new Database();
     User currentUser = db.read(userName);
+    // Create a stringbuilder to format the stats string
     StringBuilder sb = new StringBuilder();
-    sb.append("Won: ")
+    sb.append("Won: ") // Append wins
         .append(currentUser.getWins())
         .append(System.getProperty("line.separator"))
-        .append("Lost: ")
+        .append("Lost: ") // Append losses
         .append(currentUser.getLosses())
         .append(System.getProperty("line.separator"))
-        .append("Fastest Time: ")
+        .append("Fastest Time: ") // Append fastest time
         .append(currentUser.getFastestTime());
+    // Set the stats and the users username to their respective labels in the GUI
     userStats.setText(sb.toString());
     userId.setText(userName);
   }
@@ -70,11 +73,13 @@ public class MenuController {
   }
 
   @FXML
-  private void switchProfile(ActionEvent event) throws IOException {
+  private void onSwitchProfile(ActionEvent event) throws IOException {
+    // Create the FXML loader with the profile scene
     FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/profile.fxml"));
     Parent root = loader.load();
     Scene scene = new Scene(root);
     Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+    // Set the scene and show the stage
     stage.setScene(scene);
     stage.show();
   }

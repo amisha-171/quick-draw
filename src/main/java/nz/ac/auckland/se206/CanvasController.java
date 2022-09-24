@@ -2,7 +2,7 @@ package nz.ac.auckland.se206;
 
 import ai.djl.ModelException;
 import com.opencsv.exceptions.CsvException;
-import java.awt.*;
+import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -17,10 +17,10 @@ import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.Cursor;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
@@ -30,10 +30,10 @@ import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javax.imageio.ImageIO;
-import nz.ac.auckland.se206.Userutil.Database;
-import nz.ac.auckland.se206.Userutil.User;
 import nz.ac.auckland.se206.ml.DoodlePrediction;
 import nz.ac.auckland.se206.speech.TextToSpeech;
+import nz.ac.auckland.se206.userutils.Database;
+import nz.ac.auckland.se206.userutils.User;
 
 /**
  * This is the controller of the canvas. You are free to modify this class and the corresponding
@@ -183,16 +183,19 @@ public class CanvasController {
    * @throws IOException If the image cannot be saved.
    */
   @FXML
-  private void saveCurrentSnapshotOnFile() throws IOException {
+  private void onSaveSnapshot() throws IOException {
+    // Create a file chooser
     fileChooser = new FileChooser();
+    // Set the title
     fileChooser.setTitle("Save Your Image");
+    // Add all the extensions for saving the drawing
     fileChooser
         .getExtensionFilters()
         .addAll(
             new FileChooser.ExtensionFilter("All Images", "*.*"),
             new FileChooser.ExtensionFilter("JPG", "*.jpg"),
             new FileChooser.ExtensionFilter("PNG", "*.png"));
-
+    // Set the initial file name
     fileChooser.setInitialFileName("snapshot_of_" + wordChosen + System.currentTimeMillis());
     File file = fileChooser.showSaveDialog(new Stage());
     if (file != null) {
@@ -201,7 +204,7 @@ public class CanvasController {
   }
 
   @FXML
-  private void readyToDraw() throws ModelException, IOException {
+  private void onReady() throws ModelException, IOException {
     initialize(true);
     onInk.setDisable(true);
     runTimer();
@@ -390,11 +393,11 @@ public class CanvasController {
   }
 
   @FXML
-  public void onSpeakWord() {
+  private void onSpeakWord() {
     // Create text to speech instance
     TextToSpeech speech = new TextToSpeech();
     // Create task for thread and put speak inside
-    Task<Void> bThread =
+    Task<Void> voiceThread =
         new Task<>() {
           @Override
           protected Void call() throws Exception {
@@ -403,7 +406,7 @@ public class CanvasController {
           }
         };
     // Create thread for bThread and start it when this method is called
-    Thread speechThread = new Thread(bThread);
+    Thread speechThread = new Thread(voiceThread);
     speechThread.setDaemon(true);
     speechThread.start();
   }
