@@ -19,10 +19,11 @@ public class CreateProfileController {
   private final Database db = new Database();
 
   private void setAlert(String title, String header) {
+    // Alert method where we show user an alert based on the input title and header messages
     Alert alert = new Alert(Alert.AlertType.INFORMATION);
     alert.setTitle(title);
     alert.setHeaderText(header);
-    alert.showAndWait();
+    alert.showAndWait(); // Show result in GUI
   }
 
   @FXML

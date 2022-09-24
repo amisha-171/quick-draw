@@ -108,6 +108,8 @@ public class CanvasController {
           e -> {
             currentX = e.getX();
             currentY = e.getY();
+            // Set content boolean to true when user has drawn, we will use this field as a guard
+            // for predictions
             isContent = true;
           });
 
@@ -136,6 +138,8 @@ public class CanvasController {
   }
 
   public void setUserName(String userId) throws IOException {
+    // Set the username of the current user playing, and also its corresponding stats to local
+    // fields
     this.userName = userId;
     this.user = db.read(userName);
     this.wins = user.getWins();
@@ -205,12 +209,14 @@ public class CanvasController {
 
   @FXML
   private void onReady() throws ModelException, IOException {
+    // When player is ready we start the game by enabling canvas, starting the timer etc
     initialize(true);
     onInk.setDisable(true);
     runTimer();
   }
 
   protected void setWord(String wordDraw) {
+    // Obtain the word given to draw from filereader class
     wordLabel.setText("Draw: " + wordDraw);
     wordChosen = wordDraw;
   }
@@ -262,6 +268,7 @@ public class CanvasController {
               }
             }
             if (counter == 0) {
+              // If times up cancel the timer, disable canvas and change GUI state
               canvas.setOnMouseDragged(
                   e -> {
                     canvas.setCursor(Cursor.DEFAULT);
@@ -269,9 +276,11 @@ public class CanvasController {
               timer.cancel();
               disableButtons();
               enableEndButtons();
+              // Inform user they have lost
               Platform.runLater(() -> wordLabel.setText("You lost, better luck next time!"));
             }
             if (counter == 10) {
+              // If 10 seconds remain we change the timer to color to red instead of blue
               Platform.runLater(() -> timerCount.setTextFill(Color.RED));
               textSpeak();
             }
@@ -281,6 +290,7 @@ public class CanvasController {
   }
 
   private void enableEndButtons() {
+    // Enable the available buttons user can interact with when the game has ended
     newGameBtn.setDisable(false);
     saveImage.setDisable(false);
     mainMenuBtn.setDisable(false);

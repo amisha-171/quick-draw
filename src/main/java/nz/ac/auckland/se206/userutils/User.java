@@ -14,6 +14,7 @@ public class User {
   private int fastestTime;
 
   public User(String userName, String password) {
+    // Constructor for new user
     this.userName = userName;
     this.password = password;
   }

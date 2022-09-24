@@ -21,9 +21,12 @@ public class Database {
    * @throws IOException
    */
   public void write(User user) throws IOException {
+    // Create a json file for the new profile
     FileWriter file = new FileWriter("users/" + user.getUserName() + ".json");
+    // Use Gson to write the user object to the new json file we have created
     Gson currentUser = new Gson();
     String userData = currentUser.toJson(user);
+    // Write json representation of the user to the json file
     file.write(userData);
     file.flush();
   }
@@ -37,8 +40,10 @@ public class Database {
    * @throws IOException
    */
   public User read(String user) throws IOException {
+    // Get string representation in json format of a user file
     String currString = new String(Files.readAllBytes(Paths.get("users/" + user + ".json")));
     Gson currentUser = new Gson();
+    // Convert the json string into its java object representation to return user of type User
     return currentUser.fromJson(currString, User.class);
   }
 
