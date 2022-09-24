@@ -200,7 +200,7 @@ public class CanvasController {
             new FileChooser.ExtensionFilter("JPG", "*.jpg"),
             new FileChooser.ExtensionFilter("PNG", "*.png"));
     // Set the initial file name
-    fileChooser.setInitialFileName("snapshot_of_" + wordChosen + System.currentTimeMillis());
+    fileChooser.setInitialFileName(wordChosen);
     File file = fileChooser.showSaveDialog(new Stage());
     if (file != null) {
       ImageIO.write(getCurrentSnapshot(), "bmp", file);
