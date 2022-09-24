@@ -1,4 +1,4 @@
-package nz.ac.auckland.se206.FileReader;
+package nz.ac.auckland.se206.filereader;
 
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvException;

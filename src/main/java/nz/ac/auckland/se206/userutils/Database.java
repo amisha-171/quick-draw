@@ -1,4 +1,4 @@
-package nz.ac.auckland.se206.Userutil;
+package nz.ac.auckland.se206.userutils;
 
 import com.google.gson.Gson;
 import java.io.File;
@@ -21,9 +21,12 @@ public class Database {
    * @throws IOException
    */
   public void write(User user) throws IOException {
+    // Create a json file for the new profile
     FileWriter file = new FileWriter("users/" + user.getUserName() + ".json");
+    // Use Gson to write the user object to the new json file we have created
     Gson currentUser = new Gson();
     String userData = currentUser.toJson(user);
+    // Write json representation of the user to the json file
     file.write(userData);
     file.flush();
   }
@@ -37,8 +40,10 @@ public class Database {
    * @throws IOException
    */
   public User read(String user) throws IOException {
+    // Get string representation in json format of a user file
     String currString = new String(Files.readAllBytes(Paths.get("users/" + user + ".json")));
     Gson currentUser = new Gson();
+    // Convert the json string into its java object representation to return user of type User
     return currentUser.fromJson(currString, User.class);
   }
 
@@ -51,9 +56,14 @@ public class Database {
    *     exists false otherwise)
    */
   public boolean userExists(String user, boolean login) {
+    // Get all of the files from the user folder
     File[] files = new File("users").listFiles();
+    // Since each file contains the username of the user + ".json" we make a string with the same
+    // format
     String checkUser = user + ".json";
     assert files != null;
+    // Run a for each loop to loop through existing usernames and compare them against the input
+    // username and return boolean true or false
     for (File file : files) {
       if (!login) {
         if (checkUser.equalsIgnoreCase(file.getName())) {
@@ -65,6 +75,7 @@ public class Database {
         }
       }
     }
+    // Return false if not found
     return false;
   }
 
@@ -75,10 +86,13 @@ public class Database {
    * @throws IOException
    */
   public User[] getAllUsers() throws IOException {
+    // Initialize an array of type User
     User[] users;
+    // Obtain all the currently registered user profiles
     File[] allUserFiles = new File("users").listFiles();
     assert allUserFiles != null;
     users = new User[allUserFiles.length];
+    // Loop through all the current existing users and add them to our users array
     for (int i = 0; i < users.length; i++) {
       users[i] = read(allUserFiles[i].getName().replace(".json", ""));
     }

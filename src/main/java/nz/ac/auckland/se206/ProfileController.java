@@ -16,8 +16,8 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
-import nz.ac.auckland.se206.Userutil.Database;
-import nz.ac.auckland.se206.Userutil.User;
+import nz.ac.auckland.se206.userutils.Database;
+import nz.ac.auckland.se206.userutils.User;
 
 public class ProfileController {
   private @FXML Button loginButton;
@@ -66,15 +66,17 @@ public class ProfileController {
   }
 
   @FXML
-  private void createProfile(ActionEvent event) throws IOException {
+  private void onCreateProfile(ActionEvent event) throws IOException {
+    // If the user attempts to create a new account while 6 accounts are already active we show a
+    // message as we limit maximum accounts to 6
     if (data.getAllUsers().length == 6) {
       Alert maxUsers = new Alert(Alert.AlertType.INFORMATION);
       maxUsers.setHeaderText("Sorry but only 6 user accounts or less are allowed");
       maxUsers.setTitle("Unable to create profile");
       maxUsers.show();
-      return;
+      return; // Return statement to prevent proceeding
     }
-    // Show the create profile scene if the user wishes to make a new profile
+    // If < 6 users we show the create profile scene if the user wishes to make a new profile
     FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/createprofile.fxml"));
     Parent root = loader.load();
     Scene scene = new Scene(root);
@@ -92,7 +94,7 @@ public class ProfileController {
   }
 
   @FXML
-  private void loginButton(ActionEvent event) throws IOException {
+  private void onLogin(ActionEvent event) throws IOException {
     // Create our database instance
     User[] allUsers = data.getAllUsers();
     Database db = new Database();
