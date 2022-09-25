@@ -38,21 +38,27 @@
                   <Insets bottom="30.0" />
                </VBox.margin>
             </Label>
-            <HBox prefHeight="543.0" prefWidth="981.0">
+            <HBox alignment="CENTER" prefHeight="717.0" prefWidth="981.0" spacing="30.0">
                <children>
-                  <Label fx:id="userStats" alignment="TOP_LEFT" prefHeight="376.0" prefWidth="407.0" text="Hi">
+                  <Label fx:id="userStats" alignment="TOP_LEFT" prefHeight="350.0" prefWidth="300.0" text="Games Won: 0">
                      <HBox.margin>
                         <Insets />
                      </HBox.margin>
+                     <padding>
+                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                     </padding>
                   </Label>
-                  <Label fx:id="wordListLabel" alignment="TOP_LEFT" prefHeight="540.0" prefWidth="523.0" text="WORD LIST:">
+                  <Label fx:id="wordListLabel" alignment="TOP_LEFT" prefHeight="350.0" prefWidth="300.0" text="WORD LIST:">
                      <HBox.margin>
                         <Insets />
                      </HBox.margin>
+                     <padding>
+                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                     </padding>
                   </Label>
                </children>
                <padding>
-                  <Insets left="200.0" />
+                  <Insets left="50.0" />
                </padding>
             </HBox>
             <HBox alignment="CENTER" prefHeight="46.0" prefWidth="981.0" spacing="20.0">

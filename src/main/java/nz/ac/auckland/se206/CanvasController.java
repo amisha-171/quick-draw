@@ -441,6 +441,7 @@ public class CanvasController {
     MenuController menuController = loader.getController();
     menuController.getName(this.userName);
     menuController.setStats();
+    menuController.setWordsPlayed();
     // show the scene in the GUI
     stage.setScene(scene);
     stage.show();

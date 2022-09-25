@@ -33,7 +33,7 @@
             </HBox>
             <VBox fx:id="loginVbox" alignment="CENTER" prefHeight="108.0" prefWidth="1066.0" spacing="30.0">
                <children>
-                  <HBox alignment="CENTER" prefHeight="0.0" prefWidth="1066.0" spacing="10.0">
+                  <HBox alignment="CENTER" prefHeight="0.0" prefWidth="1066.0" spacing="30.0">
                      <children>
                         <Label alignment="CENTER_RIGHT" prefHeight="42.0" prefWidth="231.0" text="Enter Password" textAlignment="RIGHT">
                            <font>
