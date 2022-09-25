@@ -20,11 +20,9 @@ public class MenuController {
   private @FXML Button startGame;
   private Scene scene;
   private Stage stage;
-  @FXML private Label userLabel;
-
   private String userName;
-
   @FXML private Label userStats;
+  @FXML private Label wordListLabel;
   @FXML private Label userId;
 
   protected void getName(String userId) {
@@ -37,10 +35,10 @@ public class MenuController {
     User currentUser = db.read(userName);
     // Create a stringbuilder to format the stats string
     StringBuilder sb = new StringBuilder();
-    sb.append("Won: ") // Append wins
+    sb.append("Games Won: ") // Append wins
         .append(currentUser.getWins())
         .append(System.getProperty("line.separator"))
-        .append("Lost: ") // Append losses
+        .append("Games Lost: ") // Append losses
         .append(currentUser.getLosses())
         .append(System.getProperty("line.separator"))
         .append("Fastest Time: ") // Append fastest time
@@ -48,6 +46,23 @@ public class MenuController {
     // Set the stats and the users username to their respective labels in the GUI
     userStats.setText(sb.toString());
     userId.setText(userName);
+  }
+
+  protected void setWordsPlayed() throws IOException {
+    // Create database instance and obtain the current user for which we set stats
+    Database db = new Database();
+    User currentUser = db.read(userName);
+    // Create a stringbuilder to format the stats string
+    StringBuilder sb = new StringBuilder();
+    sb.append("WORDS PLAYED: ") // Append wins
+        .append(System.getProperty("line.separator"));
+
+    for (String word : currentUser.getWordList()) {
+      sb.append(word).append(System.getProperty("line.separator"));
+    }
+
+    // Set the stats and the users username to their respective labels in the GUI
+    wordListLabel.setText(sb.toString());
   }
 
   @FXML

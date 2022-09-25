@@ -60,4 +60,15 @@ public class CreateProfileController {
       stage.show();
     }
   }
+
+  @FXML
+  private void onMainMenuSwitch(ActionEvent btnEvent) throws IOException {
+    FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/mainmenu.fxml"));
+    Parent root = loader.load();
+    Scene scene = new Scene(root);
+    Stage stage = (Stage) ((Node) btnEvent.getSource()).getScene().getWindow();
+    // show the scene in the GUI
+    stage.setScene(scene);
+    stage.show();
+  }
 }

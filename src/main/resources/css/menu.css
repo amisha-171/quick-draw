@@ -5,20 +5,23 @@
     -fx-font-size: 30px;
 }
 
-.label{
-    -fx-font-size: 27px;
-}
 
-
-#topTitle, #bottomTitle {
-    -fx-font-size: 140;
+#greetingHbox .label {
+    -fx-font-size: 100;
     -fx-alignment: center;
     -fx-font-family: "Gorditas", cursive;
     -fx-text-fill: #cc960e;
 }
 
-#topTitle{
-    -fx-text-fill: white;
+#statsTitle{
+    -fx-font-size: 60;
+    -fx-alignment: center;
+    -fx-font-family: "Gorditas", cursive;
+    -fx-text-fill: #157d20;
+}
+
+#wordListLabel, #userStats{
+    -fx-font-size: 30;
 }
 
 

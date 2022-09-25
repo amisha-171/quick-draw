@@ -9,43 +9,37 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import nz.ac.auckland.se206.userutils.Database;
 import nz.ac.auckland.se206.userutils.User;
 
 public class ProfileController {
-  private @FXML Button loginButton;
-  private @FXML Button createProfile;
   private @FXML PasswordField password;
   private final Database data = new Database();
   private @FXML Label userLabel;
-  private @FXML VBox loginVbox;
   private @FXML Button nextUser;
   private @FXML Button prevUser;
   private @FXML ImageView userImage;
-  private int userIndex = -1;
+  private int userIndex = 0;
   private File[] allUserImages = new File("src/main/resources/images/profilepics").listFiles();
+
+  public void initialize() throws IOException {
+    setUserInfoToGui(userIndex);
+    if (data.getAllUsers().length > 1) {
+      nextUser.setVisible(true);
+    }
+  }
 
   @FXML
   private void toggleThroughUsers(ActionEvent event) throws IOException {
     Button sourceButton = (Button) event.getSource();
 
     User[] users = data.getAllUsers();
-
-    if (users.length == 0) {
-      Alert alert = new Alert(AlertType.INFORMATION);
-      alert.setHeaderText("No users found, please create a profile!");
-      alert.setTitle("No users");
-      alert.show();
-      return;
-    }
 
     if (sourceButton.equals(nextUser)) {
       if (userIndex < users.length - 1) {
@@ -60,14 +54,12 @@ public class ProfileController {
       }
     }
 
-    loginVbox.setVisible(true);
-
-    if (userIndex == 0) {
-      prevUser.setVisible(false);
-      nextUser.setVisible(true);
-    } else if (userIndex == users.length - 1) {
+    if (userIndex == users.length - 1) {
       prevUser.setVisible(true);
       nextUser.setVisible(false);
+    } else if (userIndex == 0) {
+      prevUser.setVisible(false);
+      nextUser.setVisible(true);
     } else {
       prevUser.setVisible(true);
       nextUser.setVisible(true);
@@ -80,26 +72,6 @@ public class ProfileController {
     userImage.setImage(img);
     userLabel.setText(users[userIndex].getUserName());
     password.clear();
-  }
-
-  @FXML
-  private void onCreateProfile(ActionEvent event) throws IOException {
-    // If the user attempts to create a new account while 6 accounts are already active we show a
-    // message as we limit maximum accounts to 6
-    if (data.getAllUsers().length == 6) {
-      Alert maxUsers = new Alert(Alert.AlertType.INFORMATION);
-      maxUsers.setHeaderText("Sorry but only 6 user accounts or less are allowed");
-      maxUsers.setTitle("Unable to create profile");
-      maxUsers.show();
-      return; // Return statement to prevent proceeding
-    }
-    // If < 6 users we show the create profile scene if the user wishes to make a new profile
-    FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/createprofile.fxml"));
-    Parent root = loader.load();
-    Scene scene = new Scene(root);
-    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-    stage.setScene(scene);
-    stage.show();
   }
 
   private void showAlert() {
@@ -127,6 +99,7 @@ public class ProfileController {
         MenuController menucontroller = loader.getController();
         menucontroller.getName(allUsers[userIndex].getUserName());
         menucontroller.setStats();
+        menucontroller.setWordsPlayed();
         stage.setScene(scene);
         stage.show();
       } else { // If there is a mismatch we inform the user the login details are invalid
@@ -135,5 +108,16 @@ public class ProfileController {
     } else {
       showAlert();
     }
+  }
+
+  @FXML
+  private void onMainMenuSwitch(ActionEvent btnEvent) throws IOException {
+    FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/mainmenu.fxml"));
+    Parent root = loader.load();
+    Scene scene = new Scene(root);
+    Stage stage = (Stage) ((Node) btnEvent.getSource()).getScene().getWindow();
+    // show the scene in the GUI
+    stage.setScene(scene);
+    stage.show();
   }
 }

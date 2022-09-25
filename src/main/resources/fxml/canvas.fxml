@@ -95,7 +95,7 @@
                      </HBox.margin>
                   </Button>
             <Button fx:id="newGameBtn" mnemonicParsing="false" onAction="#onNewGame" prefHeight="56.0" prefWidth="182.0" text="New Game" />
-            <Button fx:id="mainMenuBtn" mnemonicParsing="false" onAction="#onMainMenuSwitch" prefHeight="57.0" prefWidth="164.0" text="Main Menu" />
+            <Button fx:id="mainMenuBtn" mnemonicParsing="false" onAction="#onMainMenuSwitch" prefHeight="57.0" prefWidth="164.0" text="My Menu" />
           </children>
                <VBox.margin>
                   <Insets top="40.0" />
