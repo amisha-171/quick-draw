@@ -29,7 +29,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javax.imageio.ImageIO;
-import nz.ac.auckland.se206.filereader.CategorySelector;
+import nz.ac.auckland.se206.FileReader.CategorySelector;
 import nz.ac.auckland.se206.ml.DoodlePrediction;
 import nz.ac.auckland.se206.speech.TextToSpeech;
 import nz.ac.auckland.se206.userutils.Database;
@@ -87,21 +87,6 @@ public class CanvasController implements Initializable {
    * @throws IOException If the model cannot be found on the file system.
    */
   public void initialize(URL url, ResourceBundle resourceBundle) {
-    // Create an instance of category selector
-    CategorySelector categorySelector = null;
-    try {
-      categorySelector = new CategorySelector();
-    } catch (IOException e) {
-      e.printStackTrace();
-    } catch (URISyntaxException e) {
-      e.printStackTrace();
-    } catch (CsvException e) {
-      e.printStackTrace();
-    }
-    // Get a random word with Easy difficulty and set the word to be displayed to the user in the
-    // GUI
-    String randomWord = categorySelector.getRandomDiffWord(CategorySelector.Difficulty.E);
-    this.setWord(randomWord);
     // Disable the buttons in the GUI as fit
     this.disableStartButtons(true);
 
@@ -158,9 +143,29 @@ public class CanvasController implements Initializable {
     // Set the username of the current user playing, and also its corresponding stats to local
     // fields
     this.userName = userId;
-    this.user = db.read(userName);
-    this.wins = user.getWins();
-    this.words = user.getWordList();
+    this.user = this.db.read(this.userName);
+    this.wins = this.user.getWins();
+    this.words = this.user.getWordList();
+
+    this.generateWord();
+  }
+
+  public void generateWord() {
+    // Create an instance of category selector
+    CategorySelector categorySelector = null;
+    try {
+      categorySelector = new CategorySelector();
+    } catch (IOException e) {
+      e.printStackTrace();
+    } catch (URISyntaxException e) {
+      e.printStackTrace();
+    } catch (CsvException e) {
+      e.printStackTrace();
+    }
+    // Get a random word with Easy difficulty and set the word to be displayed to the user in the
+    // GUI
+    String randomWord = categorySelector.getRandomDiffWord(CategorySelector.Difficulty.E, this.words);
+    this.setWord(randomWord);
   }
 
   protected void disableStartButtons(boolean btn) {
@@ -227,7 +232,11 @@ public class CanvasController implements Initializable {
   @FXML
   private void onReady() throws ModelException, IOException {
     // When player is ready we start the game by enabling canvas, starting the timer etc
-    onInk.setDisable(true);
+    this.onInk.setDisable(true);
+    this.readyButton.setDisable(true);
+    this.clearButton.setDisable(false);
+    this.eraseBtn.setDisable(false);
+    this.
     runTimer();
   }
 
