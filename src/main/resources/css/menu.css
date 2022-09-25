@@ -22,11 +22,37 @@
 
 #wordList, #userStats{
     -fx-font-size: 30;
-    -fx-background-color: rgba(255, 255, 255, 1);
-    -fx-background-radius: 50px;
-    -fx-border-radius: 50px;
+    -fx-background-color: white;
     -fx-font-family: 'Viga', sans-serif;
 
+}
+.scroll-pane{
+    -fx-background-color:transparent;
+}
+
+.scroll-pane .viewport {
+    -fx-background-color: transparent;
+
+}
+
+.scroll-bar:vertical{
+    -fx-background-color:transparent;
+}
+
+.increment-button, .decrement-button {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+.scroll-bar:horizontal .track,
+.scroll-bar:vertical .track{
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+.scroll-bar:horizontal .thumb,
+.scroll-bar:vertical .thumb {
+    -fx-background-color: white;
 }
 
 

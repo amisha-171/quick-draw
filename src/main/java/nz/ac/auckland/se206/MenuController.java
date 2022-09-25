@@ -54,8 +54,6 @@ public class MenuController {
     User currentUser = db.read(userName);
     // Create a stringbuilder to format the stats string
     StringBuilder sb = new StringBuilder();
-    sb.append("WORDS PLAYED: ") // Append wins
-        .append(System.getProperty("line.separator"));
 
     for (String word : currentUser.getWordList()) {
       sb.append(word).append(System.getProperty("line.separator"));
