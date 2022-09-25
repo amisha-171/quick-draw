@@ -20,7 +20,7 @@
     -fx-text-fill: #157d20;
 }
 
-#wordListLabel, #userStats{
+#wordList, #userStats{
     -fx-font-size: 30;
     -fx-background-color: rgba(255, 255, 255, 1);
     -fx-background-radius: 50px;

@@ -11,7 +11,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
 import nz.ac.auckland.se206.filereader.CategorySelector;
 import nz.ac.auckland.se206.userutils.Database;
@@ -23,7 +22,7 @@ public class MenuController {
   private Stage stage;
   private String userName;
   @FXML private Label userStats;
-  @FXML private TextArea wordList;
+  @FXML private Label wordList;
   @FXML private Label userId;
 
   protected void getName(String userId) {
