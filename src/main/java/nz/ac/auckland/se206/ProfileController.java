@@ -64,7 +64,9 @@ public class ProfileController {
 
     if (userIndex == 0) {
       prevUser.setVisible(false);
+      nextUser.setVisible(true);
     } else if (userIndex == users.length - 1) {
+      prevUser.setVisible(true);
       nextUser.setVisible(false);
     } else {
       prevUser.setVisible(true);
