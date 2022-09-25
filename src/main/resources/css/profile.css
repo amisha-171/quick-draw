@@ -1,0 +1,38 @@
+@import url('https://fonts.googleapis.com/css2?family=Gorditas&family=Viga&display=swap');
+
+#prevUser{
+    -fx-background-image: url(../images/left-arrow.png);
+}
+
+#nextUser{
+    -fx-background-image: url(../images/right-arrow.png) ;
+}
+
+#prevUser, #nextUser{
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 34px;
+    -fx-background-position: center;
+}
+
+
+#passwordHbox, .label{
+    -fx-text-fill: #3b3b3b;
+}
+
+#userLabel {
+    -fx-font-family: "Gorditas", cursive;
+    -fx-text-fill: #157d20;
+}
+
+#imagePane{
+    -fx-background-radius: 50px;
+    -fx-background-size: 100px;
+    -fx-border-radius: 50px;
+}
+
+#topTitle, #bottomTitle {
+    -fx-font-size: 140;
+    -fx-alignment: center;
+    -fx-font-family: "Gorditas", cursive;
+    -fx-text-fill: #cc960e;
+}

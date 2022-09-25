@@ -15,6 +15,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import nz.ac.auckland.se206.userutils.Database;
 import nz.ac.auckland.se206.userutils.User;
@@ -25,16 +26,19 @@ public class ProfileController {
   private @FXML PasswordField password;
   private final Database data = new Database();
   private @FXML Label userLabel;
+  private @FXML VBox loginVbox;
   private @FXML Button nextUser;
   private @FXML Button prevUser;
   private @FXML ImageView userImage;
   private int userIndex = -1;
-  private File[] allUserImages = new File("src/main/resources/profilepics").listFiles();
+  private File[] allUserImages = new File("src/main/resources/images/profilepics").listFiles();
 
   @FXML
   private void toggleThroughUsers(ActionEvent event) throws IOException {
     Button sourceButton = (Button) event.getSource();
+
     User[] users = data.getAllUsers();
+
     if (users.length == 0) {
       Alert alert = new Alert(AlertType.INFORMATION);
       alert.setHeaderText("No users found, please create a profile!");
@@ -42,7 +46,7 @@ public class ProfileController {
       alert.show();
       return;
     }
-    password.setDisable(false);
+
     if (sourceButton.equals(nextUser)) {
       if (userIndex < users.length - 1) {
         userIndex++;
@@ -55,11 +59,22 @@ public class ProfileController {
         setUserInfoToGui(userIndex);
       }
     }
+
+    loginVbox.setVisible(true);
+
+    if (userIndex == 0) {
+      prevUser.setVisible(false);
+    } else if (userIndex == users.length - 1) {
+      nextUser.setVisible(false);
+    } else {
+      prevUser.setVisible(true);
+      nextUser.setVisible(true);
+    }
   }
 
   private void setUserInfoToGui(int currentUserIndex) throws IOException {
     User[] users = data.getAllUsers();
-    Image img = new Image("/profilepics/" + allUserImages[userIndex].getName());
+    Image img = new Image("/images/profilepics/" + allUserImages[userIndex].getName());
     userImage.setImage(img);
     userLabel.setText(users[userIndex].getUserName());
     password.clear();

@@ -1,9 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Gorditas&family=Viga&display=swap');
 
-.root {
-    -fx-background-color: #c7dbb2;
-    -fx-background-image: url(../images/doodles.gif);
-}
 
 .button{
     -fx-font-size: 30px;
