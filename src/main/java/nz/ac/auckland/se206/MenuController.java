@@ -11,6 +11,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import nz.ac.auckland.se206.userutils.Database;
 import nz.ac.auckland.se206.userutils.User;
@@ -19,11 +21,10 @@ public class MenuController {
   private @FXML Button startGame;
   private Scene scene;
   private Stage stage;
-  @FXML private Label userLabel;
-
   private String userName;
-
+  @FXML private ImageView userPic;
   @FXML private Label userStats;
+  @FXML private Label wordList;
   @FXML private Label userId;
 
   protected void getName(String userId) {
@@ -36,10 +37,10 @@ public class MenuController {
     User currentUser = db.read(userName);
     // Create a stringbuilder to format the stats string
     StringBuilder sb = new StringBuilder();
-    sb.append("Won: ") // Append wins
+    sb.append("Games Won: ") // Append wins
         .append(currentUser.getWins())
         .append(System.getProperty("line.separator"))
-        .append("Lost: ") // Append losses
+        .append("Games Lost: ") // Append losses
         .append(currentUser.getLosses())
         .append(System.getProperty("line.separator"))
         .append("Fastest Time: ") // Append fastest time
@@ -47,6 +48,25 @@ public class MenuController {
     // Set the stats and the users username to their respective labels in the GUI
     userStats.setText(sb.toString());
     userId.setText(userName);
+  }
+
+  protected void setWordsPlayed() throws IOException {
+    // Create database instance and obtain the current user for which we set stats
+    Database db = new Database();
+    User currentUser = db.read(userName);
+    // Create a stringbuilder to format the stats string
+    StringBuilder sb = new StringBuilder();
+
+    for (String word : currentUser.getWordList()) {
+      sb.append(word).append(System.getProperty("line.separator"));
+    }
+
+    // Set the stats and the users username to their respective labels in the GUI
+    wordList.setText(sb.toString());
+  }
+
+  protected void setUserPic(Image image) {
+    userPic.setImage(image);
   }
 
   @FXML

@@ -1,5 +1,6 @@
 package nz.ac.auckland.se206.userutils;
 
+
 import java.util.ArrayList;
 
 /** This class is for the User object which we can use to update stats etc. */
@@ -15,15 +16,20 @@ public class User {
   private int totalSolveTime;
   private ArrayList<String> wordList = new ArrayList<>();
 
-  public User(String userName, String password) {
+  private String imageName;
+
+  public User(String userName, String password, String img) {
     // Constructor for new user
     this.userName = userName;
     this.password = password;
+
     //set default stats
     this.wins = 0;
     this.losses = 0;
     this.totalSolveTime = 0;
     this.fastestTime = 100; //100 is default value because fastest time cannot be more than 60
+    // set user image
+    this.imageName = img;
   }
 
   // Getters and setters for the User fields
@@ -81,5 +87,9 @@ public class User {
 
   public String getUserName() {
     return userName;
+  }
+
+  public String getImageName() {
+    return imageName;
   }
 }

@@ -1,29 +1,64 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.URL?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<Pane fx:id="us" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.CreateProfileController">
+<Pane fx:id="us" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="703.0" prefWidth="1057.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.CreateProfileController">
    <children>
-      <TextField fx:id="usernameField" layoutX="241.0" layoutY="169.0" />
-      <TextField fx:id="passwordField" layoutX="241.0" layoutY="218.0" />
-      <Label layoutX="113.0" layoutY="168.0" text="Username:">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
-      <Label layoutX="116.0" layoutY="217.0" text="Password:">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
-      <Button layoutX="241.0" layoutY="317.0" mnemonicParsing="false" onAction="#onCreateProfile" text="Create Profile">
-         <font>
-            <Font size="16.0" />
-         </font>
-      </Button>
+      <VBox alignment="CENTER" layoutX="8.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="703.0" prefWidth="1048.0" spacing="30.0">
+         <children>
+            <Label fx:id="title" alignment="CENTER" prefHeight="17.0" prefWidth="1045.0" text="CREATE NEW USER">
+               <font>
+                  <Font size="43.0" />
+               </font>
+            </Label>
+            <ImageView fx:id="profPic" fitHeight="300.0" fitWidth="455.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/add-user.png" />
+               </image></ImageView>
+            <HBox alignment="CENTER" prefHeight="37.0" prefWidth="1057.0" spacing="30.0">
+               <children>
+                  <Label alignment="CENTER" text="Username:">
+                     <font>
+                        <Font size="30.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="usernameField" prefHeight="40.0" prefWidth="154.0" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="11.0" prefWidth="1057.0" spacing="30.0">
+               <children>
+                  <Label text="Password:">
+                     <font>
+                        <Font size="30.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="passwordField" prefHeight="40.0" prefWidth="154.0" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="72.0" prefWidth="1057.0" spacing="20.0">
+               <children>
+                  <Button alignment="TOP_LEFT" mnemonicParsing="false" onAction="#onMainMenuSwitch" text="Main Menu" />
+                  <Button mnemonicParsing="false" onAction="#onCreateProfile" text="Confirm">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
    </children>
+   <stylesheets>
+      <URL value="@../css/createprofile.css" />
+      <URL value="@../css/app.css" />
+   </stylesheets>
 </Pane>

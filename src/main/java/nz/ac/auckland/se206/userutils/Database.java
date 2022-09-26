@@ -56,12 +56,20 @@ public class Database {
    *     exists false otherwise)
    */
   public boolean userExists(String user, boolean login) {
-    // Get all of the files from the user folder
-    File[] files = new File("users").listFiles();
+    //Open the users directory as a file and create it if it doesn't exist
+    File userDir = new File("users");
+    File[] files;
+    if (!userDir.exists()) {
+      userDir.mkdir();
+    }
+    files = userDir.listFiles(); //get all the user jsons from the user directory
     // Since each file contains the username of the user + ".json" we make a string with the same
     // format
     String checkUser = user + ".json";
-    assert files != null;
+    //return false if the users directory doesn't exist (in which case files will be null)
+    if (files == null) {
+      return false;
+    }
     // Run a for each loop to loop through existing usernames and compare them against the input
     // username and return boolean true or false
     for (File file : files) {
@@ -86,11 +94,16 @@ public class Database {
    * @throws IOException
    */
   public User[] getAllUsers() throws IOException {
-    // Initialize an array of type User
-    User[] users;
+    // Initialize an array of type User, and ensure it's empty so that it's returned if users directory doesn't exist
+    User[] users = {};
     // Obtain all the currently registered user profiles
-    File[] allUserFiles = new File("users").listFiles();
-    assert allUserFiles != null;
+    File userDir = new File("users");
+    File[] allUserFiles;
+    //create the users directory if it doesn't exist
+    if (!userDir.exists()) {
+      userDir.mkdir();
+    }
+    allUserFiles = userDir.listFiles(); //obtain all the files from the user directory
     users = new User[allUserFiles.length];
     // Loop through all the current existing users and add them to our users array
     for (int i = 0; i < users.length; i++) {
