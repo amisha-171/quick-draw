@@ -43,8 +43,23 @@ public class MenuController {
         .append("Games Lost: ") // Append losses
         .append(currentUser.getLosses())
         .append(System.getProperty("line.separator"))
-        .append("Fastest Time: ") // Append fastest time
-        .append(currentUser.getFastestTime());
+        .append("Fastest Time: "); // Append fastest time
+    if (currentUser.getFastestTime() == 100) {
+      sb.append("N/A");
+    } else {
+      sb.append(currentUser.getFastestTime()).append(" s");
+    }
+    sb.append(System.getProperty("line.separator")).append("Average Time: "); // append average time
+    if (currentUser.getFastestTime() == 100) {
+      sb.append("N/A");
+    } else {
+      sb.append(currentUser.getAverageSolveTime()).append(" s");
+    }
+    sb.append(System.getProperty("line.separator"))
+        .append("Words Played (Easy): ")
+        .append(currentUser.getWordList().size())
+        .append(("/144"));
+
     // Set the stats and the users username to their respective labels in the GUI
     userStats.setText(sb.toString());
     userId.setText(userName);

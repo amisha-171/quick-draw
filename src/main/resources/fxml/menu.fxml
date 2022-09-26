@@ -15,7 +15,7 @@
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="703.0" prefWidth="1057.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.MenuController">
    <children>
 
-      <VBox alignment="BOTTOM_CENTER" layoutX="1.0" layoutY="2.0" prefHeight="682.0" prefWidth="981.0" spacing="30.0">
+      <VBox alignment="BOTTOM_CENTER" layoutX="1.0" layoutY="2.0" prefHeight="682.0" prefWidth="1049.0" spacing="30.0">
          <children>
             <HBox fx:id="greetingHbox" alignment="TOP_CENTER" prefHeight="90.0" prefWidth="981.0">
                <children>
@@ -46,11 +46,11 @@
                   <Insets left="20.0" right="20.0" top="20.0" />
                </VBox.margin>
             </HBox>
-            <HBox fx:id="subTitleHbox" alignment="CENTER" prefHeight="0.0" prefWidth="981.0">
+            <HBox fx:id="subTitleHbox" alignment="CENTER" prefHeight="57.0" prefWidth="926.0">
                <children>
-                  <Label alignment="CENTER" prefHeight="57.0" prefWidth="215.0" text="Main Stats">
+                  <Label alignment="CENTER" prefHeight="57.0" prefWidth="539.0" text="Main Statistics">
                      <HBox.margin>
-                        <Insets left="70.0" />
+                        <Insets right="50.0" />
                      </HBox.margin>
                      <font>
                         <Font size="33.0" />
@@ -59,7 +59,7 @@
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </padding>
                   </Label>
-                  <Label alignment="CENTER" prefHeight="57.0" prefWidth="257.0" text="Words Played">
+                  <Label alignment="CENTER" prefHeight="57.0" prefWidth="443.0" text="Words Played">
                      <font>
                         <Font size="33.0" />
                      </font>
@@ -67,22 +67,25 @@
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </padding>
                      <HBox.margin>
-                        <Insets left="130.0" />
+                        <Insets left="60.0" />
                      </HBox.margin>
                   </Label>
                </children>
+               <padding>
+                  <Insets left="160.0" right="90.0" />
+               </padding>
             </HBox>
             <HBox alignment="TOP_CENTER" prefHeight="542.0" prefWidth="981.0" spacing="50.0">
                <children>
-                  <Label fx:id="userStats" alignment="TOP_LEFT" prefHeight="178.0" prefWidth="335.0" text="Games Won: 0 Games Lost: 0 Fastest Time: 0" wrapText="true">
+                  <Label fx:id="userStats" alignment="TOP_LEFT" prefHeight="290.0" prefWidth="486.0" wrapText="true">
                      <HBox.margin>
                         <Insets />
                      </HBox.margin>
                      <padding>
-                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                        <Insets bottom="20.0" left="10.0" right="10.0" top="20.0" />
                      </padding>
                      <graphic>
-                        <HBox prefHeight="138.0" prefWidth="36.0" spacing="10.0">
+                        <HBox prefWidth="36.0" spacing="10.0">
                            <children>
                               <VBox alignment="CENTER" prefHeight="138.0" prefWidth="44.0" spacing="10.0">
                                  <children>
@@ -96,9 +99,19 @@
                                           <Image url="@../images/cross.png" />
                                        </image>
                                     </ImageView>
+                                    <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../images/lightning.png" />
+                                       </image>
+                                    </ImageView>
                                     <ImageView fitHeight="50.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
                                           <Image url="@../images/timer.png" />
+                                       </image>
+                                    </ImageView>
+                                    <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../images/book.png" />
                                        </image>
                                     </ImageView>
                                  </children>
@@ -126,12 +139,12 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="46.0" prefWidth="981.0" spacing="20.0">
                <children>
-                  <Button fx:id="startGame" alignment="CENTER" mnemonicParsing="false" onAction="#onNewGame" prefHeight="57.0" prefWidth="179.0" text="Start Game!" textFill="WHITE">
+                  <Button fx:id="startGame" alignment="CENTER" mnemonicParsing="false" onAction="#onNewGame" prefHeight="57.0" prefWidth="193.0" text="Start Game!" textFill="WHITE">
                      <font>
                         <Font name="Bell MT Bold" size="16.0" />
                      </font>
                   </Button>
-            <Button mnemonicParsing="false" onAction="#onSwitchProfile" prefHeight="57.0" prefWidth="197.0" text="Switch Profile" />
+            <Button mnemonicParsing="false" onAction="#onSwitchProfile" prefHeight="57.0" prefWidth="222.0" text="Switch Profile" />
                </children>
                <VBox.margin>
                   <Insets />
