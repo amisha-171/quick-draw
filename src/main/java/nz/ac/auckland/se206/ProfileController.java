@@ -28,6 +28,8 @@ public class ProfileController {
   private int userIndex = 0;
   private File[] allUserImages = new File("src/main/resources/images/profilepics").listFiles();
 
+  private Image img;
+
   public void initialize() throws IOException {
     setUserInfoToGui(userIndex);
     if (data.getAllUsers().length > 1) {
@@ -68,7 +70,7 @@ public class ProfileController {
 
   private void setUserInfoToGui(int currentUserIndex) throws IOException {
     User[] users = data.getAllUsers();
-    Image img = new Image("/images/profilepics/" + allUserImages[userIndex].getName());
+    img = new Image("/images/profilepics/" + allUserImages[userIndex].getName());
     userImage.setImage(img);
     userLabel.setText(users[userIndex].getUserName());
     password.clear();
@@ -100,6 +102,7 @@ public class ProfileController {
         menucontroller.getName(allUsers[userIndex].getUserName());
         menucontroller.setStats();
         menucontroller.setWordsPlayed();
+        menucontroller.setUserPic(img);
         stage.setScene(scene);
         stage.show();
       } else { // If there is a mismatch we inform the user the login details are invalid

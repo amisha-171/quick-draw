@@ -5,27 +5,34 @@
     -fx-font-size: 30px;
 }
 
-
 #greetingHbox .label {
-    -fx-font-size: 100;
+    -fx-font-size: 90;
     -fx-alignment: center;
     -fx-font-family: "Gorditas", cursive;
-    -fx-text-fill: #cc960e;
+    -fx-text-fill: #4b4b4b;
 }
 
 #statsTitle{
-    -fx-font-size: 60;
+    -fx-font-size: 55;
     -fx-alignment: center;
-    -fx-font-family: "Gorditas", cursive;
-    -fx-text-fill: #157d20;
+    -fx-font-family: "Viga", sans-serif;
+    -fx-text-fill: #cc960e;
 }
 
 #wordList, #userStats{
-    -fx-font-size: 30;
+    -fx-font-size: 33;
     -fx-background-color: white;
     -fx-font-family: 'Viga', sans-serif;
+    -fx-text-fill: #5e5e5e;
 
 }
+
+#subTitleHbox .label{
+    -fx-text-fill: #ffffff;
+    -fx-background-color: #157d20;
+    -fx-background-radius: 5px;
+}
+
 .scroll-pane{
     -fx-background-color:transparent;
 }

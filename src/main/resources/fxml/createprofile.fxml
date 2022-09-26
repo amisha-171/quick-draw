@@ -13,7 +13,7 @@
 
 <Pane fx:id="us" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="703.0" prefWidth="1057.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.CreateProfileController">
    <children>
-      <VBox alignment="CENTER" layoutX="8.0" prefHeight="703.0" prefWidth="1048.0" spacing="40.0">
+      <VBox alignment="CENTER" layoutX="8.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="703.0" prefWidth="1048.0" spacing="40.0">
          <children>
             <ImageView fitHeight="300.0" fitWidth="455.0" pickOnBounds="true" preserveRatio="true">
                <image>

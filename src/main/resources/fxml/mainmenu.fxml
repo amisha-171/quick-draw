@@ -11,31 +11,32 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="692.0" prefWidth="985.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.MainMenuController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="703.0" prefWidth="1057.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.MainMenuController">
    <children>
-      <Label fx:id="topTitle" alignment="CENTER" contentDisplay="CENTER" layoutX="255.0" layoutY="39.0" prefHeight="350.0" prefWidth="481.0" text="QuickDraw! " textAlignment="CENTER" textFill="WHITE" wrapText="true">
+      <Label alignment="CENTER" layoutX="11.0" layoutY="14.0" prefHeight="37.0" prefWidth="1053.0" text="SPEEDY SKETCHERS ART SCHOOL" textFill="#5c5c5c" />
+      <Label fx:id="topTitle" alignment="CENTER" contentDisplay="CENTER" layoutX="296.0" layoutY="53.0" prefHeight="350.0" prefWidth="481.0" text="QuickDraw! " textAlignment="CENTER" textFill="WHITE" wrapText="true">
          <font>
             <Font name="Berlin Sans FB Demi Bold" size="20.0" />
          </font>
       </Label>
-      <Label fx:id="bottomTitle" alignment="CENTER" contentDisplay="CENTER" layoutX="267.0" layoutY="33.0" prefHeight="350.0" prefWidth="456.0" text="QuickDraw! " textAlignment="CENTER" textFill="WHITE" wrapText="true">
+      <Label fx:id="bottomTitle" alignment="CENTER" contentDisplay="CENTER" layoutX="308.0" layoutY="47.0" prefHeight="350.0" prefWidth="456.0" text="QuickDraw! " textAlignment="CENTER" textFill="WHITE" wrapText="true">
          <font>
             <Font name="Berlin Sans FB Demi Bold" size="20.0" />
          </font>
       </Label>
 
-      <VBox alignment="BOTTOM_CENTER" layoutX="1.0" layoutY="373.0" prefHeight="307.0" prefWidth="981.0" spacing="20.0">
+      <VBox alignment="BOTTOM_CENTER" layoutX="1.0" layoutY="373.0" prefHeight="307.0" prefWidth="1064.0" spacing="20.0">
          <children>
             <HBox alignment="CENTER" prefHeight="273.0" prefWidth="981.0">
                <children>
-                  <ImageView fitHeight="188.0" fitWidth="287.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="243.0" fitWidth="221.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../images/pencil.png" />
                      </image>
                   </ImageView>
                </children>
             </HBox>
-            <HBox alignment="CENTER" prefHeight="69.0" prefWidth="401.0" spacing="20.0">
+            <HBox alignment="CENTER" prefHeight="57.0" prefWidth="1049.0" spacing="20.0">
                <children>
                   <Button fx:id="switchProfile" alignment="CENTER" mnemonicParsing="false" onAction="#onSwitchProfile" prefHeight="69.0" prefWidth="203.0" text="Select Profile" textFill="WHITE">
                      <font>

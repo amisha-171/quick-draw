@@ -11,6 +11,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import nz.ac.auckland.se206.filereader.CategorySelector;
 import nz.ac.auckland.se206.userutils.Database;
@@ -21,6 +23,8 @@ public class MenuController {
   private Scene scene;
   private Stage stage;
   private String userName;
+
+  @FXML private ImageView userPic;
   @FXML private Label userStats;
   @FXML private Label wordList;
   @FXML private Label userId;
@@ -61,6 +65,10 @@ public class MenuController {
 
     // Set the stats and the users username to their respective labels in the GUI
     wordList.setText(sb.toString());
+  }
+
+  protected void setUserPic(Image image) {
+    userPic.setImage(image);
   }
 
   @FXML
