@@ -296,7 +296,15 @@ public class CanvasController implements Initializable {
               disableButtons();
               enableEndButtons();
               // Inform user they have lost
-              Platform.runLater(() -> wordLabel.setText("You lost, better luck next time!"));
+              Platform.runLater(() -> {
+                wordLabel.setText("You lost, better luck next time!");
+                user.incrementLosses();
+                try {
+                  db.write(user);
+                } catch (IOException e) {
+                  throw new RuntimeException(e);
+                }
+              });
             }
             if (counter == 10) {
               // If 10 seconds remain we change the timer to color to red instead of blue
@@ -379,8 +387,11 @@ public class CanvasController implements Initializable {
             // Check if the game is won and set the label in the GUI to display to the user they
             // have won
             if ((gameWon && counter > 0) || (gameWon && counter == 0)) {
-              Platform.runLater(
-                  () -> wordLabel.setText("You won in " + (60 - counter) + " seconds!"));
+              Platform.runLater(() -> {
+                  wordLabel.setText("You won in " + (60 - counter) + " seconds!");
+                  user.updateFastestTime(60 - counter);
+                }
+              );
 
               // Call method to disable the buttons as the game is over
               disableButtons();

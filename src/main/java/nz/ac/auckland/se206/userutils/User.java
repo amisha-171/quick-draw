@@ -17,6 +17,10 @@ public class User {
     // Constructor for new user
     this.userName = userName;
     this.password = password;
+    //set default stats
+    this.wins = 0;
+    this.losses = 0;
+    this.fastestTime = 100; //100 is default value because fastest time cannot be more than 60
   }
 
   // Getters and setters for the User fields
@@ -53,7 +57,7 @@ public class User {
   }
 
   public int getFastestTime() {
-    return fastestTime;
+    return this.fastestTime;
   }
 
   public void updateFastestTime(int fastestTime) {
