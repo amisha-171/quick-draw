@@ -72,8 +72,6 @@ public class CanvasController implements Initializable {
   @FXML private Button mainMenuBtn;
   private final Database db = new Database();
   private User user;
-  private int wins;
-  private List<String> words;
   @FXML private Button speakWord;
 
   // mouse coordinates
@@ -144,8 +142,6 @@ public class CanvasController implements Initializable {
     // fields
     this.userName = userId;
     this.user = this.db.read(this.userName);
-    this.wins = this.user.getWins();
-    this.words = this.user.getWordList();
 
     this.generateWord();
   }
@@ -164,7 +160,7 @@ public class CanvasController implements Initializable {
     }
     // Get a random word with Easy difficulty and set the word to be displayed to the user in the
     // GUI
-    String randomWord = categorySelector.getRandomDiffWord(CategorySelector.Difficulty.E, this.words);
+    String randomWord = categorySelector.getRandomDiffWord(CategorySelector.Difficulty.E, this.user.getWordList());
     this.setWord(randomWord);
   }
 
@@ -282,10 +278,8 @@ public class CanvasController implements Initializable {
                   });
               timer.cancel();
               enableEndButtons();
-              wins++;
-              user.setWins(wins);
-              words.add(wordChosen);
-              user.setWordList((ArrayList<String>) words);
+              user.incrementWins();
+              user.updateWordList(wordChosen);
               try {
                 db.write(user);
               } catch (IOException e) {

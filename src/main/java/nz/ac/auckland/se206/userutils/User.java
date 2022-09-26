@@ -24,8 +24,10 @@ public class User {
     return wordList;
   }
 
-  public void setWordList(ArrayList<String> wordList) {
-    this.wordList = wordList;
+  public void updateWordList(String newWord) {
+    if (!this.wordList.contains(newWord)) {
+      this.wordList.add(newWord);
+    }
   }
 
   private ArrayList<String> wordList = new ArrayList<>();
