@@ -75,8 +75,8 @@ public class User {
   }
 
   public double getAverageSolveTime() {
-    //use Math.round() alongside multiplying/dividing by 100 to round to 2 d.p.
-    return Math.round(((double)this.totalSolveTime / (this.wins + this.losses)) * 100) / 100.0;
+    // use Math.round() alongside multiplying/dividing by 100 to round to 2 d.p.
+    return Math.round(((double) this.totalSolveTime / (this.wins + this.losses)) * 100) / 100.0;
   }
 
   public void updateFastestTime(int fastestTime) {
