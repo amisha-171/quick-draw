@@ -302,6 +302,7 @@ public class CanvasController implements Initializable {
                   () -> {
                     wordLabel.setText("You lost, better luck next time!");
                     user.incrementLosses();
+                    user.updateWordList(wordChosen);
                     user.updateTotalSolveTime(60);
                     try {
                       db.write(user);
