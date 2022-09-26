@@ -49,16 +49,19 @@ public class CreateProfileController {
     if (passwordField.getText().isBlank() || usernameField.getText().isBlank()) {
       setAlert("Username or Password must not be empty", "Empty field");
     }
+
     // Check if the username field contains a space as we do not allow this to be a valid char in
     // username
     else if (usernameField.getText().contains(" ")) {
       setAlert("Username must not contain any spaces", "Invalid username format");
     }
+
     // Check if the username the user entered already exists, as we do not allow duplicate profiles
     // we inform the user
     else if (db.userExists(usernameField.getText(), false)) {
       setAlert("A profile with this username already exists", "User already exists");
     }
+
     // If criteria is met then we use our Database class to write the user to system
 
     else {
