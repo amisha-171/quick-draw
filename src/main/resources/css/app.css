@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Gorditas&family=Viga&display=swap');
 
-Button {
+.button {
     -fx-text-fill: "white";
     -fx-font-size: 25px;
     -fx-background-radius: 35px;
@@ -12,12 +12,18 @@ Button {
     -fx-cursor: hand;
 }
 
-Label{
-    -fx-font-family: 'Viga', sans-serif;
-}
-
-Button:hover{
+.button:hover{
     -fx-background-color: #157d20;
     -fx-background-radius: 40px;
 
+}
+
+.root {
+    -fx-background-color: #c7dbb2;
+    -fx-background-image: url(../images/doodles.gif);
+}
+
+
+.label{
+    -fx-font-family: 'Viga', sans-serif;
 }

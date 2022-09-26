@@ -1,6 +1,5 @@
 package nz.ac.auckland.se206;
 
-import java.io.File;
 import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -9,7 +8,6 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -20,29 +18,27 @@ import nz.ac.auckland.se206.userutils.Database;
 import nz.ac.auckland.se206.userutils.User;
 
 public class ProfileController {
-  private @FXML Button loginButton;
-  private @FXML Button createProfile;
   private @FXML PasswordField password;
   private final Database data = new Database();
   private @FXML Label userLabel;
   private @FXML Button nextUser;
   private @FXML Button prevUser;
   private @FXML ImageView userImage;
-  private int userIndex = -1;
-  private File[] allUserImages = new File("src/main/resources/profilepics").listFiles();
+  private int userIndex = 0;
+
+  public void initialize() throws IOException {
+    setUserInfoToGui(userIndex);
+    if (data.getAllUsers().length > 1) {
+      nextUser.setVisible(true);
+    }
+  }
 
   @FXML
   private void toggleThroughUsers(ActionEvent event) throws IOException {
     Button sourceButton = (Button) event.getSource();
+
     User[] users = data.getAllUsers();
-    if (users.length == 0) {
-      Alert alert = new Alert(AlertType.INFORMATION);
-      alert.setHeaderText("No users found, please create a profile!");
-      alert.setTitle("No users");
-      alert.show();
-      return;
-    }
-    password.setDisable(false);
+
     if (sourceButton.equals(nextUser)) {
       if (userIndex < users.length - 1) {
         userIndex++;
@@ -55,34 +51,25 @@ public class ProfileController {
         setUserInfoToGui(userIndex);
       }
     }
+
+    if (userIndex == users.length - 1) {
+      prevUser.setVisible(true);
+      nextUser.setVisible(false);
+    } else if (userIndex == 0) {
+      prevUser.setVisible(false);
+      nextUser.setVisible(true);
+    } else {
+      prevUser.setVisible(true);
+      nextUser.setVisible(true);
+    }
   }
 
   private void setUserInfoToGui(int currentUserIndex) throws IOException {
     User[] users = data.getAllUsers();
-    Image img = new Image("/profilepics/" + allUserImages[userIndex].getName());
+    Image img = new Image("/images/profilepics/" + users[userIndex].getImageName());
     userImage.setImage(img);
     userLabel.setText(users[userIndex].getUserName());
     password.clear();
-  }
-
-  @FXML
-  private void onCreateProfile(ActionEvent event) throws IOException {
-    // If the user attempts to create a new account while 6 accounts are already active we show a
-    // message as we limit maximum accounts to 6
-    if (data.getAllUsers().length == 6) {
-      Alert maxUsers = new Alert(Alert.AlertType.INFORMATION);
-      maxUsers.setHeaderText("Sorry but only 6 user accounts or less are allowed");
-      maxUsers.setTitle("Unable to create profile");
-      maxUsers.show();
-      return; // Return statement to prevent proceeding
-    }
-    // If < 6 users we show the create profile scene if the user wishes to make a new profile
-    FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/createprofile.fxml"));
-    Parent root = loader.load();
-    Scene scene = new Scene(root);
-    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-    stage.setScene(scene);
-    stage.show();
   }
 
   private void showAlert() {
@@ -110,6 +97,9 @@ public class ProfileController {
         MenuController menucontroller = loader.getController();
         menucontroller.getName(allUsers[userIndex].getUserName());
         menucontroller.setStats();
+        menucontroller.setWordsPlayed();
+        Image img = new Image("/images/profilepics/" + allUsers[userIndex].getImageName());
+        menucontroller.setUserPic(img);
         stage.setScene(scene);
         stage.show();
       } else { // If there is a mismatch we inform the user the login details are invalid
@@ -118,5 +108,16 @@ public class ProfileController {
     } else {
       showAlert();
     }
+  }
+
+  @FXML
+  private void onMainMenuSwitch(ActionEvent btnEvent) throws IOException {
+    FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/mainmenu.fxml"));
+    Parent root = loader.load();
+    Scene scene = new Scene(root);
+    Stage stage = (Stage) ((Node) btnEvent.getSource()).getScene().getWindow();
+    // show the scene in the GUI
+    stage.setScene(scene);
+    stage.show();
   }
 }

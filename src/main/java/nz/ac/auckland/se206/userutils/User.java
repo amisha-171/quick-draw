@@ -1,5 +1,6 @@
 package nz.ac.auckland.se206.userutils;
 
+
 import java.util.ArrayList;
 
 /** This class is for the User object which we can use to update stats etc. */
@@ -13,10 +14,13 @@ public class User {
   private int losses;
   private int fastestTime;
 
-  public User(String userName, String password) {
+  private String imageName;
+
+  public User(String userName, String password, String img) {
     // Constructor for new user
     this.userName = userName;
     this.password = password;
+    this.imageName = img;
   }
 
   // Getters and setters for the User fields
@@ -60,5 +64,9 @@ public class User {
 
   public String getUserName() {
     return userName;
+  }
+
+  public String getImageName() {
+    return imageName;
   }
 }

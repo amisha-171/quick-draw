@@ -1,0 +1,24 @@
+@import url('https://fonts.googleapis.com/css2?family=Gorditas&family=Viga&display=swap');
+
+
+.button{
+    -fx-font-size: 30px;
+}
+
+.label{
+    -fx-font-size: 27px;
+}
+
+
+#topTitle, #bottomTitle {
+    -fx-font-size: 140;
+    -fx-alignment: center;
+    -fx-font-family: "Gorditas", cursive;
+    -fx-text-fill: #cc960e;
+}
+
+#topTitle{
+    -fx-text-fill: white;
+}
+
+
