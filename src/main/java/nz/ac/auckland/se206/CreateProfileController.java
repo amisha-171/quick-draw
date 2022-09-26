@@ -1,5 +1,6 @@
 package nz.ac.auckland.se206;
 
+import java.io.File;
 import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -9,6 +10,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import nz.ac.auckland.se206.userutils.Database;
 import nz.ac.auckland.se206.userutils.User;
@@ -16,7 +19,20 @@ import nz.ac.auckland.se206.userutils.User;
 public class CreateProfileController {
   @FXML private TextField usernameField;
   @FXML private TextField passwordField;
+
+  @FXML private ImageView profPic;
   private final Database db = new Database();
+
+  private Image img;
+
+  private File[] allUserImages = new File("src/main/resources/images/profilepics").listFiles();
+
+  public void initialize() throws IOException {
+    int index = db.getAllUsers().length;
+    String imgName = allUserImages[index].getName();
+    img = new Image("/images/profilepics/" + allUserImages[index].getName());
+    profPic.setImage((img));
+  }
 
   private void setAlert(String title, String header) {
     // Alert method where we show user an alert based on the input title and header messages
@@ -44,8 +60,11 @@ public class CreateProfileController {
       setAlert("A profile with this username already exists", "User already exists");
     }
     // If criteria is met then we use our Database class to write the user to system
+
     else {
-      User newUser = new User(usernameField.getText(), passwordField.getText());
+      int index = db.getAllUsers().length;
+      String imgName = allUserImages[index].getName();
+      User newUser = new User(usernameField.getText(), passwordField.getText(), imgName);
       db.write(newUser);
       // Load the fxml
       FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/menu.fxml"));
@@ -55,6 +74,7 @@ public class CreateProfileController {
       // Set the name of the current user and the current users stats in the menu scene
       MenuController menucontroller = loader.getController();
       menucontroller.getName(usernameField.getText());
+      menucontroller.setUserPic(img);
       menucontroller.setStats();
       stage.setScene(scene);
       stage.show();

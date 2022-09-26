@@ -20,7 +20,7 @@
 }
 
 #userLabel {
-    -fx-font-family: "Gorditas", cursive;
+    -fx-font-family: "Viga", cursive;
     -fx-text-fill: #262626;
 }
 
@@ -28,11 +28,4 @@
     -fx-background-radius: 50px;
     -fx-background-size: 100px;
     -fx-border-radius: 50px;
-}
-
-#topTitle, #bottomTitle {
-    -fx-font-size: 140;
-    -fx-alignment: center;
-    -fx-font-family: "Gorditas", cursive;
-    -fx-text-fill: #cc960e;
 }

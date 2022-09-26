@@ -442,6 +442,8 @@ public class CanvasController {
     menuController.getName(this.userName);
     menuController.setStats();
     menuController.setWordsPlayed();
+    Image img = new Image("/images/profilepics/" + user.getImageName());
+    menuController.setUserPic(img);
     // show the scene in the GUI
     stage.setScene(scene);
     stage.show();

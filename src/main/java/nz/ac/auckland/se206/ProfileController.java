@@ -1,6 +1,5 @@
 package nz.ac.auckland.se206;
 
-import java.io.File;
 import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -26,9 +25,6 @@ public class ProfileController {
   private @FXML Button prevUser;
   private @FXML ImageView userImage;
   private int userIndex = 0;
-  private File[] allUserImages = new File("src/main/resources/images/profilepics").listFiles();
-
-  private Image img;
 
   public void initialize() throws IOException {
     setUserInfoToGui(userIndex);
@@ -70,7 +66,7 @@ public class ProfileController {
 
   private void setUserInfoToGui(int currentUserIndex) throws IOException {
     User[] users = data.getAllUsers();
-    img = new Image("/images/profilepics/" + allUserImages[userIndex].getName());
+    Image img = new Image("/images/profilepics/" + users[userIndex].getImageName());
     userImage.setImage(img);
     userLabel.setText(users[userIndex].getUserName());
     password.clear();
@@ -102,6 +98,7 @@ public class ProfileController {
         menucontroller.getName(allUsers[userIndex].getUserName());
         menucontroller.setStats();
         menucontroller.setWordsPlayed();
+        Image img = new Image("/images/profilepics/" + allUsers[userIndex].getImageName());
         menucontroller.setUserPic(img);
         stage.setScene(scene);
         stage.show();

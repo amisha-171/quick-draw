@@ -23,7 +23,6 @@ public class MenuController {
   private Scene scene;
   private Stage stage;
   private String userName;
-
   @FXML private ImageView userPic;
   @FXML private Label userStats;
   @FXML private Label wordList;
