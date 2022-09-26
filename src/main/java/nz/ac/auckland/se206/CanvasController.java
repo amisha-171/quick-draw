@@ -299,6 +299,7 @@ public class CanvasController implements Initializable {
               Platform.runLater(() -> {
                 wordLabel.setText("You lost, better luck next time!");
                 user.incrementLosses();
+                user.updateTotalSolveTime(60);
                 try {
                   db.write(user);
                 } catch (IOException e) {
@@ -390,6 +391,7 @@ public class CanvasController implements Initializable {
               Platform.runLater(() -> {
                   wordLabel.setText("You won in " + (60 - counter) + " seconds!");
                   user.updateFastestTime(60 - counter);
+                  user.updateTotalSolveTime(60 - counter);
                 }
               );
 

@@ -12,6 +12,8 @@ public class User {
   private int wins;
   private int losses;
   private int fastestTime;
+  private int totalSolveTime;
+  private ArrayList<String> wordList = new ArrayList<>();
 
   public User(String userName, String password) {
     // Constructor for new user
@@ -20,6 +22,7 @@ public class User {
     //set default stats
     this.wins = 0;
     this.losses = 0;
+    this.totalSolveTime = 0;
     this.fastestTime = 100; //100 is default value because fastest time cannot be more than 60
   }
 
@@ -28,13 +31,15 @@ public class User {
     return wordList;
   }
 
+  public int numWordsPlayed() {
+    return this.wordList.size();
+  }
+
   public void updateWordList(String newWord) {
     if (!this.wordList.contains(newWord)) {
       this.wordList.add(newWord);
     }
   }
-
-  private ArrayList<String> wordList = new ArrayList<>();
 
   public String getPassword() {
     return password;
@@ -58,6 +63,14 @@ public class User {
 
   public int getFastestTime() {
     return this.fastestTime;
+  }
+
+  public void updateTotalSolveTime(int timeToAdd) {
+    this.totalSolveTime += timeToAdd;
+  }
+
+  public double getAverageSolveTime() {
+    return ((double)this.totalSolveTime) / (this.wins + this.losses);
   }
 
   public void updateFastestTime(int fastestTime) {
