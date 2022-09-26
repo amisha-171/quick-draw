@@ -36,7 +36,7 @@ public class User {
     return wordList;
   }
 
-  public int numWordsPlayed() {
+  public int getNumWordsPlayed() {
     return this.wordList.size();
   }
 
