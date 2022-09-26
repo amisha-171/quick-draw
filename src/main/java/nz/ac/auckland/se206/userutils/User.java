@@ -13,6 +13,8 @@ public class User {
   private int wins;
   private int losses;
   private int fastestTime;
+  private int totalSolveTime;
+  private ArrayList<String> wordList = new ArrayList<>();
 
   private String imageName;
 
@@ -20,6 +22,13 @@ public class User {
     // Constructor for new user
     this.userName = userName;
     this.password = password;
+
+    //set default stats
+    this.wins = 0;
+    this.losses = 0;
+    this.totalSolveTime = 0;
+    this.fastestTime = 100; //100 is default value because fastest time cannot be more than 60
+    // set user image
     this.imageName = img;
   }
 
@@ -28,11 +37,15 @@ public class User {
     return wordList;
   }
 
-  public void setWordList(ArrayList<String> wordList) {
-    this.wordList = wordList;
+  public int numWordsPlayed() {
+    return this.wordList.size();
   }
 
-  private ArrayList<String> wordList = new ArrayList<>();
+  public void updateWordList(String newWord) {
+    if (!this.wordList.contains(newWord)) {
+      this.wordList.add(newWord);
+    }
+  }
 
   public String getPassword() {
     return password;
@@ -42,24 +55,34 @@ public class User {
     return wins;
   }
 
-  public void setWins(int wins) {
-    this.wins = wins;
+  public void incrementWins() {
+    this.wins++;
   }
 
   public int getLosses() {
     return losses;
   }
 
-  public void setLosses(int losses) {
-    this.losses = losses;
+  public void incrementLosses() {
+    this.losses++;
   }
 
   public int getFastestTime() {
-    return fastestTime;
+    return this.fastestTime;
   }
 
-  public void setFastestTime(int fastestTime) {
-    this.fastestTime = fastestTime;
+  public void updateTotalSolveTime(int timeToAdd) {
+    this.totalSolveTime += timeToAdd;
+  }
+
+  public double getAverageSolveTime() {
+    return ((double)this.totalSolveTime) / (this.wins + this.losses);
+  }
+
+  public void updateFastestTime(int fastestTime) {
+    if (fastestTime < this.fastestTime) {
+      this.fastestTime = fastestTime;
+    }
   }
 
   public String getUserName() {

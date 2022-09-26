@@ -7,16 +7,15 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.net.URL;
+import java.util.*;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -30,6 +29,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javax.imageio.ImageIO;
+import nz.ac.auckland.se206.FileReader.CategorySelector;
 import nz.ac.auckland.se206.ml.DoodlePrediction;
 import nz.ac.auckland.se206.speech.TextToSpeech;
 import nz.ac.auckland.se206.userutils.Database;
@@ -47,7 +47,7 @@ import nz.ac.auckland.se206.userutils.User;
  * the canvas size, the ML model will not work correctly. So be careful. If you make some changes in
  * the canvas and brush sizes, make sure that the prediction works fine.
  */
-public class CanvasController {
+public class CanvasController implements Initializable {
 
   private String userName;
 
@@ -72,8 +72,6 @@ public class CanvasController {
   @FXML private Button mainMenuBtn;
   private final Database db = new Database();
   private User user;
-  private int wins;
-  private List<String> words;
   @FXML private Button speakWord;
 
   // mouse coordinates
@@ -86,7 +84,10 @@ public class CanvasController {
    * @throws ModelException If there is an error in reading the input/output of the DL model.
    * @throws IOException If the model cannot be found on the file system.
    */
-  public void initialize(boolean playerReady) throws ModelException, IOException {
+  public void initialize(URL url, ResourceBundle resourceBundle) {
+    // Disable the buttons in the GUI as fit
+    this.disableStartButtons(true);
+
     gameWon = false;
     isContent = false;
     color = Color.BLACK;
@@ -96,54 +97,71 @@ public class CanvasController {
           canvas.setCursor(Cursor.HAND);
         });
 
-    if (playerReady) {
-      // Enable buttons and disable buttons on ready
-      clearButton.setDisable(false);
-      disableStartButtons(false);
-      readyButton.setDisable(true);
+    graphic = canvas.getGraphicsContext2D();
 
-      graphic = canvas.getGraphicsContext2D();
+    canvas.setOnMousePressed(
+        e -> {
+          currentX = e.getX();
+          currentY = e.getY();
+          // Set content boolean to true when user has drawn, we will use this field as a guard
+          // for predictions
+          isContent = true;
+        });
 
-      canvas.setOnMousePressed(
-          e -> {
-            currentX = e.getX();
-            currentY = e.getY();
-            // Set content boolean to true when user has drawn, we will use this field as a guard
-            // for predictions
-            isContent = true;
-          });
+    canvas.setOnMouseDragged(
+        e -> {
+          // Brush size (you can change this, it should not be too small or too large).
+          final double size = 6;
 
-      canvas.setOnMouseDragged(
-          e -> {
-            // Brush size (you can change this, it should not be too small or too large).
-            final double size = 6;
+          final double x = e.getX() - size / 2;
+          final double y = e.getY() - size / 2;
 
-            final double x = e.getX() - size / 2;
-            final double y = e.getY() - size / 2;
+          if (!gameWon && !(counter == 0)) {
+            graphic.setStroke(color);
+            graphic.setLineWidth(size);
+            // Create a line that goes from the point (currentX, currentY) and (x,y)
+            graphic.strokeLine(currentX, currentY, x, y);
 
-            if (!gameWon && !(counter == 0)) {
-              graphic.setStroke(color);
-              graphic.setLineWidth(size);
-              // Create a line that goes from the point (currentX, currentY) and (x,y)
-              graphic.strokeLine(currentX, currentY, x, y);
+            // update the coordinates
+            currentX = x;
+            currentY = y;
+          }
+        });
 
-              // update the coordinates
-              currentX = x;
-              currentY = y;
-            }
-          });
+    try {
+      model = new DoodlePrediction();
+    } catch (ModelException e) {
+      e.printStackTrace();
+    } catch (IOException e) {
+      e.printStackTrace();
     }
-
-    model = new DoodlePrediction();
   }
 
   public void setUserName(String userId) throws IOException {
     // Set the username of the current user playing, and also its corresponding stats to local
     // fields
     this.userName = userId;
-    this.user = db.read(userName);
-    this.wins = user.getWins();
-    this.words = user.getWordList();
+    this.user = this.db.read(this.userName);
+
+    this.generateWord();
+  }
+
+  public void generateWord() {
+    // Create an instance of category selector
+    CategorySelector categorySelector = null;
+    try {
+      categorySelector = new CategorySelector();
+    } catch (IOException e) {
+      e.printStackTrace();
+    } catch (URISyntaxException e) {
+      e.printStackTrace();
+    } catch (CsvException e) {
+      e.printStackTrace();
+    }
+    // Get a random word with Easy difficulty and set the word to be displayed to the user in the
+    // GUI
+    String randomWord = categorySelector.getRandomDiffWord(CategorySelector.Difficulty.E, this.user.getWordList());
+    this.setWord(randomWord);
   }
 
   protected void disableStartButtons(boolean btn) {
@@ -210,8 +228,11 @@ public class CanvasController {
   @FXML
   private void onReady() throws ModelException, IOException {
     // When player is ready we start the game by enabling canvas, starting the timer etc
-    initialize(true);
-    onInk.setDisable(true);
+    this.onInk.setDisable(true);
+    this.readyButton.setDisable(true);
+    this.clearButton.setDisable(false);
+    this.eraseBtn.setDisable(false);
+    this.
     runTimer();
   }
 
@@ -257,10 +278,8 @@ public class CanvasController {
                   });
               timer.cancel();
               enableEndButtons();
-              wins++;
-              user.setWins(wins);
-              words.add(wordChosen);
-              user.setWordList((ArrayList<String>) words);
+              user.incrementWins();
+              user.updateWordList(wordChosen);
               try {
                 db.write(user);
               } catch (IOException e) {
@@ -277,7 +296,16 @@ public class CanvasController {
               disableButtons();
               enableEndButtons();
               // Inform user they have lost
-              Platform.runLater(() -> wordLabel.setText("You lost, better luck next time!"));
+              Platform.runLater(() -> {
+                wordLabel.setText("You lost, better luck next time!");
+                user.incrementLosses();
+                user.updateTotalSolveTime(60);
+                try {
+                  db.write(user);
+                } catch (IOException e) {
+                  throw new RuntimeException(e);
+                }
+              });
             }
             if (counter == 10) {
               // If 10 seconds remain we change the timer to color to red instead of blue
@@ -360,8 +388,12 @@ public class CanvasController {
             // Check if the game is won and set the label in the GUI to display to the user they
             // have won
             if ((gameWon && counter > 0) || (gameWon && counter == 0)) {
-              Platform.runLater(
-                  () -> wordLabel.setText("You won in " + (60 - counter) + " seconds!"));
+              Platform.runLater(() -> {
+                  wordLabel.setText("You won in " + (60 - counter) + " seconds!");
+                  user.updateFastestTime(60 - counter);
+                  user.updateTotalSolveTime(60 - counter);
+                }
+              );
 
               // Call method to disable the buttons as the game is over
               disableButtons();

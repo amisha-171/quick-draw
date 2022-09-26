@@ -14,7 +14,6 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
-import nz.ac.auckland.se206.filereader.CategorySelector;
 import nz.ac.auckland.se206.userutils.Database;
 import nz.ac.auckland.se206.userutils.User;
 
@@ -77,16 +76,9 @@ public class MenuController {
     Parent root = loader.load();
     scene = new Scene(root);
     stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-    // Create an instance of category selector
-    CategorySelector categorySelector = new CategorySelector();
-    // Get a random word with Easy difficulty and set the word to be displayed to the user in the
-    // GUI
-    String randomWord = categorySelector.getRandomDiffWord(CategorySelector.Difficulty.E);
+    // set the username in the canvas controller
     CanvasController canvasController = loader.getController();
-    canvasController.setWord(randomWord);
     canvasController.setUserName(this.userName);
-    // Disable the buttons in the GUI as fit
-    canvasController.disableStartButtons(true);
     // Set the stage and show it
     stage.setScene(scene);
     stage.show();
