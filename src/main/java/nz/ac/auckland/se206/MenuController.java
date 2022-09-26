@@ -57,7 +57,7 @@ public class MenuController {
     }
     sb.append(System.getProperty("line.separator"))
         .append("Words Played (Easy): ")
-        .append(currentUser.getWordList().size())
+        .append(currentUser.getNumWordsPlayed())
         .append(("/144"));
 
     // Set the stats and the users username to their respective labels in the GUI
