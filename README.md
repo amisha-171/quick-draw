@@ -2,6 +2,33 @@
 
 ### Quick, Draw! 
 
+# Attributions:
+
+All game icons were made by Freepik (https://www.freepik.com) from Flaticon (https://www.flaticon.com/), using the Flaticon License, which is a free for commercial use WITH ATTRIBUTION license.
+
+Flaticon License:
+Where you can use Flaticon's content*:
+Website.
+Software, applications, mobile, Multimedia.
+Printed and digital media (magazines, newspapers, books, cards, labels, CD, television, video, e-mail).
+Advertisement and promotional items.
+Presentation of products and public events.
+
+What you CAN DO:
+You have the non-exclusive, non-transferable, non-sublicensable right to use the licensed material an unlimited number of times in any and all media for the commercial or personal purposes listed above.
+You may alter and create derivative works.
+You can use Flaticon's Contents during the rights period world widely.
+
+What you CANNOT DO:
+Sublicense, sell or rent any contents (or a modified version of them)
+Distribute Flaticon Contents unless it has been expressly authorized by Flaticon
+Offering Flaticon Contents designs (or modified Flaticon Contents versions) for download
+
+* The complete content of licenses can be consulted in the Terms of Use, that will prevail over the content of this document.
+www.flaticon.com/terms-of-use
+
+# For Developer Use:
+
 **Requirements**
 
 - Java JDK 17.0.2 (download
