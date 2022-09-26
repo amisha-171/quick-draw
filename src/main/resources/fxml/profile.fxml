@@ -22,13 +22,13 @@
          <children>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="30.0">
                <children>
-                  <Button fx:id="prevUser" mnemonicParsing="false" onAction="#toggleThroughUsers" prefHeight="70.0" prefWidth="70.0" visible="false" />
+                  <Button fx:id="prevUser" mnemonicParsing="false" onAction="#onToggleUsers" prefHeight="70.0" prefWidth="70.0" visible="false" />
                   <ImageView fx:id="userImage" fitHeight="244.0" fitWidth="272.0" pickOnBounds="true" preserveRatio="true">
                      <viewport>
                         <Rectangle2D />
                      </viewport>
                   </ImageView>
-                  <Button fx:id="nextUser" alignment="CENTER" mnemonicParsing="false" onAction="#toggleThroughUsers" prefHeight="70.0" prefWidth="70.0" visible="false" />
+                  <Button fx:id="nextUser" alignment="CENTER" mnemonicParsing="false" onAction="#onToggleUsers" prefHeight="70.0" prefWidth="70.0" visible="false" />
                </children>
             </HBox>
             <VBox fx:id="loginVbox" alignment="CENTER" prefHeight="108.0" prefWidth="1066.0" spacing="30.0">

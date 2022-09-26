@@ -29,7 +29,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javax.imageio.ImageIO;
-import nz.ac.auckland.se206.FileReader.CategorySelector;
+import nz.ac.auckland.se206.filereader.CategorySelector;
 import nz.ac.auckland.se206.ml.DoodlePrediction;
 import nz.ac.auckland.se206.speech.TextToSpeech;
 import nz.ac.auckland.se206.userutils.Database;
@@ -77,6 +77,7 @@ public class CanvasController implements Initializable {
   // mouse coordinates
   private double currentX;
   private double currentY;
+
   /**
    * JavaFX calls this method once the GUI elements are loaded. In our case we create a listener for
    * the drawing, and we load the ML model.
@@ -160,7 +161,8 @@ public class CanvasController implements Initializable {
     }
     // Get a random word with Easy difficulty and set the word to be displayed to the user in the
     // GUI
-    String randomWord = categorySelector.getRandomDiffWord(CategorySelector.Difficulty.E, this.user.getWordList());
+    String randomWord =
+        categorySelector.getRandomDiffWord(CategorySelector.Difficulty.E, this.user.getWordList());
     this.setWord(randomWord);
   }
 
@@ -181,6 +183,7 @@ public class CanvasController implements Initializable {
   private void onClear() {
     graphic.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
   }
+
   /**
    * Get the current snapshot of the canvas.
    *
@@ -232,8 +235,7 @@ public class CanvasController implements Initializable {
     this.readyButton.setDisable(true);
     this.clearButton.setDisable(false);
     this.eraseBtn.setDisable(false);
-    this.
-    runTimer();
+    this.runTimer();
   }
 
   protected void setWord(String wordDraw) {
@@ -296,16 +298,17 @@ public class CanvasController implements Initializable {
               disableButtons();
               enableEndButtons();
               // Inform user they have lost
-              Platform.runLater(() -> {
-                wordLabel.setText("You lost, better luck next time!");
-                user.incrementLosses();
-                user.updateTotalSolveTime(60);
-                try {
-                  db.write(user);
-                } catch (IOException e) {
-                  throw new RuntimeException(e);
-                }
-              });
+              Platform.runLater(
+                  () -> {
+                    wordLabel.setText("You lost, better luck next time!");
+                    user.incrementLosses();
+                    user.updateTotalSolveTime(60);
+                    try {
+                      db.write(user);
+                    } catch (IOException e) {
+                      throw new RuntimeException(e);
+                    }
+                  });
             }
             if (counter == 10) {
               // If 10 seconds remain we change the timer to color to red instead of blue
@@ -388,12 +391,12 @@ public class CanvasController implements Initializable {
             // Check if the game is won and set the label in the GUI to display to the user they
             // have won
             if ((gameWon && counter > 0) || (gameWon && counter == 0)) {
-              Platform.runLater(() -> {
-                  wordLabel.setText("You won in " + (60 - counter) + " seconds!");
-                  user.updateFastestTime(60 - counter);
-                  user.updateTotalSolveTime(60 - counter);
-                }
-              );
+              Platform.runLater(
+                  () -> {
+                    wordLabel.setText("You won in " + (60 - counter) + " seconds!");
+                    user.updateFastestTime(60 - counter);
+                    user.updateTotalSolveTime(60 - counter);
+                  });
 
               // Call method to disable the buttons as the game is over
               disableButtons();

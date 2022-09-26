@@ -1,6 +1,5 @@
 package nz.ac.auckland.se206.userutils;
 
-
 import java.util.ArrayList;
 
 /** This class is for the User object which we can use to update stats etc. */
@@ -23,11 +22,11 @@ public class User {
     this.userName = userName;
     this.password = password;
 
-    //set default stats
+    // set default stats
     this.wins = 0;
     this.losses = 0;
     this.totalSolveTime = 0;
-    this.fastestTime = 100; //100 is default value because fastest time cannot be more than 60
+    this.fastestTime = 100; // 100 is default value because fastest time cannot be more than 60
     // set user image
     this.imageName = img;
   }
@@ -76,7 +75,7 @@ public class User {
   }
 
   public double getAverageSolveTime() {
-    return ((double)this.totalSolveTime) / (this.wins + this.losses);
+    return ((double) this.totalSolveTime) / (this.wins + this.losses);
   }
 
   public void updateFastestTime(int fastestTime) {

@@ -34,24 +34,27 @@ public class ProfileController {
   }
 
   @FXML
-  private void toggleThroughUsers(ActionEvent event) throws IOException {
+  private void onToggleUsers(ActionEvent event) throws IOException {
+    // Get the source button clicked by the user
     Button sourceButton = (Button) event.getSource();
-
+    // Get all of the users
     User[] users = data.getAllUsers();
-
+    // Go to next user if there are more by incrementing the index
     if (sourceButton.equals(nextUser)) {
       if (userIndex < users.length - 1) {
         userIndex++;
         setUserInfoToGui(userIndex);
       }
     }
+    // If possible decrement the index to go to the previous user
     if (sourceButton.equals(prevUser)) {
       if (userIndex > 0) {
         userIndex--;
+        // Set the previous profile information to the scene
         setUserInfoToGui(userIndex);
       }
     }
-
+    // Handle button visibility based current profile
     if (userIndex == users.length - 1) {
       prevUser.setVisible(true);
       nextUser.setVisible(false);
@@ -65,10 +68,12 @@ public class ProfileController {
   }
 
   private void setUserInfoToGui(int currentUserIndex) throws IOException {
+    // Helper method to set user info the scene depending on the current user index handled by
+    // onToggleUsers
     User[] users = data.getAllUsers();
     Image img = new Image("/images/profilepics/" + users[userIndex].getImageName());
-    userImage.setImage(img);
-    userLabel.setText(users[userIndex].getUserName());
+    userImage.setImage(img); // Set the current users corresponding image
+    userLabel.setText(users[userIndex].getUserName()); // Set current users username
     password.clear();
   }
 
