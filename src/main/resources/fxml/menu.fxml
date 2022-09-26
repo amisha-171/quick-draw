@@ -72,12 +72,12 @@
                   </Label>
                </children>
                <padding>
-                  <Insets left="160.0" right="90.0" />
+                  <Insets left="180.0" right="90.0" />
                </padding>
             </HBox>
             <HBox alignment="TOP_CENTER" prefHeight="542.0" prefWidth="981.0" spacing="50.0">
                <children>
-                  <Label fx:id="userStats" alignment="TOP_LEFT" prefHeight="290.0" prefWidth="486.0" wrapText="true">
+                  <Label fx:id="userStats" alignment="TOP_LEFT" lineSpacing="2.0" prefHeight="289.0" prefWidth="517.0" wrapText="true">
                      <HBox.margin>
                         <Insets />
                      </HBox.margin>
