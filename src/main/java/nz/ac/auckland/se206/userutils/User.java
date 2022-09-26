@@ -38,24 +38,26 @@ public class User {
     return wins;
   }
 
-  public void setWins(int wins) {
-    this.wins = wins;
+  public void incrementWins() {
+    this.wins++;
   }
 
   public int getLosses() {
     return losses;
   }
 
-  public void setLosses(int losses) {
-    this.losses = losses;
+  public void incrementLosses() {
+    this.losses++;
   }
 
   public int getFastestTime() {
     return fastestTime;
   }
 
-  public void setFastestTime(int fastestTime) {
-    this.fastestTime = fastestTime;
+  public void updateFastestTime(int fastestTime) {
+    if (fastestTime < this.fastestTime) {
+      this.fastestTime = fastestTime;
+    }
   }
 
   public String getUserName() {
