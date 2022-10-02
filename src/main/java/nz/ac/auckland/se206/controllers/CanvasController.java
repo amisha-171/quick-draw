@@ -1,24 +1,24 @@
-package nz.ac.auckland.se206;
+package nz.ac.auckland.se206.controllers;
 
 import ai.djl.ModelException;
 import com.opencsv.exceptions.CsvException;
-import java.awt.Graphics2D;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.util.*;
+import java.util.ResourceBundle;
+import java.util.Timer;
+import java.util.TimerTask;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -29,6 +29,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javax.imageio.ImageIO;
+import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.filereader.CategorySelector;
 import nz.ac.auckland.se206.ml.DoodlePrediction;
 import nz.ac.auckland.se206.speech.TextToSpeech;
@@ -81,22 +82,20 @@ public class CanvasController implements Initializable {
   /**
    * JavaFX calls this method once the GUI elements are loaded. In our case we create a listener for
    * the drawing, and we load the ML model.
-   *
-   * @throws ModelException If there is an error in reading the input/output of the DL model.
-   * @throws IOException If the model cannot be found on the file system.
    */
   public void initialize(URL url, ResourceBundle resourceBundle) {
+    startGame();
+  }
+
+  protected void startGame() {
     // Disable the buttons in the GUI as fit
-    this.disableStartButtons(true);
+    this.disableStartButtons();
 
     gameWon = false;
     isContent = false;
     color = Color.BLACK;
 
-    canvas.setOnMouseEntered(
-        e -> {
-          canvas.setCursor(Cursor.HAND);
-        });
+    canvas.setOnMouseEntered(e -> canvas.setCursor(Cursor.HAND));
 
     graphic = canvas.getGraphicsContext2D();
 
@@ -131,14 +130,12 @@ public class CanvasController implements Initializable {
 
     try {
       model = new DoodlePrediction();
-    } catch (ModelException e) {
-      e.printStackTrace();
-    } catch (IOException e) {
+    } catch (ModelException | IOException e) {
       e.printStackTrace();
     }
   }
 
-  public void setUserName(String userId) throws IOException {
+  protected void setUserName(String userId) throws IOException {
     // Set the username of the current user playing, and also its corresponding stats to local
     // fields
     this.userName = userId;
@@ -147,16 +144,12 @@ public class CanvasController implements Initializable {
     this.generateWord();
   }
 
-  public void generateWord() {
+  private void generateWord() {
     // Create an instance of category selector
     CategorySelector categorySelector = null;
     try {
       categorySelector = new CategorySelector();
-    } catch (IOException e) {
-      e.printStackTrace();
-    } catch (URISyntaxException e) {
-      e.printStackTrace();
-    } catch (CsvException e) {
+    } catch (IOException | URISyntaxException | CsvException e) {
       e.printStackTrace();
     }
     // Get a random word with Easy difficulty and set the word to be displayed to the user in the
@@ -166,12 +159,12 @@ public class CanvasController implements Initializable {
     this.setWord(randomWord);
   }
 
-  protected void disableStartButtons(boolean btn) {
+  protected void disableStartButtons() {
     // This method when called well disable or enable the required buttons on input
-    onInk.setDisable(btn);
-    clearButton.setDisable(btn);
-    onInk.setDisable(btn);
-    eraseBtn.setDisable(btn);
+    onInk.setDisable(true);
+    clearButton.setDisable(true);
+    onInk.setDisable(true);
+    eraseBtn.setDisable(true);
     saveImage.setDisable(true);
     newGameBtn.setDisable(true);
     mainMenuBtn.setDisable(true);
@@ -229,12 +222,14 @@ public class CanvasController implements Initializable {
   }
 
   @FXML
-  private void onReady() throws ModelException, IOException {
+  private void onReady() {
     // When player is ready we start the game by enabling canvas, starting the timer etc
+    canvas.setDisable(false);
     this.onInk.setDisable(true);
     this.readyButton.setDisable(true);
     this.clearButton.setDisable(false);
     this.eraseBtn.setDisable(false);
+    timerCount.setVisible(true);
     this.runTimer();
   }
 
@@ -246,7 +241,7 @@ public class CanvasController implements Initializable {
 
   private void runTimer() {
     counter = 61;
-    // Runs a 60 second timer countdown when timer is called and the task runs
+    // Runs a 60-second timer countdown when timer is called and the task runs
     Timer timer = new Timer();
     TimerTask task =
         new TimerTask() {
@@ -271,13 +266,10 @@ public class CanvasController implements Initializable {
                     }
                   });
             }
-            // Conditionals to check if the user has won the game or time has finished etc and if
+            // Conditionals to check if the user has won the game or time has finished etc. and if
             // met we update the status label
             if (gameWon) {
-              canvas.setOnMouseDragged(
-                  e -> {
-                    canvas.setCursor(Cursor.DEFAULT);
-                  });
+              canvas.setOnMouseDragged(e -> canvas.setCursor(Cursor.DEFAULT));
               timer.cancel();
               enableEndButtons();
               user.incrementWins();
@@ -290,10 +282,7 @@ public class CanvasController implements Initializable {
             }
             if (counter == 0) {
               // If times up cancel the timer, disable canvas and change GUI state
-              canvas.setOnMouseDragged(
-                  e -> {
-                    canvas.setCursor(Cursor.DEFAULT);
-                  });
+              canvas.setOnMouseDragged(e -> canvas.setCursor(Cursor.DEFAULT));
               timer.cancel();
               disableButtons();
               enableEndButtons();
@@ -333,9 +322,9 @@ public class CanvasController implements Initializable {
     // Put the speech to text inside a thread to not freeze GUI at 10 seconds
     TextToSpeech speak = new TextToSpeech();
     Task<Void> speechTask =
-        new Task<Void>() {
+        new Task<>() {
           @Override
-          protected Void call() throws Exception {
+          protected Void call() {
             // Speak there is 10 seconds remaining
             speak.speak("10 Seconds");
             return null;
@@ -359,7 +348,7 @@ public class CanvasController implements Initializable {
             // Create a scene builder instance which is how the predictions will be formatted
             StringBuilder sbf = new StringBuilder();
             int k = 1;
-            // Loop to format the string so it can be displayed to the label
+            // Loop to format the string, so it can be displayed to the label
             for (int i = 0; i < 10; i++) {
               // Append the required formatting to sbf
               // The prediction number (10) being lowest (1) being the best prediction
@@ -422,17 +411,14 @@ public class CanvasController implements Initializable {
   }
 
   @FXML
-  private void onErase(
-      ActionEvent event) { // If the user wants to erase something we set the pen color to white
+  private void onErase() { // If the user wants to erase something we set the pen color to white
     this.color = Color.WHITE;
     eraseBtn.setDisable(true);
     onInk.setDisable(false);
   }
 
   @FXML
-  private void onPen(
-      ActionEvent
-          event) { // If the user wants to switch back to pen we change the pen color to black
+  private void onPen() { // If the user wants to switch back to pen we change the pen color to black
     color = Color.BLACK;
     eraseBtn.setDisable(false);
     onInk.setDisable(true);
@@ -446,7 +432,7 @@ public class CanvasController implements Initializable {
     Task<Void> voiceThread =
         new Task<>() {
           @Override
-          protected Void call() throws Exception {
+          protected Void call() {
             speech.speak(wordChosen);
             return null;
           }
@@ -458,30 +444,31 @@ public class CanvasController implements Initializable {
   }
 
   @FXML
-  private void onNewGame(ActionEvent event)
+  protected void onNewGame()
       // If the user wants to play a new game we clear the canvas and the user gets a clean canvas
       // with a new word to draw
-      throws IOException, URISyntaxException, CsvException {
-    MenuController newGameMenu = new MenuController();
-    newGameMenu.getName(userName);
-    newGameMenu.onNewGame(event);
+      throws IOException {
+    onClear();
+    timerCount.setVisible(false);
+    readyButton.setDisable(false);
+    setUserName(userName);
+    startGame();
   }
 
   @FXML
-  private void onMainMenuSwitch(ActionEvent btnEvent) throws IOException {
-    FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/menu.fxml"));
-    Parent root = loader.load();
-    Scene scene = new Scene(root);
-    Stage stage = (Stage) ((Node) btnEvent.getSource()).getScene().getWindow();
+  private void onUserMenuSwitch(ActionEvent btnEvent) throws IOException {
+
     // set the username in the menu controller, so that the menu shows the stats
-    MenuController menuController = loader.getController();
+
+    MenuController menuController =
+        (MenuController) SceneManager.getUiController(SceneManager.AppUi.USER_MENU);
     menuController.getName(this.userName);
     menuController.setStats();
     menuController.setWordsPlayed();
     Image img = new Image("/images/profilepics/" + user.getImageName());
     menuController.setUserPic(img);
-    // show the scene in the GUI
-    stage.setScene(scene);
-    stage.show();
+
+    Scene scene = ((Node) btnEvent.getSource()).getScene();
+    scene.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.USER_MENU));
   }
 }
