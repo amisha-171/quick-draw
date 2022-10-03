@@ -86,7 +86,6 @@ public class CreateProfileController {
 
       if (index < 5) {
         index++;
-        System.out.println("new user made index: " + index);
         img = new Image("/images/profilepics/" + allUserImages[index].getName());
         profPic.setImage((img));
       }
