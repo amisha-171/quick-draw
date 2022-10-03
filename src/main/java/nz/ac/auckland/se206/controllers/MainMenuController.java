@@ -27,10 +27,6 @@ public class MainMenuController {
       alert.show();
       return;
     }
-    ProfileController profileController =
-        (ProfileController) SceneManager.getUiController(SceneManager.AppUi.SELECT_PROFILE);
-    profileController.setUserInfoToGui();
-    profileController.initialView();
     Scene scene = ((Node) event.getSource()).getScene();
     scene.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.SELECT_PROFILE));
   }

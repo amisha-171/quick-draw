@@ -26,13 +26,9 @@ public class ProfileController {
   private User[] users;
 
   public void initialize() throws IOException {
-    initialView();
-  }
-
-  protected void initialView() throws IOException {
     users = data.getAllUsers();
-    if (users.length > 1) {
-      nextUser.setVisible(true);
+    if (users.length != 0) {
+      setUserInfoToGui();
     }
   }
 
@@ -56,17 +52,6 @@ public class ProfileController {
         setUserInfoToGui();
       }
     }
-    // Handle button visibility based current profile
-    if (userIndex == users.length - 1) {
-      prevUser.setVisible(true);
-      nextUser.setVisible(false);
-    } else if (userIndex == 0) {
-      prevUser.setVisible(false);
-      nextUser.setVisible(true);
-    } else {
-      prevUser.setVisible(true);
-      nextUser.setVisible(true);
-    }
   }
 
   protected void setUserInfoToGui() throws IOException {
@@ -77,6 +62,21 @@ public class ProfileController {
     userImage.setImage(img); // Set the current users corresponding image
     userLabel.setText(users[userIndex].getUserName()); // Set current users username
     password.clear();
+
+    // Handle button visibility based current profile
+    if (users.length == 1) {
+      prevUser.setVisible(false);
+      nextUser.setVisible(false);
+    } else if (userIndex == 0) {
+      prevUser.setVisible(false);
+      nextUser.setVisible(true);
+    } else if (userIndex == users.length - 1) {
+      prevUser.setVisible(true);
+      nextUser.setVisible(false);
+    } else {
+      prevUser.setVisible(true);
+      nextUser.setVisible(true);
+    }
   }
 
   private void showAlert() {

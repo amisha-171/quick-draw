@@ -28,8 +28,10 @@ public class CreateProfileController {
 
   public void initialize() throws IOException {
     index = db.getAllUsers().length;
-    img = new Image("/images/profilepics/" + allUserImages[index].getName());
-    profPic.setImage((img));
+    if (index < 6) {
+      img = new Image("/images/profilepics/" + allUserImages[index].getName());
+      profPic.setImage((img));
+    }
   }
 
   private void setAlert(String title, String header) {
@@ -77,15 +79,12 @@ public class CreateProfileController {
 
       Scene scene = ((Node) event.getSource()).getScene();
       scene.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.USER_MENU));
-      ProfileController profileController =
-          (ProfileController) SceneManager.getUiController(SceneManager.AppUi.SELECT_PROFILE);
-      profileController.setUserInfoToGui();
-      profileController.initialView();
+
       usernameField.clear();
       passwordField.clear();
 
-      if (index < 5) {
-        index++;
+      index++;
+      if (index < 6) {
         img = new Image("/images/profilepics/" + allUserImages[index].getName());
         profPic.setImage((img));
       }
