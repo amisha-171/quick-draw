@@ -71,7 +71,6 @@ public class CanvasController implements Initializable {
   @FXML private Button newGameBtn;
   @FXML private Button saveImage;
   @FXML private Button mainMenuBtn;
-  private final Database db = new Database();
   private User user;
   @FXML private Button speakWord;
 
@@ -139,7 +138,7 @@ public class CanvasController implements Initializable {
     // Set the username of the current user playing, and also its corresponding stats to local
     // fields
     this.userName = userId;
-    this.user = this.db.read(this.userName);
+    this.user = Database.read(this.userName);
 
     this.generateWord();
   }
@@ -274,11 +273,7 @@ public class CanvasController implements Initializable {
               enableEndButtons();
               user.incrementWins();
               user.updateWordList(wordChosen);
-              try {
-                db.write(user);
-              } catch (IOException e) {
-                throw new RuntimeException(e);
-              }
+              user.saveSelf();
             }
             if (counter == 0) {
               // If times up cancel the timer, disable canvas and change GUI state
@@ -293,11 +288,7 @@ public class CanvasController implements Initializable {
                     user.incrementLosses();
                     user.updateWordList(wordChosen);
                     user.updateTotalSolveTime(60);
-                    try {
-                      db.write(user);
-                    } catch (IOException e) {
-                      throw new RuntimeException(e);
-                    }
+                    user.saveSelf();
                   });
             }
             if (counter == 10) {
