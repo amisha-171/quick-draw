@@ -27,8 +27,14 @@ public class MainMenuController {
 
     if (data.getAllUsers().length == 0) {
       Alert alert = new Alert(Alert.AlertType.INFORMATION);
-      alert.setHeaderText("No users found, please create a profile!");
-      alert.setTitle("No Users");
+      alert
+          .getDialogPane()
+          .getStylesheets()
+          .add(getClass().getResource("/css/alert.css").toString());
+      alert.getDialogPane().getStyleClass().add("dialog");
+      alert.setHeaderText("No users found!");
+      alert.setContentText("Please create a new profile.");
+      alert.setTitle("Sorry!");
       alert.show();
       return;
     }
@@ -45,8 +51,14 @@ public class MainMenuController {
   private void onCreateProfile(ActionEvent event) throws IOException {
     if (data.getAllUsers().length == 6) {
       Alert maxUsers = new Alert(Alert.AlertType.INFORMATION);
-      maxUsers.setHeaderText("Sorry but only 6 user accounts or less are allowed");
-      maxUsers.setTitle("Unable to Create Profile");
+      maxUsers
+          .getDialogPane()
+          .getStylesheets()
+          .add(getClass().getResource("/css/alert.css").toString());
+      maxUsers.getDialogPane().getStyleClass().add("dialog");
+      maxUsers.setHeaderText("Unable to Create Profile");
+      maxUsers.setContentText("A max of 6 user accounts are allowed.");
+      maxUsers.setTitle("Sorry!");
       maxUsers.show();
       return;
     }

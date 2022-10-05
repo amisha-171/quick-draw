@@ -15,14 +15,12 @@
 .button:hover{
     -fx-background-color: #157d20;
     -fx-background-radius: 40px;
-
 }
 
 .root {
     -fx-background-color: #c7dbb2;
     -fx-background-image: url(../images/doodles.gif);
 }
-
 
 .label{
     -fx-font-family: 'Viga', sans-serif;
