@@ -20,7 +20,7 @@ public class Database {
    * @param user Takes a User object input
    * @throws IOException
    */
-  public void write(User user) throws IOException {
+  public static void write(User user) throws IOException {
     // Create a json file for the new profile
     FileWriter file = new FileWriter("users/" + user.getUserName() + ".json");
     // Use Gson to write the user object to the new json file we have created
@@ -39,7 +39,7 @@ public class Database {
    * @return Returns a User object associated with the given username if it is valid
    * @throws IOException
    */
-  public User read(String user) throws IOException {
+  public static User read(String user) throws IOException {
     // Get string representation in json format of a user file
     String currString = new String(Files.readAllBytes(Paths.get("users/" + user + ".json")));
     Gson currentUser = new Gson();
@@ -55,7 +55,7 @@ public class Database {
    * @return returns boolean based on whether the username exists already (true if user already
    *     exists false otherwise)
    */
-  public boolean userExists(String user, boolean login) {
+  public static boolean userExists(String user, boolean login) {
     // Open the users directory as a file and create it if it doesn't exist
     File userDir = new File("users");
     File[] files;
@@ -93,7 +93,7 @@ public class Database {
    * @return Array containing object User
    * @throws IOException
    */
-  public User[] getAllUsers() throws IOException {
+  public static User[] getAllUsers() throws IOException {
     // Initialize an array of type User, and ensure it's empty so that it's returned if users
     // directory doesn't exist
     User[] users = {};

@@ -1,5 +1,6 @@
 package nz.ac.auckland.se206.userutils;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 /** This class is for the User object which we can use to update stats etc. */
@@ -91,5 +92,13 @@ public class User {
 
   public String getImageName() {
     return imageName;
+  }
+
+  public void saveSelf() {
+    try {
+      Database.write(this);
+    } catch (IOException e) {
+      throw new RuntimeException(e);
+    }
   }
 }

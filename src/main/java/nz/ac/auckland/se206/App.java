@@ -4,7 +4,6 @@ import java.io.IOException;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
@@ -25,8 +24,8 @@ public class App extends Application {
    * @return The node of the input file.
    * @throws IOException If the file is not found.
    */
-  private static Parent loadFxml(final String fxml) throws IOException {
-    return new FXMLLoader(App.class.getResource("/fxml/" + fxml + ".fxml")).load();
+  private static FXMLLoader getFxmlLoader(final String fxml) throws IOException {
+    return new FXMLLoader(App.class.getResource("/fxml/" + fxml + ".fxml"));
   }
 
   /**
@@ -37,9 +36,17 @@ public class App extends Application {
    */
   @Override
   public void start(final Stage stage) throws IOException {
-    final Scene scene = new Scene(loadFxml("mainmenu"), 1057, 703);
+
+    SceneManager.addUi(SceneManager.AppUi.CANVAS, getFxmlLoader("canvas"));
+    SceneManager.addUi(SceneManager.AppUi.USER_MENU, getFxmlLoader("menu"));
+    SceneManager.addUi(SceneManager.AppUi.MAIN_MENU, getFxmlLoader("mainmenu"));
+    SceneManager.addUi(SceneManager.AppUi.CREATE_PROFILE, getFxmlLoader("createprofile"));
+    SceneManager.addUi(SceneManager.AppUi.SELECT_PROFILE, getFxmlLoader("profile"));
+
+    Scene scene = new Scene(SceneManager.getUiRoot(SceneManager.AppUi.MAIN_MENU), 1057, 703);
     stage.setScene(scene);
     stage.show();
+    stage.setTitle("Quick, Draw!");
 
     stage.setOnCloseRequest(
         event -> {
