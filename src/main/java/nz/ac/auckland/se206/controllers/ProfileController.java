@@ -17,7 +17,6 @@ import nz.ac.auckland.se206.userutils.User;
 
 public class ProfileController {
   private @FXML PasswordField password;
-  private final Database data = new Database();
   private @FXML Label userLabel;
   private @FXML Button nextUser;
   private @FXML Button prevUser;
@@ -26,7 +25,7 @@ public class ProfileController {
   private User[] users;
 
   public void initialize() throws IOException {
-    users = data.getAllUsers();
+    users = Database.getAllUsers();
     if (users.length != 0) {
       setUserInfoToGui();
     }
@@ -36,7 +35,7 @@ public class ProfileController {
   private void onToggleUsers(ActionEvent event) throws IOException {
     // Get the source button clicked by the user
     Button sourceButton = (Button) event.getSource();
-    // Get all of the users
+    // Get all users
     // Go to next user if there are more by incrementing the index
     if (sourceButton.equals(nextUser)) {
       if (userIndex < users.length - 1) {
@@ -55,7 +54,7 @@ public class ProfileController {
   }
 
   protected void setUserInfoToGui() throws IOException {
-    users = data.getAllUsers();
+    users = Database.getAllUsers();
     // Helper method to set user info the scene depending on the current user index handled by
     // onToggleUsers
     Image img = new Image("/images/profilepics/" + users[userIndex].getImageName());
@@ -90,9 +89,8 @@ public class ProfileController {
   @FXML
   private void onLogin(ActionEvent event) throws IOException {
     // Create our database instance
-    User[] allUsers = data.getAllUsers();
-    Database db = new Database();
-    if (db.userExists(allUsers[userIndex].getUserName(), true)) {
+    User[] allUsers = Database.getAllUsers();
+    if (Database.userExists(allUsers[userIndex].getUserName(), true)) {
       User currentUser = allUsers[userIndex];
       // Check if the password associated user in our file is the same as what the user entered and
       // load the main menu

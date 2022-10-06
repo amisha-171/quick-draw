@@ -19,7 +19,6 @@ public class CreateProfileController {
   @FXML private TextField passwordField;
 
   @FXML private ImageView profPic;
-  private final Database db = new Database();
   private int index;
 
   private Image img;
@@ -27,7 +26,7 @@ public class CreateProfileController {
   private File[] allUserImages = new File("src/main/resources/images/profilepics").listFiles();
 
   public void initialize() throws IOException {
-    index = db.getAllUsers().length;
+    index = Database.getAllUsers().length;
     if (index < 6) {
       img = new Image("/images/profilepics/" + allUserImages[index].getName());
       profPic.setImage((img));
@@ -58,7 +57,7 @@ public class CreateProfileController {
 
     // Check if the username the user entered already exists, as we do not allow duplicate profiles
     // we inform the user
-    else if (db.userExists(usernameField.getText(), false)) {
+    else if (Database.userExists(usernameField.getText(), false)) {
       setAlert("A profile with this username already exists", "User already exists");
     }
 
@@ -67,7 +66,7 @@ public class CreateProfileController {
     else {
       String imgName = allUserImages[index].getName();
       User newUser = new User(usernameField.getText(), passwordField.getText(), imgName);
-      db.write(newUser);
+      Database.write(newUser);
 
       // Set the name of the current user and the current users stats in the menu scene
       MenuController menuController =

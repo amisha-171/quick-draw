@@ -14,13 +14,12 @@ public class MainMenuController {
 
   @FXML Button switchProfile;
   @FXML Button createProfile;
-  private final Database data = new Database();
 
   @FXML
   private void onSwitchProfile(ActionEvent event) throws IOException {
     // Create the FXML loader with the profile scene
 
-    if (data.getAllUsers().length == 0) {
+    if (Database.getAllUsers().length == 0) {
       Alert alert = new Alert(Alert.AlertType.INFORMATION);
       alert.setHeaderText("No users found, please create a profile!");
       alert.setTitle("No Users");
@@ -33,7 +32,7 @@ public class MainMenuController {
 
   @FXML
   private void onCreateProfile(ActionEvent event) throws IOException {
-    if (data.getAllUsers().length == 6) {
+    if (Database.getAllUsers().length == 6) {
       Alert maxUsers = new Alert(Alert.AlertType.INFORMATION);
       maxUsers.setHeaderText("Sorry but only 6 user accounts or less are allowed");
       maxUsers.setTitle("Unable to Create Profile");

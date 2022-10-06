@@ -1,8 +1,6 @@
 package nz.ac.auckland.se206.controllers;
 
-import com.opencsv.exceptions.CsvException;
 import java.io.IOException;
-import java.net.URISyntaxException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -27,8 +25,7 @@ public class MenuController {
 
   protected void setStats() throws IOException {
     // Create database instance and obtain the current user for which we set stats
-    Database db = new Database();
-    User currentUser = db.read(userName);
+    User currentUser = Database.read(userName);
     // Create a stringbuilder to format the stats string
     StringBuilder sb = new StringBuilder();
     sb.append("Games Won: ") // Append wins
@@ -37,7 +34,7 @@ public class MenuController {
         .append("Games Lost: ") // Append losses
         .append(currentUser.getLosses())
         .append(System.getProperty("line.separator"))
-        .append("Fastest Time: "); // Append fastest time
+        .append("Fastest Time: "); // Append the fastest time
     if (currentUser.getFastestTime() == 100) {
       sb.append("N/A");
     } else {
@@ -61,8 +58,7 @@ public class MenuController {
 
   protected void setWordsPlayed() throws IOException {
     // Create database instance and obtain the current user for which we set stats
-    Database db = new Database();
-    User currentUser = db.read(userName);
+    User currentUser = Database.read(userName);
     // Create a stringbuilder to format the stats string
     StringBuilder sb = new StringBuilder();
     for (String word : currentUser.getWordList()) {
@@ -77,7 +73,7 @@ public class MenuController {
   }
 
   @FXML
-  protected void onNewGame(ActionEvent event) throws IOException, URISyntaxException, CsvException {
+  protected void onNewGame(ActionEvent event) throws IOException {
     // set the username in the canvas controller
     CanvasController canvasController =
         (CanvasController) SceneManager.getUiController(SceneManager.AppUi.CANVAS);
