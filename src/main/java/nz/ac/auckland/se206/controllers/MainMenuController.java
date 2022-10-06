@@ -45,7 +45,7 @@ public class MainMenuController {
           .getStylesheets()
           .add(getClass().getResource("/css/alert.css").toString());
       maxUsers.getDialogPane().getStyleClass().add("dialog");
-      maxUsers.setHeaderText("Unable to Create Profile");
+      maxUsers.setHeaderText("Unable to Create Profile!");
       maxUsers.setContentText("A max of 6 user accounts are allowed.");
       maxUsers.setTitle("Sorry!");
       maxUsers.show();

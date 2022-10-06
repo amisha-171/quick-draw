@@ -2,7 +2,7 @@
 
 
 .dialog .content {
-    -fx-text-fill: #3b3b3b;
+    -fx-text-fill: white;
     -fx-font-size: 20px;
     -fx-font-family: 'Viga', sans-serif;
     -fx-text-alignment: center;
@@ -10,11 +10,11 @@
 }
 
 .dialog, .content, .header-panel{
-    -fx-background-color: #c7dbb2;
+    -fx-background-color: #157d20;
 }
 
 .header-panel .label{
-    -fx-text-fill: #3b3b3b;
+    -fx-text-fill: white;
     -fx-font-size:30px;
     -fx-font-family: 'Viga', sans-serif;
     -fx-wrap-text: true;
@@ -33,7 +33,7 @@
 }
 
 .button:hover{
-    -fx-background-color: #157d20;
-    -fx-text-fill: white;
+    -fx-background-color: white;
+    -fx-text-fill:  #cc960e;
 }
 
