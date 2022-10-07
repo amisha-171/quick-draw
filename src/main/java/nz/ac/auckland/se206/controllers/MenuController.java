@@ -93,4 +93,16 @@ public class MenuController {
     Scene scene = ((Node) event.getSource()).getScene();
     scene.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.SELECT_PROFILE));
   }
+
+  @FXML
+  private void onSetGameSettings(ActionEvent event) throws IOException {
+    User user = Database.read(userName);
+    GameSettingsController gameSettingsController =
+        (GameSettingsController) SceneManager.getUiController(SceneManager.AppUi.SELECT_SETTING);
+    gameSettingsController.currentUser(user);
+    gameSettingsController.setInitialInterface();
+    Scene scene = ((Node) event.getSource()).getScene();
+    scene.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.SELECT_SETTING));
+    // Set the scene and show the stage
+  }
 }

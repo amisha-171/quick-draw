@@ -2,6 +2,7 @@ package nz.ac.auckland.se206.userutils;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import nz.ac.auckland.se206.util.enums.WordSettings;
 
 /** This class is for the User object which we can use to update stats etc. */
 public class User {
@@ -14,6 +15,7 @@ public class User {
   private int losses;
   private int fastestTime;
   private int totalSolveTime;
+  private GameSettings gameSettings;
   private ArrayList<String> wordList = new ArrayList<>();
 
   private String imageName;
@@ -30,6 +32,10 @@ public class User {
     this.fastestTime = 100; // 100 is default value because fastest time cannot be more than 60
     // set user image
     this.imageName = img;
+  }
+
+  public void setGameSettings(GameSettings settings) {
+    this.gameSettings = settings;
   }
 
   // Getters and setters for the User fields
@@ -92,6 +98,26 @@ public class User {
 
   public String getImageName() {
     return imageName;
+  }
+
+  public int getCurrentAccuracySetting() {
+    return gameSettings.getAccuracy().getAccuracyLevel();
+  }
+
+  public int getCurrentConfidenceSetting() {
+    return gameSettings.getConfidence().getConfidenceLevel();
+  }
+
+  public int getCurrentTimeSetting() {
+    return gameSettings.getTime().getTimeLevel();
+  }
+
+  public WordSettings getCurrentWordSetting() {
+    return gameSettings.getWords();
+  }
+
+  public GameSettings getGameSettings() {
+    return gameSettings;
   }
 
   public void saveSelf() {

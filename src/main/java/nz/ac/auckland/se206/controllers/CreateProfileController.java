@@ -12,7 +12,12 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.userutils.Database;
+import nz.ac.auckland.se206.userutils.GameSettings;
 import nz.ac.auckland.se206.userutils.User;
+import nz.ac.auckland.se206.util.enums.AccuracySettings;
+import nz.ac.auckland.se206.util.enums.ConfidenceSettings;
+import nz.ac.auckland.se206.util.enums.TimeSettings;
+import nz.ac.auckland.se206.util.enums.WordSettings;
 
 public class CreateProfileController {
   @FXML private TextField usernameField;
@@ -66,6 +71,13 @@ public class CreateProfileController {
     else {
       String imgName = allUserImages[index].getName();
       User newUser = new User(usernameField.getText(), passwordField.getText(), imgName);
+      // When user initially creates profile we give them default settings which are all easy across
+      // all catagories
+      GameSettings newUserGameSettings =
+          new GameSettings(
+              AccuracySettings.EASY, TimeSettings.EASY, ConfidenceSettings.EASY, WordSettings.EASY);
+      // Set the game settings to the current user profile and write it to file
+      newUser.setGameSettings(newUserGameSettings);
       Database.write(newUser);
 
       // Set the name of the current user and the current users stats in the menu scene
