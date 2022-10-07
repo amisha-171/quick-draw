@@ -5,6 +5,7 @@ import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 /**
@@ -45,8 +46,9 @@ public class App extends Application {
 
     Scene scene = new Scene(SceneManager.getUiRoot(SceneManager.AppUi.MAIN_MENU), 1057, 703);
     stage.setScene(scene);
-    stage.show();
     stage.setTitle("Quick, Draw!");
+    stage.getIcons().add(new Image("images/pencil.png"));
+    stage.show();
 
     stage.setOnCloseRequest(
         event -> {

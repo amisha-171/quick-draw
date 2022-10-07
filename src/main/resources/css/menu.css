@@ -9,7 +9,7 @@
     -fx-font-size: 90;
     -fx-alignment: center;
     -fx-font-family: "Gorditas", cursive;
-    -fx-text-fill: #4b4b4b;
+    -fx-text-fill: #2c2c2c;
 }
 
 #statsTitle{
@@ -29,7 +29,7 @@
 
 #subTitleHbox .label{
     -fx-text-fill: #ffffff;
-    -fx-background-color: #157d20;
+    -fx-background-color: #45a446;
     -fx-background-radius: 5px;
 }
 

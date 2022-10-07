@@ -10,12 +10,12 @@
 }
 
 .dialog, .content, .header-panel{
-    -fx-background-color: #157d20;
+    -fx-background-color: #45a446;
 }
 
 .header-panel .label{
     -fx-text-fill: white;
-    -fx-font-size:30px;
+    -fx-font-size: 35px;
     -fx-font-family: 'Viga', sans-serif;
     -fx-wrap-text: true;
     -fx-text-alignment: center;
@@ -29,7 +29,9 @@
     -fx-cursor: hand;
     -fx-text-fill: white;
     -fx-alignment: center;
-
+    -fx-border-radius: 15px;
+    -fx-border-width: 3px;
+    -fx-border-color: white;
 }
 
 .button:hover{
