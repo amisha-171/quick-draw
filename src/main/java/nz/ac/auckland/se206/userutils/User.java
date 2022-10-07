@@ -9,7 +9,6 @@ public class User {
 
   // Create the stats fields and user information fields
   private final String userName;
-  private final String password;
   private int wins;
   private int losses;
   private int fastestTime;
@@ -18,11 +17,9 @@ public class User {
 
   private String imageName;
 
-  public User(String userName, String password, String img) {
+  public User(String userName, String img) {
     // Constructor for new user
     this.userName = userName;
-    this.password = password;
-
     // set default stats
     this.wins = 0;
     this.losses = 0;
@@ -45,10 +42,6 @@ public class User {
     if (!this.wordList.contains(newWord)) {
       this.wordList.add(newWord);
     }
-  }
-
-  public String getPassword() {
-    return password;
   }
 
   public int getWins() {

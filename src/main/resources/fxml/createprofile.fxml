@@ -34,16 +34,6 @@
                   <TextField fx:id="usernameField" prefHeight="40.0" prefWidth="154.0" />
                </children>
             </HBox>
-            <HBox alignment="CENTER" prefHeight="11.0" prefWidth="1057.0" spacing="30.0">
-               <children>
-                  <Label text="Password:">
-                     <font>
-                        <Font size="30.0" />
-                     </font>
-                  </Label>
-                  <TextField fx:id="passwordField" prefHeight="40.0" prefWidth="154.0" />
-               </children>
-            </HBox>
             <HBox alignment="CENTER" prefHeight="72.0" prefWidth="1057.0" spacing="20.0">
                <children>
                   <Button alignment="TOP_LEFT" mnemonicParsing="false" onAction="#onMainMenuSwitch" text="Main Menu" />

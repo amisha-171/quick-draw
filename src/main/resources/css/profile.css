@@ -14,11 +14,6 @@
     -fx-background-position: center;
 }
 
-
-#passwordHbox, .label{
-    -fx-text-fill: #157d20;
-}
-
 #userLabel {
     -fx-font-family: "Viga", cursive;
     -fx-text-fill: #262626;

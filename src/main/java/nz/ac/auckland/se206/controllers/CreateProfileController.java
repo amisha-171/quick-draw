@@ -16,13 +16,9 @@ import nz.ac.auckland.se206.userutils.User;
 
 public class CreateProfileController {
   @FXML private TextField usernameField;
-  @FXML private TextField passwordField;
-
   @FXML private ImageView profPic;
   private int index;
-
   private Image img;
-
   private File[] allUserImages = new File("src/main/resources/images/profilepics").listFiles();
 
   public void initialize() throws IOException {
@@ -43,15 +39,9 @@ public class CreateProfileController {
 
   @FXML
   private void onCreateProfile(ActionEvent event) throws IOException {
-    // Check if the user tries to create a profile with either the password field or the username
-    // field being empty
-    if (passwordField.getText().isBlank() || usernameField.getText().isBlank()) {
-      setAlert("Username or Password must not be empty", "Empty field");
-    }
-
     // Check if the username field contains a space as we do not allow this to be a valid char in
     // username
-    else if (usernameField.getText().contains(" ")) {
+    if (usernameField.getText().contains(" ")) {
       setAlert("Username must not contain any spaces", "Invalid username format");
     }
 
@@ -65,7 +55,7 @@ public class CreateProfileController {
 
     else {
       String imgName = allUserImages[index].getName();
-      User newUser = new User(usernameField.getText(), passwordField.getText(), imgName);
+      User newUser = new User(usernameField.getText(), imgName);
       Database.write(newUser);
 
       // Set the name of the current user and the current users stats in the menu scene
@@ -80,8 +70,6 @@ public class CreateProfileController {
       scene.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.USER_MENU));
 
       usernameField.clear();
-      passwordField.clear();
-
       index++;
       if (index < 6) {
         img = new Image("/images/profilepics/" + allUserImages[index].getName());
