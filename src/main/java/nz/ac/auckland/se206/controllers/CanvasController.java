@@ -435,22 +435,21 @@ public class CanvasController implements Initializable {
   }
 
   @FXML
-  protected void onNewGame()
-      // If the user wants to play a new game we clear the canvas and the user gets a clean canvas
-      // with a new word to draw
-      throws IOException {
+  protected void onNewGame() throws IOException {
+    // If the user wants to play a new game we clear the canvas and the user gets a new word to draw
     onClear();
     timerCount.setVisible(false);
     readyButton.setDisable(false);
     setUserName(userName);
     startGame();
+    predLabel.setText(
+        "Click the \"Ready!\" button to start drawing the word you see and view the predictions!");
   }
 
   @FXML
   private void onUserMenuSwitch(ActionEvent btnEvent) throws IOException {
 
     // set the username in the menu controller, so that the menu shows the stats
-
     MenuController menuController =
         (MenuController) SceneManager.getUiController(SceneManager.AppUi.USER_MENU);
     menuController.getName(this.userName);
