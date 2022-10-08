@@ -8,9 +8,7 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 import nz.ac.auckland.se206.SceneManager;
-import nz.ac.auckland.se206.userutils.Database;
 import nz.ac.auckland.se206.userutils.GameSettings;
 import nz.ac.auckland.se206.userutils.User;
 import nz.ac.auckland.se206.util.enums.AccuracySettings;
@@ -135,17 +133,8 @@ public class GameSettingsController {
     currentUser.setGameSettings(gameSettings);
     // Write information to user file
     currentUser.saveSelf();
-    // Obtain menucontroller instance
-    MenuController menuController =
-        (MenuController) SceneManager.getUiController(SceneManager.AppUi.USER_MENU);
     // Set scene
     Scene scene = ((Node) e.getSource()).getScene();
-    // Set defaults in menucontroller
-    menuController.getName(this.currentUser.getUserName());
-    menuController.setStats();
-    menuController.setWordsPlayed();
-    Image img = new Image("/images/profilepics/" + currentUser.getImageName());
-    menuController.setUserPic(img);
     // Set the scene and show the stage
     scene.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.USER_MENU));
   }
