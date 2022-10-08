@@ -14,6 +14,7 @@ public class User {
   private final String userName;
   private final String password;
   private int wins;
+  private int consecutiveWins;
   private int losses;
   private int fastestTime;
   private int totalSolveTime;
@@ -84,6 +85,7 @@ public class User {
 
   public void incrementWins() {
     this.wins++;
+    this.consecutiveWins++;
   }
 
   public int getLosses() {
@@ -92,6 +94,7 @@ public class User {
 
   public void incrementLosses() {
     this.losses++;
+    this.consecutiveWins = 0;
   }
 
   public int getFastestTime() {
@@ -151,6 +154,42 @@ public class User {
 
   public GameSettings getGameSettings() {
     return gameSettings;
+  }
+  
+  public boolean underThirtySeconds() {
+    return this.fastestTime < 30;
+  }
+
+  public boolean underTenSeconds() {
+    return this.fastestTime < 10;
+  }
+
+  public boolean twentyFiveGamesPlayed() {
+    return this.wins + this.losses >= 25;
+  }
+
+  public boolean fiftyGamesPlayed() {
+    return this.wins + this.losses >= 50;
+  }
+
+  public boolean hundredGamesPlayed() {
+    return this.wins + this.losses >= 100;
+  }
+
+  public boolean twoConsecutiveWins() {
+    return this.consecutiveWins >= 2;
+  }
+
+  public boolean fiveConsecutiveWins() {
+    return this.consecutiveWins >= 5;
+  }
+
+  public boolean tenConsecutiveWins() {
+    return this.consecutiveWins >= 10;
+  }
+
+  public boolean twentyConsecutiveWins() {
+    return this.consecutiveWins >= 20;
   }
 
   public void saveSelf() {
