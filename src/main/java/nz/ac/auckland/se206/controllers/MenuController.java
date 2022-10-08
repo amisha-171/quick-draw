@@ -26,6 +26,38 @@ public class MenuController {
     img.setFitWidth(200);
     iconButton.setGraphic(img);
     userId.setText(userName);
+}
+
+  protected void setStats() throws IOException {
+    // Create database instance and obtain the current user for which we set stats
+    User currentUser = Database.read(userName);
+    // Create a stringbuilder to format the stats string
+    StringBuilder sb = new StringBuilder();
+    sb.append("Games Won: ") // Append wins
+        .append(currentUser.getWins())
+        .append(System.getProperty("line.separator"))
+        .append("Games Lost: ") // Append losses
+        .append(currentUser.getLosses())
+        .append(System.getProperty("line.separator"))
+        .append("Fastest Time: "); // Append the fastest time
+    if (currentUser.getFastestTime() == 100) {
+      sb.append("N/A");
+    } else {
+      sb.append(currentUser.getFastestTime()).append(" s");
+    }
+    sb.append(System.getProperty("line.separator")).append("Average Time: "); // append average time
+    if (currentUser.getFastestTime() == 100) {
+      sb.append("N/A");
+    } else {
+      sb.append(currentUser.getAverageSolveTime()).append(" s");
+    }
+    sb.append(System.getProperty("line.separator"))
+        .append("Words Played: ")
+        .append(currentUser.getNumWordsPlayed())
+        .append(("/345"));
+
+    // Set the stats and the users username to their respective labels in the GUI
+    userStats.setText(sb.toString());
   }
 
   @FXML
@@ -63,5 +95,13 @@ public class MenuController {
   }
 
   @FXML
-  private void onSwitchSettings(ActionEvent event) {}
+  private void onSwitchSettings(ActionEvent event) throws IOException {
+    User user = Database.read(userName);
+    GameSettingsController gameSettingsController =
+        (GameSettingsController) SceneManager.getUiController(SceneManager.AppUi.SELECT_SETTING);
+    gameSettingsController.currentUser(user);
+    gameSettingsController.setInitialInterface();
+    Scene scene = ((Node) event.getSource()).getScene();
+    scene.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.SELECT_SETTING));
+  }
 }

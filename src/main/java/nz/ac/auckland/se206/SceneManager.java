@@ -16,7 +16,7 @@ public class SceneManager {
     USER_MENU,
     CREATE_PROFILE,
     STATS,
-    SELECT_PROFILE
+    SELECT_SETTING;
   }
 
   private static HashMap<AppUi, UiData> sceneMap = new HashMap<AppUi, UiData>();
