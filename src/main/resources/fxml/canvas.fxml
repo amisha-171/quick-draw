@@ -113,7 +113,7 @@
     </VBox>
   </children>
 <stylesheets>
-  <URL value="@../css/canvas.css" />
-  <URL value="@../css/app.css" />
+    <URL value="@../css/app.css" />
+    <URL value="@../css/canvas.css" />
 </stylesheets>
 </Pane>

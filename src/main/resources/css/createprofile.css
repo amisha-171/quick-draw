@@ -1,4 +1,7 @@
-#title{
-    -fx-text-fill: #262626;
-    -fx-font-size: 50px;
+@import url('https://fonts.googleapis.com/css2?family=Gorditas&family=Viga&display=swap');
+.text-field {
+    -fx-background-radius: 20px;
+    -fx-font-family: 'Viga', sans-serif;
+    -fx-font-size: 25px;
 }
+

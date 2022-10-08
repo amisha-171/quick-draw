@@ -7,6 +7,9 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
 import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.userutils.Database;
 
@@ -14,15 +17,25 @@ public class MainMenuController {
 
   @FXML Button switchProfile;
   @FXML Button createProfile;
+  private Alert alert;
+
+  public void initialize() {
+    alert = new Alert(Alert.AlertType.INFORMATION);
+    alert.getDialogPane().getStylesheets().add(getClass().getResource("/css/alert.css").toString());
+    alert.getDialogPane().getStyleClass().add("dialog");
+    alert.setTitle("Sorry!");
+    // adding custom icon to the alert window & the top of the window
+    alert.setGraphic((new ImageView("/images/sad.png")));
+    Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
+    stage.getIcons().add(new Image("images/pencil.png"));
+  }
 
   @FXML
   private void onSwitchProfile(ActionEvent event) throws IOException {
-    // Create the FXML loader with the profile scene
-
     if (Database.getAllUsers().length == 0) {
-      Alert alert = new Alert(Alert.AlertType.INFORMATION);
-      alert.setHeaderText("No users found, please create a profile!");
-      alert.setTitle("No Users");
+      // showing alert warning to user if no user profiles exist.
+      alert.setHeaderText("No Users Found!");
+      alert.setContentText("Please create a new profile.");
       alert.show();
       return;
     }
@@ -33,13 +46,12 @@ public class MainMenuController {
   @FXML
   private void onCreateProfile(ActionEvent event) throws IOException {
     if (Database.getAllUsers().length == 6) {
-      Alert maxUsers = new Alert(Alert.AlertType.INFORMATION);
-      maxUsers.setHeaderText("Sorry but only 6 user accounts or less are allowed");
-      maxUsers.setTitle("Unable to Create Profile");
-      maxUsers.show();
+      // showing alert warning to user if max number of user profiles exist.
+      alert.setHeaderText("Unable to Create Profile!");
+      alert.setContentText("A max of 6 user accounts are allowed.");
+      alert.show();
       return;
     }
-
     Scene scene = ((Node) event.getSource()).getScene();
     scene.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.CREATE_PROFILE));
   }

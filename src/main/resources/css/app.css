@@ -13,9 +13,8 @@
 }
 
 .button:hover{
-    -fx-background-color: #157d20;
+    -fx-background-color: #45a446;
     -fx-background-radius: 40px;
-
 }
 
 .root {
@@ -23,7 +22,13 @@
     -fx-background-image: url(../images/doodles.gif);
 }
 
-
 .label{
     -fx-font-family: 'Viga', sans-serif;
+}
+
+.header{
+    -fx-text-fill: white;
+    -fx-font-size: 50px;
+    -fx-background-color: #45a446;
+    -fx-background-radius: 30px;
 }

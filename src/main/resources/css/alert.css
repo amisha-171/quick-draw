@@ -1,0 +1,41 @@
+@import url('https://fonts.googleapis.com/css2?family=Gorditas&family=Viga&display=swap');
+
+
+.dialog .content {
+    -fx-text-fill: white;
+    -fx-font-size: 20px;
+    -fx-font-family: 'Viga', sans-serif;
+    -fx-text-alignment: center;
+    -fx-wrap-text: true;
+}
+
+.dialog, .content, .header-panel{
+    -fx-background-color: #45a446;
+}
+
+.header-panel .label{
+    -fx-text-fill: white;
+    -fx-font-size: 35px;
+    -fx-font-family: 'Viga', sans-serif;
+    -fx-wrap-text: true;
+    -fx-text-alignment: center;
+}
+
+.button {
+    -fx-font-size: 15px;
+    -fx-background-radius: 15px;
+    -fx-background-color: #cc960e;
+    -fx-font-family: 'Viga', sans-serif;
+    -fx-cursor: hand;
+    -fx-text-fill: white;
+    -fx-alignment: center;
+    -fx-border-radius: 15px;
+    -fx-border-width: 3px;
+    -fx-border-color: white;
+}
+
+.button:hover{
+    -fx-background-color: white;
+    -fx-text-fill:  #cc960e;
+}
+

@@ -15,7 +15,6 @@ public class User {
 
   // Create the stats fields and user information fields
   private final String userName;
-  private final String password;
   private int wins;
   private int consecutiveWins;
   private int losses;
@@ -29,11 +28,9 @@ public class User {
 
   private String imageName;
 
-  public User(String userName, String password, String img) {
+  public User(String userName, String img) {
     // Constructor for new user
     this.userName = userName;
-    this.password = password;
-
     // set default stats
     this.wins = 0;
     this.losses = 0;
@@ -85,10 +82,6 @@ public class User {
         this.numHardWords++;
         break;
     }
-  }
-
-  public String getPassword() {
-    return password;
   }
 
   public int getWins() {

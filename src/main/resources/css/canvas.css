@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Gorditas&family=Viga&display=swap');
 
 .root {
-    -fx-font-family: 'Viga', sans-serif;
+    -fx-background-image: url(../images/doodles.png);
 }
 
 #canvasPane {
