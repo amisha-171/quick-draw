@@ -4,6 +4,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import nz.ac.auckland.se206.filereader.CategorySelector;
+import nz.ac.auckland.se206.util.enums.AccuracySettings;
+import nz.ac.auckland.se206.util.enums.ConfidenceSettings;
+import nz.ac.auckland.se206.util.enums.TimeSettings;
 import nz.ac.auckland.se206.util.enums.WordSettings;
 
 /** This class is for the User object which we can use to update stats etc. */
@@ -43,6 +46,10 @@ public class User {
     this.fastestTime = 100; // 100 is default value because fastest time cannot be more than 60
     // set user image
     this.imageName = img;
+    //set default game settings
+    this.gameSettings = new GameSettings(
+            AccuracySettings.EASY, TimeSettings.EASY, ConfidenceSettings.EASY, WordSettings.EASY
+    );
   }
 
   public void setGameSettings(GameSettings settings) {
