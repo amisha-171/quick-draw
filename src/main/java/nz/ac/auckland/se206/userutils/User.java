@@ -36,6 +36,10 @@ public class User {
     this.losses = 0;
     this.consecutiveWins = 0;
     this.totalSolveTime = 0;
+    this.numEasyWords = 0;
+    this.numMediumWords = 0;
+    this.numHardWords = 0;
+    this.totalSolveTime = 0;
     this.fastestTime = 100; // 100 is default value because fastest time cannot be more than 60
     // set user image
     this.imageName = img;
