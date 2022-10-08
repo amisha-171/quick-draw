@@ -444,6 +444,7 @@ public class CanvasController implements Initializable {
     startGame();
     predLabel.setText(
         "Click the \"Ready!\" button to start drawing the word you see and view the predictions!");
+    timerCount.setTextFill(Color.color(0.8, 0.6, 0.06));
   }
 
   @FXML

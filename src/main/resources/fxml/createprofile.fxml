@@ -29,14 +29,15 @@
                <image>
                   <Image url="@../images/add-user.png" />
                </image></ImageView>
-            <HBox alignment="CENTER" prefHeight="37.0" prefWidth="1057.0" spacing="30.0">
+            <HBox alignment="CENTER" prefHeight="37.0" prefWidth="1057.0" spacing="20.0">
                <children>
-                  <Label alignment="CENTER" text="Username:">
+                  <Label alignment="CENTER" prefHeight="42.0" prefWidth="269.0" text="What's your name?">
                      <font>
                         <Font size="30.0" />
                      </font>
                   </Label>
                   <TextField fx:id="usernameField" prefHeight="40.0" prefWidth="144.0" />
+
                </children>
             </HBox>
             <HBox alignment="CENTER" prefHeight="72.0" prefWidth="1057.0" spacing="20.0">
