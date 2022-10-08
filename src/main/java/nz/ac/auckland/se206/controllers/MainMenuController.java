@@ -17,9 +17,10 @@ public class MainMenuController {
 
   @FXML Button switchProfile;
   @FXML Button createProfile;
+  private Alert alert;
 
-  private Alert initialiseAlert() {
-    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+  public void initialize() {
+    alert = new Alert(Alert.AlertType.INFORMATION);
     alert.getDialogPane().getStylesheets().add(getClass().getResource("/css/alert.css").toString());
     alert.getDialogPane().getStyleClass().add("dialog");
     alert.setTitle("Sorry!");
@@ -27,15 +28,12 @@ public class MainMenuController {
     alert.setGraphic((new ImageView("/images/sad.png")));
     Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
     stage.getIcons().add(new Image("images/pencil.png"));
-
-    return alert;
   }
 
   @FXML
   private void onSwitchProfile(ActionEvent event) throws IOException {
     if (Database.getAllUsers().length == 0) {
       // showing alert warning to user if no user profiles exist.
-      Alert alert = initialiseAlert();
       alert.setHeaderText("No Users Found!");
       alert.setContentText("Please create a new profile.");
       alert.show();
@@ -49,7 +47,6 @@ public class MainMenuController {
   private void onCreateProfile(ActionEvent event) throws IOException {
     if (Database.getAllUsers().length == 6) {
       // showing alert warning to user if max number of user profiles exist.
-      Alert alert = initialiseAlert();
       alert.setHeaderText("Unable to Create Profile!");
       alert.setContentText("A max of 6 user accounts are allowed.");
       alert.show();

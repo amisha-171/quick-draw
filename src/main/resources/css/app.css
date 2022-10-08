@@ -25,3 +25,10 @@
 .label{
     -fx-font-family: 'Viga', sans-serif;
 }
+
+.header{
+    -fx-text-fill: white;
+    -fx-font-size: 50px;
+    -fx-background-color: #45a446;
+    -fx-background-radius: 30px;
+}

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import java.net.URL?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
@@ -15,10 +16,14 @@
    <children>
       <VBox alignment="CENTER" layoutX="8.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="703.0" prefWidth="1048.0" spacing="30.0">
          <children>
-            <Label fx:id="title" alignment="CENTER" prefHeight="17.0" prefWidth="1045.0" text="CREATE NEW USER">
+            <Label fx:id="title" alignment="CENTER" prefHeight="70.0" prefWidth="477.0" text="CREATE NEW USER">
                <font>
                   <Font size="43.0" />
                </font>
+               <styleClass>
+                  <String fx:value="header" />
+                  <String fx:value="header" />
+               </styleClass>
             </Label>
             <ImageView fx:id="profPic" fitHeight="300.0" fitWidth="455.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -31,17 +36,21 @@
                         <Font size="30.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="usernameField" prefHeight="40.0" prefWidth="154.0" />
+                  <TextField fx:id="usernameField" prefHeight="40.0" prefWidth="144.0" />
                </children>
             </HBox>
             <HBox alignment="CENTER" prefHeight="72.0" prefWidth="1057.0" spacing="20.0">
                <children>
-                  <Button alignment="TOP_LEFT" mnemonicParsing="false" onAction="#onMainMenuSwitch" text="Main Menu" />
-                  <Button mnemonicParsing="false" onAction="#onCreateProfile" text="Confirm">
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                  </Button>
+                  <VBox alignment="CENTER" prefHeight="112.0" prefWidth="1089.0" spacing="20.0">
+                     <children>
+                        <Button mnemonicParsing="false" onAction="#onCreateProfile" text="CONFIRM">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Button>
+                        <Button alignment="TOP_LEFT" mnemonicParsing="false" onAction="#onMainMenuSwitch" text="Main Menu" />
+                     </children>
+                  </VBox>
                </children>
             </HBox>
          </children>
