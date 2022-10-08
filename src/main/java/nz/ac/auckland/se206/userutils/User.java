@@ -2,6 +2,8 @@ package nz.ac.auckland.se206.userutils;
 
 import java.io.IOException;
 import java.util.ArrayList;
+
+import nz.ac.auckland.se206.filereader.CategorySelector;
 import nz.ac.auckland.se206.util.enums.WordSettings;
 
 /** This class is for the User object which we can use to update stats etc. */
@@ -15,6 +17,9 @@ public class User {
   private int losses;
   private int fastestTime;
   private int totalSolveTime;
+  private int numEasyWords;
+  private int numMediumWords;
+  private int numHardWords;
   private GameSettings gameSettings;
   private ArrayList<String> wordList = new ArrayList<>();
 
@@ -48,8 +53,24 @@ public class User {
   }
 
   public void updateWordList(String newWord) {
+    String difficulty = CategorySelector.getWordDifficulty(newWord);
+
+    //update the user's word list with new word if it doesn't already contain it
     if (!this.wordList.contains(newWord)) {
       this.wordList.add(newWord);
+    }
+
+    //update the user's word count for the appropriate difficulty
+    switch (difficulty) {
+      case "E":
+        this.numEasyWords++;
+        break;
+      case "M":
+        this.numMediumWords++;
+        break;
+      case "H":
+        this.numHardWords++;
+        break;
     }
   }
 
@@ -90,6 +111,18 @@ public class User {
     if (fastestTime < this.fastestTime) {
       this.fastestTime = fastestTime;
     }
+  }
+
+  public int getNumEasyWords() {
+    return this.numEasyWords;
+  }
+
+  public int getNumMediumWords() {
+    return this.numMediumWords;
+  }
+
+  public int getNumHardWords() {
+    return this.numHardWords;
   }
 
   public String getUserName() {

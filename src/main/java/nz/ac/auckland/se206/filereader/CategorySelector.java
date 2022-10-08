@@ -17,9 +17,11 @@ import java.util.Random;
 
 public class CategorySelector {
   private Map<WordSettings, List<String>> difficultyCat;
+  private static Map<String, String> wordDifficultyMap;
 
   public CategorySelector() throws IOException, URISyntaxException, CsvException {
     difficultyCat = new HashMap<>();
+    wordDifficultyMap = new HashMap<>();
     for (WordSettings wordSetting : WordSettings.values()) {
       difficultyCat.put(wordSetting, new ArrayList<>());
     }
@@ -43,6 +45,7 @@ public class CategorySelector {
           difficultyCat.get(WordSettings.MASTER).add(line[0]);
           break;
       }
+      wordDifficultyMap.put(line[0], line[1]);
     }
   }
 
@@ -70,6 +73,10 @@ public class CategorySelector {
     }
 
     return difficultyCat.get(wordSetting).get(wordPointer);
+  }
+
+  public static String getWordDifficulty(String word) {
+    return wordDifficultyMap.get(word);
   }
 
   private List<String[]> getLines() throws IOException, CsvException, URISyntaxException {
