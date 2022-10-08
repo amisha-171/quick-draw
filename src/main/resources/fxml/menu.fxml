@@ -139,6 +139,7 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="46.0" prefWidth="981.0" spacing="20.0">
                <children>
+                  <Button mnemonicParsing="false" onAction="#onSetGameSettings" text="Select Game Settings" />
                   <Button fx:id="startGame" alignment="CENTER" mnemonicParsing="false" onAction="#onNewGame" prefHeight="57.0" prefWidth="193.0" text="Start Game!" textFill="WHITE">
                      <font>
                         <Font name="Bell MT Bold" size="16.0" />

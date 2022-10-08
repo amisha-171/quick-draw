@@ -47,9 +47,9 @@ public class MenuController {
       sb.append(currentUser.getAverageSolveTime()).append(" s");
     }
     sb.append(System.getProperty("line.separator"))
-        .append("Words Played (Easy): ")
+        .append("Words Played: ")
         .append(currentUser.getNumWordsPlayed())
-        .append(("/144"));
+        .append(("/345"));
 
     // Set the stats and the users username to their respective labels in the GUI
     userStats.setText(sb.toString());
@@ -92,5 +92,17 @@ public class MenuController {
 
     Scene scene = ((Node) event.getSource()).getScene();
     scene.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.SELECT_PROFILE));
+  }
+
+  @FXML
+  private void onSetGameSettings(ActionEvent event) throws IOException {
+    User user = Database.read(userName);
+    GameSettingsController gameSettingsController =
+        (GameSettingsController) SceneManager.getUiController(SceneManager.AppUi.SELECT_SETTING);
+    gameSettingsController.currentUser(user);
+    gameSettingsController.setInitialInterface();
+    Scene scene = ((Node) event.getSource()).getScene();
+    scene.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.SELECT_SETTING));
+    // Set the scene and show the stage
   }
 }

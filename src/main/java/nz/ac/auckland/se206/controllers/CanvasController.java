@@ -154,7 +154,7 @@ public class CanvasController implements Initializable {
     // Get a random word with Easy difficulty and set the word to be displayed to the user in the
     // GUI
     String randomWord =
-        categorySelector.getRandomDiffWord(CategorySelector.Difficulty.E, this.user.getWordList());
+        categorySelector.getRandomDiffWord(this.user.getCurrentWordSetting(), this.user.getWordList());
     this.setWord(randomWord);
   }
 
@@ -239,7 +239,7 @@ public class CanvasController implements Initializable {
   }
 
   private void runTimer() {
-    counter = 61;
+    counter = user.getCurrentTimeSetting() + 1;
     // Runs a 60-second timer countdown when timer is called and the task runs
     Timer timer = new Timer();
     TimerTask task =
@@ -360,7 +360,9 @@ public class CanvasController implements Initializable {
               // We set the game won status to be true.
               if (wordChosen.equals(
                       model.getPredictions(image, 10).get(i).getClassName().replace("_", " "))
-                  && i < 3) {
+                  && i < user.getCurrentAccuracySetting()
+                  && model.getPredictions(image, 10).get(i).getProbability() * 100
+                      >= (double) user.getCurrentConfidenceSetting()) {
                 enableEndButtons();
                 gameWon = true;
               }
@@ -374,9 +376,10 @@ public class CanvasController implements Initializable {
             if ((gameWon && counter > 0) || (gameWon && counter == 0)) {
               Platform.runLater(
                   () -> {
-                    wordLabel.setText("You won in " + (60 - counter) + " seconds!");
-                    user.updateFastestTime(60 - counter);
-                    user.updateTotalSolveTime(60 - counter);
+                    wordLabel.setText(
+                        "You won in " + (user.getCurrentTimeSetting() - counter) + " seconds!");
+                    user.updateFastestTime(user.getCurrentTimeSetting() - counter);
+                    user.updateTotalSolveTime(user.getCurrentTimeSetting() - counter);
                   });
 
               // Call method to disable the buttons as the game is over
