@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.net.URL?>
+<?import javafx.geometry.Insets?>
 <?import javafx.geometry.Rectangle2D?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
@@ -12,13 +13,13 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="703.0" prefWidth="1057.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.ProfileController">
    <children>
-      <VBox alignment="CENTER" prefHeight="703.0" prefWidth="1057.0" spacing="30.0">
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="351.0" layoutY="39.0" prefHeight="60.0" prefWidth="355.0" styleClass="header" text="USER SELECT" wrapText="true">
+         <font>
+            <Font size="51.0" />
+         </font>
+      </Label>
+      <VBox alignment="CENTER" layoutY="169.0" prefHeight="533.0" prefWidth="1057.0">
          <children>
-            <Label alignment="BOTTOM_CENTER" prefHeight="70.0" prefWidth="355.0" styleClass="header" text="USER SELECT" wrapText="true">
-               <font>
-                  <Font size="51.0" />
-               </font>
-            </Label>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="30.0">
                <children>
                   <Button fx:id="prevUser" mnemonicParsing="false" onAction="#onToggleUsers" prefHeight="70.0" prefWidth="70.0" visible="false" />
@@ -30,13 +31,26 @@
                   <Button fx:id="nextUser" alignment="CENTER" mnemonicParsing="false" onAction="#onToggleUsers" prefHeight="70.0" prefWidth="70.0" visible="false" />
                </children>
             </HBox>
-            <Label fx:id="userLabel" alignment="BOTTOM_CENTER" prefHeight="28.0" prefWidth="1057.0" text="User" wrapText="true">
-               <font>
-                  <Font size="51.0" />
-               </font>
-            </Label>
-            <Button fx:id="loginButton" alignment="CENTER" mnemonicParsing="false" onAction="#onLogin" text="CONFIRM" />
-            <Button alignment="BOTTOM_LEFT" mnemonicParsing="false" onAction="#onMainMenuSwitch" text="Main Menu" />
+            <VBox alignment="CENTER" prefHeight="384.0" prefWidth="1057.0" spacing="10.0">
+               <children>
+                  <Label fx:id="userLabel" alignment="BOTTOM_CENTER" prefHeight="89.0" prefWidth="1057.0" text="User" wrapText="true">
+                     <font>
+                        <Font size="51.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                     <padding>
+                        <Insets bottom="50.0" />
+                     </padding>
+                  </Label>
+                  <Button fx:id="loginButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onLogin" text="Confirm" />
+                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onMainMenuSwitch" text="Main Menu" />
+               </children>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </VBox>
          </children>
       </VBox>
    </children>
