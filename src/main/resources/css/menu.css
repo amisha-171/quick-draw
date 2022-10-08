@@ -1,8 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Gorditas&family=Viga&display=swap');
 
-
 .button{
     -fx-font-size: 30px;
+}
+
+#iconButton {
+    -fx-background-color: none;
+    -fx-border-color: none;
 }
 
 #greetingHbox .label {
@@ -11,55 +15,4 @@
     -fx-font-family: "Gorditas", cursive;
     -fx-text-fill: #2c2c2c;
 }
-
-#statsTitle{
-    -fx-font-size: 55;
-    -fx-alignment: center;
-    -fx-font-family: "Viga", sans-serif;
-    -fx-text-fill: #cc960e;
-}
-
-#wordList, #userStats{
-    -fx-font-size: 33;
-    -fx-background-color: white;
-    -fx-font-family: 'Viga', sans-serif;
-    -fx-text-fill: #5e5e5e;
-
-}
-
-#subTitleHbox .label{
-    -fx-text-fill: #ffffff;
-    -fx-background-color: #45a446;
-    -fx-background-radius: 5px;
-}
-
-.scroll-pane{
-    -fx-background-color:transparent;
-}
-
-.scroll-pane .viewport {
-    -fx-background-color: transparent;
-
-}
-
-.scroll-bar:vertical{
-    -fx-background-color:transparent;
-}
-
-.increment-button, .decrement-button {
-    -fx-background-color: transparent;
-    -fx-border-color: transparent;
-}
-
-.scroll-bar:horizontal .track,
-.scroll-bar:vertical .track{
-    -fx-background-color: transparent;
-    -fx-border-color: transparent;
-}
-
-.scroll-bar:horizontal .thumb,
-.scroll-bar:vertical .thumb {
-    -fx-background-color: white;
-}
-
 

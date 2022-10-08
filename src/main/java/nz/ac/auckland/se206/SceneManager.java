@@ -15,6 +15,7 @@ public class SceneManager {
     MAIN_MENU,
     USER_MENU,
     CREATE_PROFILE,
+    STATS,
     SELECT_PROFILE
   }
 

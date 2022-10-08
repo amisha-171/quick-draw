@@ -58,13 +58,11 @@ public class CreateProfileController {
       User newUser = new User(usernameField.getText(), imgName);
       Database.write(newUser);
 
-      // Set the name of the current user and the current users stats in the menu scene
+      // Set the name of the current user in the menu scene
       MenuController menuController =
           (MenuController) SceneManager.getUiController(SceneManager.AppUi.USER_MENU);
-      menuController.getName(usernameField.getText());
-      menuController.setStats();
-      menuController.setWordsPlayed();
-      menuController.setUserPic(img);
+      menuController.setName(usernameField.getText());
+      menuController.setUserDetails(img);
 
       Scene scene = ((Node) event.getSource()).getScene();
       scene.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.USER_MENU));

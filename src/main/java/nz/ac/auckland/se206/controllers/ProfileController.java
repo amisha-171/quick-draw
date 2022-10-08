@@ -85,19 +85,15 @@ public class ProfileController {
 
   @FXML
   private void onLogin(ActionEvent event) throws IOException {
-    // Create our database instance
     User[] allUsers = Database.getAllUsers();
     if (Database.userExists(allUsers[userIndex].getUserName(), true)) {
       // Check if the password associated user in our file is the same as what the user entered and
       // load the main menu
-      // setting user stats in the user menu before the scene switches to show it
       MenuController menucontroller =
           (MenuController) SceneManager.getUiController(SceneManager.AppUi.USER_MENU);
-      menucontroller.getName(allUsers[userIndex].getUserName());
-      menucontroller.setStats();
-      menucontroller.setWordsPlayed();
+      menucontroller.setName(allUsers[userIndex].getUserName());
       Image img = new Image("/images/profilepics/" + allUsers[userIndex].getImageName());
-      menucontroller.setUserPic(img);
+      menucontroller.setUserDetails(img);
 
       Scene scene = ((Node) event.getSource()).getScene();
       scene.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.USER_MENU));

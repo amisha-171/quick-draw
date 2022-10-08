@@ -448,18 +448,14 @@ public class CanvasController implements Initializable {
   }
 
   @FXML
-  private void onUserMenuSwitch(ActionEvent btnEvent) throws IOException {
-
-    // set the username in the menu controller, so that the menu shows the stats
-    MenuController menuController =
+  private void onUserMenuSwitch(ActionEvent event) {
+    MenuController menucontroller =
         (MenuController) SceneManager.getUiController(SceneManager.AppUi.USER_MENU);
-    menuController.getName(this.userName);
-    menuController.setStats();
-    menuController.setWordsPlayed();
+    menucontroller.setName(userName);
     Image img = new Image("/images/profilepics/" + user.getImageName());
-    menuController.setUserPic(img);
+    menucontroller.setUserDetails(img);
 
-    Scene scene = ((Node) btnEvent.getSource()).getScene();
+    Scene scene = ((Node) event.getSource()).getScene();
     scene.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.USER_MENU));
   }
 }
