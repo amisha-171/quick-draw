@@ -134,7 +134,7 @@ public class GameSettingsController {
     // Set the new game settings in the user profile class
     currentUser.setGameSettings(gameSettings);
     // Write information to user file
-    Database.write(currentUser);
+    currentUser.saveSelf();
     // Obtain menucontroller instance
     MenuController menuController =
         (MenuController) SceneManager.getUiController(SceneManager.AppUi.USER_MENU);

@@ -47,9 +47,9 @@ public class MenuController {
       sb.append(currentUser.getAverageSolveTime()).append(" s");
     }
     sb.append(System.getProperty("line.separator"))
-        .append("Words Played (Easy): ")
+        .append("Words Played: ")
         .append(currentUser.getNumWordsPlayed())
-        .append(("/144"));
+        .append(("/345"));
 
     // Set the stats and the users username to their respective labels in the GUI
     userStats.setText(sb.toString());

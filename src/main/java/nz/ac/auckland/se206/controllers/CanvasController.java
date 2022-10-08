@@ -154,7 +154,7 @@ public class CanvasController implements Initializable {
     // Get a random word with Easy difficulty and set the word to be displayed to the user in the
     // GUI
     String randomWord =
-        categorySelector.getRandomDiffWord(CategorySelector.Difficulty.E, this.user.getWordList());
+        categorySelector.getRandomDiffWord(this.user.getCurrentWordSetting(), this.user.getWordList());
     this.setWord(randomWord);
   }
 
