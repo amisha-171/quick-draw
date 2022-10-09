@@ -63,7 +63,6 @@ public class ZenCanvasController implements Initializable {
     @FXML private Label timerCount;
     private int counter;
     private String wordChosen;
-    private boolean gameWon;
     @FXML private Button clearButton;
     protected FileChooser fileChooser;
     private Boolean isContent;
@@ -90,7 +89,6 @@ public class ZenCanvasController implements Initializable {
         // Disable the buttons in the GUI as fit
         this.disableStartButtons();
 
-        gameWon = false;
         isContent = false;
         color = Color.BLACK;
 
@@ -115,16 +113,14 @@ public class ZenCanvasController implements Initializable {
                     final double x = e.getX() - size / 2;
                     final double y = e.getY() - size / 2;
 
-                    if (!gameWon && !(counter == 0)) {
-                        graphic.setStroke(color);
-                        graphic.setLineWidth(size);
-                        // Create a line that goes from the point (currentX, currentY) and (x,y)
-                        graphic.strokeLine(currentX, currentY, x, y);
+                    graphic.setStroke(color);
+                    graphic.setLineWidth(size);
+                    // Create a line that goes from the point (currentX, currentY) and (x,y)
+                    graphic.strokeLine(currentX, currentY, x, y);
 
-                        // update the coordinates
-                        currentX = x;
-                        currentY = y;
-                    }
+                    // update the coordinates
+                    currentX = x;
+                    currentY = y;
                 });
 
         try {
@@ -161,12 +157,7 @@ public class ZenCanvasController implements Initializable {
     protected void disableStartButtons() {
         // This method when called well disable or enable the required buttons on input
         onInk.setDisable(true);
-        clearButton.setDisable(true);
-        onInk.setDisable(true);
         eraseBtn.setDisable(true);
-        saveImage.setDisable(true);
-        newGameBtn.setDisable(true);
-        mainMenuBtn.setDisable(true);
         speakWord.setDisable(false);
     }
 
@@ -239,23 +230,20 @@ public class ZenCanvasController implements Initializable {
     }
 
     private void runTimer() {
-        counter = user.getCurrentTimeSetting() + 1;
-        // Runs a 60-second timer countdown when timer is called and the task runs
+        counter = -1;
         Timer timer = new Timer();
         TimerTask task =
                 new TimerTask() {
                     @Override
                     public void run() {
-                        // Decrement the counter each second the timer task runs
-                        if (!gameWon) {
-                            counter--;
-                            // When possible we set the label to update the counter
-                            Platform.runLater(() -> timerCount.setText(counter + " Seconds remaining"));
-                        }
+                        // Increment the counter each second the timer task runs
+                        counter++;
+                        // When possible we set the label to update the counter
+                        Platform.runLater(() -> timerCount.setText(counter + " Seconds elapsed"));
                         // Here we call the predictions' method (onDraw()) only if user has actually begun
                         // drawing on the canvas
                         // Surrounded in try and catch for exception handling
-                        if (isContent && !gameWon) {
+                        if (isContent) {
                             Platform.runLater(
                                     () -> {
                                         try {
@@ -264,37 +252,6 @@ public class ZenCanvasController implements Initializable {
                                             throw new RuntimeException(e);
                                         }
                                     });
-                        }
-                        // Conditionals to check if the user has won the game or time has finished etc. and if
-                        // met we update the status label
-                        if (gameWon) {
-                            canvas.setOnMouseDragged(e -> canvas.setCursor(Cursor.DEFAULT));
-                            timer.cancel();
-                            enableEndButtons();
-                            user.incrementWins();
-                            user.updateWordList(wordChosen);
-                            user.saveSelf();
-                        }
-                        if (counter == 0) {
-                            // If times up cancel the timer, disable canvas and change GUI state
-                            canvas.setOnMouseDragged(e -> canvas.setCursor(Cursor.DEFAULT));
-                            timer.cancel();
-                            disableButtons();
-                            enableEndButtons();
-                            // Inform user they have lost
-                            Platform.runLater(
-                                    () -> {
-                                        wordLabel.setText("You lost, better luck next time!");
-                                        user.incrementLosses();
-                                        user.updateWordList(wordChosen);
-                                        user.updateTotalSolveTime(60);
-                                        user.saveSelf();
-                                    });
-                        }
-                        if (counter == 10) {
-                            // If 10 seconds remain we change the timer to color to red instead of blue
-                            Platform.runLater(() -> timerCount.setTextFill(Color.RED));
-                            textSpeak();
                         }
                     }
                 };
@@ -364,28 +321,11 @@ public class ZenCanvasController implements Initializable {
                                     && model.getPredictions(image, 10).get(i).getProbability() * 100
                                     >= (double) user.getCurrentConfidenceSetting()) {
                                 enableEndButtons();
-                                gameWon = true;
                             }
                         }
 
                         // Set the predictions label in the GUI to the string builder sbf
                         Platform.runLater(() -> predLabel.setText(sbf.toString()));
-
-                        // Check if the game is won and set the label in the GUI to display to the user they
-                        // have won
-                        if ((gameWon && counter > 0) || (gameWon && counter == 0)) {
-                            Platform.runLater(
-                                    () -> {
-                                        wordLabel.setText(
-                                                "You won in " + (user.getCurrentTimeSetting() - counter) + " seconds!");
-                                        user.updateFastestTime(user.getCurrentTimeSetting() - counter);
-                                        user.updateTotalSolveTime(user.getCurrentTimeSetting() - counter);
-                                    });
-
-                            // Call method to disable the buttons as the game is over
-                            disableButtons();
-                            enableEndButtons();
-                        }
 
                         return null;
                     }
