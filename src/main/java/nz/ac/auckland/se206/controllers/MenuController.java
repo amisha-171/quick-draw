@@ -33,13 +33,13 @@ public class MenuController {
   @FXML
   protected void onNewGame(ActionEvent event) throws IOException {
     // set the username in the canvas controller
-    CanvasController canvasController =
-        (CanvasController) SceneManager.getUiController(SceneManager.AppUi.CANVAS);
+    NormalCanvasController canvasController =
+        (NormalCanvasController) SceneManager.getUiController(SceneManager.AppUi.NORMAL_CANVAS);
     canvasController.setUserName(this.userName);
     canvasController.onNewGame();
 
     Scene scene = ((Node) event.getSource()).getScene();
-    scene.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.CANVAS));
+    scene.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.NORMAL_CANVAS));
   }
 
   @FXML
