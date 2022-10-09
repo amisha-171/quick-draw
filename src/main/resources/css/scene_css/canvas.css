@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Gorditas&family=Viga&display=swap');
 
 .root {
-    -fx-background-image: url(../images/doodles.png);
+    -fx-background-image: url(../../images/doodles.png);
 }
 
 #canvasPane {
@@ -37,15 +37,15 @@
 }
 
 #speakWord{
-    -fx-background-image: url(../images/ear.png);
+    -fx-background-image: url(../../images/ear.png);
 }
 
 #eraseBtn{
-    -fx-background-image: url(../images/eraser.png);
+    -fx-background-image: url(../../images/eraser.png);
 }
 
 #onInk{
-    -fx-background-image: url(../images/pen.png);
+    -fx-background-image: url(../../images/pen.png);
 }
 
 #readyLabel{

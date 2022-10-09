@@ -10,7 +10,7 @@
 }
 
 #greetingHbox .label {
-    -fx-font-size: 90;
+    -fx-font-size: 90px;
     -fx-alignment: center;
     -fx-font-family: "Gorditas", cursive;
     -fx-text-fill: #2c2c2c;

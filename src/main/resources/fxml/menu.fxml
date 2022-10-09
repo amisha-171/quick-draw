@@ -67,7 +67,7 @@
       </VBox>
    </children>
    <stylesheets>
-      <URL value="@../css/menu.css" />
+      <URL value="@../css/scene_css/menu.css" />
       <URL value="@../css/app.css" />
    </stylesheets>
 </Pane>

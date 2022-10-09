@@ -55,7 +55,7 @@
       </VBox>
    </children>
    <stylesheets>
-   <URL value="@../css/profile.css" />
+   <URL value="@../css/scene_css/profile.css" />
    <URL value="@../css/app.css" />
    </stylesheets>
 </Pane>

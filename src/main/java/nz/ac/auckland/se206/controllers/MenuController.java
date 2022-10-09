@@ -1,6 +1,8 @@
 package nz.ac.auckland.se206.controllers;
 
+import com.opencsv.exceptions.CsvException;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -53,7 +55,8 @@ public class MenuController {
   }
 
   @FXML
-  private void onSwitchStats(ActionEvent btnEvent) throws IOException {
+  private void onSwitchStats(ActionEvent btnEvent)
+      throws IOException, URISyntaxException, CsvException {
     StatsController statsController =
         (StatsController) SceneManager.getUiController(SceneManager.AppUi.STATS);
     statsController.setName(userName);

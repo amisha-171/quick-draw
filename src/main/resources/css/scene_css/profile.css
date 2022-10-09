@@ -1,11 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Gorditas&family=Viga&display=swap');
 
 #prevUser{
-    -fx-background-image: url(../images/left-arrow.png);
+    -fx-background-image: url(../../images/left-arrow.png);
 }
 
 #nextUser{
-    -fx-background-image: url(../images/right-arrow.png) ;
+    -fx-background-image: url(../../images/right-arrow.png) ;
 }
 
 #prevUser, #nextUser{
