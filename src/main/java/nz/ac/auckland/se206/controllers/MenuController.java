@@ -31,7 +31,7 @@ public class MenuController {
   }
 
   @FXML
-  protected void onNewGame(ActionEvent event) throws IOException {
+  protected void onNewNormalGame(ActionEvent event) throws IOException {
     // set the username in the canvas controller
     NormalCanvasController canvasController =
         (NormalCanvasController) SceneManager.getUiController(SceneManager.AppUi.NORMAL_CANVAS);
@@ -40,6 +40,28 @@ public class MenuController {
 
     Scene scene = ((Node) event.getSource()).getScene();
     scene.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.NORMAL_CANVAS));
+  }
+
+  @FXML
+  protected void onNewHiddenGame(ActionEvent event) throws IOException {
+    HiddenCanvasController canvasController =
+            (HiddenCanvasController) SceneManager.getUiController(SceneManager.AppUi.HIDDEN_CANVAS);
+    canvasController.setUserName(this.userName);
+    canvasController.onNewGame();
+
+    Scene scene = ((Node) event.getSource()).getScene();
+    scene.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.HIDDEN_CANVAS));
+  }
+
+  @FXML
+  protected void onNewZenGame(ActionEvent event) throws IOException {
+    ZenCanvasController canvasController =
+            (ZenCanvasController) SceneManager.getUiController(SceneManager.AppUi.ZEN_CANVAS);
+    canvasController.setUserName(this.userName);
+    canvasController.onNewGame();
+
+    Scene scene = ((Node) event.getSource()).getScene();
+    scene.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.ZEN_CANVAS));
   }
 
   @FXML
