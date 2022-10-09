@@ -27,8 +27,15 @@
 }
 
 .header{
-    -fx-text-fill: white;
+    -fx-text-fill: #2b2b2b;
     -fx-font-size: 50px;
-    -fx-background-color: #45a446;
+    -fx-background-color: #c7dbb2;
     -fx-background-radius: 30px;
+}
+
+.small-header{
+    -fx-font-size: 35px;
+    -fx-text-fill: white;
+    -fx-background-color: #157d20;
+    -fx-background-radius: 5px;
 }

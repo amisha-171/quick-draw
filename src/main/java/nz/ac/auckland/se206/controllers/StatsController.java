@@ -53,7 +53,11 @@ public class StatsController {
             new PieChart.Data(numLosses + " LOSSES", numLosses));
     gamesPlayedChart.setData(pieChartData);
 
-    fastestTimeLabel.setText(currentUser.getFastestTime() + ".0 seconds");
+    if (currentUser.getFastestTime() == 100) {
+      fastestTimeLabel.setText("0.0 seconds");
+    } else {
+      fastestTimeLabel.setText(currentUser.getFastestTime() + ".0 seconds");
+    }
     avgTimeLabel.setText(currentUser.getAverageSolveTime() + " seconds");
   }
 
@@ -66,7 +70,7 @@ public class StatsController {
       case "Easy" -> updateWordsPlayedLabel("E", 142, currentUser);
       case "Medium" -> updateWordsPlayedLabel("M", 130, currentUser);
       case "Hard" -> updateWordsPlayedLabel("H", 68, currentUser);
-      default -> updateWordsPlayedLabel(currentUser);
+      default -> updateWordsPlayedLabel("None", 340, currentUser);
     }
   }
 
@@ -81,7 +85,8 @@ public class StatsController {
     new CategorySelector();
     StringBuilder sb = new StringBuilder();
     for (String word : currentUser.getWordList()) {
-      if (CategorySelector.getWordDifficulty(word).equals(difficulty)) {
+      if (difficulty.equals("None")
+          || CategorySelector.getWordDifficulty(word).equals(difficulty)) {
         sb.append(word).append(System.getProperty("line.separator"));
       }
     }
@@ -89,18 +94,8 @@ public class StatsController {
       case "E" -> wordsPlayedLabel.setText(currentUser.getNumEasyWords() + "/" + numWords);
       case "M" -> wordsPlayedLabel.setText(currentUser.getNumMediumWords() + "/" + numWords);
       case "H" -> wordsPlayedLabel.setText(currentUser.getNumHardWords() + "/" + numWords);
+      case "None" -> wordsPlayedLabel.setText(currentUser.getNumWordsPlayed() + "/" + numWords);
     }
-    wordList.setText(sb.toString());
-  }
-
-  private void updateWordsPlayedLabel(User currentUser)
-      throws IOException, URISyntaxException, CsvException {
-    new CategorySelector();
-    StringBuilder sb = new StringBuilder();
-    for (String word : currentUser.getWordList()) {
-      sb.append(word).append(System.getProperty("line.separator"));
-    }
-    wordsPlayedLabel.setText(currentUser.getNumWordsPlayed() + "/340");
     wordList.setText(sb.toString());
   }
 }

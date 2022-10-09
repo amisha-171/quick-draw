@@ -1,0 +1,30 @@
+.top-arrow{
+    -fx-background-image: url(../../images/up-arrow.png);
+}
+
+.bottom-arrow{
+    -fx-background-image: url(../../images/down-arrow.png);
+}
+
+.top-arrow, .bottom-arrow{
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 34px;
+    -fx-background-position: center;
+}
+
+.difficulty-label{
+    -fx-font-size: 35px;
+    -fx-background-color: white;
+    -fx-padding: 10px;
+    -fx-background-radius: 60px;
+}
+
+.small-header{
+    -fx-background-color: #45a446;
+    -fx-border-color: #45a446;
+    -fx-border-width: 1px;
+    -fx-border-radius: 60px;
+    -fx-background-radius: 60px;
+    -fx-text-fill: white;
+    -fx-text-alignment: center;
+}

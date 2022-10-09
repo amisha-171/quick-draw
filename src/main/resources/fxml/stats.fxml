@@ -21,12 +21,12 @@
          <children>
             <HBox alignment="CENTER" prefHeight="126.0" prefWidth="1057.0">
                <children>
-                  <Label fx:id="userLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="225.0" styleClass="title-label" text="User" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                  <Label fx:id="userLabel" alignment="CENTER" contentDisplay="CENTER" styleClass="header" text="User" textAlignment="CENTER" textFill="WHITE" wrapText="true">
                      <font>
                         <Font size="13.0" />
                      </font>
                   </Label>
-                  <Label fx:id="hiLabel1" alignment="CENTER" contentDisplay="CENTER" prefHeight="111.0" prefWidth="469.0" styleClass="title-label" text="'s  Progress!" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                  <Label fx:id="hiLabel1" alignment="CENTER" contentDisplay="CENTER" styleClass="header" text="'s Game Progress!" textAlignment="CENTER" textFill="WHITE" wrapText="true">
                      <font>
                         <Font size="13.0" />
                      </font>

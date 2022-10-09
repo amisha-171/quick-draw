@@ -1,6 +1,5 @@
 package nz.ac.auckland.se206.controllers;
 
-import java.io.IOException;
 import java.util.Arrays;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -8,6 +7,7 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.paint.Color;
 import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.userutils.GameSettings;
 import nz.ac.auckland.se206.userutils.User;
@@ -21,7 +21,6 @@ public class GameSettingsController {
   private @FXML Label wordLabel;
   private @FXML Label timeLabel;
   private @FXML Label confidenceLabel;
-
   private @FXML Button upAccuracy;
   private @FXML Button upTime;
   private @FXML Button upConfidence;
@@ -66,6 +65,10 @@ public class GameSettingsController {
     wordLabel.setText(wordList[diffIndex[1]]);
     timeLabel.setText(timeList[diffIndex[2]]);
     confidenceLabel.setText(confidenceList[diffIndex[3]]);
+    updateDifficultyColours(accuracyLabel);
+    updateDifficultyColours(wordLabel);
+    updateDifficultyColours(confidenceLabel);
+    updateDifficultyColours(timeLabel);
   }
 
   private void setDifficultyLabelToScene(
@@ -97,6 +100,7 @@ public class GameSettingsController {
     // Call method to set the label for setting when user attempts to toggle
     setDifficultyLabelToScene(0, accuracyList, accuracyLabel, toggleUp);
     this.accuracySettings = AccuracySettings.valueOf(accuracyList[diffIndex[0]]);
+    updateDifficultyColours(accuracyLabel);
   }
 
   @FXML
@@ -105,6 +109,7 @@ public class GameSettingsController {
     boolean toggleUp = wordToggleButton.equals(upWords);
     setDifficultyLabelToScene(1, wordList, wordLabel, toggleUp);
     this.wordSettings = WordSettings.valueOf(wordList[diffIndex[1]]);
+    updateDifficultyColours(wordLabel);
   }
 
   @FXML
@@ -113,6 +118,7 @@ public class GameSettingsController {
     boolean toggleUp = timeToggleButton.equals(upTime);
     setDifficultyLabelToScene(2, timeList, timeLabel, toggleUp);
     this.timeSettings = TimeSettings.valueOf(timeList[diffIndex[2]]);
+    updateDifficultyColours(timeLabel);
   }
 
   @FXML
@@ -121,10 +127,11 @@ public class GameSettingsController {
     boolean toggleUp = confidenceToggleButton.equals(upConfidence);
     setDifficultyLabelToScene(3, confidenceList, confidenceLabel, toggleUp);
     this.confidenceSettings = ConfidenceSettings.valueOf(confidenceList[diffIndex[3]]);
+    updateDifficultyColours(confidenceLabel);
   }
 
   @FXML
-  private void onConfirmSettings(ActionEvent e) throws IOException {
+  private void onConfirmSettings(ActionEvent e) {
     // Update current users game settings to the updated settings.
     GameSettings gameSettings =
         new GameSettings(
@@ -135,7 +142,17 @@ public class GameSettingsController {
     currentUser.saveSelf();
     // Set scene
     Scene scene = ((Node) e.getSource()).getScene();
-    // Set the scene and show the stage
     scene.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.USER_MENU));
+  }
+
+  private void updateDifficultyColours(Label label) {
+    String difficulty = label.getText();
+
+    switch (difficulty) {
+      case "EASY" -> label.setTextFill(Color.web("#41b208"));
+      case "MEDIUM" -> label.setTextFill(Color.web("#ffc400"));
+      case "HARD" -> label.setTextFill(Color.web("#ea7c00"));
+      case "MASTER" -> label.setTextFill(Color.web("#b70000"));
+    }
   }
 }
