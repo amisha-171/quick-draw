@@ -65,6 +65,7 @@ public class GameSettingsController {
     wordLabel.setText(wordList[diffIndex[1]]);
     timeLabel.setText(timeList[diffIndex[2]]);
     confidenceLabel.setText(confidenceList[diffIndex[3]]);
+
     updateDifficultyColours(accuracyLabel);
     updateDifficultyColours(wordLabel);
     updateDifficultyColours(confidenceLabel);

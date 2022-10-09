@@ -23,9 +23,8 @@ public class App extends Application {
    *
    * @param fxml The name of the FXML file (without extension).
    * @return The node of the input file.
-   * @throws IOException If the file is not found.
    */
-  private static FXMLLoader getFxmlLoader(final String fxml) throws IOException {
+  private static FXMLLoader getFxmlLoader(final String fxml) {
     return new FXMLLoader(App.class.getResource("/fxml/" + fxml + ".fxml"));
   }
 
@@ -45,6 +44,7 @@ public class App extends Application {
     SceneManager.addUi(SceneManager.AppUi.SELECT_PROFILE, getFxmlLoader("profile"));
     SceneManager.addUi(SceneManager.AppUi.STATS, getFxmlLoader("stats"));
     SceneManager.addUi(SceneManager.AppUi.SELECT_SETTING, getFxmlLoader("gamesettings"));
+    SceneManager.addUi(SceneManager.AppUi.BADGES, getFxmlLoader("badges"));
 
     Scene scene = new Scene(SceneManager.getUiRoot(SceneManager.AppUi.MAIN_MENU), 1057, 703);
     stage.setScene(scene);

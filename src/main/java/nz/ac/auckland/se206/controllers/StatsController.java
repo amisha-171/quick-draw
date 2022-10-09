@@ -70,7 +70,7 @@ public class StatsController {
       case "Easy" -> updateWordsPlayedLabel("E", 142, currentUser);
       case "Medium" -> updateWordsPlayedLabel("M", 130, currentUser);
       case "Hard" -> updateWordsPlayedLabel("H", 68, currentUser);
-      default -> updateWordsPlayedLabel("None", 340, currentUser);
+      default -> updateWordsPlayedLabel("N", 340, currentUser);
     }
   }
 
@@ -80,13 +80,22 @@ public class StatsController {
     scene.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.USER_MENU));
   }
 
+  @FXML
+  private void onBadgeDisplaySwitch(ActionEvent event) throws IOException {
+    BadgesController badgesController =
+        (BadgesController) SceneManager.getUiController(SceneManager.AppUi.BADGES);
+    badgesController.setBadgesForUser(userName);
+
+    Scene scene = ((Node) event.getSource()).getScene();
+    scene.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.BADGES));
+  }
+
   private void updateWordsPlayedLabel(String difficulty, int numWords, User currentUser)
       throws IOException, URISyntaxException, CsvException {
     new CategorySelector();
     StringBuilder sb = new StringBuilder();
     for (String word : currentUser.getWordList()) {
-      if (difficulty.equals("None")
-          || CategorySelector.getWordDifficulty(word).equals(difficulty)) {
+      if (difficulty.equals("N") || CategorySelector.getWordDifficulty(word).equals(difficulty)) {
         sb.append(word).append(System.getProperty("line.separator"));
       }
     }
@@ -94,7 +103,7 @@ public class StatsController {
       case "E" -> wordsPlayedLabel.setText(currentUser.getNumEasyWords() + "/" + numWords);
       case "M" -> wordsPlayedLabel.setText(currentUser.getNumMediumWords() + "/" + numWords);
       case "H" -> wordsPlayedLabel.setText(currentUser.getNumHardWords() + "/" + numWords);
-      case "None" -> wordsPlayedLabel.setText(currentUser.getNumWordsPlayed() + "/" + numWords);
+      case "N" -> wordsPlayedLabel.setText(currentUser.getNumWordsPlayed() + "/" + numWords);
     }
     wordList.setText(sb.toString());
   }
