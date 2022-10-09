@@ -23,6 +23,7 @@ import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
+import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
@@ -72,6 +73,7 @@ public class ZenCanvasController implements Initializable {
     @FXML private Button mainMenuBtn;
     private User user;
     @FXML private Button speakWord;
+    @FXML private ColorPicker colourSwitcher;
 
     // mouse coordinates
     private double currentX;
@@ -90,7 +92,7 @@ public class ZenCanvasController implements Initializable {
         this.disableStartButtons();
 
         isContent = false;
-        color = Color.BLACK;
+        color = this.colourSwitcher.getValue();
 
         canvas.setOnMouseEntered(e -> canvas.setCursor(Cursor.HAND));
 
@@ -159,6 +161,7 @@ public class ZenCanvasController implements Initializable {
         onInk.setDisable(true);
         eraseBtn.setDisable(true);
         speakWord.setDisable(false);
+        clearButton.setDisable(true);
     }
 
     /** This method is called when the "Clear" button is pressed. */
@@ -356,6 +359,11 @@ public class ZenCanvasController implements Initializable {
         color = Color.BLACK;
         eraseBtn.setDisable(false);
         onInk.setDisable(true);
+    }
+
+    @FXML
+    private void switchPenColour() {
+        this.color = this.colourSwitcher.getValue();
     }
 
     @FXML
