@@ -260,6 +260,10 @@ public class HiddenCanvasController implements Initializable {
         this.numCharactersShown++;
         this.counter -= 10;
         this.setWord();
+        //if whole word is shown, disable the hint button
+        if (this.numCharactersShown == this.wordChosen.length()) {
+            this.hintButton.setDisable(true);
+        }
     }
 
     protected void setWord() {
