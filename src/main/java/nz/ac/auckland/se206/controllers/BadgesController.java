@@ -5,21 +5,21 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.image.ImageView;
+import javafx.scene.control.Label;
 import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.userutils.Database;
 import nz.ac.auckland.se206.userutils.User;
 
 public class BadgesController {
-  @FXML private ImageView goldTime;
-  @FXML private ImageView goldGames;
-  @FXML private ImageView goldWins;
-  @FXML private ImageView silverTime;
-  @FXML private ImageView silverGames;
-  @FXML private ImageView silverWins;
-  @FXML private ImageView bronzeTime;
-  @FXML private ImageView bronzeWins;
-  @FXML private ImageView bronzeGames;
+  @FXML private Label goldTime;
+  @FXML private Label goldGames;
+  @FXML private Label goldWins;
+  @FXML private Label silverTime;
+  @FXML private Label silverGames;
+  @FXML private Label silverWins;
+  @FXML private Label bronzeTime;
+  @FXML private Label bronzeWins;
+  @FXML private Label bronzeGames;
 
   protected void setBadgesForUser(String userName) throws IOException {
     User currentUser = Database.read(userName);

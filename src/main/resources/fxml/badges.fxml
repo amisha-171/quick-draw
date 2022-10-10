@@ -35,9 +35,9 @@
          <children>
             <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="20.0">
                <children>
-                  <Label visible="false">
+                  <Label fx:id="goldGames" visible="false">
                      <graphic>
-                        <ImageView fx:id="goldGames" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../images/badges/goldgames.png" />
                            </image>
@@ -47,9 +47,9 @@
                         <Tooltip text="For 100 Games Played!" />
                      </tooltip>
                   </Label>
-                  <Label visible="false">
+                  <Label fx:id="silverGames" visible="false">
                      <graphic>
-                        <ImageView fx:id="silverGames" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../images/badges/silvergames.png" />
                            </image>
@@ -59,9 +59,9 @@
                         <Tooltip text="For 50 Games Played!" />
                      </tooltip>
                   </Label>
-                  <Label visible="false">
+                  <Label fx:id="bronzeGames" visible="false">
                      <graphic>
-                        <ImageView fx:id="bronzeGames" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../images/badges/bronzegames.png" />
                            </image>
@@ -75,9 +75,9 @@
             </VBox>
             <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="20.0">
                <children>
-                  <Label visible="false">
+                  <Label fx:id="goldTime" visible="false">
                      <graphic>
-                        <ImageView fx:id="goldTime" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../images/badges/goldtime.png" />
                            </image>
@@ -87,9 +87,9 @@
                         <Tooltip text="For a Win Under 5 Seconds!" />
                      </tooltip>
                   </Label>
-                  <Label visible="false">
+                  <Label fx:id="silverTime" visible="false">
                      <graphic>
-                        <ImageView fx:id="silverTime" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../images/badges/silvertime.png" />
                            </image>
@@ -99,9 +99,9 @@
                         <Tooltip text="For a Win Under 10 Seconds!" />
                      </tooltip>
                   </Label>
-                  <Label visible="false">
+                  <Label fx:id="bronzeTime" visible="false">
                      <graphic>
-                        <ImageView fx:id="bronzeTime" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../images/badges/bronzetime.png" />
                            </image>
@@ -118,9 +118,9 @@
             </VBox>
             <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="20.0">
                <children>
-                  <Label visible="false">
+                  <Label fx:id="goldWins" visible="false">
                      <graphic>
-                        <ImageView fx:id="goldWins" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../images/badges/goldwins.png" />
                            </image>
@@ -130,9 +130,9 @@
                         <Tooltip text="For Winning 20 Games in a Row!" />
                      </tooltip>
                   </Label>
-                  <Label visible="false">
+                  <Label fx:id="silverWins" visible="false">
                      <graphic>
-                        <ImageView fx:id="silverWins" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../images/badges/silverwins.png" />
                            </image>
@@ -142,9 +142,9 @@
                         <Tooltip text="For Winning 10 Games in a Row!" />
                      </tooltip>
                   </Label>
-                  <Label visible="false">
+                  <Label fx:id="bronzeWins" visible="false">
                      <graphic>
-                        <ImageView fx:id="bronzeWins" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../images/badges/bronzewins.png" />
                            </image>
