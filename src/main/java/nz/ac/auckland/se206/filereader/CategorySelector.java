@@ -60,7 +60,7 @@ public class CategorySelector {
     while ((userWordList.contains(this.difficultyCat.get(wordSetting).get(wordPointer)))
         && (passes < 2)) {
       // wrap to start of the word list for the difficult if we've reached the end
-      if (wordPointer < this.difficultyCat.get(wordSetting).size()) {
+      if (wordPointer < this.difficultyCat.get(wordSetting).size() - 1) {
         wordPointer++;
       } else {
         wordPointer = 0;

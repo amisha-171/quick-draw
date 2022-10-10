@@ -8,7 +8,6 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -30,11 +29,9 @@ import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javax.imageio.ImageIO;
-import javax.speech.Word;
 
 import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.dict.DictionaryLookup;
-import nz.ac.auckland.se206.dict.WordEntry;
 import nz.ac.auckland.se206.dict.WordNotFoundException;
 import nz.ac.auckland.se206.filereader.CategorySelector;
 import nz.ac.auckland.se206.ml.DoodlePrediction;
@@ -64,6 +61,7 @@ public class HiddenCanvasController implements Initializable {
     private GraphicsContext graphic;
     protected DoodlePrediction model;
     @FXML private Label predLabel;
+    @FXML private Label definitionLabel;
     @FXML private Button eraseBtn;
     @FXML private Button onInk;
     @FXML private Label timerCount;
@@ -73,6 +71,7 @@ public class HiddenCanvasController implements Initializable {
     private String wordDefinition;
     private boolean gameWon;
     @FXML private Button clearButton;
+    @FXML private Button hintButton;
     protected FileChooser fileChooser;
     private Boolean isContent;
     private Color color;
@@ -153,19 +152,28 @@ public class HiddenCanvasController implements Initializable {
     private void generateWord() throws WordNotFoundException, IOException {
         // Create an instance of category selector
         CategorySelector categorySelector = null;
+        String randomWord= "";
+        boolean wordDefined;
         try {
             categorySelector = new CategorySelector();
         } catch (IOException | URISyntaxException | CsvException e) {
             e.printStackTrace();
         }
-        // Get a random word with Easy difficulty and set the word to be displayed to the user in the
-        // GUI
-        String randomWord =
-                categorySelector.getRandomDiffWord(this.user.getCurrentWordSetting(), this.user.getWordList());
+        // Get a random word with user's preferred difficulty, and fetch definition until defined word is chosen
+        wordDefined = false;
+        while (!wordDefined) {
+            wordDefined = true;
+            try {
+                randomWord =
+                        categorySelector.getRandomDiffWord(this.user.getCurrentWordSetting(), this.user.getWordList());
+                //fetch definition of word from dictionary api
+                this.wordDefinition =
+                        DictionaryLookup.searchWordInfo(randomWord).getWordEntries().get(0).getDefinitions().get(0);
+            } catch (WordNotFoundException e) {
+                wordDefined = false;
+            }
+        }
 
-        //fetch definition of word from dictionary api
-        this.wordDefinition =
-                DictionaryLookup.searchWordInfo(randomWord).getWordEntries().get(0).getDefinitions().get(0);
         this.wordChosen = randomWord;
         this.numCharactersShown = 0;
         this.setWord();
@@ -174,6 +182,7 @@ public class HiddenCanvasController implements Initializable {
     protected void disableStartButtons() {
         // This method when called well disable or enable the required buttons on input
         onInk.setDisable(true);
+        hintButton.setDisable(true);
         clearButton.setDisable(true);
         onInk.setDisable(true);
         eraseBtn.setDisable(true);
@@ -236,10 +245,12 @@ public class HiddenCanvasController implements Initializable {
     private void onReady() {
         // When player is ready we start the game by enabling canvas, starting the timer etc
         canvas.setDisable(false);
+        this.definitionLabel.setText(this.wordDefinition);
         this.onInk.setDisable(true);
         this.readyButton.setDisable(true);
         this.clearButton.setDisable(false);
         this.eraseBtn.setDisable(false);
+        this.hintButton.setDisable(false);
         timerCount.setVisible(true);
         this.runTimer();
     }
@@ -302,7 +313,7 @@ public class HiddenCanvasController implements Initializable {
                             user.updateWordList(wordChosen);
                             user.saveSelf();
                         }
-                        if (counter == 0) {
+                        if (counter <= 0) {
                             // If times up cancel the timer, disable canvas and change GUI state
                             canvas.setOnMouseDragged(e -> canvas.setCursor(Cursor.DEFAULT));
                             timer.cancel();
@@ -312,6 +323,9 @@ public class HiddenCanvasController implements Initializable {
                             Platform.runLater(
                                     () -> {
                                         wordLabel.setText("You lost, better luck next time!");
+                                        timerCount.setTextFill(Color.RED);
+                                        timerCount.setText("0 seconds remaining");
+                                        definitionLabel.setText("The word was " + wordChosen + "!");
                                         user.incrementLosses();
                                         user.updateWordList(wordChosen);
                                         user.updateTotalSolveTime(60);
@@ -454,6 +468,7 @@ public class HiddenCanvasController implements Initializable {
         startGame();
         predLabel.setText(
                 "Click the \"Ready!\" button to start drawing the word you see and view the predictions!");
+        definitionLabel.setText("");
         timerCount.setTextFill(Color.color(0.8, 0.6, 0.06));
     }
 
