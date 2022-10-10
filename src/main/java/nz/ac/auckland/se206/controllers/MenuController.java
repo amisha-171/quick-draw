@@ -37,6 +37,7 @@ public class MenuController {
     NormalCanvasController canvasController =
         (NormalCanvasController) SceneManager.getUiController(SceneManager.AppUi.NORMAL_CANVAS);
     canvasController.setUserName(this.userName);
+    canvasController.onNewGame();
 
     Scene scene = ((Node) event.getSource()).getScene();
     scene.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.NORMAL_CANVAS));
@@ -47,6 +48,7 @@ public class MenuController {
     HiddenCanvasController canvasController =
             (HiddenCanvasController) SceneManager.getUiController(SceneManager.AppUi.HIDDEN_CANVAS);
     canvasController.setUserName(this.userName);
+    canvasController.onNewGame();
 
     Scene scene = ((Node) event.getSource()).getScene();
     scene.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.HIDDEN_CANVAS));
@@ -57,6 +59,7 @@ public class MenuController {
     ZenCanvasController canvasController =
             (ZenCanvasController) SceneManager.getUiController(SceneManager.AppUi.ZEN_CANVAS);
     canvasController.setUserName(this.userName);
+    canvasController.onNewGame();
 
     Scene scene = ((Node) event.getSource()).getScene();
     scene.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.ZEN_CANVAS));
