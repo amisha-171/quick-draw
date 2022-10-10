@@ -92,7 +92,7 @@ public class ZenCanvasController implements Initializable {
         this.disableStartButtons();
 
         isContent = false;
-        color = this.colourSwitcher.getValue();
+        color = Color.WHITE;
 
         canvas.setOnMouseEntered(e -> canvas.setCursor(Cursor.HAND));
 
@@ -217,12 +217,13 @@ public class ZenCanvasController implements Initializable {
     @FXML
     private void onReady() {
         // When player is ready we start the game by enabling canvas, starting the timer etc
-        canvas.setDisable(false);
+        this.color = this.colourSwitcher.getValue();
+        this.canvas.setDisable(false);
         this.onInk.setDisable(true);
         this.readyButton.setDisable(true);
         this.clearButton.setDisable(false);
         this.eraseBtn.setDisable(false);
-        timerCount.setVisible(true);
+        this.timerCount.setVisible(true);
         this.runTimer();
     }
 
@@ -267,24 +268,6 @@ public class ZenCanvasController implements Initializable {
         saveImage.setDisable(false);
         mainMenuBtn.setDisable(false);
         speakWord.setDisable(true);
-    }
-
-    private void textSpeak() {
-        // Put the speech to text inside a thread to not freeze GUI at 10 seconds
-        TextToSpeech speak = new TextToSpeech();
-        Task<Void> speechTask =
-                new Task<>() {
-                    @Override
-                    protected Void call() {
-                        // Speak there is 10 seconds remaining
-                        speak.speak("10 Seconds");
-                        return null;
-                    }
-                };
-        // Begin the thread given the task
-        Thread timeLeftThread = new Thread(speechTask);
-        timeLeftThread.setDaemon(true);
-        timeLeftThread.start();
     }
 
     private void onDraw() {
@@ -339,14 +322,6 @@ public class ZenCanvasController implements Initializable {
         backgroundThread.start(); // Begin the thread when called
     }
 
-    private void disableButtons() {
-        // Disable the required buttons when called
-        canvas.setDisable(true);
-        clearButton.setDisable(true);
-        eraseBtn.setDisable(true);
-        onInk.setDisable(true);
-    }
-
     @FXML
     private void onErase() { // If the user wants to erase something we set the pen color to white
         this.color = Color.WHITE;
@@ -356,14 +331,16 @@ public class ZenCanvasController implements Initializable {
 
     @FXML
     private void onPen() { // If the user wants to switch back to pen we change the pen color to black
-        color = Color.BLACK;
+        this.color = this.colourSwitcher.getValue();
         eraseBtn.setDisable(false);
         onInk.setDisable(true);
     }
 
     @FXML
     private void switchPenColour() {
-        this.color = this.colourSwitcher.getValue();
+        if (!this.eraseBtn.isDisabled()) { //only switch colour if we are currently on ink (not eraser)
+            this.color = this.colourSwitcher.getValue();
+        }
     }
 
     @FXML
