@@ -32,6 +32,7 @@ import javax.imageio.ImageIO;
 
 import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.dict.DictionaryLookup;
+import nz.ac.auckland.se206.dict.WordEntry;
 import nz.ac.auckland.se206.dict.WordNotFoundException;
 import nz.ac.auckland.se206.filereader.CategorySelector;
 import nz.ac.auckland.se206.ml.DoodlePrediction;
@@ -140,7 +141,7 @@ public class HiddenCanvasController implements Initializable {
         }
     }
 
-    protected void setUserName(String userId) throws IOException, WordNotFoundException {
+    protected void setUserName(String userId) throws IOException {
         // Set the username of the current user playing, and also its corresponding stats to local
         // fields
         this.userName = userId;
@@ -149,7 +150,7 @@ public class HiddenCanvasController implements Initializable {
         this.generateWord();
     }
 
-    private void generateWord() throws WordNotFoundException, IOException {
+    private void generateWord() throws IOException {
         // Create an instance of category selector
         CategorySelector categorySelector = null;
         String randomWord= "";
@@ -162,13 +163,16 @@ public class HiddenCanvasController implements Initializable {
         // Get a random word with user's preferred difficulty, and fetch definition until defined word is chosen
         wordDefined = false;
         while (!wordDefined) {
-            wordDefined = true;
             try {
                 randomWord =
                         categorySelector.getRandomDiffWord(this.user.getCurrentWordSetting(), this.user.getWordList());
-                //fetch definition of word from dictionary api
-                this.wordDefinition =
-                        DictionaryLookup.searchWordInfo(randomWord).getWordEntries().get(0).getDefinitions().get(0);
+                //fetch definition of word from dictionary api, but only if it's a noun
+                for (WordEntry currentWordEntry : DictionaryLookup.searchWordInfo(randomWord).getWordEntries()) {
+                    if (currentWordEntry.getPartOfSpeech().equals("noun")) {
+                        wordDefined = true;
+                        this.wordDefinition = currentWordEntry.getDefinitions().get(0);
+                    }
+                }
             } catch (WordNotFoundException e) {
                 wordDefined = false;
             }
@@ -176,6 +180,7 @@ public class HiddenCanvasController implements Initializable {
 
         this.wordChosen = randomWord;
         this.numCharactersShown = 0;
+        this.definitionLabel.setText(this.wordDefinition);
         this.setWord();
     }
 
@@ -245,7 +250,6 @@ public class HiddenCanvasController implements Initializable {
     private void onReady() {
         // When player is ready we start the game by enabling canvas, starting the timer etc
         canvas.setDisable(false);
-        this.definitionLabel.setText(this.wordDefinition);
         this.onInk.setDisable(true);
         this.readyButton.setDisable(true);
         this.clearButton.setDisable(false);
@@ -463,7 +467,7 @@ public class HiddenCanvasController implements Initializable {
     }
 
     @FXML
-    protected void onNewGame() throws IOException, WordNotFoundException {
+    protected void onNewGame() throws IOException {
         // If the user wants to play a new game we clear the canvas and the user gets a new word to draw
         onClear();
         timerCount.setVisible(false);
@@ -472,7 +476,6 @@ public class HiddenCanvasController implements Initializable {
         startGame();
         predLabel.setText(
                 "Click the \"Ready!\" button to start drawing the word you see and view the predictions!");
-        definitionLabel.setText("");
         timerCount.setTextFill(Color.color(0.8, 0.6, 0.06));
     }
 
