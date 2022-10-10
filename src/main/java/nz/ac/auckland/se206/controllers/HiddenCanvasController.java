@@ -8,6 +8,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -29,7 +30,12 @@ import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javax.imageio.ImageIO;
+import javax.speech.Word;
+
 import nz.ac.auckland.se206.SceneManager;
+import nz.ac.auckland.se206.dict.DictionaryLookup;
+import nz.ac.auckland.se206.dict.WordEntry;
+import nz.ac.auckland.se206.dict.WordNotFoundException;
 import nz.ac.auckland.se206.filereader.CategorySelector;
 import nz.ac.auckland.se206.ml.DoodlePrediction;
 import nz.ac.auckland.se206.speech.TextToSpeech;
@@ -63,6 +69,8 @@ public class HiddenCanvasController implements Initializable {
     @FXML private Label timerCount;
     private int counter;
     private String wordChosen;
+    private int numCharactersShown;
+    private String wordDefinition;
     private boolean gameWon;
     @FXML private Button clearButton;
     protected FileChooser fileChooser;
@@ -72,7 +80,6 @@ public class HiddenCanvasController implements Initializable {
     @FXML private Button saveImage;
     @FXML private Button mainMenuBtn;
     private User user;
-    @FXML private Button speakWord;
 
     // mouse coordinates
     private double currentX;
@@ -134,7 +141,7 @@ public class HiddenCanvasController implements Initializable {
         }
     }
 
-    protected void setUserName(String userId) throws IOException {
+    protected void setUserName(String userId) throws IOException, WordNotFoundException {
         // Set the username of the current user playing, and also its corresponding stats to local
         // fields
         this.userName = userId;
@@ -143,7 +150,7 @@ public class HiddenCanvasController implements Initializable {
         this.generateWord();
     }
 
-    private void generateWord() {
+    private void generateWord() throws WordNotFoundException, IOException {
         // Create an instance of category selector
         CategorySelector categorySelector = null;
         try {
@@ -155,7 +162,13 @@ public class HiddenCanvasController implements Initializable {
         // GUI
         String randomWord =
                 categorySelector.getRandomDiffWord(this.user.getCurrentWordSetting(), this.user.getWordList());
-        this.setWord(randomWord);
+
+        //fetch definition of word from dictionary api
+        this.wordDefinition =
+                DictionaryLookup.searchWordInfo(randomWord).getWordEntries().get(0).getDefinitions().get(0);
+        this.wordChosen = randomWord;
+        this.numCharactersShown = 0;
+        this.setWord();
     }
 
     protected void disableStartButtons() {
@@ -167,7 +180,6 @@ public class HiddenCanvasController implements Initializable {
         saveImage.setDisable(true);
         newGameBtn.setDisable(true);
         mainMenuBtn.setDisable(true);
-        speakWord.setDisable(false);
     }
 
     /** This method is called when the "Clear" button is pressed. */
@@ -232,10 +244,25 @@ public class HiddenCanvasController implements Initializable {
         this.runTimer();
     }
 
-    protected void setWord(String wordDraw) {
-        // Obtain the word given to draw from filereader class
-        wordLabel.setText("Draw: " + wordDraw);
-        wordChosen = wordDraw;
+    @FXML
+    private void onGiveHint() {
+        this.numCharactersShown++;
+        this.counter -= 10;
+        this.setWord();
+    }
+
+    protected void setWord() {
+        String wordString = "";
+
+        for (int i = 0; i < this.numCharactersShown; i++) {
+            wordString += this.wordChosen.charAt(i);
+        }
+
+        for (int i = this.numCharactersShown; i < this.wordChosen.length(); i++) {
+            wordString += "_";
+        }
+
+        wordLabel.setText("Word: " + wordString);
     }
 
     private void runTimer() {
@@ -306,7 +333,6 @@ public class HiddenCanvasController implements Initializable {
         newGameBtn.setDisable(false);
         saveImage.setDisable(false);
         mainMenuBtn.setDisable(false);
-        speakWord.setDisable(true);
     }
 
     private void textSpeak() {
@@ -419,26 +445,7 @@ public class HiddenCanvasController implements Initializable {
     }
 
     @FXML
-    private void onSpeakWord() {
-        // Create text to speech instance
-        TextToSpeech speech = new TextToSpeech();
-        // Create task for thread and put speak inside
-        Task<Void> voiceThread =
-                new Task<>() {
-                    @Override
-                    protected Void call() {
-                        speech.speak(wordChosen);
-                        return null;
-                    }
-                };
-        // Create thread for bThread and start it when this method is called
-        Thread speechThread = new Thread(voiceThread);
-        speechThread.setDaemon(true);
-        speechThread.start();
-    }
-
-    @FXML
-    protected void onNewGame() throws IOException {
+    protected void onNewGame() throws IOException, WordNotFoundException {
         // If the user wants to play a new game we clear the canvas and the user gets a new word to draw
         onClear();
         timerCount.setVisible(false);

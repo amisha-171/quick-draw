@@ -10,6 +10,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import nz.ac.auckland.se206.SceneManager;
+import nz.ac.auckland.se206.dict.WordNotFoundException;
 import nz.ac.auckland.se206.userutils.Database;
 import nz.ac.auckland.se206.userutils.User;
 
@@ -43,7 +44,7 @@ public class MenuController {
   }
 
   @FXML
-  protected void onNewHiddenGame(ActionEvent event) throws IOException {
+  protected void onNewHiddenGame(ActionEvent event) throws IOException, WordNotFoundException {
     HiddenCanvasController canvasController =
             (HiddenCanvasController) SceneManager.getUiController(SceneManager.AppUi.HIDDEN_CANVAS);
     canvasController.setUserName(this.userName);
