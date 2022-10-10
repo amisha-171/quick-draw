@@ -1,17 +1,3 @@
-.top-arrow{
-    -fx-background-image: url(../../images/up-arrow.png);
-}
-
-.bottom-arrow{
-    -fx-background-image: url(../../images/down-arrow.png);
-}
-
-.top-arrow, .bottom-arrow{
-    -fx-background-repeat: no-repeat;
-    -fx-background-size: 34px;
-    -fx-background-position: center;
-}
-
 .difficulty-label{
     -fx-font-size: 35px;
     -fx-background-color: white;

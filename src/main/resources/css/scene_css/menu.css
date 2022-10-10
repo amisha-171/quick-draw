@@ -1,9 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Gorditas&family=Viga&display=swap');
 
-.button{
-    -fx-font-size: 30px;
-}
-
 #iconButton {
     -fx-background-color: none;
     -fx-border-color: none;
@@ -16,3 +12,39 @@
     -fx-text-fill: #2c2c2c;
 }
 
+.zen-button{
+    -fx-background-color: #45a446;
+}
+
+.zen-button:hover{
+    -fx-background-color: #ffffff;
+    -fx-text-fill: #45a446;
+    -fx-border-radius: 35px;
+    -fx-border-width: 3px;
+    -fx-border-color: #45a446;
+}
+
+.definitions-button{
+    -fx-background-color: #d7697d;
+
+}
+
+.definitions-button:hover{
+    -fx-background-color: #ffffff;
+    -fx-text-fill: #d7697d;
+    -fx-border-radius: 35px;
+    -fx-border-width: 3px;
+    -fx-border-color: #d7697d;
+}
+
+classic-button{
+    -fx-background-color: #cc960e;
+}
+
+.classic-button:hover{
+    -fx-background-color: #ffffff;
+    -fx-text-fill: #cc960e;
+    -fx-border-radius: 35px;
+    -fx-border-width: 3px;
+    -fx-border-color: #cc960e;
+}

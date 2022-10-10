@@ -18,6 +18,8 @@ import nz.ac.auckland.se206.userutils.User;
 public class MenuController {
   private String userName;
   @FXML private Button iconButton;
+  @FXML private Button startGame;
+  @FXML private ImageView gameIcon;
   @FXML private Label userId;
 
   protected void setName(String userId) {
@@ -30,6 +32,35 @@ public class MenuController {
     img.setFitWidth(200);
     iconButton.setGraphic(img);
     userId.setText(userName);
+  }
+
+  @FXML
+  private void onGameModeToggle() {
+    String gameMode = startGame.getText();
+
+    switch (gameMode) {
+      case "Start Classic Game!" -> {
+        startGame.setText("Start Zen Mode Game!");
+        gameIcon.setImage(new Image("/images/leaf.png"));
+        startGame.getStyleClass().remove("definitions-button");
+        startGame.getStyleClass().remove("classic-button");
+        startGame.getStyleClass().add("zen-button");
+      }
+      case "Start Zen Mode Game!" -> {
+        startGame.setText("Start Hidden Word Game!");
+        gameIcon.setImage(new Image("/images/dictionary.png"));
+        startGame.getStyleClass().remove("zen-button");
+        startGame.getStyleClass().remove("classic-button");
+        startGame.getStyleClass().add("definitions-button");
+      }
+      case "Start Hidden Word Game!" -> {
+        startGame.setText("Start Classic Game!");
+        gameIcon.setImage(new Image("/images/pencil.png"));
+        startGame.getStyleClass().remove("zen-button");
+        startGame.getStyleClass().remove("definitions-button");
+        startGame.getStyleClass().add("classic-button");
+      }
+    }
   }
 
   @FXML

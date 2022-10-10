@@ -39,3 +39,31 @@
     -fx-background-color: #157d20;
     -fx-background-radius: 5px;
 }
+
+.top-arrow{
+    -fx-background-image: url(../images/up-arrow.png);
+}
+
+.bottom-arrow{
+    -fx-background-image: url(../images/down-arrow.png);
+}
+
+.top-arrow, .bottom-arrow{
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 34px;
+    -fx-background-position: center;
+}
+
+.left-arrow{
+    -fx-background-image: url(../images/left-arrow.png);
+}
+
+.right-arrow{
+    -fx-background-image: url(../images/right-arrow.png) ;
+}
+
+.left-arrow, .right-arrow{
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 34px;
+    -fx-background-position: center;
+}
