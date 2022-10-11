@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ResourceBundle;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -51,25 +50,19 @@ public class MenuController implements Initializable {
         startGame.setText("Start Zen Mode Game!");
         this.currentGameMode = GameMode.ZEN;
         gameIcon.setImage(new Image("/images/leaf.png"));
-        startGame.getScene().getRoot().getStylesheets().remove("/css/scene_css/menu.css");
-        startGame.getScene().getRoot().getStylesheets().remove("/css/scene_css/hiddenmenu.css");
-        startGame.getScene().getRoot().getStylesheets().add("/css/scene_css/zenmenu.css");
+        setZenStyle();
       }
       case ZEN -> {
         startGame.setText("Start Hidden Word Game!");
         this.currentGameMode = GameMode.HIDDEN;
         gameIcon.setImage(new Image("/images/dictionary.png"));
-        startGame.getScene().getRoot().getStylesheets().remove("/css/scene_css/menu.css");
-        startGame.getScene().getRoot().getStylesheets().remove("/css/scene_css/zenmenu.css");
-        startGame.getScene().getRoot().getStylesheets().add("/css/scene_css/hiddenmenu.css");
+        setHiddenStyle();
       }
       case HIDDEN -> {
         startGame.setText("Start Classic Game!");
         this.currentGameMode = GameMode.NORMAL;
         gameIcon.setImage(new Image("/images/pencil.png"));
-        startGame.getScene().getRoot().getStylesheets().remove("/css/scene_css/zenmenu.css");
-        startGame.getScene().getRoot().getStylesheets().remove("/css/scene_css/hiddenmenu.css");
-        startGame.getScene().getRoot().getStylesheets().add("/css/scene_css/menu.css");
+        setClassicStyle();
       }
     }
   }
@@ -81,25 +74,19 @@ public class MenuController implements Initializable {
         startGame.setText("Start Hidden Word Game!");
         this.currentGameMode = GameMode.HIDDEN;
         gameIcon.setImage(new Image("/images/dictionary.png"));
-        startGame.getScene().getRoot().getStylesheets().remove("/css/scene_css/menu.css");
-        startGame.getScene().getRoot().getStylesheets().remove("/css/scene_css/zenmenu.css");
-        startGame.getScene().getRoot().getStylesheets().add("/css/scene_css/hiddenmenu.css");
+        setHiddenStyle();
       }
       case ZEN -> {
         startGame.setText("Start Classic Game!");
         this.currentGameMode = GameMode.NORMAL;
         gameIcon.setImage(new Image("/images/pencil.png"));
-        startGame.getScene().getRoot().getStylesheets().remove("/css/scene_css/zenmenu.css");
-        startGame.getScene().getRoot().getStylesheets().remove("/css/scene_css/hiddenmenu.css");
-        startGame.getScene().getRoot().getStylesheets().add("/css/scene_css/menu.css");
+        setClassicStyle();
       }
       case HIDDEN -> {
         startGame.setText("Start Zen Mode Game!");
         this.currentGameMode = GameMode.ZEN;
         gameIcon.setImage(new Image("/images/leaf.png"));
-        startGame.getScene().getRoot().getStylesheets().remove("/css/scene_css/hiddenmenu.css");
-        startGame.getScene().getRoot().getStylesheets().remove("/css/scene_css/menu.css");
-        startGame.getScene().getRoot().getStylesheets().add("/css/scene_css/zenmenu.css");
+        setZenStyle();
       }
     }
   }
@@ -110,7 +97,7 @@ public class MenuController implements Initializable {
       case NORMAL -> {
         // set the username in the canvas controller
         NormalCanvasController canvasController =
-                (NormalCanvasController) SceneManager.getUiController(SceneManager.AppUi.NORMAL_CANVAS);
+            (NormalCanvasController) SceneManager.getUiController(SceneManager.AppUi.NORMAL_CANVAS);
         canvasController.setUserName(this.userName);
         canvasController.onNewGame();
 
@@ -119,7 +106,7 @@ public class MenuController implements Initializable {
       }
       case ZEN -> {
         ZenCanvasController canvasController =
-                (ZenCanvasController) SceneManager.getUiController(SceneManager.AppUi.ZEN_CANVAS);
+            (ZenCanvasController) SceneManager.getUiController(SceneManager.AppUi.ZEN_CANVAS);
         canvasController.setUserName(this.userName);
         canvasController.onNewGame();
 
@@ -128,7 +115,7 @@ public class MenuController implements Initializable {
       }
       case HIDDEN -> {
         HiddenCanvasController canvasController =
-                (HiddenCanvasController) SceneManager.getUiController(SceneManager.AppUi.HIDDEN_CANVAS);
+            (HiddenCanvasController) SceneManager.getUiController(SceneManager.AppUi.HIDDEN_CANVAS);
         canvasController.setUserName(this.userName);
         canvasController.onNewGame();
 
@@ -170,5 +157,23 @@ public class MenuController implements Initializable {
     gameSettingsController.setInitialInterface();
     Scene scene = ((Node) event.getSource()).getScene();
     scene.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.SELECT_SETTING));
+  }
+
+  private void setHiddenStyle() {
+    startGame.getScene().getRoot().getStylesheets().remove("/css/scene_css/menu.css");
+    startGame.getScene().getRoot().getStylesheets().remove("/css/scene_css/zenmenu.css");
+    startGame.getScene().getRoot().getStylesheets().add("/css/scene_css/hiddenmenu.css");
+  }
+
+  private void setZenStyle() {
+    startGame.getScene().getRoot().getStylesheets().remove("/css/scene_css/menu.css");
+    startGame.getScene().getRoot().getStylesheets().remove("/css/scene_css/hiddenmenu.css");
+    startGame.getScene().getRoot().getStylesheets().add("/css/scene_css/zenmenu.css");
+  }
+
+  private void setClassicStyle() {
+    startGame.getScene().getRoot().getStylesheets().remove("/css/scene_css/hiddenmenu.css");
+    startGame.getScene().getRoot().getStylesheets().remove("/css/scene_css/zenmenu.css");
+    startGame.getScene().getRoot().getStylesheets().add("/css/scene_css/menu.css");
   }
 }
