@@ -5,6 +5,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
@@ -12,6 +13,14 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="703.0" prefWidth="1057.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.GameSettingsController">
    <children>
+      <Label layoutX="206.0" layoutY="107.0" prefHeight="42.0" prefWidth="662.0" text="Hover over to see what each difficulty means!" textAlignment="CENTER" textFill="#c29800">
+         <padding>
+            <Insets left="5.0" right="5.0" />
+         </padding>
+         <font>
+            <Font size="31.0" />
+         </font>
+      </Label>
       <Label fx:id="title" alignment="CENTER" layoutX="262.0" layoutY="36.0" prefHeight="70.0" prefWidth="528.0" text="DIFFICULTY SETTINGS">
          <font>
             <Font size="43.0" />
@@ -21,11 +30,11 @@
             <String fx:value="header" />
          </styleClass>
       </Label>
-      <HBox alignment="CENTER" layoutY="119.0" prefHeight="502.0" prefWidth="1051.0" spacing="80.0">
+      <HBox alignment="CENTER" layoutX="14.0" layoutY="148.0" prefHeight="473.0" prefWidth="1014.0" spacing="80.0">
          <children>
-            <VBox alignment="CENTER" prefHeight="502.0" prefWidth="200.0" spacing="30.0">
+            <VBox alignment="CENTER" prefHeight="502.0" prefWidth="251.0" spacing="30.0">
                <children>
-                  <Label alignment="CENTER" prefHeight="61.0" prefWidth="176.0" styleClass="small-header" text="Accuracy">
+                  <Label alignment="CENTER" prefHeight="61.0" prefWidth="165.0" styleClass="small-header" text="Accuracy">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -38,11 +47,14 @@
                      <font>
                         <Font size="18.0" />
                      </font>
+                     <tooltip>
+                        <Tooltip text="You can win if the word to draw is in the Top 3 Guesses!" />
+                     </tooltip>
                   </Label>
                   <Button fx:id="downAccuracy" mnemonicParsing="false" onAction="#onAccuracy" prefHeight="56.0" prefWidth="56.0" styleClass="bottom-arrow" />
                </children>
             </VBox>
-            <VBox alignment="CENTER" prefHeight="502.0" prefWidth="179.0" spacing="30.0">
+            <VBox alignment="CENTER" prefHeight="502.0" prefWidth="231.0" spacing="30.0">
                <children>
                   <Label alignment="CENTER" prefHeight="61.0" prefWidth="127.0" styleClass="small-header" text="Words">
                      <font>
@@ -57,13 +69,16 @@
                      <font>
                         <Font size="18.0" />
                      </font>
+                     <tooltip>
+                        <Tooltip text="Only Easy words are chosen to draw!" />
+                     </tooltip>
                   </Label>
                   <Button fx:id="downWords" mnemonicParsing="false" onAction="#onWords" prefHeight="56.0" prefWidth="56.0" styleClass="bottom-arrow" />
                </children>
             </VBox>
-            <VBox alignment="CENTER" prefHeight="502.0" prefWidth="167.0" spacing="30.0">
+            <VBox alignment="CENTER" prefHeight="502.0" prefWidth="215.0" spacing="30.0">
                <children>
-                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="61.0" prefWidth="117.0" styleClass="small-header" text="Time">
+                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="61.0" prefWidth="129.0" styleClass="small-header" text="Time">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -76,11 +91,14 @@
                      <font>
                         <Font size="18.0" />
                      </font>
+                     <tooltip>
+                        <Tooltip text="60 seconds time limit to draw!" />
+                     </tooltip>
                   </Label>
                   <Button fx:id="downTime" mnemonicParsing="false" onAction="#onTime" prefHeight="56.0" prefWidth="56.0" styleClass="bottom-arrow" />
                </children>
             </VBox>
-            <VBox alignment="CENTER" prefHeight="502.0" prefWidth="211.0" spacing="30.0">
+            <VBox alignment="CENTER" prefHeight="502.0" prefWidth="287.0" spacing="30.0">
                <children>
                   <Label alignment="CENTER" prefHeight="61.0" prefWidth="202.0" styleClass="small-header" text="Confidence" textAlignment="CENTER">
                      <font>
@@ -95,6 +113,9 @@
                      <font>
                         <Font size="18.0" />
                      </font>
+                     <tooltip>
+                        <Tooltip text="We'll make guesses we aren't so confident about!" />
+                     </tooltip>
                   </Label>
                   <Button fx:id="downConfidence" mnemonicParsing="false" onAction="#onConfidence" prefHeight="56.0" prefWidth="56.0" styleClass="bottom-arrow" />
                </children>

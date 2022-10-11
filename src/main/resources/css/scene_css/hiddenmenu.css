@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Gorditas&family=Viga&display=swap');
 
 .root{
-    -fx-background-color: #f5dd81;
+    -fx-background-color: #d3959d;
     -fx-background-image: url(/images/question.gif);
     -fx-background-size: 250px;
 
@@ -23,7 +23,7 @@
     -fx-text-fill: "white";
     -fx-font-size: 30px;
     -fx-background-radius: 35px;
-    -fx-background-color: #d3959d;
+    -fx-background-color: #f5dd81;
     -fx-border-radius: 35px;
     -fx-border-width: 3px;
     -fx-border-color: #ffffff;
@@ -32,7 +32,7 @@
 }
 
 .button:hover{
-    -fx-background-color: #e3b8bc;
+    -fx-background-color: #ead89b;
 }
 
 .left-arrow{

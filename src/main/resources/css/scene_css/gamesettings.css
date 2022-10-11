@@ -14,3 +14,15 @@
     -fx-text-fill: white;
     -fx-text-alignment: center;
 }
+
+.tooltip{
+    -fx-font-family: 'Viga', sans-serif;
+    -fx-font-size: 20px ;
+    -fx-base: #cc960e;
+    -fx-background-color: #cc960e;
+    -fx-text-fill: white;
+}
+
+.subtitle{
+    -fx-font-size: 25pc;
+}
