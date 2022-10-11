@@ -32,12 +32,14 @@ public class App extends Application {
    * This method is invoked when the application starts. It loads and shows the "Canvas" scene.
    *
    * @param stage The primary stage of the application.
-   * @throws IOException If "src/main/resources/fxml/canvas.fxml" is not found.
+   * @throws IOException If "src/main/resources/fxml/normalCanvas.fxml" is not found.
    */
   @Override
   public void start(final Stage stage) throws IOException {
 
-    SceneManager.addUi(SceneManager.AppUi.CANVAS, getFxmlLoader("canvas"));
+    SceneManager.addUi(SceneManager.AppUi.NORMAL_CANVAS, getFxmlLoader("normalCanvas"));
+    SceneManager.addUi(SceneManager.AppUi.HIDDEN_CANVAS, getFxmlLoader("hiddenCanvas"));
+    SceneManager.addUi(SceneManager.AppUi.ZEN_CANVAS, getFxmlLoader("zenCanvas"));
     SceneManager.addUi(SceneManager.AppUi.USER_MENU, getFxmlLoader("menu"));
     SceneManager.addUi(SceneManager.AppUi.MAIN_MENU, getFxmlLoader("mainmenu"));
     SceneManager.addUi(SceneManager.AppUi.CREATE_PROFILE, getFxmlLoader("createprofile"));

@@ -65,14 +65,38 @@ public class MenuController {
 
   @FXML
   protected void onNewGame(ActionEvent event) throws IOException {
-    // set the username in the canvas controller
-    CanvasController canvasController =
-        (CanvasController) SceneManager.getUiController(SceneManager.AppUi.CANVAS);
-    canvasController.setUserName(this.userName);
-    canvasController.onNewGame();
+    String gameMode = startGame.getText();
 
-    Scene scene = ((Node) event.getSource()).getScene();
-    scene.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.CANVAS));
+    switch (gameMode) {
+      case "Start Classic Game!" -> {
+        // set the username in the canvas controller
+        NormalCanvasController canvasController =
+                (NormalCanvasController) SceneManager.getUiController(SceneManager.AppUi.NORMAL_CANVAS);
+        canvasController.setUserName(this.userName);
+        canvasController.onNewGame();
+
+        Scene scene = ((Node) event.getSource()).getScene();
+        scene.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.NORMAL_CANVAS));
+      }
+      case "Start Zen Mode Game!" -> {
+        ZenCanvasController canvasController =
+                (ZenCanvasController) SceneManager.getUiController(SceneManager.AppUi.ZEN_CANVAS);
+        canvasController.setUserName(this.userName);
+        canvasController.onNewGame();
+
+        Scene scene = ((Node) event.getSource()).getScene();
+        scene.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.ZEN_CANVAS));
+      }
+      case "Start Hidden Word Game!" -> {
+        HiddenCanvasController canvasController =
+                (HiddenCanvasController) SceneManager.getUiController(SceneManager.AppUi.HIDDEN_CANVAS);
+        canvasController.setUserName(this.userName);
+        canvasController.onNewGame();
+
+        Scene scene = ((Node) event.getSource()).getScene();
+        scene.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.HIDDEN_CANVAS));
+      }
+    }
   }
 
   @FXML

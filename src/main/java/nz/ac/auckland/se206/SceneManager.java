@@ -11,7 +11,9 @@ public class SceneManager {
   // each UI instead of initialising a new one each time and not saving state
 
   public enum AppUi {
-    CANVAS,
+    NORMAL_CANVAS,
+    HIDDEN_CANVAS,
+    ZEN_CANVAS,
     MAIN_MENU,
     USER_MENU,
     CREATE_PROFILE,

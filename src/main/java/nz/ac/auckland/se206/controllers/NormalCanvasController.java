@@ -48,7 +48,7 @@ import nz.ac.auckland.se206.userutils.User;
  * the canvas size, the ML model will not work correctly. So be careful. If you make some changes in
  * the canvas and brush sizes, make sure that the prediction works fine.
  */
-public class CanvasController implements Initializable {
+public class NormalCanvasController implements Initializable {
 
   private String userName;
 
