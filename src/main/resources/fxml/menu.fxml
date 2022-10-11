@@ -46,7 +46,7 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="431.0" prefWidth="1049.0">
                <children>
-                  <Button fx:id="prevGameMode" mnemonicParsing="false" onAction="#onGameModeToggle" prefHeight="68.0" prefWidth="68.0" styleClass="left-arrow" />
+                  <Button fx:id="prevGameMode" mnemonicParsing="false" onAction="#onGameModeToggleLeft" prefHeight="68.0" prefWidth="68.0" styleClass="left-arrow" />
                   <VBox alignment="CENTER" prefHeight="384.0" prefWidth="562.0" spacing="30.0">
                      <children>
                         <ImageView fx:id="gameIcon" fitHeight="187.0" fitWidth="178.0" pickOnBounds="true" preserveRatio="true">
@@ -61,7 +61,7 @@
                         </Button>
                      </children>
                   </VBox>
-                  <Button fx:id="nextGameMode" mnemonicParsing="false" onAction="#onGameModeToggle" prefHeight="68.0" prefWidth="68.0" styleClass="right-arrow" />
+                  <Button fx:id="nextGameMode" mnemonicParsing="false" onAction="#onGameModeToggleRight" prefHeight="68.0" prefWidth="68.0" styleClass="right-arrow" />
                </children>
             </HBox>
             <HBox alignment="CENTER" prefHeight="44.0" prefWidth="1049.0" spacing="30.0">
