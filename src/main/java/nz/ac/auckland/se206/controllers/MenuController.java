@@ -42,23 +42,23 @@ public class MenuController {
       case "Start Classic Game!" -> {
         startGame.setText("Start Zen Mode Game!");
         gameIcon.setImage(new Image("/images/leaf.png"));
-        startGame.getStyleClass().remove("definitions-button");
-        startGame.getStyleClass().remove("classic-button");
-        startGame.getStyleClass().add("zen-button");
+        startGame.getScene().getRoot().getStylesheets().remove("/css/scene_css/menu.css");
+        startGame.getScene().getRoot().getStylesheets().remove("/css/scene_css/hiddenmenu.css");
+        startGame.getScene().getRoot().getStylesheets().add("/css/scene_css/zenmenu.css");
       }
       case "Start Zen Mode Game!" -> {
         startGame.setText("Start Hidden Word Game!");
         gameIcon.setImage(new Image("/images/dictionary.png"));
-        startGame.getStyleClass().remove("zen-button");
-        startGame.getStyleClass().remove("classic-button");
-        startGame.getStyleClass().add("definitions-button");
+        startGame.getScene().getRoot().getStylesheets().remove("/css/scene_css/menu.css");
+        startGame.getScene().getRoot().getStylesheets().remove("/css/scene_css/zenmenu.css");
+        startGame.getScene().getRoot().getStylesheets().add("/css/scene_css/hiddenmenu.css");
       }
       case "Start Hidden Word Game!" -> {
         startGame.setText("Start Classic Game!");
         gameIcon.setImage(new Image("/images/pencil.png"));
-        startGame.getStyleClass().remove("zen-button");
-        startGame.getStyleClass().remove("definitions-button");
-        startGame.getStyleClass().add("classic-button");
+        startGame.getScene().getRoot().getStylesheets().remove("/css/scene_css/zenmenu.css");
+        startGame.getScene().getRoot().getStylesheets().remove("/css/scene_css/hiddenmenu.css");
+        startGame.getScene().getRoot().getStylesheets().add("/css/scene_css/menu.css");
       }
     }
   }

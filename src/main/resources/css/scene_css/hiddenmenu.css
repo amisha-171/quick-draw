@@ -1,8 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Gorditas&family=Viga&display=swap');
 
-.root {
-    -fx-background-color: #c7dbb2;
-    -fx-background-image: url(/images/doodles.gif);
+.root{
+    -fx-background-color: #f5dd81;
+    -fx-background-image: url(/images/question.gif);
+    -fx-background-size: 250px;
+
 }
 
 #iconButton {
@@ -17,14 +19,11 @@
     -fx-text-fill: #2c2c2c;
 }
 
-.button{
-    -fx-background-color: #cc960e;
-}
-
 .button {
     -fx-text-fill: "white";
     -fx-font-size: 30px;
     -fx-background-radius: 35px;
+    -fx-background-color: #d3959d;
     -fx-border-radius: 35px;
     -fx-border-width: 3px;
     -fx-border-color: #ffffff;
@@ -33,8 +32,7 @@
 }
 
 .button:hover{
-    -fx-background-color: #45a446;
-    -fx-background-radius: 40px;
+    -fx-background-color: #e3b8bc;
 }
 
 .left-arrow{
