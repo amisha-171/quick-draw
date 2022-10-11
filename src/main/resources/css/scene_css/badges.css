@@ -1,0 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Gorditas&family=Viga&display=swap');
+
+.tooltip{
+-fx-font-family: 'Viga', sans-serif;
+-fx-font-size: 20px ;
+-fx-base: #cc960e;
+-fx-background-color: #cc960e;
+-fx-text-fill: white;
+}
+
+.small-header{
+    -fx-font-size: 25px ;
+}

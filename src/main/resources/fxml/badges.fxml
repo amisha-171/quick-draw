@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+
+<Pane prefHeight="703.0" prefWidth="1057.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.BadgesController">
+
+    <stylesheets>
+        <URL value="@../css/app.css" />
+        <URL value="@../css/scene_css/badges.css" />
+    </stylesheets>
+   <children>
+      <VBox alignment="TOP_CENTER" layoutY="9.0" prefHeight="191.0" prefWidth="1070.0">
+         <children>
+            <Label styleClass="header" text="Your Awarded Badges" />
+            <Label styleClass="small-header" text="Hover over a badge to see its description!">
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+               <padding>
+                  <Insets left="5.0" right="5.0" />
+               </padding>
+            </Label>
+         </children>
+      </VBox>
+      <HBox alignment="CENTER" layoutX="1.0" layoutY="132.0" prefHeight="486.0" prefWidth="1051.0" spacing="20.0">
+         <children>
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="20.0">
+               <children>
+                  <Label fx:id="goldGames" visible="false">
+                     <graphic>
+                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/badges/goldgames.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <tooltip>
+                        <Tooltip text="For 100 Games Played!" />
+                     </tooltip>
+                  </Label>
+                  <Label fx:id="silverGames" visible="false">
+                     <graphic>
+                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/badges/silvergames.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <tooltip>
+                        <Tooltip text="For 50 Games Played!" />
+                     </tooltip>
+                  </Label>
+                  <Label fx:id="bronzeGames" visible="false">
+                     <graphic>
+                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/badges/bronzegames.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <tooltip>
+                        <Tooltip text="For 25 Games Played!" />
+                     </tooltip>
+                  </Label>
+               </children>
+            </VBox>
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="20.0">
+               <children>
+                  <Label fx:id="goldTime" visible="false">
+                     <graphic>
+                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/badges/goldtime.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <tooltip>
+                        <Tooltip text="For a Win Under 5 Seconds!" />
+                     </tooltip>
+                  </Label>
+                  <Label fx:id="silverTime" visible="false">
+                     <graphic>
+                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/badges/silvertime.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <tooltip>
+                        <Tooltip text="For a Win Under 10 Seconds!" />
+                     </tooltip>
+                  </Label>
+                  <Label fx:id="bronzeTime" visible="false">
+                     <graphic>
+                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/badges/bronzetime.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <tooltip>
+                        <Tooltip text="For a Win Under 30 Seconds!" />
+                     </tooltip>
+                  </Label>
+               </children>
+               <padding>
+                  <Insets left="5.0" right="5.0" />
+               </padding>
+            </VBox>
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="20.0">
+               <children>
+                  <Label fx:id="goldWins" visible="false">
+                     <graphic>
+                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/badges/goldwins.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <tooltip>
+                        <Tooltip text="For Winning 20 Games in a Row!" />
+                     </tooltip>
+                  </Label>
+                  <Label fx:id="silverWins" visible="false">
+                     <graphic>
+                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/badges/silverwins.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <tooltip>
+                        <Tooltip text="For Winning 10 Games in a Row!" />
+                     </tooltip>
+                  </Label>
+                  <Label fx:id="bronzeWins" visible="false">
+                     <graphic>
+                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/badges/bronzewins.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <tooltip>
+                        <Tooltip text="For Winning 5 Games in a Row!" />
+                     </tooltip>
+                  </Label>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+      <Button alignment="CENTER" contentDisplay="CENTER" layoutX="400.0" layoutY="632.0" mnemonicParsing="false" onAction="#onStatsSwitch" prefHeight="56.0" prefWidth="256.0" text="Back to My Stats" />
+   </children>
+</Pane>

@@ -154,7 +154,8 @@ public class NormalCanvasController implements Initializable {
     // Get a random word with Easy difficulty and set the word to be displayed to the user in the
     // GUI
     String randomWord =
-        categorySelector.getRandomDiffWord(this.user.getCurrentWordSetting(), this.user.getWordList());
+        categorySelector.getRandomDiffWord(
+            this.user.getCurrentWordSetting(), this.user.getWordList());
     this.setWord(randomWord);
   }
 
@@ -281,14 +282,14 @@ public class NormalCanvasController implements Initializable {
               timer.cancel();
               disableButtons();
               enableEndButtons();
+              user.incrementLosses();
+              user.updateWordList(wordChosen);
+              user.updateTotalSolveTime(60);
+              user.saveSelf();
               // Inform user they have lost
               Platform.runLater(
                   () -> {
                     wordLabel.setText("You lost, better luck next time!");
-                    user.incrementLosses();
-                    user.updateWordList(wordChosen);
-                    user.updateTotalSolveTime(60);
-                    user.saveSelf();
                   });
             }
             if (counter == 10) {

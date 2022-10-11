@@ -1,6 +1,5 @@
 package nz.ac.auckland.se206.controllers;
 
-import java.io.IOException;
 import java.util.Arrays;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -8,6 +7,7 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.paint.Color;
 import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.userutils.GameSettings;
 import nz.ac.auckland.se206.userutils.User;
@@ -21,7 +21,6 @@ public class GameSettingsController {
   private @FXML Label wordLabel;
   private @FXML Label timeLabel;
   private @FXML Label confidenceLabel;
-
   private @FXML Button upAccuracy;
   private @FXML Button upTime;
   private @FXML Button upConfidence;
@@ -66,6 +65,11 @@ public class GameSettingsController {
     wordLabel.setText(wordList[diffIndex[1]]);
     timeLabel.setText(timeList[diffIndex[2]]);
     confidenceLabel.setText(confidenceList[diffIndex[3]]);
+
+    updateDifficultyLabel(accuracyLabel);
+    updateDifficultyLabel(wordLabel);
+    updateDifficultyLabel(confidenceLabel);
+    updateDifficultyLabel(timeLabel);
   }
 
   private void setDifficultyLabelToScene(
@@ -97,6 +101,7 @@ public class GameSettingsController {
     // Call method to set the label for setting when user attempts to toggle
     setDifficultyLabelToScene(0, accuracyList, accuracyLabel, toggleUp);
     this.accuracySettings = AccuracySettings.valueOf(accuracyList[diffIndex[0]]);
+    updateDifficultyLabel(accuracyLabel);
   }
 
   @FXML
@@ -105,6 +110,7 @@ public class GameSettingsController {
     boolean toggleUp = wordToggleButton.equals(upWords);
     setDifficultyLabelToScene(1, wordList, wordLabel, toggleUp);
     this.wordSettings = WordSettings.valueOf(wordList[diffIndex[1]]);
+    updateDifficultyLabel(wordLabel);
   }
 
   @FXML
@@ -113,6 +119,7 @@ public class GameSettingsController {
     boolean toggleUp = timeToggleButton.equals(upTime);
     setDifficultyLabelToScene(2, timeList, timeLabel, toggleUp);
     this.timeSettings = TimeSettings.valueOf(timeList[diffIndex[2]]);
+    updateDifficultyLabel(timeLabel);
   }
 
   @FXML
@@ -121,10 +128,11 @@ public class GameSettingsController {
     boolean toggleUp = confidenceToggleButton.equals(upConfidence);
     setDifficultyLabelToScene(3, confidenceList, confidenceLabel, toggleUp);
     this.confidenceSettings = ConfidenceSettings.valueOf(confidenceList[diffIndex[3]]);
+    updateDifficultyLabel(confidenceLabel);
   }
 
   @FXML
-  private void onConfirmSettings(ActionEvent e) throws IOException {
+  private void onConfirmSettings(ActionEvent e) {
     // Update current users game settings to the updated settings.
     GameSettings gameSettings =
         new GameSettings(
@@ -135,7 +143,60 @@ public class GameSettingsController {
     currentUser.saveSelf();
     // Set scene
     Scene scene = ((Node) e.getSource()).getScene();
-    // Set the scene and show the stage
     scene.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.USER_MENU));
+  }
+
+  private void updateDifficultyLabel(Label label) {
+    String difficulty = label.getText();
+
+    switch (difficulty) {
+      case "EASY" -> label.setTextFill(Color.web("#41b208"));
+      case "MEDIUM" -> label.setTextFill(Color.web("#ffc400"));
+      case "HARD" -> label.setTextFill(Color.web("#ea7c00"));
+      case "MASTER" -> label.setTextFill(Color.web("#b70000"));
+    }
+
+    if (label.equals(accuracyLabel)) {
+      switch (difficulty) {
+        case "EASY" -> label
+            .getTooltip()
+            .setText("You can win if the word to draw is in the Top 3 Guesses!");
+        case "MEDIUM" -> label
+            .getTooltip()
+            .setText("You can win if the word to draw is in the Top 2 Guesses!");
+        case "HARD" -> label
+            .getTooltip()
+            .setText("You can win if the word to draw is the Top Guess!");
+      }
+    } else if (label.equals(wordLabel)) {
+      switch (difficulty) {
+        case "EASY" -> label.getTooltip().setText("Only Easy words are chosen to draw!");
+        case "MEDIUM" -> label.getTooltip().setText("Easy and Medium words are chosen to draw!");
+        case "HARD" -> label
+            .getTooltip()
+            .setText("Easy, Medium and Hard words are chosen to draw!");
+        case "MASTER" -> label.getTooltip().setText("Only Hard words are chosen to draw!");
+      }
+    } else if (label.equals(timeLabel)) {
+      switch (difficulty) {
+        case "EASY" -> label.getTooltip().setText("You have a 60 second time limit to draw!");
+        case "MEDIUM" -> label.getTooltip().setText("You have a 45 second time limit to draw!");
+        case "HARD" -> label.getTooltip().setText("You have a 30 second time limit to draw!");
+        case "MASTER" -> label.getTooltip().setText("You have a 15 second time limit to draw!");
+      }
+    } else {
+      switch (difficulty) {
+        case "EASY" -> label
+            .getTooltip()
+            .setText("We'll make guesses we aren't very confident about!");
+        case "MEDIUM" -> label
+            .getTooltip()
+            .setText("We'll make guesses we are fairly confident about!");
+        case "HARD" -> label.getTooltip().setText("We'll make guesses we are confident about!");
+        case "MASTER" -> label
+            .getTooltip()
+            .setText("We'll make guesses we are super confident about!");
+      }
+    }
   }
 }

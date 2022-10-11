@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=Gorditas&family=Viga&display=swap');
+
+.root{
+    -fx-background-color: #bddee8;
+    -fx-background-image: url(/images/clouds.gif);
+    -fx-background-size: 250px;
+}
+
+#iconButton {
+    -fx-background-color: none;
+    -fx-border-color: none;
+}
+
+#greetingHbox .label {
+    -fx-font-size: 90px;
+    -fx-alignment: center;
+    -fx-font-family: "Gorditas", cursive;
+    -fx-text-fill: #2c2c2c;
+}
+
+.button {
+    -fx-text-fill: "white";
+    -fx-font-size: 30px;
+    -fx-background-radius: 35px;
+    -fx-border-radius: 35px;
+    -fx-border-width: 3px;
+    -fx-border-color: #ffffff;
+    -fx-font-family: 'Viga', sans-serif;
+    -fx-cursor: hand;
+}
+.button{
+    -fx-background-color: #68a869;
+}
+
+.button:hover{
+    -fx-background-color: #89c08a;
+}
+
+.left-arrow{
+    -fx-background-image: url(/images/left-arrow.png);
+}
+
+.right-arrow{
+    -fx-background-image: url(/images/right-arrow.png) ;
+}
+
+.left-arrow, .right-arrow{
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 34px;
+    -fx-background-position: center;
+}

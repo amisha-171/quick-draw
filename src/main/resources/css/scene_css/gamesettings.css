@@ -1,0 +1,28 @@
+.difficulty-label{
+    -fx-font-size: 35px;
+    -fx-background-color: white;
+    -fx-padding: 10px;
+    -fx-background-radius: 60px;
+}
+
+.small-header{
+    -fx-background-color: #45a446;
+    -fx-border-color: #45a446;
+    -fx-border-width: 1px;
+    -fx-border-radius: 60px;
+    -fx-background-radius: 60px;
+    -fx-text-fill: white;
+    -fx-text-alignment: center;
+}
+
+.tooltip{
+    -fx-font-family: 'Viga', sans-serif;
+    -fx-font-size: 20px ;
+    -fx-base: #cc960e;
+    -fx-background-color: #cc960e;
+    -fx-text-fill: white;
+}
+
+.subtitle{
+    -fx-font-size: 25pc;
+}

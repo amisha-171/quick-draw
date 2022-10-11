@@ -1,8 +1,13 @@
 package nz.ac.auckland.se206.controllers;
 
+import com.opencsv.exceptions.CsvException;
 import java.io.IOException;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -10,14 +15,21 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import nz.ac.auckland.se206.SceneManager;
-import nz.ac.auckland.se206.dict.WordNotFoundException;
 import nz.ac.auckland.se206.userutils.Database;
 import nz.ac.auckland.se206.userutils.User;
+import nz.ac.auckland.se206.util.enums.GameMode;
 
-public class MenuController {
+public class MenuController implements Initializable {
   private String userName;
+  private GameMode currentGameMode;
   @FXML private Button iconButton;
+  @FXML private Button startGame;
+  @FXML private ImageView gameIcon;
   @FXML private Label userId;
+
+  public void initialize(URL url, ResourceBundle resourceBundle) {
+    this.currentGameMode = GameMode.NORMAL;
+  }
 
   protected void setName(String userId) {
     this.userName = userId;
@@ -32,37 +44,79 @@ public class MenuController {
   }
 
   @FXML
-  protected void onNewNormalGame(ActionEvent event) throws IOException {
-    // set the username in the canvas controller
-    NormalCanvasController canvasController =
-        (NormalCanvasController) SceneManager.getUiController(SceneManager.AppUi.NORMAL_CANVAS);
-    canvasController.setUserName(this.userName);
-    canvasController.onNewGame();
-
-    Scene scene = ((Node) event.getSource()).getScene();
-    scene.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.NORMAL_CANVAS));
+  private void onGameModeToggleRight() {
+    switch (this.currentGameMode) {
+      case NORMAL -> {
+        startGame.setText("Start Zen Mode Game!");
+        this.currentGameMode = GameMode.ZEN;
+        setZenStyle();
+      }
+      case ZEN -> {
+        startGame.setText("Start Hidden Word Game!");
+        this.currentGameMode = GameMode.HIDDEN;
+        setHiddenStyle();
+      }
+      case HIDDEN -> {
+        startGame.setText("Start Classic Game!");
+        this.currentGameMode = GameMode.NORMAL;
+        setClassicStyle();
+      }
+    }
   }
 
   @FXML
-  protected void onNewHiddenGame(ActionEvent event) throws IOException, WordNotFoundException {
-    HiddenCanvasController canvasController =
-            (HiddenCanvasController) SceneManager.getUiController(SceneManager.AppUi.HIDDEN_CANVAS);
-    canvasController.setUserName(this.userName);
-    canvasController.onNewGame();
-
-    Scene scene = ((Node) event.getSource()).getScene();
-    scene.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.HIDDEN_CANVAS));
+  private void onGameModeToggleLeft() {
+    switch (this.currentGameMode) {
+      case NORMAL -> {
+        startGame.setText("Start Hidden Word Game!");
+        this.currentGameMode = GameMode.HIDDEN;
+        setHiddenStyle();
+      }
+      case ZEN -> {
+        startGame.setText("Start Classic Game!");
+        this.currentGameMode = GameMode.NORMAL;
+        setClassicStyle();
+      }
+      case HIDDEN -> {
+        startGame.setText("Start Zen Mode Game!");
+        this.currentGameMode = GameMode.ZEN;
+        setZenStyle();
+      }
+    }
   }
 
   @FXML
-  protected void onNewZenGame(ActionEvent event) throws IOException {
-    ZenCanvasController canvasController =
+  protected void onNewGame(ActionEvent event) throws IOException {
+    switch (this.currentGameMode) {
+      case NORMAL -> {
+        // set the username in the canvas controller
+        NormalCanvasController canvasController =
+            (NormalCanvasController) SceneManager.getUiController(SceneManager.AppUi.NORMAL_CANVAS);
+        canvasController.setUserName(this.userName);
+        canvasController.onNewGame();
+
+        Scene scene = ((Node) event.getSource()).getScene();
+        scene.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.NORMAL_CANVAS));
+      }
+      case ZEN -> {
+        ZenCanvasController canvasController =
             (ZenCanvasController) SceneManager.getUiController(SceneManager.AppUi.ZEN_CANVAS);
-    canvasController.setUserName(this.userName);
-    canvasController.onNewGame();
+        canvasController.setUserName(this.userName);
+        canvasController.onNewGame();
 
-    Scene scene = ((Node) event.getSource()).getScene();
-    scene.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.ZEN_CANVAS));
+        Scene scene = ((Node) event.getSource()).getScene();
+        scene.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.ZEN_CANVAS));
+      }
+      case HIDDEN -> {
+        HiddenCanvasController canvasController =
+            (HiddenCanvasController) SceneManager.getUiController(SceneManager.AppUi.HIDDEN_CANVAS);
+        canvasController.setUserName(this.userName);
+        canvasController.onNewGame();
+
+        Scene scene = ((Node) event.getSource()).getScene();
+        scene.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.HIDDEN_CANVAS));
+      }
+    }
   }
 
   @FXML
@@ -76,7 +130,8 @@ public class MenuController {
   }
 
   @FXML
-  private void onSwitchStats(ActionEvent btnEvent) throws IOException {
+  private void onSwitchStats(ActionEvent btnEvent)
+      throws IOException, URISyntaxException, CsvException {
     StatsController statsController =
         (StatsController) SceneManager.getUiController(SceneManager.AppUi.STATS);
     statsController.setName(userName);
@@ -96,5 +151,26 @@ public class MenuController {
     gameSettingsController.setInitialInterface();
     Scene scene = ((Node) event.getSource()).getScene();
     scene.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.SELECT_SETTING));
+  }
+
+  private void setHiddenStyle() {
+    gameIcon.setImage(new Image("/images/dictionary.png"));
+    startGame.getScene().getRoot().getStylesheets().remove("/css/scene_css/menu.css");
+    startGame.getScene().getRoot().getStylesheets().remove("/css/scene_css/zenmenu.css");
+    startGame.getScene().getRoot().getStylesheets().add("/css/scene_css/hiddenmenu.css");
+  }
+
+  private void setZenStyle() {
+    gameIcon.setImage(new Image("/images/leaf.png"));
+    startGame.getScene().getRoot().getStylesheets().remove("/css/scene_css/menu.css");
+    startGame.getScene().getRoot().getStylesheets().remove("/css/scene_css/hiddenmenu.css");
+    startGame.getScene().getRoot().getStylesheets().add("/css/scene_css/zenmenu.css");
+  }
+
+  private void setClassicStyle() {
+    gameIcon.setImage(new Image("/images/pencil.png"));
+    startGame.getScene().getRoot().getStylesheets().remove("/css/scene_css/hiddenmenu.css");
+    startGame.getScene().getRoot().getStylesheets().remove("/css/scene_css/zenmenu.css");
+    startGame.getScene().getRoot().getStylesheets().add("/css/scene_css/menu.css");
   }
 }

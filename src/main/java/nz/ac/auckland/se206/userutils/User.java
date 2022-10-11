@@ -2,7 +2,6 @@ package nz.ac.auckland.se206.userutils;
 
 import java.io.IOException;
 import java.util.ArrayList;
-
 import nz.ac.auckland.se206.filereader.CategorySelector;
 import nz.ac.auckland.se206.util.enums.AccuracySettings;
 import nz.ac.auckland.se206.util.enums.ConfidenceSettings;
@@ -23,6 +22,13 @@ public class User {
   private int numEasyWords;
   private int numMediumWords;
   private int numHardWords;
+
+  private boolean hasFiveConsecutiveWins;
+
+  private boolean hasTenConsecutiveWins;
+
+  private boolean hasTwentyConsecutiveWins;
+
   private GameSettings gameSettings;
   private ArrayList<String> wordList = new ArrayList<>();
 
@@ -40,13 +46,16 @@ public class User {
     this.numMediumWords = 0;
     this.numHardWords = 0;
     this.totalSolveTime = 0;
+    this.hasTwentyConsecutiveWins = false;
+    this.hasTenConsecutiveWins = false;
+    this.hasFiveConsecutiveWins = false;
     this.fastestTime = 100; // 100 is default value because fastest time cannot be more than 60
     // set user image
     this.imageName = img;
-    //set default game settings
-    this.gameSettings = new GameSettings(
-            AccuracySettings.EASY, TimeSettings.EASY, ConfidenceSettings.EASY, WordSettings.EASY
-    );
+    // set default game settings
+    this.gameSettings =
+        new GameSettings(
+            AccuracySettings.EASY, TimeSettings.EASY, ConfidenceSettings.EASY, WordSettings.EASY);
   }
 
   public void setGameSettings(GameSettings settings) {
@@ -65,12 +74,12 @@ public class User {
   public void updateWordList(String newWord) {
     String difficulty = CategorySelector.getWordDifficulty(newWord);
 
-    //update the user's word list with new word if it doesn't already contain it
+    // update the user's word list with new word if it doesn't already contain it
     if (!this.wordList.contains(newWord)) {
       this.wordList.add(newWord);
     }
 
-    //update the user's word count for the appropriate difficulty
+    // update the user's word count for the appropriate difficulty
     switch (difficulty) {
       case "E":
         this.numEasyWords++;
@@ -91,6 +100,17 @@ public class User {
   public void incrementWins() {
     this.wins++;
     this.consecutiveWins++;
+
+    // check if user has certain amount of consecutive wins
+    if (this.consecutiveWins >= 5) {
+      hasFiveConsecutiveWins = true;
+    }
+    if (this.consecutiveWins >= 10) {
+      hasTenConsecutiveWins = true;
+    }
+    if (this.consecutiveWins >= 20) {
+      hasTwentyConsecutiveWins = true;
+    }
   }
 
   public int getLosses() {
@@ -160,9 +180,13 @@ public class User {
   public GameSettings getGameSettings() {
     return gameSettings;
   }
-  
+
   public boolean underThirtySeconds() {
     return this.fastestTime < 30;
+  }
+
+  public boolean underTwentySeconds() {
+    return this.fastestTime < 20;
   }
 
   public boolean underTenSeconds() {
@@ -181,20 +205,16 @@ public class User {
     return this.wins + this.losses >= 100;
   }
 
-  public boolean twoConsecutiveWins() {
-    return this.consecutiveWins >= 2;
-  }
-
   public boolean fiveConsecutiveWins() {
-    return this.consecutiveWins >= 5;
+    return hasFiveConsecutiveWins;
   }
 
   public boolean tenConsecutiveWins() {
-    return this.consecutiveWins >= 10;
+    return hasTenConsecutiveWins;
   }
 
   public boolean twentyConsecutiveWins() {
-    return this.consecutiveWins >= 20;
+    return hasTwentyConsecutiveWins;
   }
 
   public void saveSelf() {

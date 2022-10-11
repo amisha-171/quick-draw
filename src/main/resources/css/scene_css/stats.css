@@ -1,0 +1,89 @@
+@import url('https://fonts.googleapis.com/css2?family=Gorditas&family=Viga&display=swap');
+
+
+#wordList{
+    -fx-font-size: 30px;
+    -fx-background-color: white;
+    -fx-font-family: 'Viga', sans-serif;
+    -fx-text-fill: #5e5e5e;
+}
+
+#fastestTimeLabel, #avgTimeLabel{
+    -fx-font-size: 25px;
+    -fx-background-color: white;
+    -fx-font-family: 'Viga', sans-serif;
+    -fx-text-fill: #5e5e5e;
+}
+
+.button{
+    -fx-text-fill: white;
+    -fx-border-radius: 50px;
+    -fx-background-radius: 50px;
+}
+
+.button:hover{
+    -fx-border-radius: 50px;
+    -fx-background-radius: 50px;
+}
+
+/*PIECHART STYLING*/
+#gamesPlayedChart {
+    -fx-font-size: 20px;
+    -fx-font-family: 'Viga', sans-serif;
+    -fx-text-fill: #157d20;
+}
+
+.default-color0.chart-pie { -fx-pie-color: #7ce061; }
+.default-color1.chart-pie { -fx-pie-color: #ff7c7c; }
+
+/*WORD LIST STYLING*/
+#wordsPlayedLabel{
+    -fx-background-color: #cc960e;
+    -fx-font-size: 25px;
+    -fx-text-fill: white;
+}
+
+.combo-box, .combo-box .list-cell{
+    -fx-font-size: 25px;
+    -fx-font-family: 'Viga', sans-serif;
+    -fx-background-color: #cc960e;
+    -fx-text-fill: white;
+
+}
+
+.combo-box .arrow{
+    -fx-background-color: white;
+}
+
+
+/*SCROLLBAR STYLING*/
+
+.scroll-pane{
+    -fx-background-color:transparent;
+}
+
+.scroll-pane .viewport {
+    -fx-background-color: transparent;
+}
+
+.scroll-bar:vertical{
+    -fx-background-color:transparent;
+}
+
+.increment-button, .decrement-button {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+.scroll-bar:horizontal .track,
+.scroll-bar:vertical .track{
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+.scroll-bar:horizontal .thumb,
+.scroll-bar:vertical .thumb {
+    -fx-background-color: rgba(255, 255, 255, 0.7);;
+}
+
+

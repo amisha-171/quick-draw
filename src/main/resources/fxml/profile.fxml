@@ -22,13 +22,13 @@
          <children>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="30.0">
                <children>
-                  <Button fx:id="prevUser" mnemonicParsing="false" onAction="#onToggleUsers" prefHeight="70.0" prefWidth="70.0" visible="false" />
+                  <Button fx:id="prevUser" mnemonicParsing="false" onAction="#onToggleUsers" prefHeight="70.0" prefWidth="70.0" styleClass="left-arrow" visible="false" />
                   <ImageView fx:id="userImage" fitHeight="244.0" fitWidth="272.0" pickOnBounds="true" preserveRatio="true">
                      <viewport>
                         <Rectangle2D />
                      </viewport>
                   </ImageView>
-                  <Button fx:id="nextUser" alignment="CENTER" mnemonicParsing="false" onAction="#onToggleUsers" prefHeight="70.0" prefWidth="70.0" visible="false" />
+                  <Button fx:id="nextUser" alignment="CENTER" mnemonicParsing="false" onAction="#onToggleUsers" prefHeight="70.0" prefWidth="70.0" styleClass="right-arrow" visible="false" />
                </children>
             </HBox>
             <VBox alignment="CENTER" prefHeight="384.0" prefWidth="1057.0" spacing="10.0">
@@ -55,7 +55,7 @@
       </VBox>
    </children>
    <stylesheets>
-   <URL value="@../css/profile.css" />
+   <URL value="@../css/scene_css/profile.css" />
    <URL value="@../css/app.css" />
    </stylesheets>
 </Pane>
