@@ -10,6 +10,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import nz.ac.auckland.se206.SceneManager;
+import nz.ac.auckland.se206.dict.WordNotFoundException;
 import nz.ac.auckland.se206.userutils.Database;
 import nz.ac.auckland.se206.userutils.User;
 
@@ -31,15 +32,37 @@ public class MenuController {
   }
 
   @FXML
-  protected void onNewGame(ActionEvent event) throws IOException {
+  protected void onNewNormalGame(ActionEvent event) throws IOException {
     // set the username in the canvas controller
-    CanvasController canvasController =
-        (CanvasController) SceneManager.getUiController(SceneManager.AppUi.CANVAS);
+    NormalCanvasController canvasController =
+        (NormalCanvasController) SceneManager.getUiController(SceneManager.AppUi.NORMAL_CANVAS);
     canvasController.setUserName(this.userName);
     canvasController.onNewGame();
 
     Scene scene = ((Node) event.getSource()).getScene();
-    scene.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.CANVAS));
+    scene.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.NORMAL_CANVAS));
+  }
+
+  @FXML
+  protected void onNewHiddenGame(ActionEvent event) throws IOException, WordNotFoundException {
+    HiddenCanvasController canvasController =
+            (HiddenCanvasController) SceneManager.getUiController(SceneManager.AppUi.HIDDEN_CANVAS);
+    canvasController.setUserName(this.userName);
+    canvasController.onNewGame();
+
+    Scene scene = ((Node) event.getSource()).getScene();
+    scene.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.HIDDEN_CANVAS));
+  }
+
+  @FXML
+  protected void onNewZenGame(ActionEvent event) throws IOException {
+    ZenCanvasController canvasController =
+            (ZenCanvasController) SceneManager.getUiController(SceneManager.AppUi.ZEN_CANVAS);
+    canvasController.setUserName(this.userName);
+    canvasController.onNewGame();
+
+    Scene scene = ((Node) event.getSource()).getScene();
+    scene.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.ZEN_CANVAS));
   }
 
   @FXML
