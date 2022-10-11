@@ -49,19 +49,16 @@ public class MenuController implements Initializable {
       case NORMAL -> {
         startGame.setText("Start Zen Mode Game!");
         this.currentGameMode = GameMode.ZEN;
-        gameIcon.setImage(new Image("/images/leaf.png"));
         setZenStyle();
       }
       case ZEN -> {
         startGame.setText("Start Hidden Word Game!");
         this.currentGameMode = GameMode.HIDDEN;
-        gameIcon.setImage(new Image("/images/dictionary.png"));
         setHiddenStyle();
       }
       case HIDDEN -> {
         startGame.setText("Start Classic Game!");
         this.currentGameMode = GameMode.NORMAL;
-        gameIcon.setImage(new Image("/images/pencil.png"));
         setClassicStyle();
       }
     }
@@ -73,19 +70,16 @@ public class MenuController implements Initializable {
       case NORMAL -> {
         startGame.setText("Start Hidden Word Game!");
         this.currentGameMode = GameMode.HIDDEN;
-        gameIcon.setImage(new Image("/images/dictionary.png"));
         setHiddenStyle();
       }
       case ZEN -> {
         startGame.setText("Start Classic Game!");
         this.currentGameMode = GameMode.NORMAL;
-        gameIcon.setImage(new Image("/images/pencil.png"));
         setClassicStyle();
       }
       case HIDDEN -> {
         startGame.setText("Start Zen Mode Game!");
         this.currentGameMode = GameMode.ZEN;
-        gameIcon.setImage(new Image("/images/leaf.png"));
         setZenStyle();
       }
     }
@@ -160,18 +154,21 @@ public class MenuController implements Initializable {
   }
 
   private void setHiddenStyle() {
+    gameIcon.setImage(new Image("/images/dictionary.png"));
     startGame.getScene().getRoot().getStylesheets().remove("/css/scene_css/menu.css");
     startGame.getScene().getRoot().getStylesheets().remove("/css/scene_css/zenmenu.css");
     startGame.getScene().getRoot().getStylesheets().add("/css/scene_css/hiddenmenu.css");
   }
 
   private void setZenStyle() {
+    gameIcon.setImage(new Image("/images/leaf.png"));
     startGame.getScene().getRoot().getStylesheets().remove("/css/scene_css/menu.css");
     startGame.getScene().getRoot().getStylesheets().remove("/css/scene_css/hiddenmenu.css");
     startGame.getScene().getRoot().getStylesheets().add("/css/scene_css/zenmenu.css");
   }
 
   private void setClassicStyle() {
+    gameIcon.setImage(new Image("/images/pencil.png"));
     startGame.getScene().getRoot().getStylesheets().remove("/css/scene_css/hiddenmenu.css");
     startGame.getScene().getRoot().getStylesheets().remove("/css/scene_css/zenmenu.css");
     startGame.getScene().getRoot().getStylesheets().add("/css/scene_css/menu.css");
