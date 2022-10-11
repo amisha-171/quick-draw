@@ -49,44 +49,11 @@ import nz.ac.auckland.se206.userutils.User;
  * the canvas size, the ML model will not work correctly. So be careful. If you make some changes in
  * the canvas and brush sizes, make sure that the prediction works fine.
  */
-public class ZenCanvasController implements Initializable {
-
-    private String userName;
-
-    @FXML private Canvas canvas;
-    @FXML private Label wordLabel;
-    @FXML private Button readyButton;
-    private GraphicsContext graphic;
-    protected DoodlePrediction model;
-    @FXML private Label predLabel;
-    @FXML private Button eraseBtn;
-    @FXML private Button onInk;
-    @FXML private Label timerCount;
-    private int counter;
-    private String wordChosen;
-    @FXML private Button clearButton;
-    protected FileChooser fileChooser;
-    private Boolean isContent;
-    private Color color;
-    @FXML private Button newGameBtn;
-    @FXML private Button saveImage;
-    @FXML private Button mainMenuBtn;
-    private User user;
-    @FXML private Button speakWord;
+public class ZenCanvasController extends CanvasController {
     @FXML private ColorPicker colourSwitcher;
+    @FXML private Button speakWord;
 
-    // mouse coordinates
-    private double currentX;
-    private double currentY;
-
-    /**
-     * JavaFX calls this method once the GUI elements are loaded. In our case we create a listener for
-     * the drawing, and we load the ML model.
-     */
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        startGame();
-    }
-
+    @Override
     protected void startGame() {
         // Disable the buttons in the GUI as fit
         this.disableStartButtons();
@@ -132,30 +99,7 @@ public class ZenCanvasController implements Initializable {
         }
     }
 
-    protected void setUserName(String userId) throws IOException {
-        // Set the username of the current user playing, and also its corresponding stats to local
-        // fields
-        this.userName = userId;
-        this.user = Database.read(this.userName);
-
-        this.generateWord();
-    }
-
-    private void generateWord() {
-        // Create an instance of category selector
-        CategorySelector categorySelector = null;
-        try {
-            categorySelector = new CategorySelector();
-        } catch (IOException | URISyntaxException | CsvException e) {
-            e.printStackTrace();
-        }
-        // Get a random word with Easy difficulty and set the word to be displayed to the user in the
-        // GUI
-        String randomWord =
-                categorySelector.getRandomDiffWord(this.user.getCurrentWordSetting(), this.user.getWordList());
-        this.setWord(randomWord);
-    }
-
+    @Override
     protected void disableStartButtons() {
         // This method when called well disable or enable the required buttons on input
         onInk.setDisable(true);
@@ -214,8 +158,8 @@ public class ZenCanvasController implements Initializable {
         }
     }
 
-    @FXML
-    private void onReady() {
+    @Override
+    protected void onReady() {
         // When player is ready we start the game by enabling canvas, starting the timer etc
         this.color = this.colourSwitcher.getValue();
         this.canvas.setDisable(false);
@@ -227,13 +171,8 @@ public class ZenCanvasController implements Initializable {
         this.runTimer();
     }
 
-    protected void setWord(String wordDraw) {
-        // Obtain the word given to draw from filereader class
-        wordLabel.setText("Draw: " + wordDraw);
-        wordChosen = wordDraw;
-    }
-
-    private void runTimer() {
+    @Override
+    protected void runTimer() {
         counter = -1;
         Timer timer = new Timer();
         TimerTask task =
@@ -262,7 +201,8 @@ public class ZenCanvasController implements Initializable {
         timer.scheduleAtFixedRate(task, 0, 1000);
     }
 
-    private void enableEndButtons() {
+    @Override
+    protected void enableEndButtons() {
         // Enable the available buttons user can interact with when the game has ended
         newGameBtn.setDisable(false);
         saveImage.setDisable(false);
@@ -270,7 +210,8 @@ public class ZenCanvasController implements Initializable {
         speakWord.setDisable(true);
     }
 
-    private void onDraw() {
+    @Override
+    protected void onDraw() {
         // Set the image to be the current snapshot which is called every second, image is final for
         // predictions
         final BufferedImage image = getCurrentSnapshot();
@@ -360,31 +301,6 @@ public class ZenCanvasController implements Initializable {
         Thread speechThread = new Thread(voiceThread);
         speechThread.setDaemon(true);
         speechThread.start();
-    }
-
-    @FXML
-    protected void onNewGame() throws IOException {
-        // If the user wants to play a new game we clear the canvas and the user gets a new word to draw
-        onClear();
-        timerCount.setVisible(false);
-        readyButton.setDisable(false);
-        setUserName(userName);
-        startGame();
-        predLabel.setText(
-                "Click the \"Ready!\" button to start drawing the word you see and view the predictions!");
-        timerCount.setTextFill(Color.color(0.8, 0.6, 0.06));
-    }
-
-    @FXML
-    private void onUserMenuSwitch(ActionEvent event) {
-        MenuController menucontroller =
-                (MenuController) SceneManager.getUiController(SceneManager.AppUi.USER_MENU);
-        menucontroller.setName(userName);
-        Image img = new Image("/images/profilepics/" + user.getImageName());
-        menucontroller.setUserDetails(img);
-
-        Scene scene = ((Node) event.getSource()).getScene();
-        scene.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.USER_MENU));
     }
 }
 
