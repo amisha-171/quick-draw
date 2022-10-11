@@ -12,12 +12,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.userutils.Database;
-import nz.ac.auckland.se206.userutils.GameSettings;
 import nz.ac.auckland.se206.userutils.User;
-import nz.ac.auckland.se206.util.enums.AccuracySettings;
-import nz.ac.auckland.se206.util.enums.ConfidenceSettings;
-import nz.ac.auckland.se206.util.enums.TimeSettings;
-import nz.ac.auckland.se206.util.enums.WordSettings;
 
 public class CreateProfileController {
   @FXML private TextField usernameField;

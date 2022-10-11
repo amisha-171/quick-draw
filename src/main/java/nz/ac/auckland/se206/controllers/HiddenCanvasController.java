@@ -1,36 +1,20 @@
 package nz.ac.auckland.se206.controllers;
 
 import com.opencsv.exceptions.CsvException;
-import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
-import java.net.SocketTimeoutException;
 import java.net.URISyntaxException;
 import java.util.Timer;
 import java.util.TimerTask;
 import javafx.application.Platform;
-import javafx.concurrent.Task;
-import javafx.embed.swing.SwingFXUtils;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Cursor;
-import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
-import javafx.stage.FileChooser;
-import javafx.stage.Stage;
-import javax.imageio.ImageIO;
-
-import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.dict.DictionaryLookup;
 import nz.ac.auckland.se206.dict.WordEntry;
 import nz.ac.auckland.se206.dict.WordNotFoundException;
 import nz.ac.auckland.se206.filereader.CategorySelector;
-import nz.ac.auckland.se206.speech.TextToSpeech;
 
 /**
  * This is the controller of the canvas. You are free to modify this class and the corresponding
@@ -68,7 +52,6 @@ public class HiddenCanvasController extends CanvasController {
                 randomWord =
                         categorySelector.getRandomDiffWord(this.user.getCurrentWordSetting(), this.user.getWordList());
                 //fetch definition of word from dictionary api, but only if it's a noun
-                /*
                 for (WordEntry currentWordEntry : DictionaryLookup.searchWordInfo(randomWord).getWordEntries()) {
                     if (currentWordEntry.getPartOfSpeech().equals("noun")) {
                         wordDefined = true;
@@ -76,10 +59,7 @@ public class HiddenCanvasController extends CanvasController {
                         break;
                     }
                 }
-                 */
-                this.wordDefinition = "testing";
-                wordDefined = true;
-            } catch (Exception  e) {
+            } catch (WordNotFoundException e) {
                 wordDefined = false;
             }
         }
