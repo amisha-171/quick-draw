@@ -53,6 +53,7 @@ public class StatsController {
             new PieChart.Data(numLosses + " LOSSES", numLosses));
     gamesPlayedChart.setData(pieChartData);
 
+    // Handle setting the fastest time label
     if (currentUser.getFastestTime() == 100) {
       fastestTimeLabel.setText("0.0 seconds");
     } else {
@@ -67,6 +68,7 @@ public class StatsController {
     User currentUser = Database.read(userName);
     String difficultyFilter = wordDifficultyFilter.getValue();
     switch (difficultyFilter) {
+        // Update the total words the user has played depending on the current difficulty
       case "Easy" -> updateWordsPlayedLabel("E", 142, currentUser);
       case "Medium" -> updateWordsPlayedLabel("M", 130, currentUser);
       case "Hard" -> updateWordsPlayedLabel("H", 68, currentUser);

@@ -81,6 +81,7 @@ public class NormalCanvasController extends CanvasController {
             // met we update the status label
             if (gameWon) {
               canvas.setOnMouseDragged(e -> canvas.setCursor(Cursor.DEFAULT));
+              // Since user has won cancel the timer and handle saving game information to user file
               timer.cancel();
               enableEndButtons();
               user.incrementWins();

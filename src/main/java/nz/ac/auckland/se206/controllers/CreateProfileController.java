@@ -70,10 +70,9 @@ public class CreateProfileController {
           (MenuController) SceneManager.getUiController(SceneManager.AppUi.USER_MENU);
       menuController.setName(usernameField.getText());
       menuController.setUserDetails(img);
-
+      // Create the scene and change the root
       Scene scene = ((Node) event.getSource()).getScene();
       scene.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.USER_MENU));
-
       usernameField.clear();
       index++;
       if (index < 6) {

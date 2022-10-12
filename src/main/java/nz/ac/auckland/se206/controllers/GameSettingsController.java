@@ -117,8 +117,11 @@ public class GameSettingsController {
 
   @FXML
   private void onWords(ActionEvent w) {
+    // Get the action button
     Button wordToggleButton = (Button) w.getSource();
+    // Set boolean based on if user would like to toggle up or down the difficulties
     boolean toggleUp = wordToggleButton.equals(upWords);
+    // Call method to set the label for setting when user attempts to toggle
     setDifficultyLabelToScene(1, wordList, wordLabel, toggleUp);
     this.wordSettings = WordSettings.valueOf(wordList[diffIndex[1]]);
     updateDifficultyLabel(wordLabel);
@@ -126,8 +129,11 @@ public class GameSettingsController {
 
   @FXML
   private void onTime(ActionEvent t) {
+    // Get the action button
     Button timeToggleButton = (Button) t.getSource();
+    // Set boolean based on if user would like to toggle up or down the difficulties
     boolean toggleUp = timeToggleButton.equals(upTime);
+    // Call method to set the label for setting when user attempts to toggle
     setDifficultyLabelToScene(2, timeList, timeLabel, toggleUp);
     this.timeSettings = TimeSettings.valueOf(timeList[diffIndex[2]]);
     updateDifficultyLabel(timeLabel);
@@ -135,8 +141,11 @@ public class GameSettingsController {
 
   @FXML
   private void onConfidence(ActionEvent c) {
+    // Get the action button
     Button confidenceToggleButton = (Button) c.getSource();
+    // Set boolean based on if user would like to toggle up or down the difficulties
     boolean toggleUp = confidenceToggleButton.equals(upConfidence);
+    // Call method to set the label for setting when user attempts to toggle
     setDifficultyLabelToScene(3, confidenceList, confidenceLabel, toggleUp);
     this.confidenceSettings = ConfidenceSettings.valueOf(confidenceList[diffIndex[3]]);
     updateDifficultyLabel(confidenceLabel);
@@ -160,6 +169,7 @@ public class GameSettingsController {
   private void updateDifficultyLabel(Label label) {
     String difficulty = label.getText();
 
+    // Switch statement to handle the label color based on difficulty setting
     switch (difficulty) {
       case "EASY" -> label.setTextFill(Color.web("#41b208"));
       case "MEDIUM" -> label.setTextFill(Color.web("#ffc400"));
@@ -168,6 +178,7 @@ public class GameSettingsController {
     }
 
     if (label.equals(accuracyLabel)) {
+      // Logic to set tooltip text based on difficulty for accuracy
       switch (difficulty) {
         case "EASY" -> label
             .getTooltip()
@@ -180,6 +191,7 @@ public class GameSettingsController {
             .setText("You can win if the word to draw is the Top Guess!");
       }
     } else if (label.equals(wordLabel)) {
+      // Logic to set tooltip text based on difficulty for word setting
       switch (difficulty) {
         case "EASY" -> label.getTooltip().setText("Only Easy words are chosen to draw!");
         case "MEDIUM" -> label.getTooltip().setText("Easy and Medium words are chosen to draw!");
@@ -189,6 +201,7 @@ public class GameSettingsController {
         case "MASTER" -> label.getTooltip().setText("Only Hard words are chosen to draw!");
       }
     } else if (label.equals(timeLabel)) {
+      // Logic to set tooltip text based on difficulty for time setting
       switch (difficulty) {
         case "EASY" -> label.getTooltip().setText("You have a 60 second time limit to draw!");
         case "MEDIUM" -> label.getTooltip().setText("You have a 45 second time limit to draw!");
@@ -197,6 +210,7 @@ public class GameSettingsController {
       }
     } else {
       switch (difficulty) {
+          // Logic to set tooltip text based on difficulty for confidence setting
         case "EASY" -> label
             .getTooltip()
             .setText("We'll make guesses we aren't very confident about!");

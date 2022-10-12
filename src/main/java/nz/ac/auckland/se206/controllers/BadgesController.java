@@ -22,8 +22,10 @@ public class BadgesController {
   @FXML private Label bronzeGames;
 
   protected void setBadgesForUser(String userName) throws IOException {
+    // Create the current user object by reading using Database class
     User currentUser = Database.read(userName);
 
+    // If conditionals to check current users win stats and set the badges accordingly
     if (currentUser.fiveConsecutiveWins()) {
       bronzeWins.setVisible(true);
     }
@@ -36,6 +38,7 @@ public class BadgesController {
       goldWins.setVisible(true);
     }
 
+    // Check the current users total games played stats and set badges accordingly
     if (currentUser.twentyFiveGamesPlayed()) {
       bronzeGames.setVisible(true);
     }
@@ -48,6 +51,7 @@ public class BadgesController {
       goldGames.setVisible(true);
     }
 
+    // Check the current users time stats and set the badges accordingly
     if (currentUser.underThirtySeconds()) {
       bronzeTime.setVisible(true);
     }
@@ -63,6 +67,7 @@ public class BadgesController {
 
   @FXML
   private void onStatsSwitch(ActionEvent event) {
+    // Create scene and set the root to the scene we want to load.
     Scene scene = ((Node) event.getSource()).getScene();
     scene.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.STATS));
   }
