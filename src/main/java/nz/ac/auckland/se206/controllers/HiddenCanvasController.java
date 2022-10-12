@@ -56,7 +56,8 @@ public class HiddenCanvasController extends CanvasController {
         // fetch definition of word from dictionary api, but only if it's a noun
         for (WordEntry currentWordEntry :
             DictionaryLookup.searchWordInfo(randomWord).getWordEntries()) {
-          if (currentWordEntry.getPartOfSpeech().equals("noun") || currentWordEntry.getPartOfSpeech().equals("noun")) {
+          if (currentWordEntry.getPartOfSpeech().equals("noun")
+              || currentWordEntry.getPartOfSpeech().equals("proper noun")) {
             wordDefined = true;
             this.wordDefinition = currentWordEntry.getDefinitions().get(0);
             break;
