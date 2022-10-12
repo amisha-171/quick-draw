@@ -21,6 +21,13 @@ public class CreateProfileController {
   private Image img;
   private File[] allUserImages = new File("src/main/resources/images/profilepics").listFiles();
 
+  /**
+   * Responsible for initializing this scene with the first users username and corresponding profile
+   * picture
+   *
+   * @throws IOException If failed in obtaining the total users or failing in getting profile
+   *     picture
+   */
   public void initialize() throws IOException {
     index = Database.getAllUsers().length;
     if (index < 6) {

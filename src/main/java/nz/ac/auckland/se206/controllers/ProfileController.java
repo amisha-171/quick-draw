@@ -22,6 +22,12 @@ public class ProfileController {
   private int userIndex = 0;
   private User[] users;
 
+  /**
+   * Initializes the first users profile information to the scene when it is loaded by accessing
+   * setUserInfoToGui() method
+   *
+   * @throws IOException If accessing any of the profile related files causes an error
+   */
   public void initialize() throws IOException {
     users = Database.getAllUsers();
     if (users.length != 0) {

@@ -45,6 +45,12 @@ public class GameSettingsController {
       Arrays.stream(WordSettings.values()).map(WordSettings::toString).toArray(String[]::new);
   private User currentUser;
 
+  /**
+   * Takes input object of type user and we initialize this class fields to the user attributes to
+   * maintain state of the scene
+   *
+   * @param user object of type User
+   */
   public void currentUser(User user) {
     // Initialize the users current settings so settings page always maintains state
     this.currentUser = user;
@@ -54,6 +60,11 @@ public class GameSettingsController {
     this.wordSettings = user.getGameSettings().getWords();
   }
 
+  /**
+   * Used to maintain state of a scene when the App is closed and opened. We each setting index to
+   * match the current users difficulty settings and then set each label for the setting based on
+   * the current index.
+   */
   public void setInitialInterface() {
     // Set the current index to match the difficulty, this is to help maintain state of this scene
     diffIndex[0] = currentUser.getGameSettings().getIndexOnLoad(accuracySettings.toString());

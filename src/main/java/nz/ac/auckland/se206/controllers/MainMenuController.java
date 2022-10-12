@@ -6,7 +6,6 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
@@ -14,11 +13,9 @@ import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.userutils.Database;
 
 public class MainMenuController {
-
-  @FXML Button switchProfile;
-  @FXML Button createProfile;
   private Alert alert;
 
+  /** Initialize the alert of this scene and associate it with relevant css styling */
   public void initialize() {
     alert = new Alert(Alert.AlertType.INFORMATION);
     alert.getDialogPane().getStylesheets().add(getClass().getResource("/css/alert.css").toString());
