@@ -47,7 +47,6 @@ public class User {
     this.wins = 0;
     this.losses = 0;
     this.consecutiveWins = 0;
-    this.totalSolveTime = 0;
     this.numEasyWords = 0;
     this.numMediumWords = 0;
     this.numHardWords = 0;
