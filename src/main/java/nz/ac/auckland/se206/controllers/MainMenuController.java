@@ -36,6 +36,7 @@ public class MainMenuController {
       alert.show();
       return;
     }
+    // Set scene and switch the root of the scene to the new scene
     Scene scene = ((Node) event.getSource()).getScene();
     scene.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.SELECT_PROFILE));
   }
@@ -49,6 +50,7 @@ public class MainMenuController {
       alert.show();
       return;
     }
+    // Set scene and switch scene root
     Scene scene = ((Node) event.getSource()).getScene();
     scene.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.CREATE_PROFILE));
   }

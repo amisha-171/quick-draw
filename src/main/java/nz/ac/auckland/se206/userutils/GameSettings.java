@@ -25,6 +25,7 @@ public class GameSettings {
       TimeSettings time,
       ConfidenceSettings confidence,
       WordSettings words) {
+    // Set the required settings on this objects creation which on default are all EASY
     this.accuracy = accuracy;
     this.time = time;
     this.confidence = confidence;

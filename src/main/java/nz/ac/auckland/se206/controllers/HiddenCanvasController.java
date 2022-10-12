@@ -112,8 +112,10 @@ public class HiddenCanvasController extends CanvasController {
   }
 
   protected void setWord() {
+    // Create String builder object
     StringBuilder wordString = new StringBuilder();
 
+    // Loop through and append Char at the corresponding index (i)
     for (int i = 0; i < this.numCharactersShown; i++) {
       wordString.append(this.wordChosen.charAt(i));
     }
@@ -121,7 +123,7 @@ public class HiddenCanvasController extends CanvasController {
     for (int i = this.numCharactersShown; i < this.wordChosen.length(); i++) {
       wordString.append("_");
     }
-
+    // Set the word to its label in GUI
     wordLabel.setText("Word: " + wordString);
   }
 

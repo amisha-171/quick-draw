@@ -2,8 +2,6 @@ package nz.ac.auckland.se206.filereader;
 
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvException;
-import nz.ac.auckland.se206.util.enums.WordSettings;
-
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
@@ -14,12 +12,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import nz.ac.auckland.se206.util.enums.WordSettings;
 
 public class CategorySelector {
   private Map<WordSettings, List<String>> difficultyCat;
   private static Map<String, String> wordDifficultyMap;
 
   public CategorySelector() throws IOException, URISyntaxException, CsvException {
+    // Initialize hashmaps which need to be used to create key value mapping for words -> difficulty
     difficultyCat = new HashMap<>();
     wordDifficultyMap = new HashMap<>();
     for (WordSettings wordSetting : WordSettings.values()) {
@@ -29,18 +29,18 @@ public class CategorySelector {
     for (String[] line : getLines()) {
       switch (line[1]) {
         case "E":
-          //if the word is easy, then it should be added to the easy, medium, and hard settings
+          // if the word is easy, then it should be added to the easy, medium, and hard settings
           difficultyCat.get(WordSettings.EASY).add(line[0]);
           difficultyCat.get(WordSettings.MEDIUM).add(line[0]);
           difficultyCat.get(WordSettings.HARD).add(line[0]);
           break;
         case "M":
-          //if the word is medium, then it should be added to the medium and hard settings
+          // if the word is medium, then it should be added to the medium and hard settings
           difficultyCat.get(WordSettings.MEDIUM).add(line[0]);
           difficultyCat.get(WordSettings.HARD).add(line[0]);
           break;
         case "H":
-          //if the word is hard, then it should be added to the
+          // if the word is hard, then it should be added to the
           difficultyCat.get(WordSettings.HARD).add(line[0]);
           difficultyCat.get(WordSettings.MASTER).add(line[0]);
           break;
@@ -80,8 +80,10 @@ public class CategorySelector {
   }
 
   private List<String[]> getLines() throws IOException, CsvException, URISyntaxException {
+    // Get file instance for the category difficulty csv file
     File file = new File(CategorySelector.class.getResource("/category_difficulty.csv").toURI());
-
+    // Read contents of the csv file and return List containing arrays of corresponding word and
+    // difficulty
     try (FileReader fr = new FileReader(file, StandardCharsets.UTF_8);
         CSVReader reader = new CSVReader(fr)) {
       return reader.readAll();

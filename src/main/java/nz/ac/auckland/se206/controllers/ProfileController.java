@@ -93,24 +93,27 @@ public class ProfileController {
   private void onLogin(ActionEvent event) throws IOException {
     User[] allUsers = Database.getAllUsers();
     if (Database.userExists(allUsers[userIndex].getUserName(), true)) {
-      // Check if the password associated user in our file is the same as what the user entered and
-      // load the main menu
+      // Create MenuController instance and set the current users name in that scene
       MenuController menucontroller =
           (MenuController) SceneManager.getUiController(SceneManager.AppUi.USER_MENU);
       menucontroller.setName(allUsers[userIndex].getUserName());
+      // Obtain current users corresponding image
       Image img = new Image("/images/profilepics/" + allUsers[userIndex].getImageName());
+      // Set the required user details to the new scene we are about to load
       menucontroller.setUserDetails(img);
-
+      // Create the new scene and switch out the root to that of the new scene we want to load
       Scene scene = ((Node) event.getSource()).getScene();
       scene.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.USER_MENU));
 
     } else {
+      // Otherwise show alert explaining what went wrong
       showAlert();
     }
   }
 
   @FXML
   private void onMainMenuSwitch(ActionEvent btnEvent) {
+    // Logic to switch back to the main menu scene
     Scene scene = ((Node) btnEvent.getSource()).getScene();
     scene.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.MAIN_MENU));
   }
