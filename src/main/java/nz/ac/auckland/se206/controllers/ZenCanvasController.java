@@ -132,7 +132,6 @@ public class ZenCanvasController extends CanvasController {
     fileChooser
         .getExtensionFilters()
         .addAll(
-            new FileChooser.ExtensionFilter("All Images", "*.*"),
             new FileChooser.ExtensionFilter("JPG", "*.jpg"),
             new FileChooser.ExtensionFilter("PNG", "*.png"));
     // Set the initial file name
