@@ -110,14 +110,14 @@ public class HiddenCanvasController extends CanvasController {
   }
 
   protected void setWord() {
-    String wordString = "";
+    StringBuilder wordString = new StringBuilder();
 
     for (int i = 0; i < this.numCharactersShown; i++) {
-      wordString += this.wordChosen.charAt(i);
+      wordString.append(this.wordChosen.charAt(i));
     }
 
     for (int i = this.numCharactersShown; i < this.wordChosen.length(); i++) {
-      wordString += "_";
+      wordString.append("_");
     }
 
     wordLabel.setText("Word: " + wordString);
