@@ -56,7 +56,7 @@ public class HiddenCanvasController extends CanvasController {
         // fetch definition of word from dictionary api, but only if it's a noun
         for (WordEntry currentWordEntry :
             DictionaryLookup.searchWordInfo(randomWord).getWordEntries()) {
-          if (currentWordEntry.getPartOfSpeech().equals("noun")) {
+          if (currentWordEntry.getPartOfSpeech().equals("noun") || currentWordEntry.getPartOfSpeech().equals("noun")) {
             wordDefined = true;
             this.wordDefinition = currentWordEntry.getDefinitions().get(0);
             break;
@@ -68,6 +68,7 @@ public class HiddenCanvasController extends CanvasController {
     }
 
     this.wordChosen = randomWord;
+    System.out.println(this.wordChosen);
     this.numCharactersShown = 0;
     this.definitionLabel.setText(this.wordDefinition);
     this.setWord();
@@ -198,6 +199,7 @@ public class HiddenCanvasController extends CanvasController {
     newGameBtn.setDisable(false);
     saveImage.setDisable(false);
     mainMenuBtn.setDisable(false);
+    hintButton.setDisable(true);
   }
 
   @FXML
