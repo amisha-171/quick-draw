@@ -1,39 +1,20 @@
 package nz.ac.auckland.se206.controllers;
 
 import ai.djl.ModelException;
-import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
-import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXML;
 import javafx.scene.Cursor;
 import javafx.scene.control.Button;
 import javafx.scene.control.ColorPicker;
-import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
-import javafx.stage.FileChooser;
-import javafx.stage.Stage;
-import javax.imageio.ImageIO;
 import nz.ac.auckland.se206.ml.DoodlePrediction;
 import nz.ac.auckland.se206.speech.TextToSpeech;
 
-/**
- * This is the controller of the canvas. You are free to modify this class and the corresponding
- * FXML file as you see fit. For example, you might no longer need the "Predict" button because the
- * DL model should be automatically queried in the background every second.
- *
- * <p>!! IMPORTANT !!
- *
- * <p>Although we added the scale of the image, you need to be careful when changing the size of the
- * drawable canvas and the brush size. If you make the brush too big or too small with respect to
- * the canvas size, the ML model will not work correctly. So be careful. If you make some changes in
- * the canvas and brush sizes, make sure that the prediction works fine.
- */
 public class ZenCanvasController extends CanvasController {
   @FXML private ColorPicker colourSwitcher;
   @FXML private Button speakWord;
@@ -97,49 +78,6 @@ public class ZenCanvasController extends CanvasController {
   @FXML
   private void onClear() {
     graphic.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
-  }
-
-  /**
-   * Get the current snapshot of the canvas.
-   *
-   * @return The BufferedImage corresponding to the current canvas content.
-   */
-  public BufferedImage getCurrentSnapshot() {
-    final Image snapshot = canvas.snapshot(null, null);
-    final BufferedImage image = SwingFXUtils.fromFXImage(snapshot, null);
-    // Convert into a binary image.
-    final BufferedImage imageBinary =
-        new BufferedImage(image.getWidth(), image.getHeight(), BufferedImage.TYPE_BYTE_BINARY);
-    final Graphics2D graphics = imageBinary.createGraphics();
-    graphics.drawImage(image, 0, 0, null);
-    // To release memory we dispose.
-    graphics.dispose();
-    return imageBinary;
-  }
-
-  /**
-   * Save the current snapshot on a bitmap file.
-   *
-   * @throws IOException If the image cannot be saved.
-   */
-  @FXML
-  private void onSaveSnapshot() throws IOException {
-    // Create a file chooser
-    fileChooser = new FileChooser();
-    // Set the title
-    fileChooser.setTitle("Save Your Image");
-    // Add all the extensions for saving the drawing
-    fileChooser
-        .getExtensionFilters()
-        .addAll(
-            new FileChooser.ExtensionFilter("JPG", "*.jpg"),
-            new FileChooser.ExtensionFilter("PNG", "*.png"));
-    // Set the initial file name
-    fileChooser.setInitialFileName(wordChosen);
-    File file = fileChooser.showSaveDialog(new Stage());
-    if (file != null) {
-      ImageIO.write(getCurrentSnapshot(), "bmp", file);
-    }
   }
 
   @Override
@@ -273,17 +211,12 @@ public class ZenCanvasController extends CanvasController {
     // Create text to speech instance
     TextToSpeech speech = new TextToSpeech();
     // Create task for thread and put speak inside
-    Task<Void> voiceThread =
-        new Task<>() {
-          @Override
-          protected Void call() {
-            speech.speak(wordChosen);
-            return null;
-          }
-        };
-    // Create thread for bThread and start it when this method is called
-    Thread speechThread = new Thread(voiceThread);
-    speechThread.setDaemon(true);
-    speechThread.start();
+    new Task<>() {
+      @Override
+      protected Void call() {
+        speech.speak(wordChosen);
+        return null;
+      }
+    };
   }
 }

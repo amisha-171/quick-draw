@@ -99,10 +99,7 @@ public class NormalCanvasController extends CanvasController {
               user.updateTotalSolveTime(60);
               user.saveSelf();
               // Inform user they have lost
-              Platform.runLater(
-                  () -> {
-                    wordLabel.setText("You lost, better luck next time!");
-                  });
+              Platform.runLater(() -> wordLabel.setText("You lost, better luck next time!"));
             }
             if (counter == 10) {
               // If 10 seconds remain we change the timer to color to red instead of blue

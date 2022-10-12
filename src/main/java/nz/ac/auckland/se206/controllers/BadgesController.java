@@ -7,8 +7,8 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import nz.ac.auckland.se206.SceneManager;
-import nz.ac.auckland.se206.userutils.Database;
-import nz.ac.auckland.se206.userutils.User;
+import nz.ac.auckland.se206.speech.userutils.Database;
+import nz.ac.auckland.se206.speech.userutils.User;
 
 public class BadgesController {
   @FXML private Label goldTime;
@@ -21,11 +21,18 @@ public class BadgesController {
   @FXML private Label bronzeWins;
   @FXML private Label bronzeGames;
 
+  /**
+   * This method takes in a username as input and will display the badges earned for that user to
+   * the GUI.
+   *
+   * @param userName the current user's name as a string.
+   * @throws IOException if an I/O error occurs reading from the stream when reading user data from
+   *     Database.
+   */
   protected void setBadgesForUser(String userName) throws IOException {
-    // Create the current user object by reading using Database class
     User currentUser = Database.read(userName);
 
-    // If conditionals to check current users win stats and set the badges accordingly
+    // Conditionals used to check current user's wins and display badges accordingly
     if (currentUser.fiveConsecutiveWins()) {
       bronzeWins.setVisible(true);
     }
@@ -38,7 +45,7 @@ public class BadgesController {
       goldWins.setVisible(true);
     }
 
-    // Check the current users total games played stats and set badges accordingly
+    // Conditionals used to check current user's games played and display badges accordingly
     if (currentUser.twentyFiveGamesPlayed()) {
       bronzeGames.setVisible(true);
     }
@@ -51,7 +58,7 @@ public class BadgesController {
       goldGames.setVisible(true);
     }
 
-    // Check the current users time stats and set the badges accordingly
+    // Conditionals used to check current user's fastest time and display badges accordingly
     if (currentUser.underThirtySeconds()) {
       bronzeTime.setVisible(true);
     }
@@ -65,9 +72,14 @@ public class BadgesController {
     }
   }
 
+  /**
+   * This method switches back to the statistics page of the chosen user via a button click.
+   *
+   * @param event The (button) event which invokes this method.
+   */
   @FXML
   private void onStatsSwitch(ActionEvent event) {
-    // Create scene and set the root to the scene we want to load.
+    // Obtain scene and set the statistics scene root.
     Scene scene = ((Node) event.getSource()).getScene();
     scene.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.STATS));
   }
