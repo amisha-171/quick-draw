@@ -32,7 +32,7 @@ import nz.ac.auckland.se206.userutils.User;
 import nz.ac.auckland.se206.util.SceneManager;
 
 public abstract class CanvasController {
-  private String userName;
+  protected String userName;
   @FXML protected Canvas canvas;
   @FXML protected Label wordLabel;
   @FXML protected Button readyButton;

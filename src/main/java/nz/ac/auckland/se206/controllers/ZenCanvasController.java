@@ -18,6 +18,7 @@ import nz.ac.auckland.se206.speech.TextToSpeech;
 public class ZenCanvasController extends CanvasController {
   @FXML private ColorPicker colourSwitcher;
   @FXML private Button speakWord;
+  private boolean timerRunning;
 
   /**
    * Sets up the game by setting up the canvas and deep learning model.
@@ -29,6 +30,7 @@ public class ZenCanvasController extends CanvasController {
 
     isContent = false;
     color = Color.WHITE;
+    timerRunning = false;
 
     canvas.setOnMouseEntered(e -> canvas.setCursor(Cursor.HAND));
 
@@ -110,6 +112,7 @@ public class ZenCanvasController extends CanvasController {
   protected void runTimer() {
     counter = -1;
     Timer timer = new Timer();
+    timerRunning = true;
     TimerTask task =
         new TimerTask() {
           @Override
@@ -130,6 +133,10 @@ public class ZenCanvasController extends CanvasController {
                       throw new RuntimeException(e);
                     }
                   });
+            }
+
+            if (!timerRunning) {
+              timer.cancel();
             }
           }
         };
@@ -253,5 +260,24 @@ public class ZenCanvasController extends CanvasController {
         return null;
       }
     };
+  }
+
+  /**
+   * Method to create a new game when the user clicks "New Game". Overrides parent method because
+   * this method is used to cancel the timer for zen mode
+   * @throws IOException If there is an error in regenerating the word
+   */
+  @Override
+  protected void onNewGame() throws IOException {
+    // If the user wants to play a new game we clear the canvas and the user gets a new word to draw
+    timerRunning = false; //cancel the timer
+    onClear();
+    timerCount.setVisible(false);
+    readyButton.setDisable(false);
+    setUserName(userName);
+    startGame();
+    predLabel.setText(
+            "Click the \"Ready!\" button to start drawing the word you see and view the predictions!");
+    timerCount.setTextFill(Color.color(0.8, 0.6, 0.06));
   }
 }
