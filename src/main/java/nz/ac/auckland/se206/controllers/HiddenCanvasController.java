@@ -168,6 +168,7 @@ public class HiddenCanvasController extends CanvasController {
                   () -> {
                     try {
                       onDraw();
+                      informUserOnCurrDrawing();
                     } catch (Exception e) {
                       throw new RuntimeException(e);
                     }

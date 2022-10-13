@@ -20,9 +20,7 @@ public class ZenCanvasController extends CanvasController {
   @FXML private Button speakWord;
   private boolean timerRunning;
 
-  /**
-   * Sets up the game by setting up the canvas and deep learning model.
-   */
+  /** Sets up the game by setting up the canvas and deep learning model. */
   @Override
   protected void startGame() {
     // Disable the buttons in the GUI as fit
@@ -70,9 +68,7 @@ public class ZenCanvasController extends CanvasController {
     }
   }
 
-  /**
-   * Method to disable the start buttons when the user had clicked 'Ready'
-   */
+  /** Method to disable the start buttons when the user had clicked 'Ready' */
   @Override
   protected void disableStartButtons() {
     // This method when called well disable or enable the required buttons on input
@@ -80,12 +76,6 @@ public class ZenCanvasController extends CanvasController {
     eraseBtn.setDisable(true);
     speakWord.setDisable(false);
     clearButton.setDisable(true);
-  }
-
-  /** This method is called when the "Clear" button is pressed to clear the canvas. */
-  @FXML
-  private void onClear() {
-    graphic.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
   }
 
   /**
@@ -105,8 +95,8 @@ public class ZenCanvasController extends CanvasController {
   }
 
   /**
-   * Runs the timer for the drawing, in zen mode the counter just counts up because
-   * there is no time limit.
+   * Runs the timer for the drawing, in zen mode the counter just counts up because there is no time
+   * limit.
    */
   @Override
   protected void runTimer() {
@@ -129,6 +119,7 @@ public class ZenCanvasController extends CanvasController {
                   () -> {
                     try {
                       onDraw();
+                      informUserOnCurrDrawing();
                     } catch (Exception e) {
                       throw new RuntimeException(e);
                     }
@@ -154,9 +145,7 @@ public class ZenCanvasController extends CanvasController {
     mainMenuBtn.setDisable(false);
   }
 
-  /**
-   * Runs the threads for generating the predictions once the user starts drawing.
-   */
+  /** Runs the threads for generating the predictions once the user starts drawing. */
   @Override
   protected void onDraw() {
     // Set the image to be the current snapshot which is called every second, image is final for
@@ -211,8 +200,7 @@ public class ZenCanvasController extends CanvasController {
   }
 
   /**
-   * Switches to the eraser tool and disables the pen tool when the user clicks
-   * the eraser button.
+   * Switches to the eraser tool and disables the pen tool when the user clicks the eraser button.
    */
   @FXML
   private void onErase() { // If the user wants to erase something we set the pen color to white
@@ -221,10 +209,7 @@ public class ZenCanvasController extends CanvasController {
     onInk.setDisable(false);
   }
 
-  /**
-   * Switches to the pen tool and disables the eraser tool when the user clicks the
-   * pen button.
-   */
+  /** Switches to the pen tool and disables the eraser tool when the user clicks the pen button. */
   @FXML
   private void onPen() { // If the user wants to switch back to pen we change the pen color to black
     this.color = this.colourSwitcher.getValue();
@@ -233,8 +218,8 @@ public class ZenCanvasController extends CanvasController {
   }
 
   /**
-   * Changes the pen colour using the JavaFX colour picker widget, to allow
-   * user to draw with different colours.
+   * Changes the pen colour using the JavaFX colour picker widget, to allow user to draw with
+   * different colours.
    */
   @FXML
   private void switchPenColour() {
@@ -244,8 +229,7 @@ public class ZenCanvasController extends CanvasController {
   }
 
   /**
-   * Uses to text to speech model to speak the word that has been generated for the
-   * user to draw.
+   * Uses to text to speech model to speak the word that has been generated for the user to draw.
    */
   @FXML
   private void onSpeakWord() {

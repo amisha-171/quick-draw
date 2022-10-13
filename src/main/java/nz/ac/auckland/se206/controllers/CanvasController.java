@@ -1,12 +1,16 @@
 package nz.ac.auckland.se206.controllers;
 
 import ai.djl.ModelException;
+import ai.djl.modality.Classifications;
+import ai.djl.translate.TranslateException;
 import com.opencsv.exceptions.CsvException;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
+import java.util.List;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.embed.swing.SwingFXUtils;
@@ -19,6 +23,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
@@ -54,6 +59,8 @@ public abstract class CanvasController {
   @FXML protected Button saveImage;
   @FXML protected Button mainMenuBtn;
   protected User user;
+  @FXML protected ProgressBar predBar;
+  protected double currProgress = 0.0;
 
   // mouse coordinates
   protected double currentX;
@@ -78,6 +85,8 @@ public abstract class CanvasController {
     gameWon = false;
     isContent = false;
     color = Color.BLACK;
+    currProgress = 0;
+    predBar.setProgress(currProgress);
 
     canvas.setOnMouseEntered(e -> canvas.setCursor(Cursor.HAND));
     graphic = canvas.getGraphicsContext2D();
@@ -167,6 +176,43 @@ public abstract class CanvasController {
   @FXML
   private void onClear() {
     graphic.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
+    currProgress = 0;
+    predBar.setProgress(currProgress);
+  }
+
+  protected void informUserOnCurrDrawing() throws TranslateException {
+    Task<Void> queryTopHundredPredictions =
+        new Task<>() {
+          final List<Classifications.Classification> predList =
+              model.getPredictions(getCurrentSnapshot(), 100);
+
+          @Override
+          protected Void call() {
+            List<String> preds =
+                new ArrayList<>(
+                    predList.stream().map(Classifications.Classification::getClassName).toList());
+            // Replace each instance of _ with space
+            preds.replaceAll(randomWord -> randomWord.replace("_", " "));
+            // If the current list of top 100 predictions contains the current given word to draw
+            // then
+            // execute logic update progress bar
+            if (preds.contains(wordChosen)) {
+              double num = predList.size() - preds.indexOf(wordChosen);
+              double predSize = preds.size();
+              currProgress = num / predSize;
+              Platform.runLater(() -> predBar.setProgress(currProgress));
+            }
+            // If the "current progress" value is at least 0.9 this means user has reached top 10
+            // predictions so progress bar should be full
+            if (currProgress >= 0.9) {
+              Platform.runLater(() -> predBar.setProgress(1));
+            }
+            return null;
+          }
+        };
+    Thread queryThread = new Thread(queryTopHundredPredictions);
+    queryThread.setDaemon(true);
+    queryThread.start();
   }
 
   /**
