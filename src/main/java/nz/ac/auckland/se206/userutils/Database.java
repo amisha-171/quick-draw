@@ -1,4 +1,4 @@
-package nz.ac.auckland.se206.speech.userutils;
+package nz.ac.auckland.se206.userutils;
 
 import com.google.gson.Gson;
 import java.io.File;

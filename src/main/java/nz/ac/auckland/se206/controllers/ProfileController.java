@@ -9,9 +9,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import nz.ac.auckland.se206.SceneManager;
-import nz.ac.auckland.se206.speech.userutils.Database;
-import nz.ac.auckland.se206.speech.userutils.User;
+import nz.ac.auckland.se206.userutils.Database;
+import nz.ac.auckland.se206.userutils.User;
+import nz.ac.auckland.se206.util.SceneManager;
 
 public class ProfileController {
   private @FXML Label userLabel;

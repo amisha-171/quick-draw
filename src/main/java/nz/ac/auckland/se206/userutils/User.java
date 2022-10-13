@@ -1,4 +1,4 @@
-package nz.ac.auckland.se206.speech.userutils;
+package nz.ac.auckland.se206.userutils;
 
 import java.io.IOException;
 import java.util.ArrayList;

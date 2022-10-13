@@ -8,9 +8,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
-import nz.ac.auckland.se206.SceneManager;
-import nz.ac.auckland.se206.speech.userutils.GameSettings;
-import nz.ac.auckland.se206.speech.userutils.User;
+import nz.ac.auckland.se206.userutils.GameSettings;
+import nz.ac.auckland.se206.userutils.User;
+import nz.ac.auckland.se206.util.SceneManager;
 import nz.ac.auckland.se206.util.enums.AccuracySettings;
 import nz.ac.auckland.se206.util.enums.ConfidenceSettings;
 import nz.ac.auckland.se206.util.enums.TimeSettings;
@@ -51,7 +51,7 @@ public class GameSettingsController {
    *
    * @param user object of type User
    */
-  public void currentUser(User user) {
+  public void setUserSettings(User user) {
     // Initialize the users current settings
     this.currentUser = user;
     this.accuracySettings = user.getGameSettings().getAccuracy();
@@ -120,7 +120,7 @@ public class GameSettingsController {
    * @param event The (button) event which invokes this method.
    */
   @FXML
-  private void onAccuracy(ActionEvent event) {
+  private void onToggleAccuracy(ActionEvent event) {
     // Get the action button
     Button accuracyToggleButton = (Button) event.getSource();
     // Set boolean based on if user would like to toggle up or down the difficulties
@@ -138,7 +138,7 @@ public class GameSettingsController {
    * @param event The (button) event which invokes this method.
    */
   @FXML
-  private void onWords(ActionEvent event) {
+  private void onToggleWords(ActionEvent event) {
     // Get the action button
     Button wordToggleButton = (Button) event.getSource();
     // Set boolean based on if user would like to toggle up or down the difficulties
@@ -156,7 +156,7 @@ public class GameSettingsController {
    * @param event The (button) event which invokes this method.
    */
   @FXML
-  private void onTime(ActionEvent event) {
+  private void onToggleTime(ActionEvent event) {
     // Get the action button
     Button timeToggleButton = (Button) event.getSource();
     // Set boolean based on if user would like to toggle up or down the difficulties
@@ -174,7 +174,7 @@ public class GameSettingsController {
    * @param event The (button) event which invokes this method.
    */
   @FXML
-  private void onConfidence(ActionEvent event) {
+  private void onToggleConfidence(ActionEvent event) {
     // Get the action button
     Button confidenceToggleButton = (Button) event.getSource();
     // Set boolean based on if user would like to toggle up or down the difficulties

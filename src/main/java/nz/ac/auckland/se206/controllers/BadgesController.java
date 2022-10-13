@@ -6,9 +6,9 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import nz.ac.auckland.se206.SceneManager;
-import nz.ac.auckland.se206.speech.userutils.Database;
-import nz.ac.auckland.se206.speech.userutils.User;
+import nz.ac.auckland.se206.userutils.Database;
+import nz.ac.auckland.se206.userutils.User;
+import nz.ac.auckland.se206.util.SceneManager;
 
 public class BadgesController {
   @FXML private Label goldTime;
@@ -34,41 +34,52 @@ public class BadgesController {
 
     // Conditionals used to check current user's wins and display badges accordingly
     if (currentUser.fiveConsecutiveWins()) {
-      bronzeWins.setVisible(true);
+      bronzeWins.getTooltip().setText("JUNIOR ARTIST! \n For winning 5 games in a row.");
+      bronzeWins.setDisable(false);
     }
 
     if (currentUser.tenConsecutiveWins()) {
-      silverWins.setVisible(true);
+      silverWins.getTooltip().setText("INTERMEDIATE ARTIST! \n For winning 10 games in a row.");
+      silverWins.setDisable(false);
     }
 
     if (currentUser.twentyConsecutiveWins()) {
-      goldWins.setVisible(true);
+      goldWins.getTooltip().setText("MASTER ARTIST! \n For winning 20 games in a row.");
+      goldWins.setDisable(false);
     }
 
     // Conditionals used to check current user's games played and display badges accordingly
     if (currentUser.twentyFiveGamesPlayed()) {
-      bronzeGames.setVisible(true);
+      bronzeGames.getTooltip().setText("EXPERIENCED SKETCHER! \n For playing 25 games.");
+      bronzeGames.setDisable(false);
     }
 
     if (currentUser.fiftyGamesPlayed()) {
-      silverGames.setVisible(true);
+      silverGames.getTooltip().setText("DEDICATED SKETCHER! \n For playing 50 games.");
+      silverGames.setDisable(false);
     }
 
     if (currentUser.hundredGamesPlayed()) {
-      goldGames.setVisible(true);
+      goldGames.getTooltip().setText("SUPERSTAR SKETCHER! \n For playing 100 games.");
+      goldGames.setDisable(false);
     }
 
     // Conditionals used to check current user's fastest time and display badges accordingly
     if (currentUser.underThirtySeconds()) {
-      bronzeTime.setVisible(true);
+      bronzeTime.getTooltip().setText("QUICK DRAWER! \n For winning a game under 30 seconds.");
+      bronzeTime.setDisable(false);
     }
 
     if (currentUser.underTwentySeconds()) {
-      silverTime.setVisible(true);
+      silverTime.getTooltip().setText("SPEEDY SKETCHER! \n For winning a game under 20 seconds.");
+      silverTime.setDisable(false);
     }
 
     if (currentUser.underTenSeconds()) {
-      goldTime.setVisible(true);
+      goldTime
+          .getTooltip()
+          .setText("SUPER SPEEDY SKETCHER! \n For winning a game under 10 seconds.");
+      goldTime.setDisable(false);
     }
   }
 

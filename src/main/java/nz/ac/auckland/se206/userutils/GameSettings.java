@@ -1,4 +1,4 @@
-package nz.ac.auckland.se206.speech.userutils;
+package nz.ac.auckland.se206.userutils;
 
 import nz.ac.auckland.se206.util.enums.AccuracySettings;
 import nz.ac.auckland.se206.util.enums.ConfidenceSettings;

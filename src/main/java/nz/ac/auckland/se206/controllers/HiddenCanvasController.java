@@ -37,6 +37,7 @@ public class HiddenCanvasController extends CanvasController {
   /**
    * Generates a word using the CategorySelector and also its associated definition using the
    * dictionary API.
+   *
    * @throws IOException If there is an error in using the CategorySelector
    */
   @Override
@@ -61,9 +62,9 @@ public class HiddenCanvasController extends CanvasController {
         // fetch definition of word from dictionary api, but only if it's a noun
         for (WordEntry currentWordEntry :
             DictionaryLookup.searchWordInfo(randomWord).getWordEntries()) {
-            wordDefined = true;
-            this.wordDefinition = currentWordEntry.getDefinitions().get(0);
-            break;
+          wordDefined = true;
+          this.wordDefinition = currentWordEntry.getDefinitions().get(0);
+          break;
         }
       } catch (WordNotFoundException e) {
         wordDefined = false;
@@ -77,9 +78,7 @@ public class HiddenCanvasController extends CanvasController {
     this.setWord();
   }
 
-  /**
-   * Method to disable the start buttons when the user had clicked 'Ready'
-   */
+  /** Method to disable the start buttons when the user had clicked 'Ready' */
   @Override
   protected void disableStartButtons() {
     // This method when called well disable or enable the required buttons on input
@@ -109,8 +108,8 @@ public class HiddenCanvasController extends CanvasController {
   }
 
   /**
-   * Method to generate a hint by revealing one letter at a time of the hidden word in a hangman-style
-   * fashion, when the user clicks the 'Hint' button.
+   * Method to generate a hint by revealing one letter at a time of the hidden word in a
+   * hangman-style fashion, when the user clicks the 'Hint' button.
    */
   @FXML
   private void onGiveHint() {
@@ -124,8 +123,7 @@ public class HiddenCanvasController extends CanvasController {
   }
 
   /**
-   * This method sets the word, depending on how many characters have been revealed,
-   * in the label.
+   * This method sets the word, depending on how many characters have been revealed, in the label.
    */
   protected void setWord() {
     // Create String builder object
@@ -144,8 +142,8 @@ public class HiddenCanvasController extends CanvasController {
   }
 
   /**
-   * Runs the timer for the drawing, in zen mode the counter just counts up because
-   * there is no time limit.
+   * Runs the timer for the drawing, in zen mode the counter just counts up because there is no time
+   * limit.
    */
   @Override
   protected void runTimer() {
@@ -180,17 +178,24 @@ public class HiddenCanvasController extends CanvasController {
             if (gameWon) {
               canvas.setOnMouseDragged(e -> canvas.setCursor(Cursor.DEFAULT));
               timer.cancel();
-              enableEndButtons();
+
               user.incrementWins();
               user.updateWordList(wordChosen);
               user.saveSelf();
+              Platform.runLater(
+                  () -> {
+                    enableEndButtons();
+                    definitionLabel.setText("The word was " + wordChosen + "!");
+                  });
             }
             if (counter <= 0) {
               // If times up cancel the timer, disable canvas and change GUI state
               canvas.setOnMouseDragged(e -> canvas.setCursor(Cursor.DEFAULT));
               timer.cancel();
-              disableButtons();
-              enableEndButtons();
+              user.incrementLosses();
+              user.updateWordList(wordChosen);
+              user.updateTotalSolveTime(60);
+              user.saveSelf();
               // Inform user they have lost
               Platform.runLater(
                   () -> {
@@ -200,10 +205,8 @@ public class HiddenCanvasController extends CanvasController {
                     timerCount.setTextFill(Color.RED);
                     timerCount.setText("0 seconds remaining");
                     definitionLabel.setText("The word was " + wordChosen + "!");
-                    user.incrementLosses();
-                    user.updateWordList(wordChosen);
-                    user.updateTotalSolveTime(60);
-                    user.saveSelf();
+                    disableButtons();
+                    enableEndButtons();
                   });
             }
             if (counter == 10) {

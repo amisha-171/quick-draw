@@ -24,12 +24,12 @@ import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javax.imageio.ImageIO;
-import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.filereader.CategorySelector;
 import nz.ac.auckland.se206.ml.DoodlePrediction;
 import nz.ac.auckland.se206.speech.TextToSpeech;
-import nz.ac.auckland.se206.speech.userutils.Database;
-import nz.ac.auckland.se206.speech.userutils.User;
+import nz.ac.auckland.se206.userutils.Database;
+import nz.ac.auckland.se206.userutils.User;
+import nz.ac.auckland.se206.util.SceneManager;
 
 public abstract class CanvasController {
   private String userName;
@@ -372,9 +372,8 @@ public abstract class CanvasController {
   protected abstract void onReady();
 
   /**
-   * Abstract method implemented by different game mode controllers that disables the start
-   * buttons when the user has started, disables slightly different buttons depending on
-   * game mode.
+   * Abstract method implemented by different game mode controllers that disables the start buttons
+   * when the user has started, disables slightly different buttons depending on game mode.
    */
   protected abstract void disableStartButtons();
 

@@ -12,10 +12,10 @@ import javafx.scene.Scene;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
-import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.filereader.CategorySelector;
-import nz.ac.auckland.se206.speech.userutils.Database;
-import nz.ac.auckland.se206.speech.userutils.User;
+import nz.ac.auckland.se206.userutils.Database;
+import nz.ac.auckland.se206.userutils.User;
+import nz.ac.auckland.se206.util.SceneManager;
 
 public class StatsController {
   private String userName;
