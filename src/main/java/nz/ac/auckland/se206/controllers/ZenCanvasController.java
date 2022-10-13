@@ -76,12 +76,6 @@ public class ZenCanvasController extends CanvasController {
     clearButton.setDisable(true);
   }
 
-  /** This method is called when the "Clear" button is pressed to clear the canvas. */
-  @FXML
-  private void onClear() {
-    graphic.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
-  }
-
   /**
    * Method run when user click "Ready" to disable buttons, set the pen colour, and run the timer.
    */
