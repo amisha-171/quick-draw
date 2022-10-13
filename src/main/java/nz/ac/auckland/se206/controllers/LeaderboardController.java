@@ -28,10 +28,8 @@ public class LeaderboardController {
   /**
    * Updates the leaderboard with the most up to date and accurate statistics of each user based on
    * their current statistics.
-   *
-   * @throws IOException if user data cannot be read in correctly.
    */
-  private void initialiseLeaderboard() throws IOException {
+  private void initialiseLeaderboard() {
 
     // initialising contents of each section of the leaderboard
     iconColumn.setCellValueFactory(new PropertyValueFactory<>("userIcon"));
@@ -46,8 +44,6 @@ public class LeaderboardController {
     fastestTimeColumn.setReorderable(false);
     averageTimeColumn.setReorderable(false);
     leaderboard.setEditable(false);
-
-    setLeaderboardContents();
   }
 
   /**
@@ -64,6 +60,8 @@ public class LeaderboardController {
     for (User user : userList) {
       leaderboard.getItems().add(user);
     }
+    // initially sort leaderboard by number of wins
+    leaderboard.getSortOrder().setAll(winsColumn);
   }
   /**
    * This method switches back to the main menu page of the game via a button click.
