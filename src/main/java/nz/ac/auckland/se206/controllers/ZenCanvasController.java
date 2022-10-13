@@ -252,13 +252,18 @@ public class ZenCanvasController extends CanvasController {
     // Create text to speech instance
     TextToSpeech speech = new TextToSpeech();
     // Create task for thread and put speak inside
-    new Task<>() {
-      @Override
-      protected Void call() {
-        speech.speak(wordChosen);
-        return null;
-      }
-    };
+    Task<Void> voiceThread =
+            new Task<>() {
+              @Override
+              protected Void call() {
+                speech.speak(wordChosen);
+                return null;
+              }
+            };
+    // Create thread for bThread and start it when this method is called
+    Thread speechThread = new Thread(voiceThread);
+    speechThread.setDaemon(true);
+    speechThread.start();
   }
 
   /**
