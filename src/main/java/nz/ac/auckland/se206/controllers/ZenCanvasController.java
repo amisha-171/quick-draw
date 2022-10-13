@@ -152,7 +152,6 @@ public class ZenCanvasController extends CanvasController {
     newGameBtn.setDisable(false);
     saveImage.setDisable(false);
     mainMenuBtn.setDisable(false);
-    speakWord.setDisable(true);
   }
 
   /**
