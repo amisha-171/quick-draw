@@ -35,7 +35,7 @@
          <children>
             <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="20.0">
                <children>
-                  <Label fx:id="goldGames" visible="false">
+                  <Label fx:id="goldGames" disable="true">
                      <graphic>
                         <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -47,7 +47,7 @@
                         <Tooltip text="For 100 Games Played!" />
                      </tooltip>
                   </Label>
-                  <Label fx:id="silverGames" visible="false">
+                  <Label fx:id="silverGames" disable="true">
                      <graphic>
                         <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -59,7 +59,7 @@
                         <Tooltip text="For 50 Games Played!" />
                      </tooltip>
                   </Label>
-                  <Label fx:id="bronzeGames" visible="false">
+                  <Label fx:id="bronzeGames" disable="true">
                      <graphic>
                         <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -75,7 +75,7 @@
             </VBox>
             <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="20.0">
                <children>
-                  <Label fx:id="goldTime" visible="false">
+                  <Label fx:id="goldTime" disable="true">
                      <graphic>
                         <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -87,7 +87,7 @@
                         <Tooltip text="For a Win Under 5 Seconds!" />
                      </tooltip>
                   </Label>
-                  <Label fx:id="silverTime" visible="false">
+                  <Label fx:id="silverTime" disable="true">
                      <graphic>
                         <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -99,7 +99,7 @@
                         <Tooltip text="For a Win Under 10 Seconds!" />
                      </tooltip>
                   </Label>
-                  <Label fx:id="bronzeTime" visible="false">
+                  <Label fx:id="bronzeTime" disable="true">
                      <graphic>
                         <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -118,7 +118,7 @@
             </VBox>
             <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="20.0">
                <children>
-                  <Label fx:id="goldWins" visible="false">
+                  <Label fx:id="goldWins" disable="true">
                      <graphic>
                         <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -130,7 +130,7 @@
                         <Tooltip text="For Winning 20 Games in a Row!" />
                      </tooltip>
                   </Label>
-                  <Label fx:id="silverWins" visible="false">
+                  <Label fx:id="silverWins" disable="true">
                      <graphic>
                         <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -142,7 +142,7 @@
                         <Tooltip text="For Winning 10 Games in a Row!" />
                      </tooltip>
                   </Label>
-                  <Label fx:id="bronzeWins" visible="false">
+                  <Label fx:id="bronzeWins" disable="true">
                      <graphic>
                         <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                            <image>

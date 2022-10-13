@@ -10,54 +10,74 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.userutils.Database;
-import nz.ac.auckland.se206.userutils.GameSettings;
 import nz.ac.auckland.se206.userutils.User;
-import nz.ac.auckland.se206.util.enums.AccuracySettings;
-import nz.ac.auckland.se206.util.enums.ConfidenceSettings;
-import nz.ac.auckland.se206.util.enums.TimeSettings;
-import nz.ac.auckland.se206.util.enums.WordSettings;
+import nz.ac.auckland.se206.util.SceneManager;
 
 public class CreateProfileController {
   @FXML private TextField usernameField;
   @FXML private ImageView profPic;
   private int index;
   private Image img;
+  private Alert alert;
   private File[] allUserImages = new File("src/main/resources/images/profilepics").listFiles();
 
+  /**
+   * This method initialises the scene with the first users username and their profile picture on
+   * start up.
+   *
+   * @throws IOException If failed in obtaining the total users or failing in getting their profile
+   *     picture.
+   */
   public void initialize() throws IOException {
     index = Database.getAllUsers().length;
     if (index < 6) {
       img = new Image("/images/profilepics/" + allUserImages[index].getName());
       profPic.setImage((img));
     }
+    // initialising styling for the pop-up alerts
+    MainMenuController mainMenuController =
+        (MainMenuController) SceneManager.getUiController(SceneManager.AppUi.MAIN_MENU);
+    alert = mainMenuController.initialiseAlert();
   }
 
-  private void setAlert(String title, String header) {
-    // Alert method where we show user an alert based on the input title and header messages
-    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-    alert.setTitle(title);
+  /**
+   * This method sets the text within the alert message so the user is correctly informed.
+   *
+   * @param content a String containing the descriptive reason behind the alert
+   * @param header a String which acts as a title for the alert
+   */
+  private void showAlert(String content, String header) {
+    alert.setTitle("Sorry!");
     alert.setHeaderText(header);
-    alert.showAndWait(); // Show result in GUI
+    alert.setContentText(content);
+    alert.showAndWait(); // Show alert result in GUI
   }
 
+  /**
+   * This method will create a new user profile and assign them a profile picture if the username is
+   * valid and does not already exist. It will then automatically log the user into the game by
+   * switching to the User Menu scene. It finally tidies up the scene so a new user can be created
+   * next time.
+   *
+   * @param event The (button) event which invokes this method.
+   * @throws IOException if an I/O error occurs when writing the user file.
+   */
   @FXML
   private void onCreateProfile(ActionEvent event) throws IOException {
     // Check if the username field contains a space as we do not allow this to be a valid char in
     // username
     if (usernameField.getText().contains(" ")) {
-      setAlert("Username must not contain any spaces", "Invalid username format");
+      showAlert("Username must not contain any spaces", "Invalid username format");
     }
 
     // Check if the username the user entered already exists, as we do not allow duplicate profiles
     // we inform the user
     else if (Database.userExists(usernameField.getText(), false)) {
-      setAlert("A profile with this username already exists", "User already exists");
+      showAlert("A profile with this name already exists", "User already exists");
     }
 
     // If criteria is met then we use our Database class to write the user to system
-
     else {
       String imgName = allUserImages[index].getName();
       User newUser = new User(usernameField.getText(), imgName);
@@ -69,9 +89,9 @@ public class CreateProfileController {
       menuController.setName(usernameField.getText());
       menuController.setUserDetails(img);
 
+      // Create the scene and change the root
       Scene scene = ((Node) event.getSource()).getScene();
       scene.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.USER_MENU));
-
       usernameField.clear();
       index++;
       if (index < 6) {
@@ -81,9 +101,14 @@ public class CreateProfileController {
     }
   }
 
+  /**
+   * This method switches back to the main menu page of the game via a button click.
+   *
+   * @param event The (button) event which invokes this method.
+   */
   @FXML
-  private void onMainMenuSwitch(ActionEvent btnEvent) {
-    Scene scene = ((Node) btnEvent.getSource()).getScene();
+  private void onMainMenuSwitch(ActionEvent event) {
+    Scene scene = ((Node) event.getSource()).getScene();
     scene.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.MAIN_MENU));
   }
 }

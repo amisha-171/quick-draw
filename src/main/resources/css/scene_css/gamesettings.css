@@ -24,5 +24,9 @@
 }
 
 .subtitle{
-    -fx-font-size: 25pc;
+    -fx-background-color: #45a446;
+    -fx-background-radius: 60px;
+    -fx-text-fill: white;
+    -fx-text-alignment: center;
+    -fx-font-size: 25px;
 }

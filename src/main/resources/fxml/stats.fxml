@@ -57,7 +57,7 @@
                         </Label>
                         <HBox alignment="CENTER" prefHeight="50.0" prefWidth="412.0" spacing="10.0">
                            <children>
-                              <ComboBox fx:id="wordDifficultyFilter" onAction="#setWordsPlayed" prefHeight="50.0" prefWidth="228.0" promptText="All Words" visibleRowCount="4" />
+                              <ComboBox fx:id="wordDifficultyFilter" onAction="#onSetWordsPlayedList" prefHeight="50.0" prefWidth="228.0" promptText="All Words" visibleRowCount="4" />
                               <Label fx:id="wordsPlayedLabel" alignment="CENTER" prefHeight="50.0" prefWidth="122.0" text="340/340">
                                  <font>
                                     <Font size="25.0" />

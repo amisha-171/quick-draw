@@ -18,7 +18,7 @@ public class Database {
    * new users.
    *
    * @param user Takes a User object input
-   * @throws IOException
+   * @throws IOException if method fails to write to the corresponding json file
    */
   public static void write(User user) throws IOException {
     // Create a json file for the new profile
@@ -37,7 +37,7 @@ public class Database {
    *
    * @param user Takes input string for username
    * @return Returns a User object associated with the given username if it is valid
-   * @throws IOException
+   * @throws IOException If reading from the associated json file goes wrong
    */
   public static User read(String user) throws IOException {
     // Get string representation in json format of a user file
@@ -91,7 +91,7 @@ public class Database {
    * This method will return an array containing all current registered users.
    *
    * @return Array containing object User
-   * @throws IOException
+   * @throws IOException If obtaining the users goes wrong when reading from the directory
    */
   public static User[] getAllUsers() throws IOException {
     // Initialize an array of type User, and ensure it's empty so that it's returned if users

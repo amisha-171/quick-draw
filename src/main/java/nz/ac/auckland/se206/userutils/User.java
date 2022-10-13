@@ -34,6 +34,12 @@ public class User {
 
   private String imageName;
 
+  /**
+   * Constructor to initialize a new user object when a user first creates a profile
+   *
+   * @param userName The username/profile name of the user's account
+   * @param img The users corresponding image associated with their profile
+   */
   public User(String userName, String img) {
     // Constructor for new user
     this.userName = userName;
@@ -41,7 +47,6 @@ public class User {
     this.wins = 0;
     this.losses = 0;
     this.consecutiveWins = 0;
-    this.totalSolveTime = 0;
     this.numEasyWords = 0;
     this.numMediumWords = 0;
     this.numHardWords = 0;
@@ -71,6 +76,12 @@ public class User {
     return this.wordList.size();
   }
 
+  /**
+   * Takes input a string representing some word a user has played, we check the difficulty of the
+   * word and if the user has not already played this word then we add it to the list
+   *
+   * @param newWord String of some word a user has played
+   */
   public void updateWordList(String newWord) {
     String difficulty = CategorySelector.getWordDifficulty(newWord);
 
@@ -81,15 +92,9 @@ public class User {
 
     // update the user's word count for the appropriate difficulty
     switch (difficulty) {
-      case "E":
-        this.numEasyWords++;
-        break;
-      case "M":
-        this.numMediumWords++;
-        break;
-      case "H":
-        this.numHardWords++;
-        break;
+      case "E" -> this.numEasyWords++;
+      case "M" -> this.numMediumWords++;
+      case "H" -> this.numHardWords++;
     }
   }
 
@@ -97,6 +102,10 @@ public class User {
     return wins;
   }
 
+  /**
+   * If the user wins a game we increment the current win field and also consecutive wins field with
+   * extra logic to determine how many games in a row the user has won
+   */
   public void incrementWins() {
     this.wins++;
     this.consecutiveWins++;
@@ -135,6 +144,12 @@ public class User {
     return Math.round(((double) this.totalSolveTime / (this.wins + this.losses)) * 100) / 100.0;
   }
 
+  /**
+   * This method takes input some integer representing time and if that time integer is smaller than
+   * the current fastest time we set the current fastest time to the parameter
+   *
+   * @param fastestTime Some time value from a game played by the user
+   */
   public void updateFastestTime(int fastestTime) {
     if (fastestTime < this.fastestTime) {
       this.fastestTime = fastestTime;
@@ -217,6 +232,10 @@ public class User {
     return hasTwentyConsecutiveWins;
   }
 
+  /**
+   * Automatically saves the current state of some Users object to its corresponding json file when
+   * called
+   */
   public void saveSelf() {
     try {
       Database.write(this);
