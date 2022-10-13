@@ -60,7 +60,11 @@ public class MainMenuController {
    * @param event The (button) event which invokes this method.
    */
   @FXML
-  private void onSwitchLeaderboard(ActionEvent event) {
+  private void onSwitchLeaderboard(ActionEvent event) throws IOException {
+    // pass in user information to the leaderboard, so it's updated
+    LeaderboardController leaderboardController =
+        (LeaderboardController) SceneManager.getUiController(SceneManager.AppUi.LEADERBOARD);
+    leaderboardController.setLeaderboardContents();
     // switch the scene root to show the leaderboard scene
     Scene scene = ((Node) event.getSource()).getScene();
     scene.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.LEADERBOARD));

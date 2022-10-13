@@ -22,7 +22,7 @@ public class LeaderboardController {
   @FXML private TableColumn<User, ImageView> iconColumn;
 
   public void initialize() throws IOException {
-    setUserInformation();
+    initialiseLeaderboard();
   }
 
   /**
@@ -31,10 +31,9 @@ public class LeaderboardController {
    *
    * @throws IOException if user data cannot be read in correctly.
    */
-  protected void setUserInformation() throws IOException {
+  private void initialiseLeaderboard() throws IOException {
 
     // initialising contents of each section of the leaderboard
-    User[] userList = Database.getAllUsers();
     iconColumn.setCellValueFactory(new PropertyValueFactory<>("userIcon"));
     usernameColumn.setCellValueFactory(new PropertyValueFactory<>("userName"));
     winsColumn.setCellValueFactory(new PropertyValueFactory<>("wins"));
@@ -48,13 +47,24 @@ public class LeaderboardController {
     averageTimeColumn.setReorderable(false);
     leaderboard.setEditable(false);
 
+    setLeaderboardContents();
+  }
+
+  /**
+   * This method sets and updates leaderboard contents before switching to this scene, so that it is
+   * up-to-date.
+   *
+   * @throws IOException if user files can not be found
+   */
+  protected void setLeaderboardContents() throws IOException {
+    User[] userList = Database.getAllUsers();
+    // clearing old information
+    leaderboard.getItems().clear();
     //  adding user information into the leaderboard itself
     for (User user : userList) {
       leaderboard.getItems().add(user);
     }
-    leaderboard.sort();
   }
-
   /**
    * This method switches back to the main menu page of the game via a button click.
    *
