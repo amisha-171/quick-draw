@@ -25,6 +25,9 @@ import nz.ac.auckland.se206.speech.TextToSpeech;
 public class NormalCanvasController extends CanvasController {
   @FXML private Button speakWord;
 
+  /**
+   * Method to disable the start buttons when the user had clicked 'Ready'
+   */
   @Override
   protected void disableStartButtons() {
     // This method when called well disable or enable the required buttons on input
@@ -37,6 +40,9 @@ public class NormalCanvasController extends CanvasController {
     speakWord.setDisable(false);
   }
 
+  /**
+   * Method run when user click "Ready" to disable buttons, set the pen colour, and run the timer.
+   */
   @Override
   protected void onReady() {
     // When player is ready we start the game by enabling canvas, starting the timer etc
@@ -49,6 +55,10 @@ public class NormalCanvasController extends CanvasController {
     this.runTimer();
   }
 
+  /**
+   * Runs the timer for the drawing, in zen mode the counter just counts up because
+   * there is no time limit.
+   */
   @Override
   protected void runTimer() {
     counter = user.getCurrentTimeSetting() + 1;
@@ -111,6 +121,9 @@ public class NormalCanvasController extends CanvasController {
     timer.scheduleAtFixedRate(task, 0, 1000);
   }
 
+  /**
+   * Enables end buttons once the user completes the game (except they're enabled from the start).
+   */
   @Override
   protected void enableEndButtons() {
     // Enable the available buttons user can interact with when the game has ended
@@ -120,6 +133,10 @@ public class NormalCanvasController extends CanvasController {
     speakWord.setDisable(true);
   }
 
+  /**
+   * Uses to text to speech model to speak the word that has been generated for the
+   * user to draw.
+   */
   @FXML
   private void onSpeakWord() {
     // Create text to speech instance

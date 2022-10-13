@@ -27,14 +27,29 @@ public class MenuController implements Initializable {
   @FXML private ImageView gameIcon;
   @FXML private Label userId;
 
+  /**
+   * Initialises the GUI by rendering GUI elements and setting the default value of the game mode
+   * to normal/classic.
+   * @param url URL of GUI
+   * @param resourceBundle Resource bundle of GUI
+   */
   public void initialize(URL url, ResourceBundle resourceBundle) {
     this.currentGameMode = GameMode.NORMAL;
   }
 
+  /**
+   * Used by other controllers to set the username from them.
+   * @param userId The username of the user
+   */
   protected void setName(String userId) {
     this.userName = userId;
   }
 
+  /**
+   * Renders the profile image of the user on the menu page (which was set by default when profile
+   * was created).
+   * @param image The profile image of the user
+   */
   protected void setUserDetails(Image image) {
     ImageView img = new ImageView(image);
     img.setFitHeight(200);
@@ -43,6 +58,9 @@ public class MenuController implements Initializable {
     userId.setText(userName);
   }
 
+  /**
+   * Toggles the game mode to the right, allowing the user to choose between different game modes.
+   */
   @FXML
   private void onGameModeToggleRight() {
     // Handle user toggling through the game modes, for each different game mode we set a different
@@ -69,6 +87,9 @@ public class MenuController implements Initializable {
     }
   }
 
+  /**
+   * Toggles the game mode to the left, allowing the user to choose between different game modes.
+   */
   @FXML
   private void onGameModeToggleLeft() {
     // Handling user toggling to the left
@@ -93,6 +114,11 @@ public class MenuController implements Initializable {
     }
   }
 
+  /**
+   * Switches to the game/canvas page of the game mode requested by the user.
+   * @param event The object associated with button click allowing to switch windows
+   * @throws IOException If there is an error in using dictionary API for hidden mode
+   */
   @FXML
   protected void onNewGame(ActionEvent event) throws IOException {
     switch (this.currentGameMode) {
@@ -129,6 +155,12 @@ public class MenuController implements Initializable {
     }
   }
 
+  /**
+   * Switches to the profile selection page as requested by the user when clicking the
+   * 'Switch Profile' button.
+   * @param event The object associated with button click allowing to switch windows
+   * @throws IOException If there is an error in reading the profile image for the user
+   */
   @FXML
   private void onSwitchProfile(ActionEvent event) throws IOException {
     // Create ProfileController object and set the user info to gui before we load the scene
@@ -140,6 +172,14 @@ public class MenuController implements Initializable {
     scene.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.SELECT_PROFILE));
   }
 
+  /**
+   * Switches to the statistics page as requested by the user when clicking the 'My Statistics'
+   * button.
+   * @param btnEvent The object associated with button click allowing to switch windows
+   * @throws IOException If there is an error in reading the user json files
+   * @throws URISyntaxException If there is another error in reading user data
+   * @throws CsvException If there is an error in reading the words CSV
+   */
   @FXML
   private void onSwitchStats(ActionEvent btnEvent)
       throws IOException, URISyntaxException, CsvException {
@@ -154,6 +194,12 @@ public class MenuController implements Initializable {
     scene.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.STATS));
   }
 
+  /**
+   * Switches to the game settings page as requested by the user when clicking the 'Game Settings'
+   * button.
+   * @param event The object associated with button click allowing to switch windows
+   * @throws IOException If there is an error in reading the user json files for their current settings
+   */
   @FXML
   private void onSwitchSettings(ActionEvent event) throws IOException {
     // Create our current User object and obtain gameSettingsController
@@ -168,6 +214,10 @@ public class MenuController implements Initializable {
     scene.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.SELECT_SETTING));
   }
 
+  /**
+   * Helper method to set the styling for the UI elements of the menu when switching
+   * to hidden mode.
+   */
   private void setHiddenStyle() {
     // Styling for hidden game mode
     gameIcon.setImage(new Image("/images/dictionary.png"));
@@ -176,6 +226,10 @@ public class MenuController implements Initializable {
     startGame.getScene().getRoot().getStylesheets().add("/css/scene_css/hiddenmenu.css");
   }
 
+  /**
+   * Helper method to set the styling for the UI elements of the menu when switching
+   * to zen mode.
+   */
   private void setZenStyle() {
     // Styling for zen game mode
     gameIcon.setImage(new Image("/images/leaf.png"));
@@ -184,6 +238,10 @@ public class MenuController implements Initializable {
     startGame.getScene().getRoot().getStylesheets().add("/css/scene_css/zenmenu.css");
   }
 
+  /**
+   * Helper method to set the styling for the UI elements of the menu when switching
+   * to normal/classic mode.
+   */
   private void setClassicStyle() {
     // Styling for classic game mode
     gameIcon.setImage(new Image("/images/pencil.png"));

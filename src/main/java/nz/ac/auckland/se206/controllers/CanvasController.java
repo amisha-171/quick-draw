@@ -364,12 +364,29 @@ public abstract class CanvasController {
     onInk.setDisable(true);
   }
 
+  /**
+   * Abstract method implemented by different game mode controllers that sets up the canvas once
+   * user is ready, does slightly different things depending on game mode.
+   */
   @FXML
   protected abstract void onReady();
 
+  /**
+   * Abstract method implemented by different game mode controllers that disables the start
+   * buttons when the user has started, disables slightly different buttons depending on
+   * game mode.
+   */
   protected abstract void disableStartButtons();
 
+  /**
+   * Abstract method implemented by different game mode controllers that runs the timer (which
+   * contains tasks for making the user win/lose, different depending on game mode).
+   */
   protected abstract void runTimer();
 
+  /**
+   * Abstract method implemented by different game mode controllers that enables the end buttons
+   * once a game is complete, enables slightly different buttons depending on game modes.
+   */
   protected abstract void enableEndButtons();
 }

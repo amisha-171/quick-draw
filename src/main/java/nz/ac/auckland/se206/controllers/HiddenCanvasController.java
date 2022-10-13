@@ -34,6 +34,11 @@ public class HiddenCanvasController extends CanvasController {
   @FXML private Label definitionLabel;
   @FXML private Button hintButton;
 
+  /**
+   * Generates a word using the CategorySelector and also its associated definition using the
+   * dictionary API.
+   * @throws IOException If there is an error in using the CategorySelector
+   */
   @Override
   protected void generateWord() throws IOException {
     // Create an instance of category selector
@@ -56,12 +61,9 @@ public class HiddenCanvasController extends CanvasController {
         // fetch definition of word from dictionary api, but only if it's a noun
         for (WordEntry currentWordEntry :
             DictionaryLookup.searchWordInfo(randomWord).getWordEntries()) {
-          if (currentWordEntry.getPartOfSpeech().equals("noun")
-              || currentWordEntry.getPartOfSpeech().equals("proper noun")) {
             wordDefined = true;
             this.wordDefinition = currentWordEntry.getDefinitions().get(0);
             break;
-          }
         }
       } catch (WordNotFoundException e) {
         wordDefined = false;
@@ -75,6 +77,9 @@ public class HiddenCanvasController extends CanvasController {
     this.setWord();
   }
 
+  /**
+   * Method to disable the start buttons when the user had clicked 'Ready'
+   */
   @Override
   protected void disableStartButtons() {
     // This method when called well disable or enable the required buttons on input
@@ -87,6 +92,9 @@ public class HiddenCanvasController extends CanvasController {
     mainMenuBtn.setDisable(true);
   }
 
+  /**
+   * Method run when user click "Ready" to disable buttons, set the pen colour, and run the timer.
+   */
   @Override
   protected void onReady() {
     // When player is ready we start the game by enabling canvas, starting the timer etc
@@ -100,6 +108,10 @@ public class HiddenCanvasController extends CanvasController {
     this.runTimer();
   }
 
+  /**
+   * Method to generate a hint by revealing one letter at a time of the hidden word in a hangman-style
+   * fashion, when the user clicks the 'Hint' button.
+   */
   @FXML
   private void onGiveHint() {
     this.numCharactersShown++;
@@ -111,6 +123,10 @@ public class HiddenCanvasController extends CanvasController {
     }
   }
 
+  /**
+   * This method sets the word, depending on how many characters have been revealed,
+   * in the label.
+   */
   protected void setWord() {
     // Create String builder object
     StringBuilder wordString = new StringBuilder();
@@ -127,6 +143,10 @@ public class HiddenCanvasController extends CanvasController {
     wordLabel.setText("Word: " + wordString);
   }
 
+  /**
+   * Runs the timer for the drawing, in zen mode the counter just counts up because
+   * there is no time limit.
+   */
   @Override
   protected void runTimer() {
     counter = user.getCurrentTimeSetting() + 1;
@@ -196,6 +216,9 @@ public class HiddenCanvasController extends CanvasController {
     timer.scheduleAtFixedRate(task, 0, 1000);
   }
 
+  /**
+   * Enables end buttons once the user completes the game (except they're enabled from the start).
+   */
   @Override
   protected void enableEndButtons() {
     // Enable the available buttons user can interact with when the game has ended
@@ -203,19 +226,5 @@ public class HiddenCanvasController extends CanvasController {
     saveImage.setDisable(false);
     mainMenuBtn.setDisable(false);
     hintButton.setDisable(true);
-  }
-
-  @FXML
-  private void onErase() { // If the user wants to erase something we set the pen color to white
-    this.color = Color.WHITE;
-    eraseBtn.setDisable(true);
-    onInk.setDisable(false);
-  }
-
-  @FXML
-  private void onPen() { // If the user wants to switch back to pen we change the pen color to black
-    color = Color.BLACK;
-    eraseBtn.setDisable(false);
-    onInk.setDisable(true);
   }
 }
