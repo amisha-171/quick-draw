@@ -2,6 +2,8 @@ package nz.ac.auckland.se206.userutils;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import nz.ac.auckland.se206.filereader.CategorySelector;
 import nz.ac.auckland.se206.util.enums.AccuracySettings;
 import nz.ac.auckland.se206.util.enums.ConfidenceSettings;
@@ -172,8 +174,12 @@ public class User {
     return userName;
   }
 
-  public String getImageName() {
-    return imageName;
+  public ImageView getUserIcon() {
+    return new ImageView(new Image("/images/profilepics/" + imageName, 64, 64, true, true));
+  }
+
+  public Image getUserImage() {
+    return new Image("/images/profilepics/" + imageName);
   }
 
   public int getCurrentAccuracySetting() {

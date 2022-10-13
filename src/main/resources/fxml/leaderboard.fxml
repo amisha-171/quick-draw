@@ -5,6 +5,9 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 
 <Pane prefHeight="703.0" prefWidth="1057.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.LeaderboardController">
@@ -13,16 +16,30 @@
         <URL value="@../css/app.css" />
     </stylesheets>
    <children>
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="264.0" layoutY="29.0" prefHeight="70.0" prefWidth="530.0" styleClass="header" text="GAME LEADERBOARD" textAlignment="CENTER" />
-      <TableView fx:id="leaderboard" layoutX="14.0" layoutY="139.0" prefHeight="464.0" prefWidth="1022.0">
+      <HBox alignment="CENTER" layoutX="1.0" layoutY="14.0" prefHeight="91.0" prefWidth="1057.0">
+         <children>
+            <ImageView fitHeight="70.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/trophy.png" />
+               </image>
+            </ImageView>
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="70.0" prefWidth="530.0" styleClass="header" text="GAME LEADERBOARD" textAlignment="CENTER" />
+            <ImageView fitHeight="70.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/trophy.png" />
+               </image>
+            </ImageView>
+         </children>
+      </HBox>
+      <TableView fx:id="leaderboard" layoutX="22.0" layoutY="109.0" prefHeight="496.0" prefWidth="1015.0">
         <columns>
-          <TableColumn fx:id="usernameColumn" prefWidth="186.0" text="USER" />
-          <TableColumn fx:id="winsColumn" prefWidth="173.0" text="TOTAL WINS" />
-            <TableColumn fx:id="fastestTimeColumn" prefWidth="226.0" text="FASTEST TIME" />
-            <TableColumn fx:id="averageTimeColumn" prefWidth="217.0" text="AVERAGE TIME" />
-            <TableColumn fx:id="badgesWonColumn" prefWidth="218.0" text="BADGES WON " />
+            <TableColumn fx:id="iconColumn" editable="false" prefWidth="97.0" resizable="false" sortable="false" />
+          <TableColumn fx:id="usernameColumn" editable="false" prefWidth="183.0" resizable="false" sortable="false" text="NAME" />
+          <TableColumn fx:id="winsColumn" editable="false" prefWidth="215.0" resizable="false" sortType="DESCENDING" text="GAMES WON" />
+            <TableColumn fx:id="fastestTimeColumn" editable="false" prefWidth="246.0" resizable="false" text="FASTEST TIME (s)" />
+            <TableColumn fx:id="averageTimeColumn" editable="false" prefWidth="273.0" resizable="false" text="AVERAGE TIME (s)" />
         </columns>
       </TableView>
-      <Button layoutX="402.0" layoutY="633.0" mnemonicParsing="false" onAction="#onMainMenuSwitch" text="Back to Main Menu" />
+      <Button layoutX="402.0" layoutY="638.0" mnemonicParsing="false" onAction="#onMainMenuSwitch" text="Back to Main Menu" />
    </children>
 </Pane>

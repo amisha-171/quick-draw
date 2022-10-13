@@ -8,6 +8,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.ImageView;
 import nz.ac.auckland.se206.userutils.Database;
 import nz.ac.auckland.se206.userutils.User;
 import nz.ac.auckland.se206.util.SceneManager;
@@ -18,13 +19,8 @@ public class LeaderboardController {
   @FXML private TableColumn<User, Integer> winsColumn;
   @FXML private TableColumn<User, Integer> fastestTimeColumn;
   @FXML private TableColumn<User, Integer> averageTimeColumn;
-  @FXML private TableColumn<User, Integer> badgesWonColumn;
+  @FXML private TableColumn<User, ImageView> iconColumn;
 
-  /**
-   * Initialise the user stats on the leaderboard upon app start-up if users currently exist.
-   *
-   * @throws IOException if user data cannot be read in correctly.
-   */
   public void initialize() throws IOException {
     setUserInformation();
   }
@@ -35,17 +31,28 @@ public class LeaderboardController {
    *
    * @throws IOException if user data cannot be read in correctly.
    */
-  private void setUserInformation() throws IOException {
-    User[] userList = Database.getAllUsers();
+  protected void setUserInformation() throws IOException {
 
+    // initialising contents of each section of the leaderboard
+    User[] userList = Database.getAllUsers();
+    iconColumn.setCellValueFactory(new PropertyValueFactory<>("userIcon"));
     usernameColumn.setCellValueFactory(new PropertyValueFactory<>("userName"));
     winsColumn.setCellValueFactory(new PropertyValueFactory<>("wins"));
     fastestTimeColumn.setCellValueFactory(new PropertyValueFactory<>("fastestTime"));
     averageTimeColumn.setCellValueFactory(new PropertyValueFactory<>("averageSolveTime"));
 
+    // ensuring users cannot edit the leaderboard contents
+    winsColumn.setReorderable(false);
+    usernameColumn.setReorderable(false);
+    fastestTimeColumn.setReorderable(false);
+    averageTimeColumn.setReorderable(false);
+    leaderboard.setEditable(false);
+
+    //  adding user information into the leaderboard itself
     for (User user : userList) {
       leaderboard.getItems().add(user);
     }
+    leaderboard.sort();
   }
 
   /**
