@@ -21,6 +21,7 @@ public class CategorySelector {
   /**
    * Instantiates CategorySelector object by reading words from the CSV and placing them in hashmap,
    * categorising them by the word setting. Also creates a map mapping every word to its difficulty.
+   *
    * @throws IOException If there's an IO error in reading the CSV
    * @throws URISyntaxException If there's a URI error in reading the CSV
    * @throws CsvException If there's another error in reading the CSV
@@ -58,8 +59,9 @@ public class CategorySelector {
 
   /**
    * Method to generate a random word for a particular word setting, ensuring that a word that was
-   * previously played by the user is not generated again. If however the user has played all the words
-   * for a given word setting, they may receive any one of those words again.
+   * previously played by the user is not generated again. If however the user has played all the
+   * words for a given word setting, they may receive any one of those words again.
+   *
    * @param wordSetting The word setting desired to select words from
    * @param userWordList List of words that the user has already played
    * @return Random word
@@ -92,6 +94,7 @@ public class CategorySelector {
 
   /**
    * Uses the difficulty hashmap to return the difficulty of a word.
+   *
    * @param word The word for which we want to find the difficulty of
    * @return The difficulty of the word - Either Easy, Medium, or Hard
    */
@@ -100,8 +103,9 @@ public class CategorySelector {
   }
 
   /**
-   * Method to read the CSV and return all the lines from it so as the parse the words
-   * and associated difficulties from them.
+   * Method to read the CSV and return all the lines from it so as the parse the words and
+   * associated difficulties from them.
+   *
    * @return List of strings representing individual lines from the CSV
    * @throws IOException If there's an IO error in reading the CSV
    * @throws CsvException If there's another type of error in reading the CSV

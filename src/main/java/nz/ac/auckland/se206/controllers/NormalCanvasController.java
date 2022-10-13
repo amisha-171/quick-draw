@@ -25,9 +25,7 @@ import nz.ac.auckland.se206.speech.TextToSpeech;
 public class NormalCanvasController extends CanvasController {
   @FXML private Button speakWord;
 
-  /**
-   * Method to disable the start buttons when the user had clicked 'Ready'
-   */
+  /** Method to disable the start buttons when the user had clicked 'Ready' */
   @Override
   protected void disableStartButtons() {
     // This method when called well disable or enable the required buttons on input
@@ -56,8 +54,8 @@ public class NormalCanvasController extends CanvasController {
   }
 
   /**
-   * Runs the timer for the drawing, in zen mode the counter just counts up because
-   * there is no time limit.
+   * Runs the timer for the drawing, in zen mode the counter just counts up because there is no time
+   * limit.
    */
   @Override
   protected void runTimer() {
@@ -82,6 +80,7 @@ public class NormalCanvasController extends CanvasController {
                   () -> {
                     try {
                       onDraw();
+                      informUserOnCurrDrawing();
                     } catch (Exception e) {
                       throw new RuntimeException(e);
                     }
@@ -134,8 +133,7 @@ public class NormalCanvasController extends CanvasController {
   }
 
   /**
-   * Uses to text to speech model to speak the word that has been generated for the
-   * user to draw.
+   * Uses to text to speech model to speak the word that has been generated for the user to draw.
    */
   @FXML
   private void onSpeakWord() {
