@@ -21,6 +21,7 @@ public class SceneManager {
     STATS,
     SELECT_SETTING,
     SELECT_PROFILE,
+    LEADERBOARD,
     BADGES
   }
 

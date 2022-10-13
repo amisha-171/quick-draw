@@ -124,7 +124,12 @@ public class ProfileController {
    * @param event The (button) event which invokes this method.
    */
   @FXML
-  private void onMainMenuSwitch(ActionEvent event) {
+  private void onMainMenuSwitch(ActionEvent event) throws IOException {
+    // setting appropriate functionality based on new number of users going back to main menu
+    MainMenuController mainMenuController =
+        (MainMenuController) SceneManager.getUiController(SceneManager.AppUi.MAIN_MENU);
+    mainMenuController.setUsableButtons();
+
     // Logic to switch back to the main menu scene
     Scene scene = ((Node) event.getSource()).getScene();
     scene.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.MAIN_MENU));

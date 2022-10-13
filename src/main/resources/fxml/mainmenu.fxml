@@ -38,12 +38,17 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="57.0" prefWidth="1049.0" spacing="20.0">
                <children>
-                  <Button fx:id="switchProfile" alignment="CENTER" mnemonicParsing="false" onAction="#onSwitchProfile" prefHeight="69.0" prefWidth="203.0" text="Select Profile" textFill="WHITE">
+                  <Button fx:id="switchProfile" alignment="CENTER" disable="true" mnemonicParsing="false" onAction="#onSwitchProfile" prefHeight="69.0" prefWidth="203.0" text="Select Profile" textFill="WHITE">
                      <font>
                         <Font name="Bell MT Bold" size="16.0" />
                      </font>
                   </Button>
-            <Button fx:id="createProfile" mnemonicParsing="false" onAction="#onCreateProfile" prefHeight="56.0" prefWidth="222.0" text="Create Profile" />
+            <Button fx:id="createProfile" mnemonicParsing="false" onAction="#onCreateProfile" prefHeight="56.0" prefWidth="213.0" text="Create Profile" />
+                  <Button fx:id="viewLeaderboard" alignment="CENTER" disable="true" mnemonicParsing="false" onAction="#onSwitchLeaderboard" prefHeight="56.0" prefWidth="243.0" text="View Leaderboard" textFill="WHITE">
+                     <font>
+                        <Font name="Bell MT Bold" size="16.0" />
+                     </font>
+                  </Button>
                </children>
                <VBox.margin>
                   <Insets />

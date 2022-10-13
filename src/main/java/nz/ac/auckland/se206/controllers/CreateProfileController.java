@@ -10,6 +10,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
 import nz.ac.auckland.se206.userutils.Database;
 import nz.ac.auckland.se206.userutils.User;
 import nz.ac.auckland.se206.util.SceneManager;
@@ -36,9 +37,29 @@ public class CreateProfileController {
       profPic.setImage((img));
     }
     // initialising styling for the pop-up alerts
-    MainMenuController mainMenuController =
-        (MainMenuController) SceneManager.getUiController(SceneManager.AppUi.MAIN_MENU);
-    alert = mainMenuController.initialiseAlert();
+    alert = initialiseAlert();
+  }
+
+  /**
+   * This method initialises the alert used for this scene, including adding CSS styling and adding
+   * the correct image graphics and icons.
+   *
+   * @return The alert that was created and styled.
+   */
+  protected Alert initialiseAlert() {
+    Alert basicAlert = new Alert(Alert.AlertType.INFORMATION);
+    // applying the stylesheet for alerts and the style class.
+    basicAlert
+        .getDialogPane()
+        .getStylesheets()
+        .add(getClass().getResource("/css/alert.css").toString());
+    basicAlert.getDialogPane().getStyleClass().add("dialog");
+    basicAlert.setTitle("Sorry!");
+    // adding custom icon to the alert window & the top of the window
+    basicAlert.setGraphic((new ImageView("/images/sad.png")));
+    Stage stage = (Stage) basicAlert.getDialogPane().getScene().getWindow();
+    stage.getIcons().add(new Image("images/pencil.png"));
+    return basicAlert;
   }
 
   /**

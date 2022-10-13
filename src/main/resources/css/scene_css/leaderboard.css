@@ -1,0 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Gorditas&family=Viga&display=swap');
+
+.root {
+    -fx-font-family: 'Viga', sans-serif;
+
+}
+
+.table-view{
+    -fx-text-fill: #cc960e;
+    -fx-font-size: 25px;
+    -fx-background-color: white;
+}
+
+
+.table-view .column-header {
+    -fx-background-color: #45a446;
+}
+
+.table-view .column-header .label {
+    -fx-text-fill: white;
+}
+
+.table-row-cell:odd{
+    -fx-background-color: -fx-table-cell-border-color, #cc960e;
+}
