@@ -181,13 +181,13 @@ public abstract class CanvasController {
   }
 
   protected void informUserOnCurrDrawing() throws TranslateException {
-    Task<Void> progTask =
-        new Task<Void>() {
+    Task<Void> queryTopHundredPredictions =
+        new Task<>() {
           final List<Classifications.Classification> predList =
               model.getPredictions(getCurrentSnapshot(), 100);
 
           @Override
-          protected Void call() throws Exception {
+          protected Void call() {
             List<String> preds =
                 new ArrayList<>(
                     predList.stream().map(Classifications.Classification::getClassName).toList());
@@ -210,9 +210,9 @@ public abstract class CanvasController {
             return null;
           }
         };
-    Thread progThrd = new Thread(progTask);
-    progThrd.setDaemon(true);
-    progThrd.start();
+    Thread queryThread = new Thread(queryTopHundredPredictions);
+    queryThread.setDaemon(true);
+    queryThread.start();
   }
 
   /**
