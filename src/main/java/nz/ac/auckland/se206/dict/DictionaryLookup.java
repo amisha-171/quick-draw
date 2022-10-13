@@ -3,17 +3,17 @@ package nz.ac.auckland.se206.dict;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import org.json.JSONArray;
-import org.json.JSONObject;
-import org.json.JSONTokener;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 import okhttp3.ResponseBody;
+import org.json.JSONArray;
+import org.json.JSONObject;
+import org.json.JSONTokener;
 
 public class DictionaryLookup {
 
-  private final static String API_URL = "https://api.dictionaryapi.dev/api/v2/entries/en/";
+  private static final String API_URL = "https://api.dictionaryapi.dev/api/v2/entries/en/";
 
   public static WordInfo searchWordInfo(String query) throws IOException, WordNotFoundException {
 
@@ -67,5 +67,4 @@ public class DictionaryLookup {
 
     return new WordInfo(query, entries);
   }
-
 }
