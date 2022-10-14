@@ -7,7 +7,6 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import nz.ac.auckland.se206.userutils.Database;
 import nz.ac.auckland.se206.userutils.User;
@@ -72,8 +71,8 @@ public class ProfileController {
     users = Database.getAllUsers();
     // Helper method to set user info the scene depending on the current user index handled by
     // onToggleUsers
-    Image img = new Image("/images/profilepics/" + users[userIndex].getImageName());
-    userImage.setImage(img); // Set the current users corresponding image
+    userImage.setImage(
+        users[userIndex].getUserImage()); // Set the current users corresponding image
     userLabel.setText(users[userIndex].getUserName()); // Set current users username
 
     // Handle button visibility based on the current profile
@@ -107,11 +106,10 @@ public class ProfileController {
       // Create MenuController instance and set the current users name in that scene
       MenuController menucontroller =
           (MenuController) SceneManager.getUiController(SceneManager.AppUi.USER_MENU);
-      menucontroller.setName(allUsers[userIndex].getUserName());
-      // Obtain current users corresponding image
-      Image img = new Image("/images/profilepics/" + allUsers[userIndex].getImageName());
       // Set the required user details to the new scene we are about to load
-      menucontroller.setUserDetails(img);
+      menucontroller.setName(allUsers[userIndex].getUserName());
+      // Set the current users corresponding image
+      menucontroller.setUserDetails(allUsers[userIndex].getUserImage());
       // Create the new scene and switch out the root to that of the new scene we want to load
       Scene scene = ((Node) event.getSource()).getScene();
       scene.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.USER_MENU));
@@ -124,7 +122,12 @@ public class ProfileController {
    * @param event The (button) event which invokes this method.
    */
   @FXML
-  private void onMainMenuSwitch(ActionEvent event) {
+  private void onMainMenuSwitch(ActionEvent event) throws IOException {
+    // setting appropriate functionality based on new number of users going back to main menu
+    MainMenuController mainMenuController =
+        (MainMenuController) SceneManager.getUiController(SceneManager.AppUi.MAIN_MENU);
+    mainMenuController.setUsableButtons();
+
     // Logic to switch back to the main menu scene
     Scene scene = ((Node) event.getSource()).getScene();
     scene.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.MAIN_MENU));

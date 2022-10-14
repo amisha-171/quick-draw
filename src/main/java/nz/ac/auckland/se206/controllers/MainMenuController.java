@@ -5,78 +5,79 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.stage.Stage;
+import javafx.scene.control.Button;
 import nz.ac.auckland.se206.userutils.Database;
 import nz.ac.auckland.se206.util.SceneManager;
 
 public class MainMenuController {
-  private Alert alert;
 
-  /** Initialise the alert of this scene and associate it with relevant CSS styling */
-  public void initialize() {
-    this.alert = initialiseAlert();
+  @FXML private Button switchProfile;
+  @FXML private Button createProfile;
+  @FXML private Button viewLeaderboard;
+
+  /**
+   * Initialise the usable buttons of this scene depending on the number of users created
+   *
+   * @throws IOException if user data cannot be read in correctly.
+   */
+  public void initialize() throws IOException {
+    setUsableButtons();
   }
 
   /**
-   * This method initialises the alert used for this scene, including adding CSS styling and adding
-   * the correct image graphics and icons.
+   * This method initialises the accessible buttons by the user when on the main menu, if max users
+   * are created you cannot create more, while if none are created, you cannot switch users or view
+   * leaderboard.
    *
-   * @return The alert that was created and styled.
+   * @throws IOException if user data cannot be read in correctly.
    */
-  protected Alert initialiseAlert() {
-    Alert basicAlert = new Alert(Alert.AlertType.INFORMATION);
-    // applying the stylesheet for alerts and the style class.
-    basicAlert
-        .getDialogPane()
-        .getStylesheets()
-        .add(getClass().getResource("/css/alert.css").toString());
-    basicAlert.getDialogPane().getStyleClass().add("dialog");
-    basicAlert.setTitle("Sorry!");
-    // adding custom icon to the alert window & the top of the window
-    basicAlert.setGraphic((new ImageView("/images/sad.png")));
-    Stage stage = (Stage) basicAlert.getDialogPane().getScene().getWindow();
-    stage.getIcons().add(new Image("images/pencil.png"));
-    return basicAlert;
+  protected void setUsableButtons() throws IOException {
+    if (Database.getAllUsers().length != 0) {
+      switchProfile.setDisable(false);
+      viewLeaderboard.setDisable(false);
+    }
+
+    if (Database.getAllUsers().length == 6) {
+      createProfile.setDisable(true);
+    }
   }
 
   /**
    * This method switches to the user profile select screen upon clicking the switch profile button.
-   * It will alert the user if no profiles have been created yet.
    *
    * @param event The (button) event which invokes this method.
    */
   @FXML
-  private void onSwitchProfile(ActionEvent event) throws IOException {
-    if (Database.getAllUsers().length == 0) {
-      // showing alert warning to user if no user profiles exist.
-      alert.setHeaderText("No Users Found!");
-      alert.setContentText("Please create a new profile.");
-      alert.show();
-      return;
-    }
-    // switch the scene root to show the select profile scene
+  private void onSwitchProfile(ActionEvent event) {
     Scene scene = ((Node) event.getSource()).getScene();
     scene.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.SELECT_PROFILE));
   }
 
   /**
-   * This method switches back to the new user profile creation screen upon pressing the create
-   * profile button. It will show an alert if the max number of user profiles (6) have been created.
+   * This method switches to the leaderboard screen upon clicking the corresponding button. It will
+   * also call methods to update information in the leaderboard if required.
    *
    * @param event The (button) event which invokes this method.
    */
   @FXML
-  private void onCreateProfile(ActionEvent event) throws IOException {
-    if (Database.getAllUsers().length == 6) {
-      // showing alert warning to user if max number of user profiles exist.
-      alert.setHeaderText("Unable to Create Profile!");
-      alert.setContentText("A max of 6 user accounts are allowed.");
-      alert.show();
-      return;
-    }
+  private void onSwitchLeaderboard(ActionEvent event) throws IOException {
+    // pass in user information to the leaderboard, so it's updated
+    LeaderboardController leaderboardController =
+        (LeaderboardController) SceneManager.getUiController(SceneManager.AppUi.LEADERBOARD);
+    leaderboardController.setLeaderboardContents();
+    // switch the scene root to show the leaderboard scene
+    Scene scene = ((Node) event.getSource()).getScene();
+    scene.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.LEADERBOARD));
+  }
+
+  /**
+   * This method switches back to the new user profile creation screen upon pressing the create
+   * profile button.
+   *
+   * @param event The (button) event which invokes this method.
+   */
+  @FXML
+  private void onCreateProfile(ActionEvent event) {
     // switch the scene root to show the profile creation scene
     Scene scene = ((Node) event.getSource()).getScene();
     scene.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.CREATE_PROFILE));

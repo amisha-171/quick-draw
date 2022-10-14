@@ -87,9 +87,9 @@ public class StatsController {
    * difficulty is selected through the difficultyFilter. It also updates the GUI to show a count of
    * these words.
    *
-   * @throws IOException
-   * @throws URISyntaxException
-   * @throws CsvException
+   * @throws IOException if there is an IO issue in reading in the words played
+   * @throws URISyntaxException If there's a URI error in reading the words played
+   * @throws CsvException If there's another type of error in reading the words played
    */
   @FXML
   protected void onSetWordsPlayedList() throws IOException, URISyntaxException, CsvException {
@@ -151,8 +151,11 @@ public class StatsController {
    * This method will update the label of words played by checking which difficulty is selected and
    * formatting a string to print the user's played words of that difficulty.
    *
-   * @param difficulty the chosen difficulty to filter words with.
+   * @param difficulty If there's an IO error in reading the CSV file containing the words.
    * @param currentUser the current user.
+   * @throws IOException if there is an IO issue in reading in the words played
+   * @throws URISyntaxException If there's a URI error in reading the words played
+   * @throws CsvException If there's another type of error in reading the words played
    */
   private void updateWordsPlayedLabel(String difficulty, User currentUser)
       throws IOException, URISyntaxException, CsvException {
