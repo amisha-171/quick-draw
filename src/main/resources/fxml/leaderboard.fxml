@@ -9,6 +9,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
 
 <Pane prefHeight="703.0" prefWidth="1057.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.LeaderboardController">
     <stylesheets>
@@ -31,15 +32,34 @@
             </ImageView>
          </children>
       </HBox>
-      <TableView fx:id="leaderboard" layoutX="22.0" layoutY="109.0" prefHeight="496.0" prefWidth="1015.0">
+      <TableView fx:id="leaderboard" layoutX="95.0" layoutY="116.0" prefHeight="467.0" prefWidth="932.0">
         <columns>
-            <TableColumn fx:id="iconColumn" editable="false" prefWidth="97.0" resizable="false" sortable="false" />
-          <TableColumn fx:id="usernameColumn" editable="false" prefWidth="183.0" resizable="false" sortable="false" text="NAME" />
-          <TableColumn fx:id="winsColumn" editable="false" prefWidth="215.0" resizable="false" sortType="DESCENDING" text="GAMES WON" />
-            <TableColumn fx:id="fastestTimeColumn" editable="false" prefWidth="246.0" resizable="false" text="FASTEST TIME (s)" />
-            <TableColumn fx:id="averageTimeColumn" editable="false" prefWidth="273.0" resizable="false" text="AVERAGE TIME (s)" />
+            <TableColumn fx:id="iconColumn" editable="false" prefWidth="77.0" resizable="false" sortable="false" />
+          <TableColumn fx:id="usernameColumn" editable="false" prefWidth="154.0" resizable="false" sortable="false" text="NAME" />
+          <TableColumn fx:id="winsColumn" editable="false" prefWidth="199.0" resizable="false" sortType="DESCENDING" text="GAMES WON" />
+            <TableColumn fx:id="fastestTimeColumn" editable="false" minWidth="0.0" prefWidth="232.0" resizable="false" text="FASTEST TIME (s)" />
+            <TableColumn fx:id="averageTimeColumn" editable="false" minWidth="0.0" prefWidth="267.0" resizable="false" text="AVERAGE TIME (s)" />
         </columns>
       </TableView>
-      <Button layoutX="402.0" layoutY="638.0" mnemonicParsing="false" onAction="#onMainMenuSwitch" text="Back to Main Menu" />
+      <Button layoutX="402.0" layoutY="630.0" mnemonicParsing="false" onAction="#onMainMenuSwitch" text="Back to Main Menu" />
+      <VBox alignment="CENTER" layoutX="1.0" layoutY="172.0" prefHeight="197.0" prefWidth="104.0" spacing="15.0">
+         <children>
+            <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/rankings/first.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/rankings/second.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/rankings/third.png" />
+               </image>
+            </ImageView>
+         </children>
+      </VBox>
    </children>
 </Pane>

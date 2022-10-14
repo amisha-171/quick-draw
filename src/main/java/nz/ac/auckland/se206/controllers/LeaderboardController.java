@@ -1,6 +1,7 @@
 package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
+import java.util.List;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -19,7 +20,7 @@ public class LeaderboardController {
   @FXML private TableColumn<User, Integer> winsColumn;
   @FXML private TableColumn<User, Integer> fastestTimeColumn;
   @FXML private TableColumn<User, Integer> averageTimeColumn;
-  @FXML private TableColumn<User, ImageView> iconColumn;
+  @FXML private TableColumn<List<ImageView>, ImageView> iconColumn;
 
   public void initialize() throws IOException {
     initialiseLeaderboard();
@@ -52,6 +53,7 @@ public class LeaderboardController {
    *
    * @throws IOException if user files can not be found
    */
+  @SuppressWarnings("unchecked")
   protected void setLeaderboardContents() throws IOException {
     User[] userList = Database.getAllUsers();
     // clearing old information
