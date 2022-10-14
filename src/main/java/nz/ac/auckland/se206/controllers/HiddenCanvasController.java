@@ -97,8 +97,9 @@ public class HiddenCanvasController extends CanvasController {
    */
   @Override
   protected void onReady() throws MalformedURLException {
-    // When player is ready we start the game by enabling canvas, starting the timer etc
+    // Play music associated with hidden game mode when user is ready
     playGameModeMusic("src/main/resources/sounds/detective.mp3");
+    // When player is ready we start the game by enabling canvas, starting the timer etc
     canvas.setDisable(false);
     this.onInk.setDisable(true);
     this.readyButton.setDisable(true);
@@ -107,6 +108,7 @@ public class HiddenCanvasController extends CanvasController {
     this.hintButton.setDisable(false);
     timerCount.setVisible(true);
     this.runTimer();
+    volumeSlider.setDisable(false);
   }
 
   /**
@@ -234,5 +236,6 @@ public class HiddenCanvasController extends CanvasController {
     saveImage.setDisable(false);
     mainMenuBtn.setDisable(false);
     hintButton.setDisable(true);
+    volumeSlider.setDisable(true);
   }
 }

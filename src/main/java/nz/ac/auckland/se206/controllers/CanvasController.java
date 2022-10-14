@@ -317,6 +317,7 @@ public abstract class CanvasController {
     predLabel.setText(
         "Click the \"Ready!\" button to start drawing the word you see and view the predictions!");
     timerCount.setTextFill(Color.color(0.8, 0.6, 0.06));
+    volumeSlider.adjustValue(50.0);
   }
 
   /**
@@ -326,7 +327,10 @@ public abstract class CanvasController {
    */
   @FXML
   private void onUserMenuSwitch(ActionEvent event) {
-    songPlayer.stop();
+    // Check if any music is playing if so stop it and change the scene and its root
+    if (songPlayer != null) {
+      songPlayer.stop();
+    }
     Scene scene = ((Node) event.getSource()).getScene();
     scene.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.USER_MENU));
   }
@@ -379,6 +383,7 @@ public abstract class CanvasController {
    * freeze or lag the GUI.
    */
   protected void textSpeak() {
+    songPlayer.setMute(true);
     // Put the speech to text inside a thread to not freeze GUI at 10 seconds
     TextToSpeech speak = new TextToSpeech();
     Task<Void> speechTask =
@@ -387,6 +392,7 @@ public abstract class CanvasController {
           protected Void call() {
             // Speak there is 10 seconds remaining
             speak.speak("10 Seconds");
+            Platform.runLater(() -> songPlayer.setMute(false));
             return null;
           }
         };
@@ -424,10 +430,24 @@ public abstract class CanvasController {
     onInk.setDisable(true);
   }
 
+  /**
+   * This method is responsible for playing the music associated with some game mode, it is accessed
+   * by its child classes which pass it the path of the music for that game mode.
+   *
+   * @param currModeSongPath String of the current path of the game mode we wish to play music for
+   * @throws MalformedURLException When a malformed URL is generated from the string path of the
+   *     music
+   */
   protected void playGameModeMusic(String currModeSongPath) throws MalformedURLException {
+    // Set the media we wish to play for some game mode
     song = new Media(new File(currModeSongPath).toURI().toURL().toString());
+    // Initialize the media player instance
     songPlayer = new MediaPlayer(song);
+    // If the current music is finished, we play the music again from the beginning, this only
+    // applies to zen mode as user can draw for any amount of time however for the other game modes
+    // the music duration is greater than any time limit
     songPlayer.setOnEndOfMedia(() -> songPlayer.seek(Duration.ZERO));
+    // Play the song
     songPlayer.play();
   }
 

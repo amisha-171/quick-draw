@@ -44,6 +44,7 @@ public class NormalCanvasController extends CanvasController {
    */
   @Override
   protected void onReady() throws MalformedURLException {
+    // Play music associated with normal game mode when user is ready
     playGameModeMusic("src/main/resources/sounds/jazz.mp3");
     // When player is ready we start the game by enabling canvas, starting the timer etc
     canvas.setDisable(false);
@@ -52,6 +53,7 @@ public class NormalCanvasController extends CanvasController {
     this.clearButton.setDisable(false);
     this.eraseBtn.setDisable(false);
     timerCount.setVisible(true);
+    volumeSlider.setDisable(false);
     this.runTimer();
   }
 
@@ -134,6 +136,7 @@ public class NormalCanvasController extends CanvasController {
     saveImage.setDisable(false);
     mainMenuBtn.setDisable(false);
     speakWord.setDisable(true);
+    volumeSlider.setDisable(true);
   }
 
   /**

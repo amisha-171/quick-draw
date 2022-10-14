@@ -84,8 +84,9 @@ public class ZenCanvasController extends CanvasController {
    */
   @Override
   protected void onReady() throws MalformedURLException {
+    // Start playing the song associated with zen mode when user is ready
+    playGameModeMusic("src/main/resources/sounds/zen.mp3");
     // When player is ready we start the game by enabling canvas, starting the timer etc
-    playGameModeMusic("src/main/resources/sounds/funny.mp3");
     this.color = this.colourSwitcher.getValue();
     this.canvas.setDisable(false);
     this.onInk.setDisable(true);
@@ -94,6 +95,7 @@ public class ZenCanvasController extends CanvasController {
     this.eraseBtn.setDisable(false);
     this.timerCount.setVisible(true);
     this.runTimer();
+    volumeSlider.setDisable(false);
   }
 
   /**
@@ -270,8 +272,12 @@ public class ZenCanvasController extends CanvasController {
     predLabel.setText(
         "Click the \"Ready!\" button to start drawing the word you see and view the predictions!");
     timerCount.setTextFill(Color.color(0.8, 0.6, 0.06));
+    // On a new game we stop the song playing if the user has pressed ready, and disable the volume
+    // slider until they press ready on the new game again
     if (this.songPlayer != null) {
       this.songPlayer.stop();
     }
+    volumeSlider.setDisable(true);
+    volumeSlider.adjustValue(50.0);
   }
 }

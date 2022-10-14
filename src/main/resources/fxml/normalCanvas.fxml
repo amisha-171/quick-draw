@@ -19,7 +19,7 @@
       <children>
             <HBox alignment="CENTER" prefHeight="154.0" prefWidth="1046.0">
                <children>
-                  <Slider fx:id="volumeSlider" value="50.0" />
+                  <Slider fx:id="volumeSlider" disable="true" value="50.0" />
               <Label fx:id="wordLabel" alignment="CENTER" prefHeight="55.0" textAlignment="CENTER" wrapText="true">
                 <font>
                   <Font size="45.0" />
