@@ -1,5 +1,7 @@
 package nz.ac.auckland.se206.controllers;
 
+import java.net.MalformedURLException;
+import java.net.URISyntaxException;
 import java.util.Timer;
 import java.util.TimerTask;
 import javafx.application.Platform;
@@ -8,6 +10,7 @@ import javafx.fxml.FXML;
 import javafx.scene.Cursor;
 import javafx.scene.control.Button;
 import javafx.scene.paint.Color;
+import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.speech.TextToSpeech;
 
 /**
@@ -42,7 +45,9 @@ public class NormalCanvasController extends CanvasController {
    * Method run when user click "Ready" to disable buttons, set the pen colour, and run the timer.
    */
   @Override
-  protected void onReady() {
+  protected void onReady() throws MalformedURLException {
+    // Play music associated with normal game mode when user is ready
+    playGameModeMusic("src/main/resources/sounds/funny.mp3");
     // When player is ready we start the game by enabling canvas, starting the timer etc
     canvas.setDisable(false);
     this.onInk.setDisable(true);
@@ -50,6 +55,7 @@ public class NormalCanvasController extends CanvasController {
     this.clearButton.setDisable(false);
     this.eraseBtn.setDisable(false);
     timerCount.setVisible(true);
+    volumeSlider.setDisable(false);
     this.runTimer();
   }
 
@@ -96,6 +102,9 @@ public class NormalCanvasController extends CanvasController {
               user.incrementWins();
               user.updateWordList(wordChosen);
               user.saveSelf();
+              songPlayer.stop();
+              playNotification(true);
+              App.playBackgroundMusic();
             }
             if (counter == 0) {
               // If times up cancel the timer, disable canvas and change GUI state
@@ -107,13 +116,15 @@ public class NormalCanvasController extends CanvasController {
               user.updateWordList(wordChosen);
               user.updateTotalSolveTime(60);
               user.saveSelf();
+              songPlayer.stop();
+              playNotification(false);
+              App.playBackgroundMusic();
               // Inform user they have lost
               Platform.runLater(() -> wordLabel.setText("You lost, better luck next time!"));
             }
             if (counter == 10) {
               // If 10 seconds remain we change the timer to color to red instead of blue
               Platform.runLater(() -> timerCount.setTextFill(Color.RED));
-              textSpeak();
             }
           }
         };
@@ -130,6 +141,7 @@ public class NormalCanvasController extends CanvasController {
     saveImage.setDisable(false);
     mainMenuBtn.setDisable(false);
     speakWord.setDisable(true);
+    volumeSlider.setDisable(true);
   }
 
   /**

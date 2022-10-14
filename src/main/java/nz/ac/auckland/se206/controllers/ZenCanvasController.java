@@ -3,6 +3,7 @@ package nz.ac.auckland.se206.controllers;
 import ai.djl.ModelException;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.util.Timer;
 import java.util.TimerTask;
 import javafx.application.Platform;
@@ -12,6 +13,7 @@ import javafx.scene.Cursor;
 import javafx.scene.control.Button;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.paint.Color;
+import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.ml.DoodlePrediction;
 import nz.ac.auckland.se206.speech.TextToSpeech;
 
@@ -82,7 +84,9 @@ public class ZenCanvasController extends CanvasController {
    * Method run when user click "Ready" to disable buttons, set the pen colour, and run the timer.
    */
   @Override
-  protected void onReady() {
+  protected void onReady() throws MalformedURLException {
+    // Start playing the song associated with zen mode when user is ready
+    playGameModeMusic("src/main/resources/sounds/zen.mp3");
     // When player is ready we start the game by enabling canvas, starting the timer etc
     this.color = this.colourSwitcher.getValue();
     this.canvas.setDisable(false);
@@ -92,6 +96,7 @@ public class ZenCanvasController extends CanvasController {
     this.eraseBtn.setDisable(false);
     this.timerCount.setVisible(true);
     this.runTimer();
+    volumeSlider.setDisable(false);
   }
 
   /**
@@ -258,6 +263,11 @@ public class ZenCanvasController extends CanvasController {
    */
   @Override
   protected void onNewGame() throws IOException {
+    //change song to the background song, if we're currently on zen mode
+    if (songPlayer != null) { //check that we're currently still on zen mode (since the song player will be not null)
+      songPlayer.stop();
+      App.playBackgroundMusic();
+    }
     // If the user wants to play a new game we clear the canvas and the user gets a new word to draw
     timerRunning = false; // cancel the timer
     onClear();
@@ -268,5 +278,12 @@ public class ZenCanvasController extends CanvasController {
     predLabel.setText(
         "Click the \"Ready!\" button to start drawing the word you see and view the predictions!");
     timerCount.setTextFill(Color.color(0.8, 0.6, 0.06));
+    // On a new game we stop the song playing if the user has pressed ready, and disable the volume
+    // slider until they press ready on the new game again
+    if (this.songPlayer != null) {
+      this.songPlayer.stop();
+    }
+    volumeSlider.setDisable(true);
+    volumeSlider.adjustValue(50.0);
   }
 }

@@ -2,6 +2,7 @@ package nz.ac.auckland.se206.controllers;
 
 import com.opencsv.exceptions.CsvException;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -11,6 +12,7 @@ import javafx.scene.Cursor;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
+import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.dict.DictionaryLookup;
 import nz.ac.auckland.se206.dict.WordEntry;
 import nz.ac.auckland.se206.dict.WordNotFoundException;
@@ -95,7 +97,9 @@ public class HiddenCanvasController extends CanvasController {
    * Method run when user click "Ready" to disable buttons, set the pen colour, and run the timer.
    */
   @Override
-  protected void onReady() {
+  protected void onReady() throws MalformedURLException {
+    // Play music associated with hidden game mode when user is ready
+    playGameModeMusic("src/main/resources/sounds/detective.mp3");
     // When player is ready we start the game by enabling canvas, starting the timer etc
     canvas.setDisable(false);
     this.onInk.setDisable(true);
@@ -105,6 +109,7 @@ public class HiddenCanvasController extends CanvasController {
     this.hintButton.setDisable(false);
     timerCount.setVisible(true);
     this.runTimer();
+    volumeSlider.setDisable(false);
   }
 
   /**
@@ -188,6 +193,9 @@ public class HiddenCanvasController extends CanvasController {
                     enableEndButtons();
                     definitionLabel.setText("The word was " + wordChosen + "!");
                   });
+              songPlayer.stop();
+              playNotification(true);
+              App.playBackgroundMusic();
             }
             if (counter <= 0) {
               // If times up cancel the timer, disable canvas and change GUI state
@@ -197,6 +205,9 @@ public class HiddenCanvasController extends CanvasController {
               user.updateWordList(wordChosen);
               user.updateTotalSolveTime(60);
               user.saveSelf();
+              songPlayer.stop();
+              playNotification(false);
+              App.playBackgroundMusic();
               // Inform user they have lost
               Platform.runLater(
                   () -> {
@@ -213,7 +224,6 @@ public class HiddenCanvasController extends CanvasController {
             if (counter == 10) {
               // If 10 seconds remain we change the timer to color to red instead of blue
               Platform.runLater(() -> timerCount.setTextFill(Color.RED));
-              textSpeak();
             }
           }
         };
@@ -230,5 +240,6 @@ public class HiddenCanvasController extends CanvasController {
     saveImage.setDisable(false);
     mainMenuBtn.setDisable(false);
     hintButton.setDisable(true);
+    volumeSlider.setDisable(true);
   }
 }

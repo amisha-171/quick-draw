@@ -8,6 +8,7 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,11 +25,17 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.control.Slider;
 import javafx.scene.image.Image;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import javax.imageio.ImageIO;
+
+import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.filereader.CategorySelector;
 import nz.ac.auckland.se206.ml.DoodlePrediction;
 import nz.ac.auckland.se206.speech.TextToSpeech;
@@ -60,7 +67,10 @@ public abstract class CanvasController {
   @FXML protected Button mainMenuBtn;
   protected User user;
   @FXML protected ProgressBar predBar;
+  @FXML protected Slider volumeSlider;
   protected double currProgress = 0.0;
+  protected Media song;
+  protected MediaPlayer songPlayer;
 
   // mouse coordinates
   protected double currentX;
@@ -71,6 +81,11 @@ public abstract class CanvasController {
    * the drawing, and we load the ML model.
    */
   public void initialize() {
+    volumeSlider
+        .valueProperty()
+        .addListener(
+            (observable, oldValue, newValue) ->
+                songPlayer.setVolume(volumeSlider.getValue() * 0.01));
     startGame();
   }
 
@@ -304,6 +319,7 @@ public abstract class CanvasController {
     predLabel.setText(
         "Click the \"Ready!\" button to start drawing the word you see and view the predictions!");
     timerCount.setTextFill(Color.color(0.8, 0.6, 0.06));
+    volumeSlider.adjustValue(50.0);
   }
 
   /**
@@ -313,6 +329,11 @@ public abstract class CanvasController {
    */
   @FXML
   private void onUserMenuSwitch(ActionEvent event) {
+    // Check if any music is playing if so stop it and change the scene and its root
+    if (songPlayer != null) {
+      songPlayer.stop();
+    }
+    App.playBackgroundMusic();
     Scene scene = ((Node) event.getSource()).getScene();
     scene.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.USER_MENU));
   }
@@ -361,28 +382,6 @@ public abstract class CanvasController {
   }
 
   /**
-   * This method runs Text To Speech warning of 10 seconds left in a background thread as to not
-   * freeze or lag the GUI.
-   */
-  protected void textSpeak() {
-    // Put the speech to text inside a thread to not freeze GUI at 10 seconds
-    TextToSpeech speak = new TextToSpeech();
-    Task<Void> speechTask =
-        new Task<>() {
-          @Override
-          protected Void call() {
-            // Speak there is 10 seconds remaining
-            speak.speak("10 Seconds");
-            return null;
-          }
-        };
-    // Begin the thread given the task
-    Thread timeLeftThread = new Thread(speechTask);
-    timeLeftThread.setDaemon(true);
-    timeLeftThread.start();
-  }
-
-  /**
    * This method disables certain GUI buttons when it is inappropriate for a user to access them.
    */
   protected void disableButtons() {
@@ -411,11 +410,51 @@ public abstract class CanvasController {
   }
 
   /**
+   * This method is responsible for playing the music associated with some game mode, it is accessed
+   * by its child classes which pass it the path of the music for that game mode.
+   *
+   * @param currModeSongPath String of the current path of the game mode we wish to play music for
+   * @throws MalformedURLException When a malformed URL is generated from the string path of the
+   *     music
+   */
+  public void playGameModeMusic(String currModeSongPath) throws MalformedURLException {
+    App.pauseBackgroundMusic(); //pause background music of app
+    // Set the media we wish to play for some game mode
+    song = new Media(new File(currModeSongPath).toURI().toURL().toString());
+    // Initialize the media player instance
+    songPlayer = new MediaPlayer(song);
+    // If the current music is finished, we play the music again from the beginning, this only
+    // applies to zen mode as user can draw for any amount of time however for the other game modes
+    // the music duration is greater than any time limit
+    songPlayer.setOnEndOfMedia(() -> songPlayer.seek(Duration.ZERO));
+    // Play the song
+    songPlayer.play();
+  }
+
+  /**
+   * This method plays the win/lose notification sound upon conclusion of a game.
+   * @param won Boolean indicating whether the user won or not
+   * @throws URISyntaxException If there's an exception in converting to URI
+   */
+  public void playNotification(boolean won) {
+    String soundFilePath = won ? "/sounds/win.wav" : "/sounds/lose.wav";
+    Media notification = null;
+    //catch exception if error in reading the sound file
+    try {
+      notification = new Media(App.class.getResource(soundFilePath).toURI().toString());
+    } catch (URISyntaxException e) {
+      e.printStackTrace();
+    }
+    MediaPlayer notificationPlayer = new MediaPlayer(notification);
+    notificationPlayer.play();
+  }
+
+  /**
    * Abstract method implemented by different game mode controllers that sets up the canvas once
    * user is ready, does slightly different things depending on game mode.
    */
   @FXML
-  protected abstract void onReady();
+  protected abstract void onReady() throws MalformedURLException;
 
   /**
    * Abstract method implemented by different game mode controllers that disables the start buttons

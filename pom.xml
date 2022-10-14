@@ -135,6 +135,11 @@
       <artifactId>json</artifactId>
       <version>20220320</version>
     </dependency>
+    <dependency>
+      <groupId>org.openjfx</groupId>
+      <artifactId>javafx-media</artifactId>
+      <version>18.0.1</version>
+    </dependency>
   </dependencies>
   <groupId>nz.ac.auckland.se206</groupId>
   <modelVersion>4.0.0</modelVersion>
