@@ -32,7 +32,7 @@
             </ImageView>
          </children>
       </HBox>
-      <TableView fx:id="leaderboard" layoutX="95.0" layoutY="116.0" prefHeight="467.0" prefWidth="932.0">
+      <TableView fx:id="leaderboard" layoutX="95.0" layoutY="116.0" prefHeight="479.0" prefWidth="932.0">
         <columns>
             <TableColumn fx:id="iconColumn" editable="false" prefWidth="77.0" resizable="false" sortable="false" />
           <TableColumn fx:id="usernameColumn" editable="false" prefWidth="154.0" resizable="false" sortable="false" text="NAME" />
