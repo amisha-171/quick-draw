@@ -1,6 +1,7 @@
 package nz.ac.auckland.se206.controllers;
 
 import java.net.MalformedURLException;
+import java.net.URISyntaxException;
 import java.util.Timer;
 import java.util.TimerTask;
 import javafx.application.Platform;
@@ -102,6 +103,7 @@ public class NormalCanvasController extends CanvasController {
               user.updateWordList(wordChosen);
               user.saveSelf();
               songPlayer.stop();
+              playNotification(true);
               App.playBackgroundMusic();
             }
             if (counter == 0) {
@@ -115,6 +117,7 @@ public class NormalCanvasController extends CanvasController {
               user.updateTotalSolveTime(60);
               user.saveSelf();
               songPlayer.stop();
+              playNotification(false);
               App.playBackgroundMusic();
               // Inform user they have lost
               Platform.runLater(() -> wordLabel.setText("You lost, better luck next time!"));

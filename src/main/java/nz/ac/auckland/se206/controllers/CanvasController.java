@@ -440,7 +440,7 @@ public abstract class CanvasController {
    * @throws MalformedURLException When a malformed URL is generated from the string path of the
    *     music
    */
-  protected void playGameModeMusic(String currModeSongPath) throws MalformedURLException {
+  public void playGameModeMusic(String currModeSongPath) throws MalformedURLException {
     App.pauseBackgroundMusic(); //pause background music of app
     // Set the media we wish to play for some game mode
     song = new Media(new File(currModeSongPath).toURI().toURL().toString());
@@ -452,6 +452,24 @@ public abstract class CanvasController {
     songPlayer.setOnEndOfMedia(() -> songPlayer.seek(Duration.ZERO));
     // Play the song
     songPlayer.play();
+  }
+
+  /**
+   * This method plays the win/lose notification sound upon conclusion of a game.
+   * @param won Boolean indicating whether the user won or not
+   * @throws URISyntaxException If there's an exception in converting to URI
+   */
+  public void playNotification(boolean won) {
+    String soundFilePath = won ? "/sounds/win.wav" : "/sounds/lose.wav";
+    Media notification = null;
+    //catch exception if error in reading the sound file
+    try {
+      notification = new Media(App.class.getResource(soundFilePath).toURI().toString());
+    } catch (URISyntaxException e) {
+      e.printStackTrace();
+    }
+    MediaPlayer notificationPlayer = new MediaPlayer(notification);
+    notificationPlayer.play();
   }
 
   /**
