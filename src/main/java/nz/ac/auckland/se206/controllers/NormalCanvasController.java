@@ -9,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.scene.Cursor;
 import javafx.scene.control.Button;
 import javafx.scene.paint.Color;
+import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.speech.TextToSpeech;
 
 /**
@@ -45,7 +46,7 @@ public class NormalCanvasController extends CanvasController {
   @Override
   protected void onReady() throws MalformedURLException {
     // Play music associated with normal game mode when user is ready
-    playGameModeMusic("src/main/resources/sounds/jazz.mp3");
+    playGameModeMusic("src/main/resources/sounds/funny.mp3");
     // When player is ready we start the game by enabling canvas, starting the timer etc
     canvas.setDisable(false);
     this.onInk.setDisable(true);
@@ -101,6 +102,7 @@ public class NormalCanvasController extends CanvasController {
               user.updateWordList(wordChosen);
               user.saveSelf();
               songPlayer.stop();
+              App.playBackgroundMusic();
             }
             if (counter == 0) {
               // If times up cancel the timer, disable canvas and change GUI state
@@ -113,6 +115,7 @@ public class NormalCanvasController extends CanvasController {
               user.updateTotalSolveTime(60);
               user.saveSelf();
               songPlayer.stop();
+              App.playBackgroundMusic();
               // Inform user they have lost
               Platform.runLater(() -> wordLabel.setText("You lost, better luck next time!"));
             }

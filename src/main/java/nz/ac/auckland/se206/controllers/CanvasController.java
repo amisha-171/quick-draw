@@ -34,6 +34,8 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import javax.imageio.ImageIO;
+
+import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.filereader.CategorySelector;
 import nz.ac.auckland.se206.ml.DoodlePrediction;
 import nz.ac.auckland.se206.speech.TextToSpeech;
@@ -439,6 +441,7 @@ public abstract class CanvasController {
    *     music
    */
   protected void playGameModeMusic(String currModeSongPath) throws MalformedURLException {
+    App.pauseBackgroundMusic(); //pause background music of app
     // Set the media we wish to play for some game mode
     song = new Media(new File(currModeSongPath).toURI().toURL().toString());
     // Initialize the media player instance
