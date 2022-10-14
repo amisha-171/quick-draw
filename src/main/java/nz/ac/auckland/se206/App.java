@@ -81,10 +81,17 @@ public class App extends Application {
         });
   }
 
+  /**
+   * Static method that can be used by other controllers to pause the background
+   * music.
+   */
   public static void pauseBackgroundMusic() {
     backgroundSongPlayer.stop();
   }
 
+  /**
+   * Static method that can be used by other controllers to play the background music.
+   */
   public static void playBackgroundMusic() {
     backgroundSongPlayer.play();
   }
