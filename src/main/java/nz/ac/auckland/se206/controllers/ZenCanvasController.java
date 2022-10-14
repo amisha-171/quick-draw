@@ -18,10 +18,9 @@ import nz.ac.auckland.se206.speech.TextToSpeech;
 public class ZenCanvasController extends CanvasController {
   @FXML private ColorPicker colourSwitcher;
   @FXML private Button speakWord;
+  private boolean timerRunning;
 
-  /**
-   * Sets up the game by setting up the canvas and deep learning model.
-   */
+  /** Sets up the game by setting up the canvas and deep learning model. */
   @Override
   protected void startGame() {
     // Disable the buttons in the GUI as fit
@@ -29,6 +28,7 @@ public class ZenCanvasController extends CanvasController {
 
     isContent = false;
     color = Color.WHITE;
+    timerRunning = false;
 
     canvas.setOnMouseEntered(e -> canvas.setCursor(Cursor.HAND));
 
@@ -68,9 +68,7 @@ public class ZenCanvasController extends CanvasController {
     }
   }
 
-  /**
-   * Method to disable the start buttons when the user had clicked 'Ready'
-   */
+  /** Method to disable the start buttons when the user had clicked 'Ready' */
   @Override
   protected void disableStartButtons() {
     // This method when called well disable or enable the required buttons on input
@@ -78,12 +76,6 @@ public class ZenCanvasController extends CanvasController {
     eraseBtn.setDisable(true);
     speakWord.setDisable(false);
     clearButton.setDisable(true);
-  }
-
-  /** This method is called when the "Clear" button is pressed to clear the canvas. */
-  @FXML
-  private void onClear() {
-    graphic.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
   }
 
   /**
@@ -103,13 +95,14 @@ public class ZenCanvasController extends CanvasController {
   }
 
   /**
-   * Runs the timer for the drawing, in zen mode the counter just counts up because
-   * there is no time limit.
+   * Runs the timer for the drawing, in zen mode the counter just counts up because there is no time
+   * limit.
    */
   @Override
   protected void runTimer() {
     counter = -1;
     Timer timer = new Timer();
+    timerRunning = true;
     TimerTask task =
         new TimerTask() {
           @Override
@@ -126,10 +119,15 @@ public class ZenCanvasController extends CanvasController {
                   () -> {
                     try {
                       onDraw();
+                      informUserOnCurrDrawing();
                     } catch (Exception e) {
                       throw new RuntimeException(e);
                     }
                   });
+            }
+
+            if (!timerRunning) {
+              timer.cancel();
             }
           }
         };
@@ -145,12 +143,9 @@ public class ZenCanvasController extends CanvasController {
     newGameBtn.setDisable(false);
     saveImage.setDisable(false);
     mainMenuBtn.setDisable(false);
-    speakWord.setDisable(true);
   }
 
-  /**
-   * Runs the threads for generating the predictions once the user starts drawing.
-   */
+  /** Runs the threads for generating the predictions once the user starts drawing. */
   @Override
   protected void onDraw() {
     // Set the image to be the current snapshot which is called every second, image is final for
@@ -205,8 +200,7 @@ public class ZenCanvasController extends CanvasController {
   }
 
   /**
-   * Switches to the eraser tool and disables the pen tool when the user clicks
-   * the eraser button.
+   * Switches to the eraser tool and disables the pen tool when the user clicks the eraser button.
    */
   @FXML
   private void onErase() { // If the user wants to erase something we set the pen color to white
@@ -215,10 +209,7 @@ public class ZenCanvasController extends CanvasController {
     onInk.setDisable(false);
   }
 
-  /**
-   * Switches to the pen tool and disables the eraser tool when the user clicks the
-   * pen button.
-   */
+  /** Switches to the pen tool and disables the eraser tool when the user clicks the pen button. */
   @FXML
   private void onPen() { // If the user wants to switch back to pen we change the pen color to black
     this.color = this.colourSwitcher.getValue();
@@ -227,8 +218,8 @@ public class ZenCanvasController extends CanvasController {
   }
 
   /**
-   * Changes the pen colour using the JavaFX colour picker widget, to allow
-   * user to draw with different colours.
+   * Changes the pen colour using the JavaFX colour picker widget, to allow user to draw with
+   * different colours.
    */
   @FXML
   private void switchPenColour() {
@@ -238,20 +229,44 @@ public class ZenCanvasController extends CanvasController {
   }
 
   /**
-   * Uses to text to speech model to speak the word that has been generated for the
-   * user to draw.
+   * Uses to text to speech model to speak the word that has been generated for the user to draw.
    */
   @FXML
   private void onSpeakWord() {
     // Create text to speech instance
     TextToSpeech speech = new TextToSpeech();
     // Create task for thread and put speak inside
-    new Task<>() {
-      @Override
-      protected Void call() {
-        speech.speak(wordChosen);
-        return null;
-      }
-    };
+    Task<Void> voiceThread =
+        new Task<>() {
+          @Override
+          protected Void call() {
+            speech.speak(wordChosen);
+            return null;
+          }
+        };
+    // Create thread for bThread and start it when this method is called
+    Thread speechThread = new Thread(voiceThread);
+    speechThread.setDaemon(true);
+    speechThread.start();
+  }
+
+  /**
+   * Method to create a new game when the user clicks "New Game". Overrides parent method because
+   * this method is used to cancel the timer for zen mode
+   *
+   * @throws IOException If there is an error in regenerating the word
+   */
+  @Override
+  protected void onNewGame() throws IOException {
+    // If the user wants to play a new game we clear the canvas and the user gets a new word to draw
+    timerRunning = false; // cancel the timer
+    onClear();
+    timerCount.setVisible(false);
+    readyButton.setDisable(false);
+    setUserName(userName);
+    startGame();
+    predLabel.setText(
+        "Click the \"Ready!\" button to start drawing the word you see and view the predictions!");
+    timerCount.setTextFill(Color.color(0.8, 0.6, 0.06));
   }
 }

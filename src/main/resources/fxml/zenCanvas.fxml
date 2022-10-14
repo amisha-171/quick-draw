@@ -7,6 +7,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ColorPicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
@@ -37,18 +38,19 @@
                         <Color />
                      </value>
                   </ColorPicker>
+                  <ProgressBar fx:id="predBar" prefWidth="200.0" progress="0.0" />
                     </children>
                 </HBox>
-                <HBox alignment="CENTER" prefHeight="421.0" prefWidth="1046.0" spacing="20.0">
+                <HBox alignment="CENTER" prefHeight="438.0" prefWidth="1046.0" spacing="20.0">
                     <children>
-                        <VBox alignment="CENTER" prefHeight="424.0" prefWidth="331.0">
+                        <VBox alignment="CENTER" prefHeight="437.0" prefWidth="313.0">
                             <children>
-                                <Label fx:id="predTitle" alignment="CENTER" contentDisplay="CENTER" prefHeight="0.0" prefWidth="232.0" text="PREDICTIONS" textAlignment="RIGHT" textFill="#0022ff">
+                                <Label fx:id="predTitle" alignment="CENTER" contentDisplay="CENTER" prefHeight="3.0" prefWidth="232.0" text="PREDICTIONS" textAlignment="RIGHT" textFill="#0022ff">
                                     <font>
                                         <Font name="Courier New Bold" size="34.0" />
                                     </font>
                                 </Label>
-                                <Label fx:id="predLabel" alignment="TOP_LEFT" contentDisplay="TOP" prefHeight="377.0" prefWidth="288.0" text="Click the &quot;Ready!&quot; button to start drawing the word you see and view the predictions!" wrapText="true">
+                                <Label fx:id="predLabel" alignment="TOP_LEFT" contentDisplay="TOP" prefHeight="408.0" prefWidth="288.0" text="Click the &quot;Ready!&quot; button to start drawing the word you see and view the predictions!" wrapText="true">
                                     <font>
                                         <Font name="Candara Light" size="25.0" />
                                     </font>
