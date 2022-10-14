@@ -2,6 +2,7 @@ package nz.ac.auckland.se206.controllers;
 
 import com.opencsv.exceptions.CsvException;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -95,8 +96,9 @@ public class HiddenCanvasController extends CanvasController {
    * Method run when user click "Ready" to disable buttons, set the pen colour, and run the timer.
    */
   @Override
-  protected void onReady() {
+  protected void onReady() throws MalformedURLException {
     // When player is ready we start the game by enabling canvas, starting the timer etc
+    playGameModeMusic("src/main/resources/sounds/detective.mp3");
     canvas.setDisable(false);
     this.onInk.setDisable(true);
     this.readyButton.setDisable(true);
@@ -188,6 +190,7 @@ public class HiddenCanvasController extends CanvasController {
                     enableEndButtons();
                     definitionLabel.setText("The word was " + wordChosen + "!");
                   });
+              songPlayer.stop();
             }
             if (counter <= 0) {
               // If times up cancel the timer, disable canvas and change GUI state
@@ -197,6 +200,7 @@ public class HiddenCanvasController extends CanvasController {
               user.updateWordList(wordChosen);
               user.updateTotalSolveTime(60);
               user.saveSelf();
+              songPlayer.stop();
               // Inform user they have lost
               Platform.runLater(
                   () -> {

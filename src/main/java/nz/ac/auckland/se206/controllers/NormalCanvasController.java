@@ -1,5 +1,6 @@
 package nz.ac.auckland.se206.controllers;
 
+import java.net.MalformedURLException;
 import java.util.Timer;
 import java.util.TimerTask;
 import javafx.application.Platform;
@@ -42,7 +43,8 @@ public class NormalCanvasController extends CanvasController {
    * Method run when user click "Ready" to disable buttons, set the pen colour, and run the timer.
    */
   @Override
-  protected void onReady() {
+  protected void onReady() throws MalformedURLException {
+    playGameModeMusic("src/main/resources/sounds/jazz.mp3");
     // When player is ready we start the game by enabling canvas, starting the timer etc
     canvas.setDisable(false);
     this.onInk.setDisable(true);
@@ -96,6 +98,7 @@ public class NormalCanvasController extends CanvasController {
               user.incrementWins();
               user.updateWordList(wordChosen);
               user.saveSelf();
+              songPlayer.stop();
             }
             if (counter == 0) {
               // If times up cancel the timer, disable canvas and change GUI state
@@ -107,6 +110,7 @@ public class NormalCanvasController extends CanvasController {
               user.updateWordList(wordChosen);
               user.updateTotalSolveTime(60);
               user.saveSelf();
+              songPlayer.stop();
               // Inform user they have lost
               Platform.runLater(() -> wordLabel.setText("You lost, better luck next time!"));
             }

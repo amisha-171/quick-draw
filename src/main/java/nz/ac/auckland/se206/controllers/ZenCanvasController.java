@@ -3,6 +3,7 @@ package nz.ac.auckland.se206.controllers;
 import ai.djl.ModelException;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.util.Timer;
 import java.util.TimerTask;
 import javafx.application.Platform;
@@ -82,8 +83,9 @@ public class ZenCanvasController extends CanvasController {
    * Method run when user click "Ready" to disable buttons, set the pen colour, and run the timer.
    */
   @Override
-  protected void onReady() {
+  protected void onReady() throws MalformedURLException {
     // When player is ready we start the game by enabling canvas, starting the timer etc
+    playGameModeMusic("src/main/resources/sounds/funny.mp3");
     this.color = this.colourSwitcher.getValue();
     this.canvas.setDisable(false);
     this.onInk.setDisable(true);
@@ -237,13 +239,13 @@ public class ZenCanvasController extends CanvasController {
     TextToSpeech speech = new TextToSpeech();
     // Create task for thread and put speak inside
     Task<Void> voiceThread =
-            new Task<>() {
-              @Override
-              protected Void call() {
-                speech.speak(wordChosen);
-                return null;
-              }
-            };
+        new Task<>() {
+          @Override
+          protected Void call() {
+            speech.speak(wordChosen);
+            return null;
+          }
+        };
     // Create thread for bThread and start it when this method is called
     Thread speechThread = new Thread(voiceThread);
     speechThread.setDaemon(true);
@@ -253,19 +255,23 @@ public class ZenCanvasController extends CanvasController {
   /**
    * Method to create a new game when the user clicks "New Game". Overrides parent method because
    * this method is used to cancel the timer for zen mode
+   *
    * @throws IOException If there is an error in regenerating the word
    */
   @Override
   protected void onNewGame() throws IOException {
     // If the user wants to play a new game we clear the canvas and the user gets a new word to draw
-    timerRunning = false; //cancel the timer
+    timerRunning = false; // cancel the timer
     onClear();
     timerCount.setVisible(false);
     readyButton.setDisable(false);
     setUserName(userName);
     startGame();
     predLabel.setText(
-            "Click the \"Ready!\" button to start drawing the word you see and view the predictions!");
+        "Click the \"Ready!\" button to start drawing the word you see and view the predictions!");
     timerCount.setTextFill(Color.color(0.8, 0.6, 0.06));
+    if (this.songPlayer != null) {
+      this.songPlayer.stop();
+    }
   }
 }

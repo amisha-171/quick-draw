@@ -8,6 +8,7 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,10 +25,14 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.control.Slider;
 import javafx.scene.image.Image;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import javax.imageio.ImageIO;
 import nz.ac.auckland.se206.filereader.CategorySelector;
 import nz.ac.auckland.se206.ml.DoodlePrediction;
@@ -60,7 +65,10 @@ public abstract class CanvasController {
   @FXML protected Button mainMenuBtn;
   protected User user;
   @FXML protected ProgressBar predBar;
+  @FXML protected Slider volumeSlider;
   protected double currProgress = 0.0;
+  protected Media song;
+  protected MediaPlayer songPlayer;
 
   // mouse coordinates
   protected double currentX;
@@ -71,6 +79,11 @@ public abstract class CanvasController {
    * the drawing, and we load the ML model.
    */
   public void initialize() {
+    volumeSlider
+        .valueProperty()
+        .addListener(
+            (observable, oldValue, newValue) ->
+                songPlayer.setVolume(volumeSlider.getValue() * 0.01));
     startGame();
   }
 
@@ -174,7 +187,7 @@ public abstract class CanvasController {
 
   /** This method is called when the "Clear" button is pressed to clear the drawing canvas. */
   @FXML
-  private void onClear() {
+  protected void onClear() {
     graphic.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
     currProgress = 0;
     predBar.setProgress(currProgress);
@@ -313,6 +326,7 @@ public abstract class CanvasController {
    */
   @FXML
   private void onUserMenuSwitch(ActionEvent event) {
+    songPlayer.stop();
     Scene scene = ((Node) event.getSource()).getScene();
     scene.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.USER_MENU));
   }
@@ -410,12 +424,19 @@ public abstract class CanvasController {
     onInk.setDisable(true);
   }
 
+  protected void playGameModeMusic(String currModeSongPath) throws MalformedURLException {
+    song = new Media(new File(currModeSongPath).toURI().toURL().toString());
+    songPlayer = new MediaPlayer(song);
+    songPlayer.setOnEndOfMedia(() -> songPlayer.seek(Duration.ZERO));
+    songPlayer.play();
+  }
+
   /**
    * Abstract method implemented by different game mode controllers that sets up the canvas once
    * user is ready, does slightly different things depending on game mode.
    */
   @FXML
-  protected abstract void onReady();
+  protected abstract void onReady() throws MalformedURLException;
 
   /**
    * Abstract method implemented by different game mode controllers that disables the start buttons
