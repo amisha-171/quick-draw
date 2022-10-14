@@ -174,7 +174,7 @@ public abstract class CanvasController {
 
   /** This method is called when the "Clear" button is pressed to clear the drawing canvas. */
   @FXML
-  private void onClear() {
+  protected void onClear() {
     graphic.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
     currProgress = 0;
     predBar.setProgress(currProgress);
