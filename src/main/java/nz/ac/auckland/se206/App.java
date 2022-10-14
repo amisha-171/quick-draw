@@ -48,6 +48,7 @@ public class App extends Application {
     SceneManager.addUi(SceneManager.AppUi.STATS, getFxmlLoader("stats"));
     SceneManager.addUi(SceneManager.AppUi.SELECT_SETTING, getFxmlLoader("gamesettings"));
     SceneManager.addUi(SceneManager.AppUi.BADGES, getFxmlLoader("badges"));
+    SceneManager.addUi(SceneManager.AppUi.LEADERBOARD, getFxmlLoader("leaderboard"));
 
     Scene scene = new Scene(SceneManager.getUiRoot(SceneManager.AppUi.MAIN_MENU), 1057, 703);
     stage.setScene(scene);
