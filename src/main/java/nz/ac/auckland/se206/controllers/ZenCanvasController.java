@@ -13,6 +13,7 @@ import javafx.scene.Cursor;
 import javafx.scene.control.Button;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.paint.Color;
+import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.ml.DoodlePrediction;
 import nz.ac.auckland.se206.speech.TextToSpeech;
 
@@ -262,6 +263,11 @@ public class ZenCanvasController extends CanvasController {
    */
   @Override
   protected void onNewGame() throws IOException {
+    //change song to the background song, if we're currently on zen mode
+    if (songPlayer != null) { //check that we're currently still on zen mode (since the song player will be not null)
+      songPlayer.stop();
+      App.playBackgroundMusic();
+    }
     // If the user wants to play a new game we clear the canvas and the user gets a new word to draw
     timerRunning = false; // cancel the timer
     onClear();

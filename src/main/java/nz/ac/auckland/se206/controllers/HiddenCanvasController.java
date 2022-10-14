@@ -12,6 +12,7 @@ import javafx.scene.Cursor;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
+import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.dict.DictionaryLookup;
 import nz.ac.auckland.se206.dict.WordEntry;
 import nz.ac.auckland.se206.dict.WordNotFoundException;
@@ -193,6 +194,8 @@ public class HiddenCanvasController extends CanvasController {
                     definitionLabel.setText("The word was " + wordChosen + "!");
                   });
               songPlayer.stop();
+              playNotification(true);
+              App.playBackgroundMusic();
             }
             if (counter <= 0) {
               // If times up cancel the timer, disable canvas and change GUI state
@@ -203,6 +206,8 @@ public class HiddenCanvasController extends CanvasController {
               user.updateTotalSolveTime(60);
               user.saveSelf();
               songPlayer.stop();
+              playNotification(false);
+              App.playBackgroundMusic();
               // Inform user they have lost
               Platform.runLater(
                   () -> {

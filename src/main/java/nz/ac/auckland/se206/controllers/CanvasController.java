@@ -333,6 +333,7 @@ public abstract class CanvasController {
     if (songPlayer != null) {
       songPlayer.stop();
     }
+    App.playBackgroundMusic();
     Scene scene = ((Node) event.getSource()).getScene();
     scene.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.USER_MENU));
   }
