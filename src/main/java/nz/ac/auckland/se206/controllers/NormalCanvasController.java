@@ -125,7 +125,6 @@ public class NormalCanvasController extends CanvasController {
             if (counter == 10) {
               // If 10 seconds remain we change the timer to color to red instead of blue
               Platform.runLater(() -> timerCount.setTextFill(Color.RED));
-              textSpeak();
             }
           }
         };

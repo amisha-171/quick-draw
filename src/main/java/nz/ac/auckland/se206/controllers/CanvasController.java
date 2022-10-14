@@ -382,30 +382,6 @@ public abstract class CanvasController {
   }
 
   /**
-   * This method runs Text To Speech warning of 10 seconds left in a background thread as to not
-   * freeze or lag the GUI.
-   */
-  protected void textSpeak() {
-    songPlayer.setMute(true);
-    // Put the speech to text inside a thread to not freeze GUI at 10 seconds
-    TextToSpeech speak = new TextToSpeech();
-    Task<Void> speechTask =
-        new Task<>() {
-          @Override
-          protected Void call() {
-            // Speak there is 10 seconds remaining
-            speak.speak("10 Seconds");
-            Platform.runLater(() -> songPlayer.setMute(false));
-            return null;
-          }
-        };
-    // Begin the thread given the task
-    Thread timeLeftThread = new Thread(speechTask);
-    timeLeftThread.setDaemon(true);
-    timeLeftThread.start();
-  }
-
-  /**
    * This method disables certain GUI buttons when it is inappropriate for a user to access them.
    */
   protected void disableButtons() {
