@@ -56,7 +56,7 @@ public class User {
     this.hasTwentyConsecutiveWins = false;
     this.hasTenConsecutiveWins = false;
     this.hasFiveConsecutiveWins = false;
-    this.fastestTime = 100; // 100 is default value because fastest time cannot be more than 60
+    this.fastestTime = 0;
     // set user image
     this.imageName = img;
     // set default game settings
@@ -148,12 +148,13 @@ public class User {
 
   /**
    * This method takes input some integer representing time and if that time integer is smaller than
-   * the current fastest time we set the current fastest time to the parameter
+   * the current fastest time (or if this is the first game) we set the current fastest time to
+   * the parameter.
    *
    * @param fastestTime Some time value from a game played by the user
    */
   public void updateFastestTime(int fastestTime) {
-    if (fastestTime < this.fastestTime) {
+    if ((fastestTime < this.fastestTime) || (this.wins + this.losses == 0)) {
       this.fastestTime = fastestTime;
     }
   }

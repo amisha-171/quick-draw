@@ -74,12 +74,13 @@ public class StatsController {
     gamesPlayedChart.setData(pieChartData);
 
     // setting the fastest and average time labels
-    if (currentUser.getFastestTime() == 100) {
-      fastestTimeLabel.setText("0.0 seconds");
+    if (currentUser.getWins() + currentUser.getLosses() > 0) {
+      fastestTimeLabel.setText(currentUser.getFastestTime() + " seconds");
+      avgTimeLabel.setText(currentUser.getAverageSolveTime() + " seconds");
     } else {
-      fastestTimeLabel.setText(currentUser.getFastestTime() + ".0 seconds");
+      fastestTimeLabel.setText("N/A");
+      avgTimeLabel.setText("N/A");
     }
-    avgTimeLabel.setText(currentUser.getAverageSolveTime() + " seconds");
   }
 
   /**
