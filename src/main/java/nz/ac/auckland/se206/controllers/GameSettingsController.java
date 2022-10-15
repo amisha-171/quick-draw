@@ -21,6 +21,10 @@ public class GameSettingsController {
   private @FXML Label wordLabel;
   private @FXML Label timeLabel;
   private @FXML Label confidenceLabel;
+  private @FXML Label accuracyDesc;
+  private @FXML Label wordsDesc;
+  private @FXML Label timeDesc;
+  private @FXML Label confidenceDesc;
   private @FXML Button upAccuracy;
   private @FXML Button upTime;
   private @FXML Button upConfidence;
@@ -76,7 +80,7 @@ public class GameSettingsController {
     wordLabel.setText(wordList[diffIndex[1]]);
     timeLabel.setText(timeList[diffIndex[2]]);
     confidenceLabel.setText(confidenceList[diffIndex[3]]);
-    // updating the labels tooltips and word colours based on difficulty.
+    // updating the labels desc and word colours based on difficulty.
     updateDifficultyLabel(accuracyLabel);
     updateDifficultyLabel(wordLabel);
     updateDifficultyLabel(confidenceLabel);
@@ -226,7 +230,7 @@ public class GameSettingsController {
     }
 
     if (label.equals(accuracyLabel)) {
-      // Logic to set tooltip text based on difficulty for accuracy
+      // Logic to set description text based on difficulty for accuracy
       int topCount = 0;
       switch (difficulty) {
         case "EASY" -> topCount = 3;
@@ -234,15 +238,14 @@ public class GameSettingsController {
         case "HARD" -> topCount = 1;
       }
       if (!difficulty.equals("HARD")) {
-        label
-            .getTooltip()
-            .setText("You can win if the word to draw is in the Top " + topCount + " Guesses!");
+        accuracyDesc.setText(
+            "You can win if the word to draw is in the Top " + topCount + " Guesses!");
       } else {
-        label.getTooltip().setText("You can win if the word to draw is the Top Guess!");
+        accuracyDesc.setText("You can win if the word to draw is the Top Guess!");
       }
 
     } else if (label.equals(wordLabel)) {
-      // Logic to set tooltip text based on difficulty for word setting
+      // Logic to set text based on difficulty for word setting
       String wordDifficulties = null;
       switch (difficulty) {
         case "EASY" -> wordDifficulties = "Easy";
@@ -250,10 +253,10 @@ public class GameSettingsController {
         case "HARD" -> wordDifficulties = "Easy, Medium and Hard";
         case "MASTER" -> wordDifficulties = "Hard";
       }
-      label.getTooltip().setText("Only " + wordDifficulties + " words are chosen to draw!");
+      wordsDesc.setText("Only " + wordDifficulties + " words are chosen to draw!");
 
     } else if (label.equals(timeLabel)) {
-      // Logic to set tooltip text based on difficulty for time setting
+      // Logic to set desc text based on difficulty for time setting
       int timeLimit = 0;
       switch (difficulty) {
         case "EASY" -> timeLimit = 60;
@@ -261,10 +264,10 @@ public class GameSettingsController {
         case "HARD" -> timeLimit = 30;
         case "MASTER" -> timeLimit = 15;
       }
-      label.getTooltip().setText("You have a " + timeLimit + " second time limit to draw!");
+      timeDesc.setText("You have a " + timeLimit + " second time limit to draw!");
 
     } else {
-      // Logic to set tooltip text based on difficulty for confidence setting
+      // Logic to set description text based on difficulty for confidence setting
       String confidence = null;
       switch (difficulty) {
         case "EASY" -> confidence = "not very";
@@ -272,7 +275,7 @@ public class GameSettingsController {
         case "HARD" -> confidence = "";
         case "MASTER" -> confidence = "super";
       }
-      label.getTooltip().setText("We'll make guesses we are " + confidence + " confident about!");
+      confidenceDesc.setText("We'll make guesses we are " + confidence + " confident about!");
     }
   }
 }

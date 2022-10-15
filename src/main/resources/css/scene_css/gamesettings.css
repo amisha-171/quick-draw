@@ -1,32 +1,35 @@
 .difficulty-label{
-    -fx-font-size: 35px;
+    -fx-font-size: 30px;
     -fx-background-color: white;
     -fx-padding: 10px;
     -fx-background-radius: 60px;
 }
 
+.description-label{
+    -fx-font-size: 26px;
+    -fx-background-color: white;
+    -fx-padding: 10px;
+    -fx-background-radius: 25px;
+    -fx-text-fill: #cc960e;
+}
+
 .small-header{
-    -fx-background-color: #45a446;
-    -fx-border-color: #45a446;
-    -fx-border-width: 1px;
-    -fx-border-radius: 60px;
-    -fx-background-radius: 60px;
-    -fx-text-fill: white;
+    -fx-background-color: transparent;
+    -fx-text-fill: #157d20;
     -fx-text-alignment: center;
+    -fx-font-size: 40px;
 }
 
-.tooltip{
-    -fx-font-family: 'Viga', sans-serif;
-    -fx-font-size: 20px ;
-    -fx-base: #cc960e;
+.left-arrow, .right-arrow{
+    -fx-background-size: 20px;
+    -fx-background-color: #157d20;
+    -fx-border: none;
+    -fx-border-width: 0px;
+}
+
+.left-arrow:hover, .right-arrow:hover{
+    -fx-background-size: 20px;
     -fx-background-color: #cc960e;
-    -fx-text-fill: white;
-}
-
-.subtitle{
-    -fx-background-color: #45a446;
-    -fx-background-radius: 60px;
-    -fx-text-fill: white;
-    -fx-text-alignment: center;
-    -fx-font-size: 25px;
+    -fx-border: none;
+    -fx-border-width: 0px;
 }
