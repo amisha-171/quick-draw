@@ -17,8 +17,10 @@ import javafx.concurrent.Task;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -81,6 +83,8 @@ public abstract class CanvasController {
    * the drawing, and we load the ML model.
    */
   public void initialize() {
+    // Add a listener for the volume slider to actively change the volume of the music when it is
+    // dragged
     volumeSlider
         .valueProperty()
         .addListener(
@@ -453,6 +457,26 @@ public abstract class CanvasController {
   }
 
   /**
+   * This method checks the users current performance after each win, depending on how the user is
+   * performing this method will load the popup window prompting the user to change settings if we
+   * feel user experience is too easy
+   */
+  protected void checkPopUp() {
+    // Check users current performance
+    if (user.getConsecutiveWinsUnderTwentySeconds() == 10
+        || user.getConsecutiveWinsUnderTenSeconds() == 5) {
+      // Load the popup window on main thread
+      Platform.runLater(
+          () -> {
+            try {
+              loadPopUpWindow();
+            } catch (IOException e) {
+              throw new RuntimeException(e);
+            }
+          });
+    }
+  }
+  /**
    * This method simply changes the speaker icon to indicate to the user whether the background
    * music is muted or can be heard.
    */
@@ -465,6 +489,25 @@ public abstract class CanvasController {
     }
   }
 
+  /**
+   * This method will load the popup window which then prompts the user to switch game settings to
+   * avoid a very easy game experience
+   *
+   * @throws IOException If reading/writing information produces error
+   */
+  protected void loadPopUpWindow() throws IOException {
+    // Load FXML
+    FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/popup.fxml"));
+    Parent root1 = loader.load();
+    // Set the current user to the controller
+    PopupController controller = loader.getController();
+    controller.currUser(user);
+    Stage stage = new Stage();
+    // Set window title and show scene
+    stage.setTitle("Change Game Settings?");
+    stage.setScene(new Scene(root1));
+    stage.show();
+  }
   /**
    * This method changes the colour of the progress bar based on how close the user is to getting
    * specified words into the prediction list.

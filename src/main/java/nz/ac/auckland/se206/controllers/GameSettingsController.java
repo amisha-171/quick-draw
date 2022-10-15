@@ -8,6 +8,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
+import javafx.stage.Stage;
 import nz.ac.auckland.se206.userutils.GameSettings;
 import nz.ac.auckland.se206.userutils.User;
 import nz.ac.auckland.se206.util.SceneManager;
@@ -34,6 +35,10 @@ public class GameSettingsController {
   private ConfidenceSettings confidenceSettings;
   private TimeSettings timeSettings;
   private WordSettings wordSettings;
+  private @FXML Button menuBtn;
+  private boolean isPopUp;
+  private Stage stage;
+  private @FXML Button doneBtn;
 
   private final String[] accuracyList =
       Arrays.stream(AccuracySettings.values())
@@ -55,13 +60,29 @@ public class GameSettingsController {
    *
    * @param user object of type User
    */
-  public void setUserSettings(User user) {
+  public void setUserSettings(User user, boolean popUp) {
     // Initialize the users current settings
     this.currentUser = user;
     this.accuracySettings = user.getGameSettings().getAccuracy();
     this.confidenceSettings = user.getGameSettings().getConfidence();
     this.timeSettings = user.getGameSettings().getTime();
     this.wordSettings = user.getGameSettings().getWords();
+    this.isPopUp = popUp;
+    setExitButtonsOnType();
+  }
+
+  /**
+   * This method adjusts the visibility of the buttons on the scene depending on if this controllers
+   * scene is loaded as a seperate window or a previous scene was switched. Depending on this we
+   * take the user back to different scenes/windows once they have selected their settings and wish
+   * to proceed.
+   */
+  private void setExitButtonsOnType() {
+    if (isPopUp) {
+      menuBtn.setVisible(false);
+    } else {
+      doneBtn.setVisible(false);
+    }
   }
 
   /**
@@ -198,6 +219,24 @@ public class GameSettingsController {
    */
   @FXML
   private void onConfirmSettings(ActionEvent event) {
+    this.stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+    if (isPopUp) {
+      onExitScene();
+      if (stage != null) {
+        stage.close();
+      }
+    } else {
+      onExitScene();
+      Scene scene = ((Node) event.getSource()).getScene();
+      scene.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.USER_MENU));
+    }
+  }
+
+  /**
+   * This method creates a GameSettings object with the corresponding settings and saves it to the
+   * user profile
+   */
+  private void onExitScene() {
     // Update current users game settings to the updated settings.
     GameSettings gameSettings =
         new GameSettings(
@@ -206,9 +245,6 @@ public class GameSettingsController {
     currentUser.setGameSettings(gameSettings);
     // Write information to user file
     currentUser.saveSelf();
-    // Set scene
-    Scene scene = ((Node) event.getSource()).getScene();
-    scene.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.USER_MENU));
   }
 
   /**

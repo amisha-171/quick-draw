@@ -186,10 +186,12 @@ public class HiddenCanvasController extends CanvasController {
             if (gameWon) {
               canvas.setOnMouseDragged(e -> canvas.setCursor(Cursor.DEFAULT));
               timer.cancel();
-
               user.incrementWins();
               user.updateWordList(wordChosen);
+              user.setConsecutiveWinsUnderTwentySeconds(user.getCurrentTimeSetting() - counter);
+              user.setConsecutiveWinsUnderTenSeconds(user.getCurrentTimeSetting() - counter);
               user.saveSelf();
+              checkPopUp();
               Platform.runLater(
                   () -> {
                     enableEndButtons();

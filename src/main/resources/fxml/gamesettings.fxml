@@ -150,7 +150,8 @@
             </VBox>
          </children>
       </HBox>
-      <Button layoutX="411.0" layoutY="624.0" mnemonicParsing="false" onAction="#onConfirmSettings" prefHeight="56.0" prefWidth="235.0" text="Go back to Menu" />
+      <Button fx:id="menuBtn" layoutX="411.0" layoutY="624.0" mnemonicParsing="false" onAction="#onConfirmSettings" prefHeight="56.0" prefWidth="235.0" text="Go back to Menu" />
+      <Button fx:id="doneBtn" layoutX="690.0" layoutY="610.0" mnemonicParsing="false" onAction="#onConfirmSettings" text="Done" />
    </children>
    <stylesheets>
       <URL value="@../css/app.css" />
