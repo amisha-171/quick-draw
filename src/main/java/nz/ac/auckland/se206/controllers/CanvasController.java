@@ -215,7 +215,12 @@ public abstract class CanvasController {
               double num = predList.size() - preds.indexOf(wordChosen);
               double predSize = preds.size();
               currProgress = num / predSize;
-              Platform.runLater(() -> predBar.setProgress(currProgress));
+              Platform.runLater(
+                  () -> {
+                    predBar.setProgress(currProgress);
+                    changeProgressBarColour();
+                    ;
+                  });
             }
             // If the "current progress" value is at least 0.9 this means user has reached top 10
             // predictions so progress bar should be full
@@ -280,7 +285,6 @@ public abstract class CanvasController {
             Platform.runLater(
                 () -> {
                   predLabel.setText(sbf.toString());
-                  changeProgressBarColour();
                 });
 
             // Check if the game is won and set the label in the GUI to display to the user they
@@ -472,17 +476,17 @@ public abstract class CanvasController {
    * specified words into the prediction list.
    */
   private void changeProgressBarColour() {
-    if (predBar.getProgress() >= 0 && predBar.getProgress() <= 0.33) {
+    if (currProgress >= 0 && currProgress <= 0.33) {
       predBar.getStyleClass().remove("red");
       predBar.getStyleClass().remove("orange");
       predBar.getStyleClass().add("blue");
-
-    } else if (predBar.getProgress() > 0.33 && predBar.getProgress() <= 0.66) {
+    }
+    if (currProgress > 0.33 && currProgress <= 0.66) {
       predBar.getStyleClass().remove("red");
       predBar.getStyleClass().remove("blue");
       predBar.getStyleClass().add("orange");
-
-    } else if (predBar.getProgress() > 0.66) {
+    }
+    if (currProgress > 0.66) {
       predBar.getStyleClass().remove("blue");
       predBar.getStyleClass().remove("orange");
       predBar.getStyleClass().add("red");
