@@ -20,8 +20,8 @@ public class User {
   private int consecutiveWins;
   private int losses;
   private int fastestTime;
+  private int consecutiveWinsUnderTwentySeconds;
   private int consecutiveWinsUnderTenSeconds;
-  private int consecutiveWinsUnderFiveSeconds;
   private int totalSolveTime;
   private int numEasyWords;
   private int numMediumWords;
@@ -62,8 +62,8 @@ public class User {
     // set user image
     this.imageName = img;
     // set default game settings
+    this.consecutiveWinsUnderTwentySeconds = 0;
     this.consecutiveWinsUnderTenSeconds = 0;
-    this.consecutiveWinsUnderFiveSeconds = 0;
     this.gameSettings =
         new GameSettings(
             AccuracySettings.EASY, TimeSettings.EASY, ConfidenceSettings.EASY, WordSettings.EASY);
@@ -134,11 +134,11 @@ public class User {
    *
    * @param time Integer representing time taken to win a game
    */
-  public void setConsecutiveWinsUnderTenSeconds(int time) {
-    if (time <= 10) {
-      consecutiveWinsUnderTenSeconds++;
+  public void setConsecutiveWinsUnderTwentySeconds(int time) {
+    if (time <= 20) {
+      consecutiveWinsUnderTwentySeconds++;
     } else {
-      consecutiveWinsUnderTenSeconds = 0;
+      consecutiveWinsUnderTwentySeconds = 0;
     }
   }
 
@@ -148,11 +148,11 @@ public class User {
    *
    * @param time An integer representing the time taken to complete a game if user has won
    */
-  public void setConsecutiveWinsUnderFiveSeconds(int time) {
-    if (time <= 5) {
-      consecutiveWinsUnderFiveSeconds++;
+  public void setConsecutiveWinsUnderTenSeconds(int time) {
+    if (time <= 10) {
+      consecutiveWinsUnderTenSeconds++;
     } else {
-      consecutiveWinsUnderFiveSeconds = 0;
+      consecutiveWinsUnderTenSeconds = 0;
     }
   }
 
@@ -163,8 +163,8 @@ public class User {
   public void incrementLosses() {
     this.losses++;
     this.consecutiveWins = 0;
+    this.consecutiveWinsUnderTwentySeconds = 0;
     this.consecutiveWinsUnderTenSeconds = 0;
-    this.consecutiveWinsUnderFiveSeconds = 0;
   }
 
   public int getFastestTime() {
@@ -272,12 +272,12 @@ public class User {
     return hasTwentyConsecutiveWins;
   }
 
-  public int getConsecutiveWinsUnderTenSeconds() {
-    return consecutiveWinsUnderTenSeconds;
+  public int getConsecutiveWinsUnderTwentySeconds() {
+    return consecutiveWinsUnderTwentySeconds;
   }
 
-  public int getConsecutiveWinsUnderFiveSeconds() {
-    return consecutiveWinsUnderFiveSeconds;
+  public int getConsecutiveWinsUnderTenSeconds() {
+    return consecutiveWinsUnderTenSeconds;
   }
 
   /**

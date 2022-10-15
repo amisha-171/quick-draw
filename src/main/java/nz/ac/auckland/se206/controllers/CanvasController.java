@@ -459,8 +459,8 @@ public abstract class CanvasController {
    */
   protected void checkPopUp() {
     // Check users current performance
-    if (user.getConsecutiveWinsUnderTenSeconds() >= 10
-        || user.getConsecutiveWinsUnderFiveSeconds() >= 5) {
+    if (user.getConsecutiveWinsUnderTwentySeconds() >= 10
+        || user.getConsecutiveWinsUnderTenSeconds() >= 5) {
       // Load the popup window on main thread
       Platform.runLater(
           () -> {

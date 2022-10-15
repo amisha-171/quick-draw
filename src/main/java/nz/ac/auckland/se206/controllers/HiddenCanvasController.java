@@ -186,8 +186,8 @@ public class HiddenCanvasController extends CanvasController {
               timer.cancel();
               user.incrementWins();
               user.updateWordList(wordChosen);
+              user.setConsecutiveWinsUnderTwentySeconds(user.getCurrentTimeSetting() - counter);
               user.setConsecutiveWinsUnderTenSeconds(user.getCurrentTimeSetting() - counter);
-              user.setConsecutiveWinsUnderFiveSeconds(user.getCurrentTimeSetting() - counter);
               user.saveSelf();
               checkPopUp();
               Platform.runLater(

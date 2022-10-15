@@ -34,8 +34,8 @@ public class PopupController {
     // settings window
     if (btn.getSource().equals(yesBtn)) {
       // Reset the tracking for the consecutive wins if the user wants to change settings
+      user.setConsecutiveWinsUnderTwentySeconds(21);
       user.setConsecutiveWinsUnderTenSeconds(11);
-      user.setConsecutiveWinsUnderFiveSeconds(6);
       Database.write(user);
       FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/gamesettings.fxml"));
       Parent root1 = loader.load();
@@ -56,11 +56,11 @@ public class PopupController {
       // If the user does not wish to change settings upon meeting the requirement for popup then
       // reset the tracking for
       // The particular stat that caused the popup
-      if (user.getConsecutiveWinsUnderTenSeconds() >= 10) {
-        user.setConsecutiveWinsUnderTenSeconds(11);
+      if (user.getConsecutiveWinsUnderTwentySeconds() >= 10) {
+        user.setConsecutiveWinsUnderTwentySeconds(21);
       }
-      if (user.getConsecutiveWinsUnderFiveSeconds() >= 5) {
-        user.setConsecutiveWinsUnderFiveSeconds(6);
+      if (user.getConsecutiveWinsUnderTenSeconds() >= 5) {
+        user.setConsecutiveWinsUnderTenSeconds(11);
       }
       Database.write(user);
       // If the user pressed no then just close the popup window
