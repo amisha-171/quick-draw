@@ -323,6 +323,7 @@ public abstract class CanvasController {
     startGame();
     predLabel.setText("Click the \"Start!\" button to start drawing and view the guesses made!");
     timerCount.setTextFill(Color.color(0.8, 0.6, 0.06));
+    changeProgressBarColour();
   }
 
   /**
@@ -471,32 +472,20 @@ public abstract class CanvasController {
    * specified words into the prediction list.
    */
   private void changeProgressBarColour() {
-    if (predBar.getProgress() >= 0 && predBar.getProgress() <= 0.25) {
+    if (predBar.getProgress() >= 0 && predBar.getProgress() <= 0.33) {
+      predBar.getStyleClass().remove("red");
+      predBar.getStyleClass().remove("orange");
       predBar.getStyleClass().add("blue");
-      predBar.getStyleClass().remove("red");
-      predBar.getStyleClass().remove("orange");
-      predBar.getStyleClass().remove("green");
 
-    } else if (predBar.getProgress() > 0.25 && predBar.getProgress() <= 0.5) {
-      predBar.getStyleClass().removeAll();
-      predBar.getStyleClass().add("green");
+    } else if (predBar.getProgress() > 0.33 && predBar.getProgress() <= 0.66) {
       predBar.getStyleClass().remove("red");
-      predBar.getStyleClass().remove("orange");
       predBar.getStyleClass().remove("blue");
-
-    } else if (predBar.getProgress() > 0.5 && predBar.getProgress() <= 0.75) {
-      predBar.getStyleClass().removeAll();
       predBar.getStyleClass().add("orange");
-      predBar.getStyleClass().remove("red");
-      predBar.getStyleClass().remove("blue");
-      predBar.getStyleClass().remove("green");
 
-    } else if (predBar.getProgress() > 0.75) {
-      predBar.getStyleClass().removeAll();
-      predBar.getStyleClass().add("red");
+    } else if (predBar.getProgress() > 0.66) {
       predBar.getStyleClass().remove("blue");
       predBar.getStyleClass().remove("orange");
-      predBar.getStyleClass().remove("green");
+      predBar.getStyleClass().add("red");
     }
   }
 

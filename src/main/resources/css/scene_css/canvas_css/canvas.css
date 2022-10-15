@@ -67,11 +67,6 @@
     -fx-background-color: dodgerblue;
 }
 
-.green .bar{
-    -fx-background-radius: 20px;
-    -fx-background-color: #21ab72;
-}
-
 .orange .bar{
     -fx-background-radius: 20px;
     -fx-background-color: #cc960e;
