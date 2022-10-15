@@ -98,8 +98,10 @@ public class HiddenCanvasController extends CanvasController {
    */
   @Override
   protected void onReady() throws MalformedURLException {
+    timerCount.setTextFill(Color.color(0.9, 0.6, 0.6));
     // Play music associated with hidden game mode when user is ready
     playGameModeMusic("src/main/resources/sounds/detective.mp3");
+    songPlayer.setVolume(volumeSlider.getValue() * 0.01);
     // When player is ready we start the game by enabling canvas, starting the timer etc
     canvas.setDisable(false);
     this.onInk.setDisable(true);
@@ -214,7 +216,6 @@ public class HiddenCanvasController extends CanvasController {
                     // If user has lost inform the user, reveal the word and save the game
                     // information to user file
                     wordLabel.setText("You lost, better luck next time!");
-                    timerCount.setTextFill(Color.RED);
                     timerCount.setText("0 seconds remaining");
                     definitionLabel.setText("The word was " + wordChosen + "!");
                     disableButtons();
@@ -222,7 +223,7 @@ public class HiddenCanvasController extends CanvasController {
                   });
             }
             if (counter == 10) {
-              // If 10 seconds remain we change the timer to color to red instead of blue
+              // If 10 seconds remain we change the timer to color to red
               Platform.runLater(() -> timerCount.setTextFill(Color.RED));
             }
           }
