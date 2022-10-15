@@ -42,7 +42,7 @@
                     <children>
                         <VBox alignment="CENTER" prefHeight="517.0" prefWidth="282.0">
                             <children>
-                                <Label fx:id="predTitle" alignment="CENTER" contentDisplay="CENTER" prefHeight="0.0" prefWidth="232.0" styleClass="hidden-header" text="PREDICTIONS" textAlignment="RIGHT" textFill="#0022ff">
+                                <Label fx:id="predTitle" alignment="CENTER" contentDisplay="CENTER" prefHeight="0.0" prefWidth="232.0" styleClass="hidden-header" text="OUR GUESSES" textAlignment="RIGHT" textFill="#0022ff">
                                     <font>
                                         <Font name="Courier New Bold" size="34.0" />
                                     </font>

@@ -31,7 +31,7 @@
 }
 
 .small-header{
-    -fx-background-color: #388498;
+    -fx-background-color: #5da1b4;
 
 }
 
@@ -122,17 +122,26 @@
     -fx-border-radius: 20px;
 }
 
-.color-picker{
+.color-picker {
     -fx-background-radius: 35px;
     -fx-background-color: #68a869;
     -fx-border-radius: 28px;
     -fx-border-width: 3px;
     -fx-border-color: white;
+    -fx-cursor: hand;
+    -fx-font-family: 'Viga', sans-serif;
 }
 
 .color-picker .arrow{
     -fx-mark-color: white;
 }
+
+ .picker-color {
+     -fx-border-color: white;
+     -fx-border-width: 2px;
+    -fx-background-radius: 20px;
+     -fx-background-color: #68a869;
+ }
 
 .tooltip{
     -fx-font-family: 'Viga', sans-serif;

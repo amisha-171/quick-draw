@@ -36,6 +36,9 @@
                             <HBox.margin>
                                 <Insets left="20.0" />
                             </HBox.margin>
+                     <tooltip>
+                        <Tooltip text="Hear Word" />
+                     </tooltip>
                         </Button>
                     </children>
                 </HBox>
@@ -43,12 +46,12 @@
                     <children>
                         <VBox alignment="CENTER" prefHeight="437.0" prefWidth="313.0">
                             <children>
-                                <Label fx:id="predTitle" alignment="CENTER" contentDisplay="CENTER" prefHeight="3.0" prefWidth="232.0" text="PREDICTIONS" textAlignment="RIGHT" textFill="#0022ff">
+                                <Label fx:id="predTitle" alignment="CENTER" contentDisplay="CENTER" prefHeight="3.0" prefWidth="232.0" text="OUR GUESSES" textAlignment="RIGHT" textFill="#0022ff">
                                     <font>
                                         <Font name="Courier New Bold" size="34.0" />
                                     </font>
                                 </Label>
-                                <Label fx:id="predLabel" alignment="TOP_LEFT" contentDisplay="TOP" prefHeight="404.0" prefWidth="271.0" text="Click the &quot;Start!&quot; button to start drawing the word you see and view the predictions!" wrapText="true">
+                                <Label fx:id="predLabel" alignment="TOP_LEFT" contentDisplay="TOP" prefHeight="404.0" prefWidth="271.0" text="Click the &quot;Start!&quot; button to start drawing and view the guesses." wrapText="true">
                                     <font>
                                         <Font name="Candara Light" size="25.0" />
                                     </font>
@@ -116,7 +119,7 @@
                         </HBox>
                             </children>
                         </VBox>
-                        <VBox alignment="CENTER" prefHeight="438.0" prefWidth="248.0" spacing="20.0">
+                        <VBox alignment="CENTER" prefHeight="438.0" prefWidth="258.0" spacing="20.0">
                      <children>
                         <VBox alignment="CENTER" prefHeight="421.0" prefWidth="213.0">
                            <children>

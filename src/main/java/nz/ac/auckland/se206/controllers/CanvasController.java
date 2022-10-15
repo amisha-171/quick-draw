@@ -320,7 +320,7 @@ public abstract class CanvasController {
     readyButton.setDisable(false);
     setUserName(userName);
     startGame();
-    predLabel.setText("Click the \"Start!\" button to start drawing and view the guesses made!");
+    predLabel.setText("Click the \"Start!\" button to start drawing and view the guesses.");
     changeProgressBarColour();
   }
 
