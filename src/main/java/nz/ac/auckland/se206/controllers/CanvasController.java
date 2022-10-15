@@ -459,7 +459,7 @@ public abstract class CanvasController {
    */
   protected void checkPopUp() {
     // Check users current performance
-    if (user.getConsecutiveWins() >= 5 || user.getLastSolveTime() <= 10) {
+    if (user.getConsecutiveWins() >= 10 || user.getLastSolveTime() <= 10) {
       System.out.println(user.getLastSolveTime());
       // Load the popup window on main thread
       Platform.runLater(
