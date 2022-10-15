@@ -224,7 +224,7 @@ public class GameSettingsController {
     // Switch statement to handle the label color based on difficulty setting.
     switch (difficulty) {
       case "EASY" -> label.setTextFill(Color.web("#41b208"));
-      case "MEDIUM" -> label.setTextFill(Color.web("#ffc400"));
+      case "MEDIUM" -> label.setTextFill(Color.web("#e1ad01"));
       case "HARD" -> label.setTextFill(Color.web("#ea7c00"));
       case "MASTER" -> label.setTextFill(Color.web("#b70000"));
     }
