@@ -13,14 +13,6 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="703.0" prefWidth="1057.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.GameSettingsController">
    <children>
-      <Label layoutX="262.0" layoutY="106.0" prefHeight="33.0" prefWidth="528.0" styleClass="subtitle" text="Hover over to see what each difficulty means!" textAlignment="CENTER" textFill="#c29800">
-         <padding>
-            <Insets left="5.0" right="5.0" />
-         </padding>
-         <font>
-            <Font size="31.0" />
-         </font>
-      </Label>
       <Label fx:id="title" alignment="CENTER" layoutX="262.0" layoutY="36.0" prefHeight="70.0" prefWidth="528.0" text="DIFFICULTY SETTINGS">
          <font>
             <Font size="43.0" />
@@ -30,11 +22,11 @@
             <String fx:value="header" />
          </styleClass>
       </Label>
-      <HBox alignment="CENTER" layoutX="14.0" layoutY="148.0" prefHeight="473.0" prefWidth="1014.0" spacing="80.0">
+      <HBox alignment="TOP_CENTER" layoutX="3.0" layoutY="111.0" prefHeight="510.0" prefWidth="1048.0">
          <children>
-            <VBox alignment="CENTER" prefHeight="502.0" prefWidth="251.0" spacing="30.0">
+            <VBox alignment="CENTER" prefHeight="510.0" prefWidth="280.0" spacing="30.0">
                <children>
-                  <Label alignment="CENTER" prefHeight="61.0" prefWidth="165.0" styleClass="small-header" text="Accuracy">
+                  <Label alignment="CENTER" prefHeight="61.0" prefWidth="232.0" styleClass="small-header" text="ACCURACY">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -42,21 +34,30 @@
                         <Insets bottom="20.0" />
                      </VBox.margin>
                   </Label>
-                  <Button fx:id="upAccuracy" mnemonicParsing="false" onAction="#onToggleAccuracy" prefHeight="56.0" prefWidth="56.0" styleClass="top-arrow" />
-                  <Label fx:id="accuracyLabel" styleClass="difficulty-label" text="EASY">
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Button fx:id="downAccuracy" mnemonicParsing="false" onAction="#onToggleAccuracy" prefHeight="30.0" prefWidth="41.0" styleClass="left-arrow" />
+                        <Label fx:id="accuracyLabel" alignment="CENTER" prefHeight="45.0" styleClass="difficulty-label" text="EASY">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Button fx:id="upAccuracy" mnemonicParsing="false" onAction="#onToggleAccuracy" prefHeight="49.0" prefWidth="43.0" styleClass="right-arrow" />
+                     </children>
+                  </HBox>
+                  <Label fx:id="accuracyDesc" alignment="TOP_CENTER" prefHeight="175.0" prefWidth="243.0" styleClass="description-label" text="Description" wrapText="true">
                      <font>
-                        <Font size="18.0" />
+                        <Font size="20.0" />
                      </font>
                      <tooltip>
                         <Tooltip text="You can win if the word to draw is in the Top 3 Guesses!" />
                      </tooltip>
                   </Label>
-                  <Button fx:id="downAccuracy" mnemonicParsing="false" onAction="#onToggleAccuracy" prefHeight="56.0" prefWidth="56.0" styleClass="bottom-arrow" />
                </children>
             </VBox>
-            <VBox alignment="CENTER" prefHeight="502.0" prefWidth="231.0" spacing="30.0">
+            <VBox alignment="CENTER" prefHeight="510.0" prefWidth="273.0" spacing="30.0">
                <children>
-                  <Label alignment="CENTER" prefHeight="61.0" prefWidth="127.0" styleClass="small-header" text="Words">
+                  <Label alignment="CENTER" prefHeight="61.0" prefWidth="236.0" styleClass="small-header" text="WORDS">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -64,21 +65,30 @@
                         <Insets bottom="20.0" />
                      </VBox.margin>
                   </Label>
-                  <Button fx:id="upWords" mnemonicParsing="false" onAction="#onToggleWords" prefHeight="56.0" prefWidth="56.0" styleClass="top-arrow" />
-                  <Label fx:id="wordLabel" styleClass="difficulty-label" text="EASY">
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Button fx:id="downWords" mnemonicParsing="false" onAction="#onToggleWords" prefHeight="44.0" prefWidth="39.0" styleClass="left-arrow" />
+                        <Label fx:id="wordLabel" prefHeight="69.0" styleClass="difficulty-label" text="EASY">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Button fx:id="upWords" mnemonicParsing="false" onAction="#onToggleWords" prefHeight="48.0" prefWidth="42.0" styleClass="right-arrow" />
+                     </children>
+                  </HBox>
+                  <Label fx:id="wordsDesc" alignment="TOP_CENTER" prefHeight="175.0" prefWidth="234.0" styleClass="description-label" text="Description" wrapText="true">
                      <font>
-                        <Font size="18.0" />
+                        <Font size="20.0" />
                      </font>
                      <tooltip>
-                        <Tooltip text="Only Easy words are chosen to draw!" />
+                        <Tooltip text="You can win if the word to draw is in the Top 3 Guesses!" />
                      </tooltip>
                   </Label>
-                  <Button fx:id="downWords" mnemonicParsing="false" onAction="#onToggleWords" prefHeight="56.0" prefWidth="56.0" styleClass="bottom-arrow" />
                </children>
             </VBox>
-            <VBox alignment="CENTER" prefHeight="502.0" prefWidth="215.0" spacing="30.0">
+            <VBox alignment="CENTER" prefHeight="510.0" prefWidth="277.0" spacing="30.0">
                <children>
-                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="61.0" prefWidth="129.0" styleClass="small-header" text="Time">
+                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="61.0" prefWidth="240.0" styleClass="small-header" text="TIME LIMIT">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -86,21 +96,30 @@
                         <Insets bottom="20.0" />
                      </VBox.margin>
                   </Label>
-                  <Button fx:id="upTime" mnemonicParsing="false" onAction="#onToggleTime" prefHeight="56.0" prefWidth="56.0" styleClass="top-arrow" />
-                  <Label fx:id="timeLabel" styleClass="difficulty-label" text="EASY">
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Button fx:id="downTime" mnemonicParsing="false" onAction="#onToggleTime" prefHeight="49.0" prefWidth="44.0" styleClass="left-arrow" />
+                        <Label fx:id="timeLabel" alignment="CENTER" prefHeight="69.0" styleClass="difficulty-label" text="EASY">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Button fx:id="upTime" mnemonicParsing="false" onAction="#onToggleTime" prefHeight="52.0" prefWidth="41.0" styleClass="right-arrow" />
+                     </children>
+                  </HBox>
+                  <Label fx:id="timeDesc" alignment="TOP_CENTER" prefHeight="175.0" prefWidth="240.0" styleClass="description-label" text="Description" wrapText="true">
                      <font>
-                        <Font size="18.0" />
+                        <Font size="20.0" />
                      </font>
                      <tooltip>
-                        <Tooltip text="60 seconds time limit to draw!" />
+                        <Tooltip text="You can win if the word to draw is in the Top 3 Guesses!" />
                      </tooltip>
                   </Label>
-                  <Button fx:id="downTime" mnemonicParsing="false" onAction="#onToggleTime" prefHeight="56.0" prefWidth="56.0" styleClass="bottom-arrow" />
                </children>
             </VBox>
-            <VBox alignment="CENTER" prefHeight="502.0" prefWidth="287.0" spacing="30.0">
+            <VBox alignment="CENTER" prefHeight="510.0" prefWidth="300.0" spacing="30.0">
                <children>
-                  <Label alignment="CENTER" prefHeight="61.0" prefWidth="202.0" styleClass="small-header" text="Confidence" textAlignment="CENTER">
+                  <Label alignment="CENTER" prefHeight="61.0" prefWidth="258.0" styleClass="small-header" text="CONFIDENCE" textAlignment="CENTER">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -108,16 +127,25 @@
                         <Insets bottom="20.0" />
                      </VBox.margin>
                   </Label>
-                  <Button fx:id="upConfidence" mnemonicParsing="false" onAction="#onToggleConfidence" prefHeight="56.0" prefWidth="56.0" styleClass="top-arrow" />
-                  <Label fx:id="confidenceLabel" styleClass="difficulty-label" text="EASY">
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="285.0">
+                     <children>
+                        <Button fx:id="downConfidence" mnemonicParsing="false" onAction="#onToggleConfidence" prefHeight="48.0" prefWidth="43.0" styleClass="left-arrow" />
+                        <Label fx:id="confidenceLabel" alignment="CENTER" prefHeight="69.0" styleClass="difficulty-label" text="EASY">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Button fx:id="upConfidence" mnemonicParsing="false" onAction="#onToggleConfidence" prefHeight="47.0" prefWidth="42.0" styleClass="right-arrow" />
+                     </children>
+                  </HBox>
+                  <Label fx:id="confidenceDesc" alignment="TOP_CENTER" prefHeight="175.0" prefWidth="256.0" styleClass="description-label" text="Description" wrapText="true">
                      <font>
-                        <Font size="18.0" />
+                        <Font size="20.0" />
                      </font>
                      <tooltip>
-                        <Tooltip text="We'll make guesses we aren't so confident about!" />
+                        <Tooltip text="You can win if the word to draw is in the Top 3 Guesses!" />
                      </tooltip>
                   </Label>
-                  <Button fx:id="downConfidence" mnemonicParsing="false" onAction="#onToggleConfidence" prefHeight="56.0" prefWidth="56.0" styleClass="bottom-arrow" />
                </children>
             </VBox>
          </children>

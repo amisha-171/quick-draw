@@ -1,0 +1,172 @@
+@import url('https://fonts.googleapis.com/css2?family=Gorditas&family=Viga&display=swap');
+
+.root {
+    -fx-background-color: #e0ddff;
+    -fx-background-image: url(../../../images/question.png);
+    -fx-background-size: 250px;
+}
+
+.button{
+    -fx-background-color: #e5909d;
+}
+
+.button:hover{
+    -fx-background-color:  #6d66b4;
+}
+
+#canvasPane {
+    -fx-border-width: 5px;
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 5px;
+}
+
+#predLabel {
+    -fx-border-width: 5px;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 15px;
+    -fx-background-color: #e5909d;
+    -fx-border-color: #ffffff;
+    -fx-text-fill: #ffffff;
+    -fx-font-family: 'Viga', sans-serif;
+}
+
+#wordLabel, #predTitle, #definitionTitle{
+    -fx-font-family: 'Viga', sans-serif;
+    -fx-text-fill: #46408c;
+}
+
+#timerCount{
+    -fx-font-family: 'Viga', sans-serif;
+    -fx-text-fill: #e5909d;
+}
+
+#eraseBtn, #speakWord, #onInk, #clearButton, #saveImage{
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 35px;
+    -fx-background-position: center;
+}
+
+#speakWord{
+    -fx-background-image: url(../../../images/ear.png);
+}
+
+#eraseBtn{
+    -fx-background-image: url(../../../images/eraser.png);
+}
+
+#onInk{
+    -fx-background-image: url(../../../images/pen.png);
+}
+
+#clearButton{
+    -fx-background-image: url(../../../images/trash.png);
+}
+
+#saveImage{
+    -fx-background-image: url(../../../images/save-image.png);
+}
+
+#readyLabel{
+    -fx-alignment: center;
+    -fx-font-family: "Gorditas", cursive;
+    -fx-text-fill: #e5909d;
+}
+
+.blue .bar{
+    -fx-background-radius: 20px;
+    -fx-background-color: dodgerblue;
+}
+
+.orange .bar{
+    -fx-background-radius: 20px;
+    -fx-background-color: #cc960e;
+}
+
+.red .bar{
+    -fx-background-radius: 20px;
+    -fx-background-color: red;
+}
+
+.progress-bar .track {
+    -fx-background-radius: 20px;
+}
+.progress-bar {
+    -fx-background-radius: 20px;
+    -fx-control-inner-background: #e0ddff;
+    -fx-border-radius: 20px;
+    -fx-border-width: 3px;
+    -fx-border-color: white;
+}
+
+.prog-label{
+    -fx-font-size: 20px;
+}
+
+.small-header {
+    -fx-font-size: 20px;
+}
+
+.slider .track{
+    -fx-background-color: #e5909d;
+}
+
+.slider .thumb{
+    -fx-background-color: white;
+    -fx-border-color: #e5909d;
+    -fx-border-width: 3px;
+    -fx-border-radius: 20px;
+}
+
+
+#definitionLabel{
+    -fx-background-color: #928dc9;
+    -fx-background-radius: 25px;
+    -fx-border-color: white;
+    -fx-border-width: 5px;
+    -fx-border-radius: 20px;
+    -fx-text-fill: white;
+}
+
+.tooltip{
+    -fx-font-family: 'Viga', sans-serif;
+    -fx-font-size: 15px;
+    -fx-base: #928dc9;
+    -fx-background-color: #928dc9;
+    -fx-text-fill: white;
+}
+
+.hint{
+    -fx-base: #c71111;
+    -fx-background-color: #c71111;
+    -fx-font-size: 20px;
+}
+
+/*SCROLLBAR STYLING*/
+
+.scroll-pane{
+    -fx-background-color:transparent;
+}
+
+.scroll-pane .viewport {
+    -fx-background-color: transparent;
+}
+
+.scroll-bar:vertical{
+    -fx-background-color:transparent;
+}
+
+.increment-button, .decrement-button {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+.scroll-bar:horizontal .track,
+.scroll-bar:vertical .track{
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+.scroll-bar:horizontal .thumb,
+.scroll-bar:vertical .thumb {
+    -fx-background-color: transparent;
+}
