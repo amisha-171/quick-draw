@@ -100,7 +100,8 @@ public class NormalCanvasController extends CanvasController {
               enableEndButtons();
               user.incrementWins();
               user.updateWordList(wordChosen);
-              user.updateLastSolveTime(user.getCurrentTimeSetting() - counter);
+              user.setConsecutiveWinsUnderTenSeconds(user.getCurrentTimeSetting() - counter);
+              user.setConsecutiveWinsUnderFiveSeconds(user.getCurrentTimeSetting() - counter);
               user.saveSelf();
               checkPopUp();
               songPlayer.stop();

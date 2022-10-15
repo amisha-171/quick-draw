@@ -312,6 +312,7 @@ public abstract class CanvasController {
    */
   @FXML
   protected void onNewGame() throws IOException {
+    System.out.println(user.getConsecutiveWinsUnderTenSeconds());
     // If the user wants to play a new game we clear the canvas and the user gets a new word to draw
     onClear();
     timerCount.setVisible(false);
@@ -459,7 +460,8 @@ public abstract class CanvasController {
    */
   protected void checkPopUp() {
     // Check users current performance
-    if (user.getConsecutiveWins() >= 10 || user.getLastSolveTime() <= 10) {
+    if (user.getConsecutiveWinsUnderTenSeconds() >= 10
+        || user.getConsecutiveWinsUnderFiveSeconds() >= 5) {
       // Load the popup window on main thread
       Platform.runLater(
           () -> {
