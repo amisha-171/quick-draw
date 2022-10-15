@@ -88,7 +88,7 @@
             </VBox>
             <VBox alignment="CENTER" prefHeight="510.0" prefWidth="277.0" spacing="30.0">
                <children>
-                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="61.0" prefWidth="240.0" styleClass="small-header" text="TIME">
+                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="61.0" prefWidth="240.0" styleClass="small-header" text="TIME LIMIT">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -119,7 +119,7 @@
             </VBox>
             <VBox alignment="CENTER" prefHeight="510.0" prefWidth="300.0" spacing="30.0">
                <children>
-                  <Label alignment="CENTER" prefHeight="61.0" prefWidth="244.0" styleClass="small-header" text="CONFIDENCE" textAlignment="CENTER">
+                  <Label alignment="CENTER" prefHeight="61.0" prefWidth="258.0" styleClass="small-header" text="CONFIDENCE" textAlignment="CENTER">
                      <font>
                         <Font size="18.0" />
                      </font>

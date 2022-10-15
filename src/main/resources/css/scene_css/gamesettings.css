@@ -10,26 +10,27 @@
     -fx-background-color: white;
     -fx-padding: 10px;
     -fx-background-radius: 25px;
-    -fx-text-fill: #696868;
+    -fx-text-fill: #6b6b6b;
 }
 
 .small-header{
-    -fx-background-color: transparent;
-    -fx-text-fill: #157d20;
+    -fx-background-color: #157d20;
+    -fx-text-fill: white;
     -fx-text-alignment: center;
     -fx-font-size: 40px;
+    -fx-background-radius: 20px;
 }
 
 .left-arrow, .right-arrow{
     -fx-background-size: 20px;
-    -fx-background-color: #157d20;
+    -fx-background-color: #cc960e;
     -fx-border: none;
     -fx-border-width: 0px;
 }
 
 .left-arrow:hover, .right-arrow:hover{
     -fx-background-size: 20px;
-    -fx-background-color: #cc960e;
+    -fx-background-color: #157d20;
     -fx-border: none;
     -fx-border-width: 0px;
 }
