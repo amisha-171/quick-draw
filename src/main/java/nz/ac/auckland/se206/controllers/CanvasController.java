@@ -312,7 +312,6 @@ public abstract class CanvasController {
    */
   @FXML
   protected void onNewGame() throws IOException {
-    System.out.println(user.getConsecutiveWinsUnderTenSeconds());
     // If the user wants to play a new game we clear the canvas and the user gets a new word to draw
     onClear();
     timerCount.setVisible(false);
@@ -481,11 +480,14 @@ public abstract class CanvasController {
    * @throws IOException If reading/writing information produces error
    */
   protected void loadPopUpWindow() throws IOException {
+    // Load FXML
     FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/popup.fxml"));
     Parent root1 = loader.load();
+    // Set the current user to the controller
     PopupController controller = loader.getController();
     controller.currUser(user);
     Stage stage = new Stage();
+    // Set window title and show scene
     stage.setTitle("Change Game Settings?");
     stage.setScene(new Scene(root1));
     stage.show();

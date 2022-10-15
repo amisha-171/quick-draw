@@ -128,6 +128,12 @@ public class User {
     }
   }
 
+  /**
+   * Method checks if the time upon user winning a game is less than or equal to ten seconds, if so
+   * we increment the consecutive wins for ten second category, otherwise reset it to zero.
+   *
+   * @param time Integer representing time taken to win a game
+   */
   public void setConsecutiveWinsUnderTenSeconds(int time) {
     if (time <= 10) {
       consecutiveWinsUnderTenSeconds++;
@@ -136,6 +142,12 @@ public class User {
     }
   }
 
+  /**
+   * This method takes in a integer time and checks if it is less than or equal to five seconds, if
+   * so we increment the consecutive wins in the five second category, otherwise reset it to zero
+   *
+   * @param time An integer representing the time taken to complete a game if user has won
+   */
   public void setConsecutiveWinsUnderFiveSeconds(int time) {
     if (time <= 5) {
       consecutiveWinsUnderFiveSeconds++;
