@@ -107,3 +107,11 @@
     -fx-border-radius: 20px;
 
 }
+
+.tooltip{
+    -fx-font-family: 'Viga', sans-serif;
+    -fx-font-size: 15px ;
+    -fx-base: #45a446;
+    -fx-background-color: #45a446;
+    -fx-text-fill: white;
+}

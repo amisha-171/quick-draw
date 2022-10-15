@@ -11,7 +11,7 @@
 }
 
 .button:hover{
-    -fx-background-color: #388498;
+    -fx-background-color: #60b4c9;
 }
 
 #canvasPane {
@@ -24,15 +24,20 @@
     -fx-border-width: 5px;
     -fx-border-radius: 10px;
     -fx-background-radius: 15px;
-    -fx-background-color: #60b4c9;
+    -fx-background-color: #68a869;
     -fx-border-color: #ffffff;
     -fx-text-fill: #ffffff;
     -fx-font-family: 'Viga', sans-serif;
 }
 
+.small-header{
+    -fx-background-color: #388498;
+
+}
+
 #wordLabel, #predTitle{
     -fx-font-family: 'Viga', sans-serif;
-    -fx-text-fill: #157d20;
+    -fx-text-fill: #388498;
 }
 
 #timerCount{
@@ -115,5 +120,24 @@
     -fx-border-color: #388498;
     -fx-border-width: 3px;
     -fx-border-radius: 20px;
+}
 
+.color-picker{
+    -fx-background-radius: 35px;
+    -fx-background-color: #68a869;
+    -fx-border-radius: 28px;
+    -fx-border-width: 3px;
+    -fx-border-color: white;
+}
+
+.color-picker .arrow{
+    -fx-mark-color: white;
+}
+
+.tooltip{
+    -fx-font-family: 'Viga', sans-serif;
+    -fx-font-size: 15px ;
+    -fx-base: #5da1b4;
+    -fx-background-color: #5da1b4;
+    -fx-text-fill: white;
 }

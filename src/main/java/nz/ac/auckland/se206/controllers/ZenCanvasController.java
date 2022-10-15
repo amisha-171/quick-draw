@@ -78,6 +78,7 @@ public class ZenCanvasController extends CanvasController {
     eraseBtn.setDisable(true);
     speakWord.setDisable(false);
     clearButton.setDisable(true);
+    colourSwitcher.setDisable(false);
   }
 
   /**
@@ -194,7 +195,11 @@ public class ZenCanvasController extends CanvasController {
             }
 
             // Set the predictions label in the GUI to the string builder sbf
-            Platform.runLater(() -> predLabel.setText(sbf.toString()));
+            Platform.runLater(
+                () -> {
+                  predLabel.setText(sbf.toString());
+                  changeProgressBarColour();
+                });
 
             return null;
           }
@@ -267,7 +272,7 @@ public class ZenCanvasController extends CanvasController {
     // change song to the background song, if we're currently on zen mode
     if (songPlayer
         != null) { // check that we're currently still on zen mode (since the song player will be
-                   // not null)
+      // not null)
       songPlayer.stop();
       App.playBackgroundMusic();
     }
@@ -279,7 +284,7 @@ public class ZenCanvasController extends CanvasController {
     setUserName(userName);
     startGame();
     predLabel.setText(
-        "Click the \"Ready!\" button to start drawing the word you see and view the predictions!");
+        "Click the \"Start!\" button to start drawing the word you see and view the predictions!");
     timerCount.setTextFill(Color.color(0.8, 0.6, 0.06));
     // On a new game we stop the song playing if the user has pressed ready, and disable the volume
     // slider until they press ready on the new game again

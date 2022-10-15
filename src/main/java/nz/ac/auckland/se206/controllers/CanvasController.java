@@ -469,7 +469,7 @@ public abstract class CanvasController {
    * This method changes the colour of the progress bar based on how close the user is to getting
    * specified words into the prediction list.
    */
-  private void changeProgressBarColour() {
+  protected void changeProgressBarColour() {
     if (currProgress >= 0 && currProgress <= 0.33) {
       predBar.getStyleClass().remove("red");
       predBar.getStyleClass().remove("orange");
