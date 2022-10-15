@@ -71,7 +71,6 @@ public abstract class CanvasController {
   protected double currProgress = 0.0;
   protected Media song;
   protected MediaPlayer songPlayer;
-  protected boolean userStateCheck = false;
 
   // mouse coordinates
   protected double currentX;
@@ -82,6 +81,8 @@ public abstract class CanvasController {
    * the drawing, and we load the ML model.
    */
   public void initialize() {
+    // Add a listener for the volume slider to actively change the volume of the music when it is
+    // dragged
     volumeSlider
         .valueProperty()
         .addListener(
@@ -451,9 +452,16 @@ public abstract class CanvasController {
     notificationPlayer.play();
   }
 
+  /**
+   * This method checks the users current performance after each win, depending on how the user is
+   * performing this method will load the popup window prompting the user to change settings if we
+   * feel user experience is too easy
+   */
   protected void checkPopUp() {
+    // Check users current performance
     if (user.getConsecutiveWins() >= 5 || user.getLastSolveTime() <= 10) {
       System.out.println(user.getLastSolveTime());
+      // Load the popup window on main thread
       Platform.runLater(
           () -> {
             try {
@@ -465,9 +473,15 @@ public abstract class CanvasController {
     }
   }
 
+  /**
+   * This method will load the popup window which then prompts the user to switch game settings to
+   * avoid a very easy game experience
+   *
+   * @throws IOException If reading/writing information produces error
+   */
   protected void loadPopUpWindow() throws IOException {
     FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/popup.fxml"));
-    Parent root1 = (Parent) loader.load();
+    Parent root1 = loader.load();
     PopupController controller = loader.getController();
     controller.currUser(user);
     Stage stage = new Stage();

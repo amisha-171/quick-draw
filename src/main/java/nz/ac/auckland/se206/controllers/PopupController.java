@@ -12,32 +12,43 @@ import nz.ac.auckland.se206.userutils.User;
 
 public class PopupController {
   @FXML private Button yesBtn;
-  @FXML private Button noBtn;
   private User user;
   @FXML private Stage stage;
   @FXML private Stage currStage;
 
-  public PopupController() {}
-
+  /**
+   * This method initializes the user for which we are loading the popup window for
+   *
+   * @param user Object of type User
+   */
   public void currUser(User user) {
     this.user = user;
   }
 
   @FXML
   private void onGameSettingsChange(ActionEvent btn) throws IOException {
+    // Get the current stage via some node
     currStage = (Stage) yesBtn.getScene().getWindow();
+    // If the yes button is clicked user would like to change game settings so we load the game
+    // settings window
     if (btn.getSource().equals(yesBtn)) {
       FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/gamesettings.fxml"));
       Parent root1 = loader.load();
+      // Obtain instance of the GameSettingsController via FXML loader
       GameSettingsController controller = loader.getController();
+      // Set the current user details in that scene
       controller.setUserSettings(user, true);
+      // Set the state of the scene
       controller.setInitialInterface();
+      // Create scene and set the scene
       stage = new Stage();
       stage.setTitle("Game Settings");
       stage.setScene(new Scene(root1));
+      // Show the game settings scene and close the popup window
       stage.show();
       currStage.close();
     } else {
+      // If the user pressed no then just close the popup window
       currStage.close();
     }
   }

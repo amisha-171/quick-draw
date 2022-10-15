@@ -67,6 +67,12 @@ public class GameSettingsController {
     setExitButtonsOnType();
   }
 
+  /**
+   * This method adjusts the visibility of the buttons on the scene depending on if this controllers
+   * scene is loaded as a seperate window or a previous scene was switched. Depending on this we
+   * take the user back to different scenes/windows once they have selected their settings and wish
+   * to proceed.
+   */
   private void setExitButtonsOnType() {
     if (isPopUp) {
       menuBtn.setVisible(false);
