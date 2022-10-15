@@ -188,6 +188,7 @@ public class HiddenCanvasController extends CanvasController {
               user.incrementWins();
               user.updateWordList(wordChosen);
               user.saveSelf();
+              checkPopUp();
               Platform.runLater(
                   () -> {
                     enableEndButtons();

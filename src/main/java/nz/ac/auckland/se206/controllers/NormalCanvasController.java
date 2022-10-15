@@ -1,7 +1,6 @@
 package nz.ac.auckland.se206.controllers;
 
 import java.net.MalformedURLException;
-import java.net.URISyntaxException;
 import java.util.Timer;
 import java.util.TimerTask;
 import javafx.application.Platform;
@@ -101,7 +100,9 @@ public class NormalCanvasController extends CanvasController {
               enableEndButtons();
               user.incrementWins();
               user.updateWordList(wordChosen);
+              user.updateLastSolveTime(user.getCurrentTimeSetting() - counter);
               user.saveSelf();
+              checkPopUp();
               songPlayer.stop();
               playNotification(true);
               App.playBackgroundMusic();

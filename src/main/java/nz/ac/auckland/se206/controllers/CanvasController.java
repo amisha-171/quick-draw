@@ -17,8 +17,10 @@ import javafx.concurrent.Task;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -34,11 +36,9 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import javax.imageio.ImageIO;
-
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.filereader.CategorySelector;
 import nz.ac.auckland.se206.ml.DoodlePrediction;
-import nz.ac.auckland.se206.speech.TextToSpeech;
 import nz.ac.auckland.se206.userutils.Database;
 import nz.ac.auckland.se206.userutils.User;
 import nz.ac.auckland.se206.util.SceneManager;
@@ -71,6 +71,7 @@ public abstract class CanvasController {
   protected double currProgress = 0.0;
   protected Media song;
   protected MediaPlayer songPlayer;
+  protected boolean userStateCheck = false;
 
   // mouse coordinates
   protected double currentX;
@@ -418,7 +419,7 @@ public abstract class CanvasController {
    *     music
    */
   public void playGameModeMusic(String currModeSongPath) throws MalformedURLException {
-    App.pauseBackgroundMusic(); //pause background music of app
+    App.pauseBackgroundMusic(); // pause background music of app
     // Set the media we wish to play for some game mode
     song = new Media(new File(currModeSongPath).toURI().toURL().toString());
     // Initialize the media player instance
@@ -433,13 +434,14 @@ public abstract class CanvasController {
 
   /**
    * This method plays the win/lose notification sound upon conclusion of a game.
+   *
    * @param won Boolean indicating whether the user won or not
    * @throws URISyntaxException If there's an exception in converting to URI
    */
   public void playNotification(boolean won) {
     String soundFilePath = won ? "/sounds/win.wav" : "/sounds/lose.wav";
     Media notification = null;
-    //catch exception if error in reading the sound file
+    // catch exception if error in reading the sound file
     try {
       notification = new Media(App.class.getResource(soundFilePath).toURI().toString());
     } catch (URISyntaxException e) {
@@ -447,6 +449,31 @@ public abstract class CanvasController {
     }
     MediaPlayer notificationPlayer = new MediaPlayer(notification);
     notificationPlayer.play();
+  }
+
+  protected void checkPopUp() {
+    if (user.getConsecutiveWins() >= 5 || user.getLastSolveTime() <= 10) {
+      System.out.println(user.getLastSolveTime());
+      Platform.runLater(
+          () -> {
+            try {
+              loadPopUpWindow();
+            } catch (IOException e) {
+              throw new RuntimeException(e);
+            }
+          });
+    }
+  }
+
+  protected void loadPopUpWindow() throws IOException {
+    FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/popup.fxml"));
+    Parent root1 = (Parent) loader.load();
+    PopupController controller = loader.getController();
+    controller.currUser(user);
+    Stage stage = new Stage();
+    stage.setTitle("WOW");
+    stage.setScene(new Scene(root1));
+    stage.show();
   }
 
   /**

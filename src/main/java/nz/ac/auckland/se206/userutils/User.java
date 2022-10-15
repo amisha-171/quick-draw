@@ -21,6 +21,7 @@ public class User {
   private int losses;
   private int fastestTime;
   private int totalSolveTime;
+  private int lastSolveTime;
   private int numEasyWords;
   private int numMediumWords;
   private int numHardWords;
@@ -60,6 +61,7 @@ public class User {
     // set user image
     this.imageName = img;
     // set default game settings
+    this.lastSolveTime = 100;
     this.gameSettings =
         new GameSettings(
             AccuracySettings.EASY, TimeSettings.EASY, ConfidenceSettings.EASY, WordSettings.EASY);
@@ -139,6 +141,14 @@ public class User {
 
   public void updateTotalSolveTime(int timeToAdd) {
     this.totalSolveTime += timeToAdd;
+  }
+
+  public void updateLastSolveTime(int solveTime) {
+    this.lastSolveTime = solveTime;
+  }
+
+  public int getLastSolveTime() {
+    return this.lastSolveTime;
   }
 
   public double getAverageSolveTime() {
@@ -236,6 +246,10 @@ public class User {
 
   public boolean twentyConsecutiveWins() {
     return hasTwentyConsecutiveWins;
+  }
+
+  public int getConsecutiveWins() {
+    return consecutiveWins;
   }
 
   /**
