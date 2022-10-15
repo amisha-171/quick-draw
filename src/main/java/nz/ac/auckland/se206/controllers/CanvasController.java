@@ -321,7 +321,6 @@ public abstract class CanvasController {
     setUserName(userName);
     startGame();
     predLabel.setText("Click the \"Start!\" button to start drawing and view the guesses made!");
-    timerCount.setTextFill(Color.color(0.8, 0.6, 0.06));
     changeProgressBarColour();
   }
 

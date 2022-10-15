@@ -45,6 +45,7 @@ public class NormalCanvasController extends CanvasController {
    */
   @Override
   protected void onReady() throws MalformedURLException {
+    timerCount.setTextFill(Color.color(0.8, 0.6, 0.06));
     // Play music associated with normal game mode when user is ready
     playGameModeMusic("src/main/resources/sounds/funny.mp3");
     songPlayer.setVolume(volumeSlider.getValue() * 0.01);

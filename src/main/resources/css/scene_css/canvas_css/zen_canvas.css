@@ -1,17 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Gorditas&family=Viga&display=swap');
 
-.root {
-    -fx-background-color: #e0ddff;
-    -fx-background-image: url(../../../images/question.png);
+.root{
+    -fx-background-color: #bddee8;
+    -fx-background-image: url(../../../images/clouds.png);
     -fx-background-size: 250px;
 }
 
 .button{
-    -fx-background-color: #e5909d;
+    -fx-background-color: #68a869;
 }
 
 .button:hover{
-    -fx-background-color:  #6d66b4;
+    -fx-background-color: #388498;
 }
 
 #canvasPane {
@@ -24,20 +24,20 @@
     -fx-border-width: 5px;
     -fx-border-radius: 10px;
     -fx-background-radius: 15px;
-    -fx-background-color: #e5909d;
+    -fx-background-color: #60b4c9;
     -fx-border-color: #ffffff;
     -fx-text-fill: #ffffff;
     -fx-font-family: 'Viga', sans-serif;
 }
 
-#wordLabel, #predTitle, #definitionTitle{
+#wordLabel, #predTitle{
     -fx-font-family: 'Viga', sans-serif;
-    -fx-text-fill: #46408c;
+    -fx-text-fill: #157d20;
 }
 
 #timerCount{
     -fx-font-family: 'Viga', sans-serif;
-    -fx-text-fill: #e5909d;
+    -fx-text-fill: #388498;
 }
 
 #eraseBtn, #speakWord, #onInk, #clearButton, #saveImage{
@@ -69,7 +69,7 @@
 #readyLabel{
     -fx-alignment: center;
     -fx-font-family: "Gorditas", cursive;
-    -fx-text-fill: #e5909d;
+    -fx-text-fill: #5da1b4;
 }
 
 .blue .bar{
@@ -92,7 +92,7 @@
 }
 .progress-bar {
     -fx-background-radius: 20px;
-    -fx-control-inner-background: #e0ddff;
+    -fx-control-inner-background: #bddee8;
     -fx-border-radius: 20px;
     -fx-border-width: 3px;
     -fx-border-color: white;
@@ -107,22 +107,13 @@
 }
 
 .slider .track{
-    -fx-background-color: #e5909d;
+    -fx-background-color: #388498;
 }
 
 .slider .thumb{
     -fx-background-color: white;
-    -fx-border-color: #e5909d;
+    -fx-border-color: #388498;
     -fx-border-width: 3px;
     -fx-border-radius: 20px;
-}
 
-
-#definitionLabel{
-    -fx-background-color: #928dc9;
-    -fx-background-radius: 25px;
-    -fx-border-color: white;
-    -fx-border-width: 5px;
-    -fx-border-radius: 20px;
-    -fx-text-fill: white;
 }
