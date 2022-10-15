@@ -26,6 +26,13 @@ public class PopupController {
     this.user = user;
   }
 
+  /**
+   * This method loads the popup for the game settings scene and is also in charge of resetting the
+   * consecutive win statistics for a given user based on factors
+   *
+   * @param btn The event button (YES) or (NO)
+   * @throws IOException If reading or riding causes error
+   */
   @FXML
   private void onGameSettingsChange(ActionEvent btn) throws IOException {
     // Get the current stage via some node

@@ -232,6 +232,10 @@ public class GameSettingsController {
     }
   }
 
+  /**
+   * This method creates a GameSettings object with the corresponding settings and saves it to the
+   * user profile
+   */
   private void onExitScene() {
     // Update current users game settings to the updated settings.
     GameSettings gameSettings =
