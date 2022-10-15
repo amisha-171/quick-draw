@@ -87,6 +87,7 @@ public class ZenCanvasController extends CanvasController {
   protected void onReady() throws MalformedURLException {
     // Start playing the song associated with zen mode when user is ready
     playGameModeMusic("src/main/resources/sounds/zen.mp3");
+    songPlayer.setVolume(volumeSlider.getValue() * 0.01);
     // When player is ready we start the game by enabling canvas, starting the timer etc
     this.color = this.colourSwitcher.getValue();
     this.canvas.setDisable(false);
@@ -263,8 +264,10 @@ public class ZenCanvasController extends CanvasController {
    */
   @Override
   protected void onNewGame() throws IOException {
-    //change song to the background song, if we're currently on zen mode
-    if (songPlayer != null) { //check that we're currently still on zen mode (since the song player will be not null)
+    // change song to the background song, if we're currently on zen mode
+    if (songPlayer
+        != null) { // check that we're currently still on zen mode (since the song player will be
+                   // not null)
       songPlayer.stop();
       App.playBackgroundMusic();
     }

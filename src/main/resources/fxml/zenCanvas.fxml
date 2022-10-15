@@ -125,6 +125,6 @@
     </children>
     <stylesheets>
         <URL value="@../css/app.css" />
-        <URL value="@../css/scene_css/canvas.css" />
+        <URL value="@../css/scene_css/canvas_css/canvas.css" />
     </stylesheets>
 </Pane>

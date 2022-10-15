@@ -1,0 +1,114 @@
+@import url('https://fonts.googleapis.com/css2?family=Gorditas&family=Viga&display=swap');
+
+.root {
+    -fx-background-image: url(../../../images/doodles.png);
+}
+
+#canvasPane {
+    -fx-border-width: 5px;
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 5px;
+}
+
+#predLabel {
+    -fx-border-width: 5px;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 15px;
+    -fx-background-color: #cc960e;
+    -fx-border-color: #ffffff;
+    -fx-text-fill: #ffffff;
+    -fx-font-family: 'Viga', sans-serif;
+}
+
+#wordLabel, #predTitle{
+    -fx-font-family: 'Viga', sans-serif;
+    -fx-text-fill: #157d20;
+}
+
+#timerCount{
+    -fx-font-family: 'Viga', sans-serif;
+    -fx-text-fill: #cc960e;
+}
+
+#eraseBtn, #speakWord, #onInk, #clearButton, #saveImage{
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 35px;
+    -fx-background-position: center;
+}
+
+#speakWord{
+    -fx-background-image: url(../../../images/ear.png);
+}
+
+#eraseBtn{
+    -fx-background-image: url(../../../images/eraser.png);
+}
+
+#onInk{
+    -fx-background-image: url(../../../images/pen.png);
+}
+
+#clearButton{
+    -fx-background-image: url(../../../images/trash.png);
+}
+
+#saveImage{
+    -fx-background-image: url(../../../images/save-image.png);
+}
+
+#readyLabel{
+    -fx-alignment: center;
+    -fx-font-family: "Gorditas", cursive;
+    -fx-text-fill: #cc960e;
+}
+
+.blue .bar{
+    -fx-background-radius: 20px;
+    -fx-background-color: dodgerblue;
+}
+
+.green .bar{
+    -fx-background-radius: 20px;
+    -fx-background-color: #21ab72;
+}
+
+.orange .bar{
+    -fx-background-radius: 20px;
+    -fx-background-color: #cc960e;
+}
+
+.red .bar{
+    -fx-background-radius: 20px;
+    -fx-background-color: red;
+}
+
+.progress-bar .track {
+    -fx-background-radius: 20px;
+}
+.progress-bar {
+    -fx-background-radius: 20px;
+    -fx-control-inner-background: #c7dbb2;
+    -fx-border-radius: 20px;
+    -fx-border-width: 3px;
+    -fx-border-color: white;
+}
+
+.prog-label{
+    -fx-font-size: 20px;
+}
+
+.small-header {
+    -fx-font-size: 20px;
+}
+
+.slider .track{
+    -fx-background-color: #cc960e;
+}
+
+.slider .thumb{
+    -fx-background-color: white;
+    -fx-border-color: #cc960e;
+    -fx-border-width: 3px;
+    -fx-border-radius: 20px;
+
+}

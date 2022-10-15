@@ -27,6 +27,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.Slider;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
@@ -34,11 +35,9 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import javax.imageio.ImageIO;
-
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.filereader.CategorySelector;
 import nz.ac.auckland.se206.ml.DoodlePrediction;
-import nz.ac.auckland.se206.speech.TextToSpeech;
 import nz.ac.auckland.se206.userutils.Database;
 import nz.ac.auckland.se206.userutils.User;
 import nz.ac.auckland.se206.util.SceneManager;
@@ -52,6 +51,7 @@ public abstract class CanvasController {
 
   protected DoodlePrediction model;
   @FXML protected Label predLabel;
+  @FXML private ImageView speakerIcon;
   @FXML protected Button eraseBtn;
   @FXML protected Button onInk;
   @FXML protected Label timerCount;
@@ -276,7 +276,12 @@ public abstract class CanvasController {
             }
 
             // Set the predictions label in the GUI to the string builder sbf
-            Platform.runLater(() -> predLabel.setText(sbf.toString()));
+            // also change the progress bar color based on predictions
+            Platform.runLater(
+                () -> {
+                  predLabel.setText(sbf.toString());
+                  changeProgressBarColour();
+                });
 
             // Check if the game is won and set the label in the GUI to display to the user they
             // have won
@@ -316,10 +321,8 @@ public abstract class CanvasController {
     readyButton.setDisable(false);
     setUserName(userName);
     startGame();
-    predLabel.setText(
-        "Click the \"Ready!\" button to start drawing the word you see and view the predictions!");
+    predLabel.setText("Click the \"Start!\" button to start drawing and view the guesses made!");
     timerCount.setTextFill(Color.color(0.8, 0.6, 0.06));
-    volumeSlider.adjustValue(50.0);
   }
 
   /**
@@ -418,7 +421,7 @@ public abstract class CanvasController {
    *     music
    */
   public void playGameModeMusic(String currModeSongPath) throws MalformedURLException {
-    App.pauseBackgroundMusic(); //pause background music of app
+    App.pauseBackgroundMusic(); // pause background music of app
     // Set the media we wish to play for some game mode
     song = new Media(new File(currModeSongPath).toURI().toURL().toString());
     // Initialize the media player instance
@@ -433,13 +436,14 @@ public abstract class CanvasController {
 
   /**
    * This method plays the win/lose notification sound upon conclusion of a game.
+   *
    * @param won Boolean indicating whether the user won or not
    * @throws URISyntaxException If there's an exception in converting to URI
    */
   public void playNotification(boolean won) {
     String soundFilePath = won ? "/sounds/win.wav" : "/sounds/lose.wav";
     Media notification = null;
-    //catch exception if error in reading the sound file
+    // catch exception if error in reading the sound file
     try {
       notification = new Media(App.class.getResource(soundFilePath).toURI().toString());
     } catch (URISyntaxException e) {
@@ -447,6 +451,53 @@ public abstract class CanvasController {
     }
     MediaPlayer notificationPlayer = new MediaPlayer(notification);
     notificationPlayer.play();
+  }
+
+  /**
+   * This method simply changes the speaker icon to indicate to the user whether the background
+   * music is muted or can be heard.
+   */
+  @FXML
+  private void onSlider() {
+    if (volumeSlider.getValue() == 0) {
+      speakerIcon.setImage(new Image("/images/mute.png"));
+    } else {
+      speakerIcon.setImage(new Image("/images/speaker.png"));
+    }
+  }
+
+  /**
+   * This method changes the colour of the progress bar based on how close the user is to getting
+   * specified words into the prediction list.
+   */
+  private void changeProgressBarColour() {
+    if (predBar.getProgress() >= 0 && predBar.getProgress() <= 0.25) {
+      predBar.getStyleClass().add("blue");
+      predBar.getStyleClass().remove("red");
+      predBar.getStyleClass().remove("orange");
+      predBar.getStyleClass().remove("green");
+
+    } else if (predBar.getProgress() > 0.25 && predBar.getProgress() <= 0.5) {
+      predBar.getStyleClass().removeAll();
+      predBar.getStyleClass().add("green");
+      predBar.getStyleClass().remove("red");
+      predBar.getStyleClass().remove("orange");
+      predBar.getStyleClass().remove("blue");
+
+    } else if (predBar.getProgress() > 0.5 && predBar.getProgress() <= 0.75) {
+      predBar.getStyleClass().removeAll();
+      predBar.getStyleClass().add("orange");
+      predBar.getStyleClass().remove("red");
+      predBar.getStyleClass().remove("blue");
+      predBar.getStyleClass().remove("green");
+
+    } else if (predBar.getProgress() > 0.75) {
+      predBar.getStyleClass().removeAll();
+      predBar.getStyleClass().add("red");
+      predBar.getStyleClass().remove("blue");
+      predBar.getStyleClass().remove("orange");
+      predBar.getStyleClass().remove("green");
+    }
   }
 
   /**

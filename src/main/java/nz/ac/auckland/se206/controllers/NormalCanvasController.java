@@ -1,7 +1,6 @@
 package nz.ac.auckland.se206.controllers;
 
 import java.net.MalformedURLException;
-import java.net.URISyntaxException;
 import java.util.Timer;
 import java.util.TimerTask;
 import javafx.application.Platform;
@@ -48,6 +47,7 @@ public class NormalCanvasController extends CanvasController {
   protected void onReady() throws MalformedURLException {
     // Play music associated with normal game mode when user is ready
     playGameModeMusic("src/main/resources/sounds/funny.mp3");
+    songPlayer.setVolume(volumeSlider.getValue() * 0.01);
     // When player is ready we start the game by enabling canvas, starting the timer etc
     canvas.setDisable(false);
     this.onInk.setDisable(true);

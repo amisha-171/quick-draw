@@ -100,6 +100,7 @@ public class HiddenCanvasController extends CanvasController {
   protected void onReady() throws MalformedURLException {
     // Play music associated with hidden game mode when user is ready
     playGameModeMusic("src/main/resources/sounds/detective.mp3");
+    songPlayer.setVolume(volumeSlider.getValue() * 0.01);
     // When player is ready we start the game by enabling canvas, starting the timer etc
     canvas.setDisable(false);
     this.onInk.setDisable(true);
