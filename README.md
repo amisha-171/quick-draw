@@ -1,8 +1,10 @@
 # SE206 - 2022 - Beta & Final Releases
 
-### Quick, Draw! 
+# Quick, Draw! 
 
-# Attributions:
+## Attributions:
+
+# Images:
 
 All game icons were made by Freepik (https://www.freepik.com) from Flaticon (https://www.flaticon.com/), using the Flaticon License, which is a free for commercial use WITH ATTRIBUTION license.
 
@@ -27,7 +29,21 @@ Offering Flaticon Contents designs (or modified Flaticon Contents versions) for 
 * The complete content of licenses can be consulted in the Terms of Use, that will prevail over the content of this document.
 www.flaticon.com/terms-of-use
 
-# For Developer Use:
+# Music
+
+All game music and sound effects were sourced from Mixkit (https://mixkit.co/).
+
+Mixkit License:
+
+Items under the Mixkit Stock Music Free License can be used in your commercial and non-commercial projects for free.
+
+You’re permitted to download, copy, modify, distribute and publicly perform the Music Items on any web or social media platform, including internet-based video on demand services, podcasts and advertisements.
+
+You’re not allowed to use them in CDs or DVDs, video games or tv or radio broadcast. You’re also not allowed to remix them (or incorporate in a music-only track), claim them as your own or register them on any rights management service.
+
+There are some important limits to these rights, described in our User Terms.
+
+## For Developer Use:
 
 **Requirements**
 
