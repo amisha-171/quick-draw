@@ -530,15 +530,6 @@ public abstract class CanvasController extends Controller {
   }
 
   /**
-   * This method mutes or unmutes the main background music and will also toggle the mute icon
-   * symbol accordingly based on the state of the music.
-   */
-  @FXML
-  protected void onToggleMute() {
-    App.toggleMusicPlaying();
-  }
-
-  /**
    * Abstract method implemented by different game mode controllers that sets up the canvas once
    * user is ready, does slightly different things depending on game mode.
    */

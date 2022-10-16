@@ -18,4 +18,13 @@ public abstract class Controller {
             speakerIcon.setImage(new Image("/images/no-music.png"));
         }
     }
+
+    /**
+     * This method mutes or unmutes the main background music and will also toggle the mute icon
+     * symbol accordingly based on the state of the music.
+     */
+    @FXML
+    private void onToggleMute() {
+        App.toggleMusicPlaying();
+    }
 }

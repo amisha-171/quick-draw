@@ -176,13 +176,4 @@ public class StatsController extends Controller {
     // Update word list label accordingly on the statistics page itself.
     wordList.setText(sb.toString());
   }
-
-  /**
-   * This method mutes or unmutes the main background music and will also toggle the mute icon
-   * symbol accordingly based on the state of the music.
-   */
-  @FXML
-  private void onToggleMute() {
-    App.toggleMusicPlaying();
-  }
 }

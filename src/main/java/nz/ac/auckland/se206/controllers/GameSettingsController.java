@@ -7,9 +7,8 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
+import javafx.stage.Stage;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.userutils.GameSettings;
 import nz.ac.auckland.se206.userutils.User;
@@ -37,19 +36,23 @@ public class GameSettingsController extends Controller {
   private ConfidenceSettings confidenceSettings;
   private TimeSettings timeSettings;
   private WordSettings wordSettings;
+  private @FXML Button menuBtn;
+  private boolean isPopUp;
+  private Stage stage;
+  private @FXML Button doneBtn;
 
   private final String[] accuracyList =
-      Arrays.stream(AccuracySettings.values())
-          .map(AccuracySettings::toString)
-          .toArray(String[]::new);
+          Arrays.stream(AccuracySettings.values())
+                  .map(AccuracySettings::toString)
+                  .toArray(String[]::new);
   private final String[] timeList =
-      Arrays.stream(TimeSettings.values()).map(TimeSettings::toString).toArray(String[]::new);
+          Arrays.stream(TimeSettings.values()).map(TimeSettings::toString).toArray(String[]::new);
   private final String[] confidenceList =
-      Arrays.stream(ConfidenceSettings.values())
-          .map(ConfidenceSettings::toString)
-          .toArray(String[]::new);
+          Arrays.stream(ConfidenceSettings.values())
+                  .map(ConfidenceSettings::toString)
+                  .toArray(String[]::new);
   private final String[] wordList =
-      Arrays.stream(WordSettings.values()).map(WordSettings::toString).toArray(String[]::new);
+          Arrays.stream(WordSettings.values()).map(WordSettings::toString).toArray(String[]::new);
   private User currentUser;
 
   /**
@@ -58,13 +61,29 @@ public class GameSettingsController extends Controller {
    *
    * @param user object of type User
    */
-  public void setUserSettings(User user) {
+  public void setUserSettings(User user, boolean popUp) {
     // Initialize the users current settings
     this.currentUser = user;
     this.accuracySettings = user.getGameSettings().getAccuracy();
     this.confidenceSettings = user.getGameSettings().getConfidence();
     this.timeSettings = user.getGameSettings().getTime();
     this.wordSettings = user.getGameSettings().getWords();
+    this.isPopUp = popUp;
+    setExitButtonsOnType();
+  }
+
+  /**
+   * This method adjusts the visibility of the buttons on the scene depending on if this controllers
+   * scene is loaded as a seperate window or a previous scene was switched. Depending on this we
+   * take the user back to different scenes/windows once they have selected their settings and wish
+   * to proceed.
+   */
+  private void setExitButtonsOnType() {
+    if (isPopUp) {
+      menuBtn.setVisible(false);
+    } else {
+      doneBtn.setVisible(false);
+    }
   }
 
   /**
@@ -101,7 +120,7 @@ public class GameSettingsController extends Controller {
    * @param toggle a boolean indicating whether the toggle up or down button was pressed.
    */
   private void setDifficultyLabelToScene(
-      int currIndex, String[] difficultyList, Label labelToSet, boolean toggle) {
+          int currIndex, String[] difficultyList, Label labelToSet, boolean toggle) {
     // If user wants to up the difficulty we check if the current index is less than the sum of all
     // difficulties for that setting, if so we increment the index for that setting
     if (toggle) {
@@ -201,17 +220,32 @@ public class GameSettingsController extends Controller {
    */
   @FXML
   private void onConfirmSettings(ActionEvent event) {
+    this.stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+    if (isPopUp) {
+      onExitScene();
+      if (stage != null) {
+        stage.close();
+      }
+    } else {
+      onExitScene();
+      Scene scene = ((Node) event.getSource()).getScene();
+      scene.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.USER_MENU));
+    }
+  }
+
+  /**
+   * This method creates a GameSettings object with the corresponding settings and saves it to the
+   * user profile
+   */
+  private void onExitScene() {
     // Update current users game settings to the updated settings.
     GameSettings gameSettings =
-        new GameSettings(
-            this.accuracySettings, this.timeSettings, this.confidenceSettings, this.wordSettings);
+            new GameSettings(
+                    this.accuracySettings, this.timeSettings, this.confidenceSettings, this.wordSettings);
     // Set the new game settings in the user profile class
     currentUser.setGameSettings(gameSettings);
     // Write information to user file
     currentUser.saveSelf();
-    // Set scene
-    Scene scene = ((Node) event.getSource()).getScene();
-    scene.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.USER_MENU));
   }
 
   /**
@@ -242,7 +276,7 @@ public class GameSettingsController extends Controller {
       }
       if (!difficulty.equals("HARD")) {
         accuracyDesc.setText(
-            "You can win if the word to draw is in the Top " + topCount + " Guesses!");
+                "You can win if the word to draw is in the Top " + topCount + " Guesses!");
       } else {
         accuracyDesc.setText("You can win if the word to draw is the Top Guess!");
       }
@@ -280,14 +314,5 @@ public class GameSettingsController extends Controller {
       }
       confidenceDesc.setText("We'll make guesses we are " + confidence + " confident about!");
     }
-  }
-
-  /**
-   * This method mutes or unmutes the main background music and will also toggle the mute icon
-   * symbol accordingly based on the state of the music.
-   */
-  @FXML
-  private void onToggleMute() {
-    App.toggleMusicPlaying();
   }
 }

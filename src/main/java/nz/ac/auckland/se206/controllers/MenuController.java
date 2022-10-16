@@ -264,13 +264,4 @@ public class MenuController extends Controller {
     startGame.getScene().getRoot().getStylesheets().remove("/css/scene_css/menu_css/zenmenu.css");
     startGame.getScene().getRoot().getStylesheets().add("/css/scene_css/menu_css/menu.css");
   }
-
-  /**
-   * This method mutes or unmutes the main background music and will also toggle the mute icon
-   * symbol accordingly based on the state of the music.
-   */
-  @FXML
-  private void onToggleMute() {
-    App.toggleMusicPlaying();
-  }
 }

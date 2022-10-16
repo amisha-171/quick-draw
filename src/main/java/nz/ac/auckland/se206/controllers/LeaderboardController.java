@@ -81,13 +81,4 @@ public class LeaderboardController extends Controller {
     Scene scene = ((Node) event.getSource()).getScene();
     scene.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.MAIN_MENU));
   }
-
-  /**
-   * This method mutes or unmutes the main background music and will also toggle the mute icon
-   * symbol accordingly based on the state of the music.
-   */
-  @FXML
-  private void onToggleMute() {
-    App.toggleMusicPlaying();
-  }
 }
