@@ -12,12 +12,11 @@ import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.userutils.Database;
 import nz.ac.auckland.se206.util.SceneManager;
 
-public class MainMenuController {
+public class MainMenuController extends Controller {
 
   @FXML private Button switchProfile;
   @FXML private Button createProfile;
   @FXML private Button viewLeaderboard;
-  @FXML private ImageView speakerIcon;
 
   /**
    * Initialise the usable buttons of this scene depending on the number of users created
@@ -93,6 +92,6 @@ public class MainMenuController {
    */
   @FXML
   private void onToggleMute() {
-    App.changeSpeakerIcon(speakerIcon);
+    App.toggleMusicPlaying();
   }
 }

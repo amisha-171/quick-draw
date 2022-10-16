@@ -42,7 +42,7 @@ import nz.ac.auckland.se206.userutils.Database;
 import nz.ac.auckland.se206.userutils.User;
 import nz.ac.auckland.se206.util.SceneManager;
 
-public abstract class CanvasController {
+public abstract class CanvasController extends Controller {
   protected String userName;
   @FXML protected Canvas canvas;
   @FXML protected Label wordLabel;
@@ -492,7 +492,7 @@ public abstract class CanvasController {
    */
   @FXML
   protected void onToggleMute() {
-    App.changeSpeakerIcon(musicIcon);
+    App.toggleMusicPlaying();
   }
 
   /**

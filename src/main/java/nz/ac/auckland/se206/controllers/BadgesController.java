@@ -6,13 +6,14 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.userutils.Database;
 import nz.ac.auckland.se206.userutils.User;
 import nz.ac.auckland.se206.util.SceneManager;
 
-public class BadgesController {
+public class BadgesController extends Controller {
   @FXML private Label goldTime;
   @FXML private Label goldGames;
   @FXML private Label goldWins;
@@ -22,7 +23,6 @@ public class BadgesController {
   @FXML private Label bronzeTime;
   @FXML private Label bronzeWins;
   @FXML private Label bronzeGames;
-  @FXML private ImageView speakerIcon;
 
   /**
    * This method takes in a username as input and will display the badges earned for that user to
@@ -104,6 +104,6 @@ public class BadgesController {
    */
   @FXML
   private void onToggleMute() {
-    App.changeSpeakerIcon(speakerIcon);
+    App.toggleMusicPlaying();
   }
 }

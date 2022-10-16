@@ -15,14 +15,13 @@ import nz.ac.auckland.se206.userutils.Database;
 import nz.ac.auckland.se206.userutils.User;
 import nz.ac.auckland.se206.util.SceneManager;
 
-public class LeaderboardController {
+public class LeaderboardController extends Controller {
   @FXML private TableView<User> leaderboard;
   @FXML private TableColumn<User, String> usernameColumn;
   @FXML private TableColumn<User, Integer> winsColumn;
   @FXML private TableColumn<User, Integer> fastestTimeColumn;
   @FXML private TableColumn<User, Integer> averageTimeColumn;
   @FXML private TableColumn<List<ImageView>, ImageView> iconColumn;
-  @FXML private ImageView speakerIcon;
 
   public void initialize() throws IOException {
     initialiseLeaderboard();
@@ -89,6 +88,6 @@ public class LeaderboardController {
    */
   @FXML
   private void onToggleMute() {
-    App.changeSpeakerIcon(speakerIcon);
+    App.toggleMusicPlaying();
   }
 }

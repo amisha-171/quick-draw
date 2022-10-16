@@ -19,7 +19,7 @@ import nz.ac.auckland.se206.userutils.Database;
 import nz.ac.auckland.se206.userutils.User;
 import nz.ac.auckland.se206.util.SceneManager;
 
-public class StatsController {
+public class StatsController extends Controller {
   private String userName;
   @FXML private Label wordList;
   @FXML private Label userLabel;
@@ -27,7 +27,6 @@ public class StatsController {
   @FXML private Label wordsPlayedLabel;
   @FXML private Label fastestTimeLabel;
   @FXML private Label avgTimeLabel;
-  @FXML private ImageView speakerIcon;
   @FXML private PieChart gamesPlayedChart;
   @FXML private ComboBox<String> wordDifficultyFilter;
 
@@ -184,6 +183,6 @@ public class StatsController {
    */
   @FXML
   private void onToggleMute() {
-    App.changeSpeakerIcon(speakerIcon);
+    App.toggleMusicPlaying();
   }
 }

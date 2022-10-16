@@ -16,10 +16,9 @@ import nz.ac.auckland.se206.userutils.Database;
 import nz.ac.auckland.se206.userutils.User;
 import nz.ac.auckland.se206.util.SceneManager;
 
-public class CreateProfileController {
+public class CreateProfileController extends Controller {
   @FXML private TextField usernameField;
   @FXML private ImageView profPic;
-  @FXML private ImageView speakerIcon;
   private int index;
   private Image img;
   private Alert alert;
@@ -141,6 +140,6 @@ public class CreateProfileController {
    */
   @FXML
   private void onToggleMute() {
-    App.changeSpeakerIcon(speakerIcon);
+    App.toggleMusicPlaying();
   }
 }

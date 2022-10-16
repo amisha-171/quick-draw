@@ -7,6 +7,7 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import nz.ac.auckland.se206.App;
@@ -18,7 +19,7 @@ import nz.ac.auckland.se206.util.enums.ConfidenceSettings;
 import nz.ac.auckland.se206.util.enums.TimeSettings;
 import nz.ac.auckland.se206.util.enums.WordSettings;
 
-public class GameSettingsController {
+public class GameSettingsController extends Controller {
   private @FXML Label accuracyLabel;
   private @FXML Label wordLabel;
   private @FXML Label timeLabel;
@@ -31,7 +32,6 @@ public class GameSettingsController {
   private @FXML Button upTime;
   private @FXML Button upConfidence;
   private @FXML Button upWords;
-  @FXML private ImageView speakerIcon;
   private int[] diffIndex = {0, 0, 0, 0};
   private AccuracySettings accuracySettings;
   private ConfidenceSettings confidenceSettings;
@@ -288,6 +288,6 @@ public class GameSettingsController {
    */
   @FXML
   private void onToggleMute() {
-    App.changeSpeakerIcon(speakerIcon);
+    App.toggleMusicPlaying();
   }
 }

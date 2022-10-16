@@ -1,10 +1,11 @@
 package nz.ac.auckland.se206.util;
 
 import javafx.scene.Parent;
+import nz.ac.auckland.se206.controllers.Controller;
 
 public class UiData {
   private Parent root;
-  private Object controller;
+  private Controller controller;
 
   /**
    * This constructor method sets the specified scene's root node and controller, so that these
@@ -13,7 +14,7 @@ public class UiData {
    * @param root the root (parent) node of this JavaFX scene.
    * @param controller the controller object of this specified JavaFX scene.
    */
-  public UiData(Parent root, Object controller) {
+  public UiData(Parent root, Controller controller) {
     this.root = root;
     this.controller = controller;
   }
@@ -32,7 +33,7 @@ public class UiData {
    *
    * @return the controller object of this specified JavaFX scene.
    */
-  public Object getController() {
+  public Controller getController() {
     return controller;
   }
 }

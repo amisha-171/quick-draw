@@ -13,12 +13,11 @@ import nz.ac.auckland.se206.userutils.Database;
 import nz.ac.auckland.se206.userutils.User;
 import nz.ac.auckland.se206.util.SceneManager;
 
-public class ProfileController {
+public class ProfileController extends Controller {
   private @FXML Label userLabel;
   private @FXML Button nextUser;
   private @FXML Button prevUser;
   private @FXML ImageView userImage;
-  private @FXML ImageView speakerIcon;
   private int userIndex = 0;
   private User[] users;
 
@@ -141,6 +140,6 @@ public class ProfileController {
    */
   @FXML
   private void onToggleMute() {
-    App.changeSpeakerIcon(speakerIcon);
+    App.toggleMusicPlaying();
   }
 }

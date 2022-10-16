@@ -20,13 +20,12 @@ import nz.ac.auckland.se206.userutils.User;
 import nz.ac.auckland.se206.util.SceneManager;
 import nz.ac.auckland.se206.util.enums.GameMode;
 
-public class MenuController implements Initializable {
+public class MenuController extends Controller {
   private String userName;
   private GameMode currentGameMode;
   @FXML private Button iconButton;
   @FXML private Button startGame;
   @FXML private ImageView gameIcon;
-  @FXML private ImageView speakerIcon;
   @FXML private Label userId;
 
   /**
@@ -36,7 +35,7 @@ public class MenuController implements Initializable {
    * @param url URL of GUI
    * @param resourceBundle Resource bundle of GUI
    */
-  public void initialize(URL url, ResourceBundle resourceBundle) {
+  public void initialize() {
     this.currentGameMode = GameMode.NORMAL;
   }
 
@@ -272,6 +271,6 @@ public class MenuController implements Initializable {
    */
   @FXML
   private void onToggleMute() {
-    App.changeSpeakerIcon(speakerIcon);
+    App.toggleMusicPlaying();
   }
 }

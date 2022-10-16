@@ -146,7 +146,7 @@
                         </Button>
                   <HBox alignment="CENTER" prefHeight="104.0" prefWidth="185.0" spacing="5.0">
                      <children>
-                        <ImageView fx:id="speakerIcon" fitHeight="36.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="musicIcon" fitHeight="36.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../images/speaker.png" />
                            </image>
@@ -178,7 +178,7 @@
         </VBox>
       <Button fx:id="muteButton" layoutX="20.0" layoutY="20.0" mnemonicParsing="false" onAction="#onToggleMute" prefHeight="67.0" prefWidth="33.0">
          <graphic>
-            <ImageView fx:id="musicIcon" fitHeight="38.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="speakerIcon" fitHeight="38.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/music.png" />
                </image>
