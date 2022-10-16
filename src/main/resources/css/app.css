@@ -88,3 +88,8 @@
     -fx-background-color: #45a446;
     -fx-text-fill: white;
 }
+
+.message{
+    -fx-text-fill: #157d20;
+    -fx-font-size: 27px;
+}
