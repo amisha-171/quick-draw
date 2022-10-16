@@ -285,7 +285,6 @@ public class ZenCanvasController extends CanvasController {
     setUserName(userName);
     startGame();
     predLabel.setText("Click the \"Start!\" button to start drawing and view the guesses.");
-    timerCount.setTextFill(Color.color(0.8, 0.6, 0.06));
     // On a new game we stop the song playing if the user has pressed ready, and disable the volume
     // slider until they press ready on the new game again
     if (this.songPlayer != null) {

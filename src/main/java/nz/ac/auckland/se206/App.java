@@ -1,6 +1,5 @@
 package nz.ac.auckland.se206;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
@@ -95,5 +94,19 @@ public class App extends Application {
    */
   public static void playBackgroundMusic() {
     backgroundSongPlayer.play();
+  }
+
+  /**
+   * Static method that can be used by other controllers to mute the background music.
+   */
+  public static void muteBackgroundMusic() {
+    backgroundSongPlayer.setVolume(0);
+  }
+
+  /**
+   * Static method that can be used by other controllers to unmute the background music.
+   */
+  public static void unmuteBackgroundMusic() {
+    backgroundSongPlayer.setVolume(1);
   }
 }
