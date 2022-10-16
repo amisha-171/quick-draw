@@ -484,9 +484,9 @@ public abstract class CanvasController extends Controller {
   @FXML
   private void onSlider() {
     if (volumeSlider.getValue() == 0) {
-      speakerIcon.setImage(new Image("/images/mute.png"));
+      musicIcon.setImage(new Image("/images/mute.png"));
     } else {
-      speakerIcon.setImage(new Image("/images/speaker.png"));
+      musicIcon.setImage(new Image("/images/speaker.png"));
     }
   }
 
