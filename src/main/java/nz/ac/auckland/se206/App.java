@@ -71,6 +71,7 @@ public class App extends Application {
     // applies to zen mode as user can draw for any amount of time however for the other game modes
     // the music duration is greater than any time limit
     backgroundSongPlayer.setOnEndOfMedia(() -> backgroundSongPlayer.seek(Duration.ZERO));
+    backgroundSongPlayer.setVolume(0.25);
     // Play the song
     backgroundSongPlayer.play();
 
