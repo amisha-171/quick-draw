@@ -51,9 +51,6 @@
                      <font>
                         <Font size="20.0" />
                      </font>
-                     <tooltip>
-                        <Tooltip text="You can win if the word to draw is in the Top 3 Guesses!" />
-                     </tooltip>
                   </Label>
                </children>
             </VBox>
@@ -82,9 +79,6 @@
                      <font>
                         <Font size="20.0" />
                      </font>
-                     <tooltip>
-                        <Tooltip text="You can win if the word to draw is in the Top 3 Guesses!" />
-                     </tooltip>
                   </Label>
                </children>
             </VBox>
@@ -113,9 +107,6 @@
                      <font>
                         <Font size="20.0" />
                      </font>
-                     <tooltip>
-                        <Tooltip text="You can win if the word to draw is in the Top 3 Guesses!" />
-                     </tooltip>
                   </Label>
                </children>
             </VBox>
@@ -144,9 +135,6 @@
                      <font>
                         <Font size="20.0" />
                      </font>
-                     <tooltip>
-                        <Tooltip text="You can win if the word to draw is in the Top 3 Guesses!" />
-                     </tooltip>
                   </Label>
                </children>
             </VBox>
