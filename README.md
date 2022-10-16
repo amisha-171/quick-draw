@@ -35,11 +35,11 @@ All game music and sound effects were sourced from Mixkit (https://mixkit.co/).
 
 Mixkit License:
 
-Items under the Mixkit Stock Music Free License can be used in your commercial and non-commercial projects for free.
+Items under the Mixkit Sound Effects Free License can be used in your commercial and non-commercial projects for free.
 
-You’re permitted to download, copy, modify, distribute and publicly perform the Music Items on any web or social media platform, including internet-based video on demand services, podcasts and advertisements.
+You are licensed to use the Item to create an End Product that incorporates the Item as well as other things, so that it is larger in scope and different in nature than the Item. You’re permitted to download, copy, modify, distribute and publicly perform the Sound Effect Items on any web or social media platform, in podcasts and in video games, as well as in films and presentations distributed on CDs, DVDs, via TV or radio broadcast or internet based video on demand services.
 
-You’re not allowed to use them in CDs or DVDs, video games or tv or radio broadcast. You’re also not allowed to remix them (or incorporate in a music-only track), claim them as your own or register them on any rights management service.
+You can’t redistribute the Item on its own, as stock, in a tool or template, or with source files. You’re also not allowed to claim them as your own or register them on any rights management service.
 
 There are some important limits to these rights, described in our User Terms.
 
