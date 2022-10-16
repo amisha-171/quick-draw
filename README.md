@@ -4,7 +4,7 @@
 
 ## Attributions:
 
-# Images:
+### Images:
 
 All game icons were made by Freepik (https://www.freepik.com) from Flaticon (https://www.flaticon.com/), using the Flaticon License, which is a free for commercial use WITH ATTRIBUTION license.
 
@@ -29,7 +29,7 @@ Offering Flaticon Contents designs (or modified Flaticon Contents versions) for 
 * The complete content of licenses can be consulted in the Terms of Use, that will prevail over the content of this document.
 www.flaticon.com/terms-of-use
 
-# Music
+### Music
 
 All game music and sound effects were sourced from Mixkit (https://mixkit.co/).
 
