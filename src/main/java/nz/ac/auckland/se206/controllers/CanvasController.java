@@ -44,7 +44,7 @@ import nz.ac.auckland.se206.userutils.Database;
 import nz.ac.auckland.se206.userutils.User;
 import nz.ac.auckland.se206.util.SceneManager;
 
-public abstract class CanvasController {
+public abstract class CanvasController extends Controller {
   protected String userName;
   @FXML protected Canvas canvas;
   @FXML protected Label wordLabel;
@@ -53,7 +53,8 @@ public abstract class CanvasController {
 
   protected DoodlePrediction model;
   @FXML protected Label predLabel;
-  @FXML private ImageView speakerIcon;
+  @FXML protected ImageView speakerIcon;
+  @FXML protected ImageView musicIcon;
   @FXML protected Button eraseBtn;
   @FXML protected Button onInk;
   @FXML protected Label timerCount;
@@ -324,7 +325,7 @@ public abstract class CanvasController {
     readyButton.setDisable(false);
     setUserName(userName);
     startGame();
-    predLabel.setText("Click the \"Start!\" button to start drawing and view the guesses made!");
+    predLabel.setText("Click the \"Start!\" button to start drawing and view the guesses.");
     changeProgressBarColour();
   }
 
@@ -483,9 +484,9 @@ public abstract class CanvasController {
   @FXML
   private void onSlider() {
     if (volumeSlider.getValue() == 0) {
-      speakerIcon.setImage(new Image("/images/mute.png"));
+      musicIcon.setImage(new Image("/images/mute.png"));
     } else {
-      speakerIcon.setImage(new Image("/images/speaker.png"));
+      musicIcon.setImage(new Image("/images/speaker.png"));
     }
   }
 

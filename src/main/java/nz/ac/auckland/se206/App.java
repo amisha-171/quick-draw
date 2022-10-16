@@ -1,14 +1,13 @@
 package nz.ac.auckland.se206;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
-
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
@@ -76,18 +75,30 @@ public class App extends Application {
     backgroundSongPlayer.play();
 
     stage.setOnCloseRequest(
-        event -> {
-          Platform.exit();
-          System.exit(0);
-        });
+            event -> {
+              Platform.exit();
+              System.exit(0);
+            });
   }
 
   /**
-   * Static method that can be used by other controllers to pause the background
-   * music.
+   * Static method that can be used by other controllers to pause the background music.
    */
   public static void pauseBackgroundMusic() {
     backgroundSongPlayer.stop();
+  }
+
+  /**
+   * Static method to mute/unmute the music depending on current playing status.
+   */
+  public static void toggleMusicPlaying() {
+    if (isBackgroundMusicPlaying()) {
+      backgroundSongPlayer.setMute(true);
+    } else {
+      backgroundSongPlayer.setMute(false);
+    }
+
+    SceneManager.toggleAllSpeakerIcons();
   }
 
   /**
@@ -95,5 +106,13 @@ public class App extends Application {
    */
   public static void playBackgroundMusic() {
     backgroundSongPlayer.play();
+  }
+
+  /**
+   * Static method which checks if the background music is playing or is muted, will return true if
+   * music is playing and false if it is muted.
+   */
+  public static boolean isBackgroundMusicPlaying() {
+    return !backgroundSongPlayer.isMute();
   }
 }

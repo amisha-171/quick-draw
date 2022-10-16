@@ -12,12 +12,14 @@ import javafx.scene.Scene;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
+import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.filereader.CategorySelector;
 import nz.ac.auckland.se206.userutils.Database;
 import nz.ac.auckland.se206.userutils.User;
 import nz.ac.auckland.se206.util.SceneManager;
 
-public class StatsController {
+public class StatsController extends Controller {
   private String userName;
   @FXML private Label wordList;
   @FXML private Label userLabel;
@@ -74,12 +76,13 @@ public class StatsController {
     gamesPlayedChart.setData(pieChartData);
 
     // setting the fastest and average time labels
-    if (currentUser.getFastestTime() == 100) {
-      fastestTimeLabel.setText("0.0 seconds");
+    if (currentUser.getWins() + currentUser.getLosses() > 0) {
+      fastestTimeLabel.setText(currentUser.getFastestTime() + " seconds");
+      avgTimeLabel.setText(currentUser.getAverageSolveTime() + " seconds");
     } else {
-      fastestTimeLabel.setText(currentUser.getFastestTime() + ".0 seconds");
+      fastestTimeLabel.setText("N/A");
+      avgTimeLabel.setText("N/A");
     }
-    avgTimeLabel.setText(currentUser.getAverageSolveTime() + " seconds");
   }
 
   /**

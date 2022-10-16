@@ -47,3 +47,11 @@
     -fx-background-size: 34px;
     -fx-background-position: center;
 }
+
+.tooltip{
+    -fx-font-family: 'Viga', sans-serif;
+    -fx-font-size: 15px;
+    -fx-base: #928dc9;
+    -fx-background-color: #928dc9;
+    -fx-text-fill: white;
+}

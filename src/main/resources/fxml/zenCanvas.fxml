@@ -36,6 +36,9 @@
                             <HBox.margin>
                                 <Insets left="20.0" />
                             </HBox.margin>
+                     <tooltip>
+                        <Tooltip text="Hear Word" />
+                     </tooltip>
                         </Button>
                     </children>
                 </HBox>
@@ -43,12 +46,12 @@
                     <children>
                         <VBox alignment="CENTER" prefHeight="437.0" prefWidth="313.0">
                             <children>
-                                <Label fx:id="predTitle" alignment="CENTER" contentDisplay="CENTER" prefHeight="3.0" prefWidth="232.0" text="PREDICTIONS" textAlignment="RIGHT" textFill="#0022ff">
+                                <Label fx:id="predTitle" alignment="CENTER" contentDisplay="CENTER" prefHeight="3.0" prefWidth="232.0" text="OUR GUESSES" textAlignment="RIGHT" textFill="#0022ff">
                                     <font>
                                         <Font name="Courier New Bold" size="34.0" />
                                     </font>
                                 </Label>
-                                <Label fx:id="predLabel" alignment="TOP_LEFT" contentDisplay="TOP" prefHeight="404.0" prefWidth="271.0" text="Click the &quot;Start!&quot; button to start drawing the word you see and view the predictions!" wrapText="true">
+                                <Label fx:id="predLabel" alignment="TOP_LEFT" contentDisplay="TOP" prefHeight="404.0" prefWidth="271.0" text="Click the &quot;Start!&quot; button to start drawing and view the guesses." wrapText="true">
                                     <font>
                                         <Font name="Candara Light" size="25.0" />
                                     </font>
@@ -116,7 +119,7 @@
                         </HBox>
                             </children>
                         </VBox>
-                        <VBox alignment="CENTER" prefHeight="438.0" prefWidth="248.0" spacing="20.0">
+                        <VBox alignment="CENTER" prefHeight="438.0" prefWidth="258.0" spacing="20.0">
                      <children>
                         <VBox alignment="CENTER" prefHeight="421.0" prefWidth="213.0">
                            <children>
@@ -154,12 +157,15 @@
                   </Button>
                   <HBox alignment="CENTER" prefHeight="104.0" prefWidth="185.0" spacing="5.0">
                      <children>
-                        <ImageView fx:id="speakerIcon" fitHeight="36.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="musicIcon" fitHeight="36.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../images/speaker.png" />
                            </image>
                         </ImageView>
-                        <Slider fx:id="volumeSlider" disable="true" onMouseReleased="#onSlider" prefHeight="14.0" prefWidth="112.0" value="50.0" />
+                        <Slider fx:id="volumeSlider" disable="true" onMouseReleased="#onSlider" prefHeight="14.0" prefWidth="112.0" value="50.0">
+                           <tooltip>
+                              <Tooltip text="Drawing Music" />
+                           </tooltip></Slider>
                      </children>
                      <HBox.margin>
                         <Insets right="150.0" />
@@ -183,6 +189,18 @@
 
             </children>
         </VBox>
+      <Button fx:id="muteButton" layoutX="20.0" layoutY="20.0" mnemonicParsing="false" onAction="#onToggleMute" prefHeight="67.0" prefWidth="33.0">
+         <graphic>
+            <ImageView fx:id="speakerIcon" fitHeight="38.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/music.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <tooltip>
+            <Tooltip text="Background Music" />
+         </tooltip>
+      </Button>
     </children>
     <stylesheets>
         <URL value="@../css/app.css" />

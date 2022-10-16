@@ -14,12 +14,13 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.userutils.Database;
 import nz.ac.auckland.se206.userutils.User;
 import nz.ac.auckland.se206.util.SceneManager;
 import nz.ac.auckland.se206.util.enums.GameMode;
 
-public class MenuController implements Initializable {
+public class MenuController extends Controller {
   private String userName;
   private GameMode currentGameMode;
   @FXML private Button iconButton;
@@ -34,7 +35,7 @@ public class MenuController implements Initializable {
    * @param url URL of GUI
    * @param resourceBundle Resource bundle of GUI
    */
-  public void initialize(URL url, ResourceBundle resourceBundle) {
+  public void initialize() {
     this.currentGameMode = GameMode.NORMAL;
   }
 

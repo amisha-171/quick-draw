@@ -68,8 +68,28 @@
     -fx-background-position: center;
 }
 
-.message{
+#muteButton{
+    -fx-background-color: transparent;
+    -fx-border-width: 0px;
+    -fx-border-color: transparent;
+}
+
+#muteButton:hover{
+    -fx-background-color: #ffffff;
+    -fx-border-width: 0px;
+    -fx-border-color: transparent;
+}
+
+
+.tooltip{
     -fx-font-family: 'Viga', sans-serif;
+    -fx-font-size: 15px ;
+    -fx-base: #45a446;
+    -fx-background-color: #45a446;
+    -fx-text-fill: white;
+}
+
+.message{
     -fx-text-fill: #157d20;
-    -fx-font-size: 30px;
+    -fx-font-size: 27px;
 }

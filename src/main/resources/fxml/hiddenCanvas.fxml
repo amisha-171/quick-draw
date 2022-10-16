@@ -42,7 +42,7 @@
                     <children>
                         <VBox alignment="CENTER" prefHeight="517.0" prefWidth="282.0">
                             <children>
-                                <Label fx:id="predTitle" alignment="CENTER" contentDisplay="CENTER" prefHeight="0.0" prefWidth="232.0" styleClass="hidden-header" text="PREDICTIONS" textAlignment="RIGHT" textFill="#0022ff">
+                                <Label fx:id="predTitle" alignment="CENTER" contentDisplay="CENTER" prefHeight="0.0" prefWidth="232.0" styleClass="hidden-header" text="OUR GUESSES" textAlignment="RIGHT" textFill="#0022ff">
                                     <font>
                                         <Font name="Courier New Bold" size="34.0" />
                                     </font>
@@ -153,12 +153,15 @@
                   </Button>
                   <HBox alignment="CENTER" prefHeight="104.0" prefWidth="185.0" spacing="5.0">
                      <children>
-                        <ImageView fx:id="speakerIcon" fitHeight="36.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="musicIcon" fitHeight="36.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../images/speaker.png" />
                            </image>
                         </ImageView>
-                        <Slider fx:id="volumeSlider" disable="true" onMouseReleased="#onSlider" prefHeight="14.0" prefWidth="112.0" value="50.0" />
+                        <Slider fx:id="volumeSlider" disable="true" onMouseReleased="#onSlider" prefHeight="14.0" prefWidth="112.0" value="50.0">
+                           <tooltip>
+                              <Tooltip text="Drawing Music" />
+                           </tooltip></Slider>
                      </children>
                      <HBox.margin>
                         <Insets right="150.0" />
@@ -190,6 +193,18 @@
             <Font size="20.0" />
          </font>
       </Label>
+      <Button fx:id="muteButton" layoutX="20.0" layoutY="20.0" mnemonicParsing="false" onAction="#onToggleMute" prefHeight="67.0" prefWidth="33.0">
+         <graphic>
+            <ImageView fx:id="speakerIcon" fitHeight="38.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/music.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <tooltip>
+            <Tooltip text="Background Music" />
+         </tooltip>
+      </Button>
     </children>
     <stylesheets>
         <URL value="@../css/app.css" />

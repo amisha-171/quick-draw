@@ -8,11 +8,12 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.userutils.Database;
 import nz.ac.auckland.se206.userutils.User;
 import nz.ac.auckland.se206.util.SceneManager;
 
-public class ProfileController {
+public class ProfileController extends Controller {
   private @FXML Label userLabel;
   private @FXML Button nextUser;
   private @FXML Button prevUser;

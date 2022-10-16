@@ -78,7 +78,7 @@ public class ZenCanvasController extends CanvasController {
     eraseBtn.setDisable(true);
     speakWord.setDisable(false);
     clearButton.setDisable(true);
-    colourSwitcher.setDisable(false);
+    colourSwitcher.setDisable(true);
   }
 
   /**
@@ -93,6 +93,7 @@ public class ZenCanvasController extends CanvasController {
     this.color = this.colourSwitcher.getValue();
     this.canvas.setDisable(false);
     this.onInk.setDisable(true);
+    colourSwitcher.setDisable(false);
     this.readyButton.setDisable(true);
     this.clearButton.setDisable(false);
     this.eraseBtn.setDisable(false);
@@ -283,15 +284,12 @@ public class ZenCanvasController extends CanvasController {
     readyButton.setDisable(false);
     setUserName(userName);
     startGame();
-    predLabel.setText(
-        "Click the \"Start!\" button to start drawing the word you see and view the predictions!");
-    timerCount.setTextFill(Color.color(0.8, 0.6, 0.06));
+    predLabel.setText("Click the \"Start!\" button to start drawing and view the guesses.");
     // On a new game we stop the song playing if the user has pressed ready, and disable the volume
     // slider until they press ready on the new game again
     if (this.songPlayer != null) {
       this.songPlayer.stop();
     }
     volumeSlider.setDisable(true);
-    volumeSlider.adjustValue(50.0);
   }
 }

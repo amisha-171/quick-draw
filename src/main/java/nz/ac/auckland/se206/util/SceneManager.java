@@ -61,4 +61,14 @@ public class SceneManager {
   public static Parent getUiRoot(AppUi appUi) {
     return sceneMap.get(appUi).getRoot();
   }
+
+  /**
+   * Static method that changes the speaker icons in all the controllers when the music
+   * is muted/unmuted.
+   */
+  public static void toggleAllSpeakerIcons() {
+    for (AppUi currentUI : sceneMap.keySet()) {
+      sceneMap.get(currentUI).getController().toggleSpeakerIcon();
+    }
+  }
 }

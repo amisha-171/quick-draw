@@ -11,11 +11,12 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.userutils.Database;
 import nz.ac.auckland.se206.userutils.User;
 import nz.ac.auckland.se206.util.SceneManager;
 
-public class CreateProfileController {
+public class CreateProfileController extends Controller {
   @FXML private TextField usernameField;
   @FXML private ImageView profPic;
   private int index;

@@ -6,10 +6,13 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.ImageView;
+import javax.swing.*;
+import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.userutils.Database;
 import nz.ac.auckland.se206.util.SceneManager;
 
-public class MainMenuController {
+public class MainMenuController extends Controller {
 
   @FXML private Button switchProfile;
   @FXML private Button createProfile;
