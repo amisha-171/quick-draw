@@ -20,6 +20,8 @@ public class User {
   private int consecutiveWins;
   private int losses;
   private int fastestTime;
+  private int consecutiveWinsUnderTwentySeconds;
+  private int consecutiveWinsUnderTenSeconds;
   private int totalSolveTime;
   private int numEasyWords;
   private int numMediumWords;
@@ -60,6 +62,8 @@ public class User {
     // set user image
     this.imageName = img;
     // set default game settings
+    this.consecutiveWinsUnderTwentySeconds = 0;
+    this.consecutiveWinsUnderTenSeconds = 0;
     this.gameSettings =
         new GameSettings(
             AccuracySettings.EASY, TimeSettings.EASY, ConfidenceSettings.EASY, WordSettings.EASY);
@@ -124,6 +128,34 @@ public class User {
     }
   }
 
+  /**
+   * Method checks if the time upon user winning a game is less than or equal to ten seconds, if so
+   * we increment the consecutive wins for ten second category, otherwise reset it to zero.
+   *
+   * @param time Integer representing time taken to win a game
+   */
+  public void setConsecutiveWinsUnderTwentySeconds(int time) {
+    if (time <= 20) {
+      consecutiveWinsUnderTwentySeconds++;
+    } else {
+      consecutiveWinsUnderTwentySeconds = 0;
+    }
+  }
+
+  /**
+   * This method takes in a integer time and checks if it is less than or equal to five seconds, if
+   * so we increment the consecutive wins in the five second category, otherwise reset it to zero
+   *
+   * @param time An integer representing the time taken to complete a game if user has won
+   */
+  public void setConsecutiveWinsUnderTenSeconds(int time) {
+    if (time <= 10) {
+      consecutiveWinsUnderTenSeconds++;
+    } else {
+      consecutiveWinsUnderTenSeconds = 0;
+    }
+  }
+
   public int getLosses() {
     return losses;
   }
@@ -131,6 +163,8 @@ public class User {
   public void incrementLosses() {
     this.losses++;
     this.consecutiveWins = 0;
+    this.consecutiveWinsUnderTwentySeconds = 0;
+    this.consecutiveWinsUnderTenSeconds = 0;
   }
 
   public int getFastestTime() {
@@ -237,6 +271,14 @@ public class User {
 
   public boolean twentyConsecutiveWins() {
     return hasTwentyConsecutiveWins;
+  }
+
+  public int getConsecutiveWinsUnderTwentySeconds() {
+    return consecutiveWinsUnderTwentySeconds;
+  }
+
+  public int getConsecutiveWinsUnderTenSeconds() {
+    return consecutiveWinsUnderTenSeconds;
   }
 
   /**

@@ -216,7 +216,7 @@ public class MenuController extends Controller {
     GameSettingsController gameSettingsController =
         (GameSettingsController) SceneManager.getUiController(SceneManager.AppUi.SELECT_SETTING);
     // Set the current user and initial interface to the scene before loading
-    gameSettingsController.setUserSettings(user);
+    gameSettingsController.setUserSettings(user, false);
     gameSettingsController.setInitialInterface();
     // Create the new scene and change the root of the scene to load
     Scene scene = ((Node) event.getSource()).getScene();
