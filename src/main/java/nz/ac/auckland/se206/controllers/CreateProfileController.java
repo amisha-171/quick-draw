@@ -11,6 +11,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.userutils.Database;
 import nz.ac.auckland.se206.userutils.User;
 import nz.ac.auckland.se206.util.SceneManager;
@@ -18,6 +19,7 @@ import nz.ac.auckland.se206.util.SceneManager;
 public class CreateProfileController {
   @FXML private TextField usernameField;
   @FXML private ImageView profPic;
+  @FXML private ImageView speakerIcon;
   private int index;
   private Image img;
   private Alert alert;
@@ -131,5 +133,14 @@ public class CreateProfileController {
   private void onMainMenuSwitch(ActionEvent event) {
     Scene scene = ((Node) event.getSource()).getScene();
     scene.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.MAIN_MENU));
+  }
+
+  /**
+   * This method mutes or unmutes the main background music and will also toggle the mute icon
+   * symbol accordingly based on the state of the music.
+   */
+  @FXML
+  private void onToggleMute() {
+    App.changeSpeakerIcon(speakerIcon);
   }
 }

@@ -1,14 +1,13 @@
 package nz.ac.auckland.se206;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
-
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
@@ -82,18 +81,48 @@ public class App extends Application {
         });
   }
 
-  /**
-   * Static method that can be used by other controllers to pause the background
-   * music.
-   */
+  /** Static method that can be used by other controllers to pause the background music. */
   public static void pauseBackgroundMusic() {
     backgroundSongPlayer.stop();
   }
 
-  /**
-   * Static method that can be used by other controllers to play the background music.
-   */
+  /** Static method that can be used by other controllers to mute the background music. */
+  public static void muteBackgroundMusic() {
+    backgroundSongPlayer.setMute(true);
+  }
+
+  /** Static method that can be used by other controllers to unmute the background music. */
+  public static void unmuteBackgroundMusic() {
+    backgroundSongPlayer.setMute(false);
+  }
+
+  /** Static method that can be used by other controllers to play the background music. */
   public static void playBackgroundMusic() {
     backgroundSongPlayer.play();
+  }
+
+  /**
+   * Static method which checks if the background music is playing or is muted, will return true if
+   * music is playing and false if it is muted.
+   */
+  public static boolean isBackgroundMusicPlaying() {
+    return !backgroundSongPlayer.isMute();
+  }
+
+  /**
+   * Static method which toggles the speaker icon depending on whether the music is muted or not for
+   * a particular scene.
+   *
+   * @param icon the ImageView speaker icon that requires toggling based on the state of the
+   *     background music.
+   */
+  public static void changeSpeakerIcon(ImageView icon) {
+    if (isBackgroundMusicPlaying()) {
+      App.muteBackgroundMusic();
+      icon.setImage(new Image("/images/no-music.png"));
+    } else {
+      App.unmuteBackgroundMusic();
+      icon.setImage(new Image("/images/music.png"));
+    }
   }
 }

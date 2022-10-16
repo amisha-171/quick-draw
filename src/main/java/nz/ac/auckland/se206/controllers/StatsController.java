@@ -12,6 +12,8 @@ import javafx.scene.Scene;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
+import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.filereader.CategorySelector;
 import nz.ac.auckland.se206.userutils.Database;
 import nz.ac.auckland.se206.userutils.User;
@@ -25,6 +27,7 @@ public class StatsController {
   @FXML private Label wordsPlayedLabel;
   @FXML private Label fastestTimeLabel;
   @FXML private Label avgTimeLabel;
+  @FXML private ImageView speakerIcon;
   @FXML private PieChart gamesPlayedChart;
   @FXML private ComboBox<String> wordDifficultyFilter;
 
@@ -173,5 +176,14 @@ public class StatsController {
     }
     // Update word list label accordingly on the statistics page itself.
     wordList.setText(sb.toString());
+  }
+
+  /**
+   * This method mutes or unmutes the main background music and will also toggle the mute icon
+   * symbol accordingly based on the state of the music.
+   */
+  @FXML
+  private void onToggleMute() {
+    App.changeSpeakerIcon(speakerIcon);
   }
 }

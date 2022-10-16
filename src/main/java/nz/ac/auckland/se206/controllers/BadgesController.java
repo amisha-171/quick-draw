@@ -6,6 +6,8 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
+import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.userutils.Database;
 import nz.ac.auckland.se206.userutils.User;
 import nz.ac.auckland.se206.util.SceneManager;
@@ -20,6 +22,7 @@ public class BadgesController {
   @FXML private Label bronzeTime;
   @FXML private Label bronzeWins;
   @FXML private Label bronzeGames;
+  @FXML private ImageView speakerIcon;
 
   /**
    * This method takes in a username as input and will display the badges earned for that user to
@@ -93,5 +96,14 @@ public class BadgesController {
     // Obtain scene and set the statistics scene root.
     Scene scene = ((Node) event.getSource()).getScene();
     scene.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.STATS));
+  }
+
+  /**
+   * This method mutes or unmutes the main background music and will also toggle the mute icon
+   * symbol accordingly based on the state of the music.
+   */
+  @FXML
+  private void onToggleMute() {
+    App.changeSpeakerIcon(speakerIcon);
   }
 }

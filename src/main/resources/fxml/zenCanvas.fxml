@@ -162,7 +162,10 @@
                               <Image url="@../images/speaker.png" />
                            </image>
                         </ImageView>
-                        <Slider fx:id="volumeSlider" disable="true" onMouseReleased="#onSlider" prefHeight="14.0" prefWidth="112.0" value="50.0" />
+                        <Slider fx:id="volumeSlider" disable="true" onMouseReleased="#onSlider" prefHeight="14.0" prefWidth="112.0" value="50.0">
+                           <tooltip>
+                              <Tooltip text="Drawing Music" />
+                           </tooltip></Slider>
                      </children>
                      <HBox.margin>
                         <Insets right="150.0" />
@@ -186,6 +189,18 @@
 
             </children>
         </VBox>
+      <Button fx:id="muteButton" layoutX="20.0" layoutY="20.0" mnemonicParsing="false" onAction="#onToggleMute" prefHeight="67.0" prefWidth="33.0">
+         <graphic>
+            <ImageView fx:id="musicIcon" fitHeight="38.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/music.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <tooltip>
+            <Tooltip text="Background Music" />
+         </tooltip>
+      </Button>
     </children>
     <stylesheets>
         <URL value="@../css/app.css" />

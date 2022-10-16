@@ -67,3 +67,24 @@
     -fx-background-size: 34px;
     -fx-background-position: center;
 }
+
+#muteButton{
+    -fx-background-color: transparent;
+    -fx-border-width: 0px;
+    -fx-border-color: transparent;
+}
+
+#muteButton:hover{
+    -fx-background-color: #ffffff;
+    -fx-border-width: 0px;
+    -fx-border-color: transparent;
+}
+
+
+.tooltip{
+    -fx-font-family: 'Viga', sans-serif;
+    -fx-font-size: 15px ;
+    -fx-base: #45a446;
+    -fx-background-color: #45a446;
+    -fx-text-fill: white;
+}

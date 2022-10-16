@@ -14,6 +14,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.userutils.Database;
 import nz.ac.auckland.se206.userutils.User;
 import nz.ac.auckland.se206.util.SceneManager;
@@ -25,6 +26,7 @@ public class MenuController implements Initializable {
   @FXML private Button iconButton;
   @FXML private Button startGame;
   @FXML private ImageView gameIcon;
+  @FXML private ImageView speakerIcon;
   @FXML private Label userId;
 
   /**
@@ -262,5 +264,14 @@ public class MenuController implements Initializable {
         .remove("/css/scene_css/menu_css/hiddenmenu.css");
     startGame.getScene().getRoot().getStylesheets().remove("/css/scene_css/menu_css/zenmenu.css");
     startGame.getScene().getRoot().getStylesheets().add("/css/scene_css/menu_css/menu.css");
+  }
+
+  /**
+   * This method mutes or unmutes the main background music and will also toggle the mute icon
+   * symbol accordingly based on the state of the music.
+   */
+  @FXML
+  private void onToggleMute() {
+    App.changeSpeakerIcon(speakerIcon);
   }
 }

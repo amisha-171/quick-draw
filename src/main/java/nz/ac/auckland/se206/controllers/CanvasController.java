@@ -51,7 +51,8 @@ public abstract class CanvasController {
 
   protected DoodlePrediction model;
   @FXML protected Label predLabel;
-  @FXML private ImageView speakerIcon;
+  @FXML protected ImageView speakerIcon;
+  @FXML protected ImageView musicIcon;
   @FXML protected Button eraseBtn;
   @FXML protected Button onInk;
   @FXML protected Label timerCount;
@@ -483,6 +484,15 @@ public abstract class CanvasController {
       predBar.getStyleClass().remove("orange");
       predBar.getStyleClass().add("red");
     }
+  }
+
+  /**
+   * This method mutes or unmutes the main background music and will also toggle the mute icon
+   * symbol accordingly based on the state of the music.
+   */
+  @FXML
+  protected void onToggleMute() {
+    App.changeSpeakerIcon(musicIcon);
   }
 
   /**

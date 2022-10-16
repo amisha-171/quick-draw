@@ -159,5 +159,17 @@
          </children>
       </HBox>
       <Button alignment="CENTER" contentDisplay="CENTER" layoutX="400.0" layoutY="632.0" mnemonicParsing="false" onAction="#onStatsSwitch" prefHeight="56.0" prefWidth="256.0" text="Back to My Stats" />
+      <Button fx:id="muteButton" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#onToggleMute" prefHeight="67.0" prefWidth="33.0">
+         <graphic>
+            <ImageView fx:id="speakerIcon" fitHeight="38.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/music.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <tooltip>
+            <Tooltip text="Background Music" />
+         </tooltip>
+      </Button>
    </children>
 </Pane>

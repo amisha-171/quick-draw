@@ -10,6 +10,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
+import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.userutils.Database;
 import nz.ac.auckland.se206.userutils.User;
 import nz.ac.auckland.se206.util.SceneManager;
@@ -21,6 +22,7 @@ public class LeaderboardController {
   @FXML private TableColumn<User, Integer> fastestTimeColumn;
   @FXML private TableColumn<User, Integer> averageTimeColumn;
   @FXML private TableColumn<List<ImageView>, ImageView> iconColumn;
+  @FXML private ImageView speakerIcon;
 
   public void initialize() throws IOException {
     initialiseLeaderboard();
@@ -30,7 +32,7 @@ public class LeaderboardController {
    * Updates the leaderboard with the most up to date and accurate statistics of each user based on
    * their current statistics.
    */
-  private void initialiseLeaderboard() throws IOException {
+  private void initialiseLeaderboard() {
 
     // initialising contents of each section of the leaderboard
     iconColumn.setCellValueFactory(new PropertyValueFactory<>("userIcon"));
@@ -46,7 +48,7 @@ public class LeaderboardController {
     averageTimeColumn.setReorderable(false);
     leaderboard.setEditable(false);
 
-    //this.setLeaderboardContents(); //set the contents of the leaderboard
+    // this.setLeaderboardContents(); //set the contents of the leaderboard
   }
 
   /**
@@ -62,7 +64,7 @@ public class LeaderboardController {
     leaderboard.getItems().clear();
     //  adding user information into the leaderboard itself
     for (User user : userList) {
-      //only add user to leaderboard if they've played at least one game
+      // only add user to leaderboard if they've played at least one game
       if (user.getWins() + user.getLosses() > 0) {
         leaderboard.getItems().add(user);
       }
@@ -79,5 +81,14 @@ public class LeaderboardController {
   private void onMainMenuSwitch(ActionEvent event) {
     Scene scene = ((Node) event.getSource()).getScene();
     scene.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.MAIN_MENU));
+  }
+
+  /**
+   * This method mutes or unmutes the main background music and will also toggle the mute icon
+   * symbol accordingly based on the state of the music.
+   */
+  @FXML
+  private void onToggleMute() {
+    App.changeSpeakerIcon(speakerIcon);
   }
 }

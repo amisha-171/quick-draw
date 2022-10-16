@@ -7,7 +7,9 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
+import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.userutils.GameSettings;
 import nz.ac.auckland.se206.userutils.User;
 import nz.ac.auckland.se206.util.SceneManager;
@@ -29,6 +31,7 @@ public class GameSettingsController {
   private @FXML Button upTime;
   private @FXML Button upConfidence;
   private @FXML Button upWords;
+  @FXML private ImageView speakerIcon;
   private int[] diffIndex = {0, 0, 0, 0};
   private AccuracySettings accuracySettings;
   private ConfidenceSettings confidenceSettings;
@@ -277,5 +280,14 @@ public class GameSettingsController {
       }
       confidenceDesc.setText("We'll make guesses we are " + confidence + " confident about!");
     }
+  }
+
+  /**
+   * This method mutes or unmutes the main background music and will also toggle the mute icon
+   * symbol accordingly based on the state of the music.
+   */
+  @FXML
+  private void onToggleMute() {
+    App.changeSpeakerIcon(speakerIcon);
   }
 }

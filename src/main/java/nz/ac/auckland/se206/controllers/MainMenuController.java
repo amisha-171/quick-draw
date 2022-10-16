@@ -6,6 +6,9 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.ImageView;
+import javax.swing.*;
+import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.userutils.Database;
 import nz.ac.auckland.se206.util.SceneManager;
 
@@ -14,6 +17,7 @@ public class MainMenuController {
   @FXML private Button switchProfile;
   @FXML private Button createProfile;
   @FXML private Button viewLeaderboard;
+  @FXML private ImageView speakerIcon;
 
   /**
    * Initialise the usable buttons of this scene depending on the number of users created
@@ -81,5 +85,14 @@ public class MainMenuController {
     // switch the scene root to show the profile creation scene
     Scene scene = ((Node) event.getSource()).getScene();
     scene.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.CREATE_PROFILE));
+  }
+
+  /**
+   * This method mutes or unmutes the main background music and will also toggle the mute icon
+   * symbol accordingly based on the state of the music.
+   */
+  @FXML
+  private void onToggleMute() {
+    App.changeSpeakerIcon(speakerIcon);
   }
 }
